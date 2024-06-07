@@ -1,3 +1,105 @@
-<p>
-  dashboard works!
-</p>
+<div id="wrapper">
+    <ion-card>
+        <swiper [spaceBetween]="30" [centeredSlides]="true" [autoplay]="{
+            delay: 10,
+            disableOnInteraction: false
+        }" [pagination]="{
+            clickable: true
+        }" [grabCursor]="true" [navigation]="true" class="mySwiper">
+            <ng-template swiperSlide *ngFor="let slider of slider_data">
+                <img class="slider_img" src="{{slider?.img_url}}" width="100%" height="200px">
+            </ng-template>
+        </swiper>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            <h5>569</h5>
+        </ion-card-header>
+
+        <ion-card-content>
+            <div class="containerBox">
+                <img src="../../../assets/icons/rentBill.jpg" alt="" height="40px">
+                <h5>My Bills</h5>
+            </div>
+            <div class="containerBox">
+                <img src="../../../assets/icons/members.png" alt="" height="40px">
+                <h5>Members</h5>
+
+            </div>
+            <div class="containerBox">
+                <img src="../../../assets/icons/vehical.webp" alt="" height="40px">
+                <h5>Vehicles</h5>
+            </div>
+        </ion-card-content>
+
+    </ion-card>
+
+    <ion-card>
+        <div class="VisitorsList">
+            <span class="navigationMenu">
+                <h5>My Visitors</h5>
+                <ion-icon name="chevron-forward-circle" color="primary"></ion-icon>
+            </span>
+
+            <div class="visitor">
+                <div class="visitorBox">
+                    <div class="visitorImg">
+                        <img src="../../../assets/images/user.webp" alt="image">
+                    </div>
+                    <div class="visitorInfo">
+                        <b>Amarjeet Kumar</b>
+                        <p>Today, 10:00 AM</p>
+                        <p>Approved</p>
+                    </div>
+                </div>
+
+                <div class="visitorBox">
+                    <div class="visitorImg">
+                        <img src="../../../assets/images/user.webp" alt="image">
+                    </div>
+                    <div class="visitorInfo">
+                        <b>Akhilesh Kumar</b>
+                        <p>Today, 10:00 AM</p>
+                        <p>Approved</p>
+                    </div>
+                </div>
+
+                <div class="visitorBox">
+                    <div class="visitorImg">
+                        <img src="../../../assets/images/user.webp" alt="image">
+                    </div>
+                    <div class="visitorInfo">
+                        <b>Amarjeet Kumar</b>
+                        <p>Today, 10:00 AM</p>
+                        <p>Approved</p>
+                    </div>
+                </div>
+
+                <div class="visitorBox">
+                    <div class="visitorImg">
+                        <img src="../../../assets/images/user.webp" alt="image">
+                    </div>
+                    <div class="visitorInfo">
+                        <b>Amarjeet Kumar</b>
+                        <p>Today, 10:00 AM</p>
+                        <p>Approved</p>
+                    </div>
+                </div>              
+            </div>
+        </div>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            <h5>Manage</h5>
+        </ion-card-header>
+
+        <div class="manage">
+            <div class="manageBox"></div>
+            <div class="manageBox"></div>
+            <div class="manageBox"></div>
+            <div class="manageBox"></div>
+            <div class="manageBox"></div>
+            <div class="manageBox"></div>
+        </div>
+      </ion-card>
+</div>

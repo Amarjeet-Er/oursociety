@@ -5,38 +5,50 @@
         <ion-title>Menu Content</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">This is the menu content.</ion-content>
+    <ion-content class="ion-padding">
+      <ion-title>Menu Content</ion-title>
+      <ion-title (click)="onLogout()">Logout</ion-title>
+    </ion-content>
+
   </ion-menu>
   <div class="ion-page" id="main-content">
-    <ion-header>
+    <ion-header class="box">
       <ion-toolbar>
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Menu</ion-title>
+        <ion-buttons slot="end">
+          <ion-title *ngIf="onRegistration()">Employee Registration</ion-title>
+          <ion-title *ngIf="onRegistrationList()">Employee List</ion-title>
+          <ion-title *ngIf="onOwnerReg()">Owner Registration</ion-title>
+          <ion-title *ngIf="onOwnerList()">Owner List</ion-title>
+          <ion-title *ngIf="onVisitorReg()">Visitor Registration</ion-title>
+          <ion-title *ngIf="onVisitorList()">Visitor List</ion-title>
+        </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding"> Tap the button in the toolbar to open the menu. </ion-content>
 
-    <ion-tabs>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="home">
-          <ion-icon name="play-circle"></ion-icon>
-          Listen Now
-        </ion-tab-button>
-        <ion-tab-button tab="radio">
-          <ion-icon name="radio"></ion-icon>
-          Radio
-        </ion-tab-button>
-        <ion-tab-button tab="library">
-          <ion-icon name="library"></ion-icon>
-          Library
-        </ion-tab-button>
-        <ion-tab-button tab="search">
-          <ion-icon name="search"></ion-icon>
-          Search
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
+    <ion-content class="ion-padding">
+      <ion-tabs>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button tab="dashboard">
+            <ion-icon name="home-sharp"></ion-icon>
+            Home
+          </ion-tab-button>
+          <ion-tab-button tab="visitorlist">
+            <ion-icon name="compass-sharp"></ion-icon>
+            Visitor
+          </ion-tab-button>
+          <ion-tab-button tab="flatownerlist">
+            <ion-icon name="library"></ion-icon>
+            Owner
+          </ion-tab-button>
+          <ion-tab-button tab="employeelist">
+            <ion-icon name="person-sharp"></ion-icon>
+            Employee
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-content>
   </div>
 </ion-app>

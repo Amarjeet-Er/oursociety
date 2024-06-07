@@ -1,3 +1,65 @@
-<p>
-  flat-owner-reg works!
-</p>
+<ion-content class="ion-padding">
+
+  <ion-select label="Building Blocks" fill="outline" label-placement="floating" interface="action-sheet"
+    placeholder="Select building blocks">
+    <ion-select-option value="Mega Bloks">Mega Bloks</ion-select-option>
+    <ion-select-option value="Rainbow blocks">Rainbow blocks</ion-select-option>
+    <ion-select-option value="Educational blocks">Educational blocks</ion-select-option>
+  </ion-select>
+
+  <ion-input label="Flat No" label-placement="floating" fill="outline" type="text"
+    placeholder="Enter flat no"></ion-input>
+
+  <ion-input label="Name" label-placement="floating" fill="outline" type="text"
+    placeholder="Enter owner name"></ion-input>
+
+  <ion-select label="Designation" fill="outline" label-placement="floating" interface="action-sheet"
+    placeholder="Select designation">
+    <ion-select-option value="Residential">Residential </ion-select-option>
+    <ion-select-option value="Commercial">Commercial</ion-select-option>
+  </ion-select>
+
+  <ion-input label="Primary Mobile No" label-placement="floating" fill="outline" type="number"
+    placeholder="Enter primary mobile no"></ion-input>
+
+  <ion-input label="Alt Mobile No" label-placement="floating" fill="outline" type="number"
+    placeholder="Enter alt mobile no"></ion-input>
+
+  <ion-input type="email" fill="outline" label="Email" labelPlacement="floating" errorText="Invalid email" ngModel
+    email></ion-input>
+
+  <ion-input label="Aadhar No" label-placement="floating" type="number" fill="outline"
+    placeholder="Enter aadhar no"></ion-input>
+
+
+
+  <ion-input #familyInput label="Number Of Family Members" label-placement="floating" type="number" fill="outline"
+    placeholder="Enter number of family members" [(ngModel)]="familyCount" (input)="onInput($event)"
+    pattern="[0-5]"></ion-input>
+
+
+  <div *ngFor="let data of inputFields">
+    <ion-input label-placement="floating" type="text" fill="outline" label="Member Name"
+      placeholder="Member name"></ion-input>
+    <ion-input label-placement="floating" type="text" fill="outline" label="Member Age"
+      placeholder="Member age"></ion-input>
+    <ion-input label-placement="floating" type="text" fill="outline" label="Member Mobile No"
+      placeholder="Member mobile no"></ion-input>
+  </div>
+
+  <ion-radio-group aria-label="Select an option" (change)="logSelection1($event)" formControlName="Weapon">
+    <ion-label>Do You Have a car:- </ion-label> &nbsp;
+    Yes<ion-checkbox color="primary" value="Yes"></ion-checkbox>
+    No <ion-checkbox color="primary" value="No"></ion-checkbox>
+  </ion-radio-group>
+
+  <ion-input label="Car" label-placement="floating" *ngIf="onhathiyar" fill="outline" type="file">
+  </ion-input>
+
+  <ion-input label="Owner Image" label-placement="floating" fill="outline" type="file">
+    <ion-icon name="images-outline" slot="end"></ion-icon>
+  </ion-input>
+
+  <ion-button shape="round" (click)="onSubmit()">Submit</ion-button>
+
+</ion-content>

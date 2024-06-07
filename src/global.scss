@@ -35,3 +35,16 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+* {
+    font-family: Arial, sans-serif;
+}
+/* for all component requiremnt color */
+:root {
+    --color-1: #0054e9;
+    --color-2: #ffffff;
+    --color-3: #000000;
+    --color-4: #DD3D4F;
+    --color-5: #096509EB;
+}
