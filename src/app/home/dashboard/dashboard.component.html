@@ -1,3 +1,8 @@
+<div class="grating" [style.color]="greetingColor">
+    <span style="font-size: 20px; color: aqua;"><b>{{ GratingData() }}</b></span><br>
+    <span style="color: brown;">Amarjeet Kumar</span>
+</div>
+
 <div id="wrapper">
     <ion-card>
         <swiper [spaceBetween]="30" [centeredSlides]="true" [autoplay]="{
@@ -34,72 +39,95 @@
 
     </ion-card>
 
-    <ion-card>
-        <div class="VisitorsList">
-            <span class="navigationMenu">
-                <h5>My Visitors</h5>
-                <ion-icon name="chevron-forward-circle" color="primary"></ion-icon>
-            </span>
+    <div class="VisitorsList">
+        <span class="navigationMenu">
+            <h5>My Visitors</h5>
+            <ion-icon name="chevron-forward-circle" color="primary"></ion-icon>
+        </span>
 
-            <div class="visitor">
-                <div class="visitorBox">
-                    <div class="visitorImg">
-                        <img src="../../../assets/images/user.webp" alt="image">
-                    </div>
-                    <div class="visitorInfo">
-                        <b>Amarjeet Kumar</b>
-                        <p>Today, 10:00 AM</p>
-                        <p>Approved</p>
-                    </div>
+        <div class="visitor">
+            <div class="visitorBox">
+                <div class="visitorImg">
+                    <img src="../../../assets/images/user.webp" alt="image">
                 </div>
-
-                <div class="visitorBox">
-                    <div class="visitorImg">
-                        <img src="../../../assets/images/user.webp" alt="image">
-                    </div>
-                    <div class="visitorInfo">
-                        <b>Akhilesh Kumar</b>
-                        <p>Today, 10:00 AM</p>
-                        <p>Approved</p>
-                    </div>
+                <div class="visitorInfo">
+                    <b>Amarjeet Kumar</b>
+                    <p>Today, 10:00 AM</p>
+                    <p>Approved</p>
                 </div>
+            </div>
 
-                <div class="visitorBox">
-                    <div class="visitorImg">
-                        <img src="../../../assets/images/user.webp" alt="image">
-                    </div>
-                    <div class="visitorInfo">
-                        <b>Amarjeet Kumar</b>
-                        <p>Today, 10:00 AM</p>
-                        <p>Approved</p>
-                    </div>
+            <div class="visitorBox">
+                <div class="visitorImg">
+                    <img src="../../../assets/images/user.webp" alt="image">
                 </div>
+                <div class="visitorInfo">
+                    <b>Akhilesh Kumar</b>
+                    <p>Today, 10:00 AM</p>
+                    <p>Approved</p>
+                </div>
+            </div>
 
-                <div class="visitorBox">
-                    <div class="visitorImg">
-                        <img src="../../../assets/images/user.webp" alt="image">
-                    </div>
-                    <div class="visitorInfo">
-                        <b>Amarjeet Kumar</b>
-                        <p>Today, 10:00 AM</p>
-                        <p>Approved</p>
-                    </div>
-                </div>              
+            <div class="visitorBox">
+                <div class="visitorImg">
+                    <img src="../../../assets/images/user.webp" alt="image">
+                </div>
+                <div class="visitorInfo">
+                    <b>Amarjeet Kumar</b>
+                    <p>Today, 10:00 AM</p>
+                    <p>Approved</p>
+                </div>
+            </div>
+
+            <div class="visitorBox">
+                <div class="visitorImg">
+                    <img src="../../../assets/images/user.webp" alt="image">
+                </div>
+                <div class="visitorInfo">
+                    <b>Amarjeet Kumar</b>
+                    <p>Today, 10:00 AM</p>
+                    <p>Approved</p>
+                </div>
             </div>
         </div>
-    </ion-card>
+    </div>
     <ion-card>
         <ion-card-header>
             <h5>Manage</h5>
         </ion-card-header>
-
         <div class="manage">
-            <div class="manageBox"></div>
-            <div class="manageBox"></div>
-            <div class="manageBox"></div>
-            <div class="manageBox"></div>
-            <div class="manageBox"></div>
-            <div class="manageBox"></div>
+            <div class="manageBox" routerLink="/home/employeereg">
+                <ion-icon name="person-add-sharp" color="danger"></ion-icon>
+                <ion-card-title>Add Employee</ion-card-title>
+            </div>
+            <div class="manageBox" routerLink="/home/visitorreg">
+                <ion-icon name="person-add-sharp" color="success"></ion-icon>
+                <ion-card-title>Add Visitors</ion-card-title>
+            </div>
+            <div class="manageBox" routerLink="/home/flatownerreg">
+                <ion-icon name="person-add-sharp" color="primary"></ion-icon>
+                <ion-card-title>Add Owner</ion-card-title>
+            </div>
+            <div class="manageBox">
+                <ion-icon name="logo-paypal" color="success"></ion-icon>
+                <ion-card-title>Payments</ion-card-title>
+            </div>
+            <div class="manageBox">
+                <ion-icon name="car-sharp" color="tertiary"></ion-icon>
+                <ion-card-title>Car Parking</ion-card-title>
+            </div>
+            <div class="manageBox">
+                <ion-icon name="headset-sharp" color="warning"></ion-icon>
+                <ion-card-title>Help Desk</ion-card-title>
+            </div>
+            <div class="manageBox">
+                <ion-icon name="notifications-circle-sharp" color="secondary"></ion-icon>
+                <ion-card-title>Notic</ion-card-title>
+            </div>
+            <div class="manageBox">
+                <ion-icon name="paw-sharp" color="medium"></ion-icon>
+                <ion-card-title>Events</ion-card-title>
+            </div>
         </div>
-      </ion-card>
+    </ion-card>
 </div>

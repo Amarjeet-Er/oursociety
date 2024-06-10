@@ -28,24 +28,17 @@ export class EmployeeListComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  onSearch(filter: any) {
-    this.getDta = this.getDta.filter((data: any) => {
-      if (data.name.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-        return true;
-      }
-      return false;
-    }
-    );
-  }
   onHeaderBox() {
     this.headerBox = !this.headerBox;
     this.siteSearch = !this.siteSearch;
   }
-  onSiteSearch() {
+  onDataSearch() {
     this.headerBox = !this.headerBox;
     this.siteSearch = !this.siteSearch;
   }
   onAddEmp() {
     this.router.navigate(['/home/employeereg']);
   }
+  onSearch(filter: any) { }
+
 }

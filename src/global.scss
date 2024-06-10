@@ -42,9 +42,16 @@
 }
 /* for all component requiremnt color */
 :root {
-    --color-1: #0054e9;
+    --color-1: #0163aa;
     --color-2: #ffffff;
     --color-3: #000000;
     --color-4: #DD3D4F;
     --color-5: #096509EB;
+}
+/* for all input  fields number top to button none */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

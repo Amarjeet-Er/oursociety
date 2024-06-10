@@ -1,0 +1,37 @@
+<div class="card">
+    <ion-button routerLink="/home" color="secondary">back</ion-button>
+    <div class="details_box">
+        <div class="card_profile_img">
+            <img [src]="ProfileImg" alt="stdProfile" width="100" height="100">
+            <h2>Admin</h2>
+            <p>{{'admin@gmail.com'}}</p>
+        </div>
+    </div>
+    <div class="dataRow">
+
+        <p>
+            <ion-icon name="call-sharp" color="secondary"></ion-icon>
+            <span> Cantact </span>
+        </p>
+
+        <p>
+            <ion-icon name="alert-circle-sharp" color="secondary"></ion-icon>
+            <span> About </span>
+        </p>
+
+        <p>
+            <ion-icon name="bookmarks-sharp" color="secondary"></ion-icon>
+            <span> Tearm & Condition </span>
+        </p>
+
+        <p>
+            <ion-icon name="git-compare-sharp" color="secondary"></ion-icon>
+            <span> Change Password </span>
+        </p>
+
+        <p (click)="onLogout()">
+            <ion-icon name="log-out-sharp" color="danger"></ion-icon>
+            <span> <b>Logout</b> </span>
+        </p>
+    </div>
+</div>

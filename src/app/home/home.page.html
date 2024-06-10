@@ -13,7 +13,7 @@
   </ion-menu>
   <div class="ion-page" id="main-content">
     <ion-header class="box">
-      <ion-toolbar>
+      <ion-toolbar color="secondary">
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
@@ -24,6 +24,7 @@
           <ion-title *ngIf="onOwnerList()">Owner List</ion-title>
           <ion-title *ngIf="onVisitorReg()">Visitor Registration</ion-title>
           <ion-title *ngIf="onVisitorList()">Visitor List</ion-title>
+          <ion-title *ngIf="onProfile()">Profile</ion-title>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -46,6 +47,10 @@
           <ion-tab-button tab="employeelist">
             <ion-icon name="person-sharp"></ion-icon>
             Employee
+          </ion-tab-button>
+          <ion-tab-button tab="profile">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            Profile
           </ion-tab-button>
         </ion-tab-bar>
       </ion-tabs>

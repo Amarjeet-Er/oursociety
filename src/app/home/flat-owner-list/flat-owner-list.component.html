@@ -5,7 +5,7 @@
       <ion-button mat-icon-button class="site-search site-search-reset" (click)="onHeaderBox()">
         <ion-icon name="search-sharp"></ion-icon>
       </ion-button>
-      <ion-button mat-icon-button (click)="onAddEmp()">
+      <ion-button mat-icon-button (click)="onAddOwner()">
         <ion-icon name="person-add-sharp"></ion-icon>
       </ion-button>
     </div>
@@ -14,7 +14,7 @@
   <div class="SearchBox" *ngIf="siteSearch">
     <span style="display: inherit; gap: 5px;"> <b>Total</b> 10</span>
     <input type="text" class="site-search-input" placeholder="Search..." #search (keyup)="onSearch(search.value)">
-    <ion-button mat-icon-button type="reset" class="site-search site-search-reset" (click)="onSiteSearch()">
+    <ion-button mat-icon-button type="reset" class="site-search site-search-reset" (click)="onDataSearch()">
       <ion-icon name="close-sharp"></ion-icon>
     </ion-button>
   </div>

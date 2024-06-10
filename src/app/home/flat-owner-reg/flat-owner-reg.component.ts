@@ -8,38 +8,44 @@ import { Router } from '@angular/router';
 })
 export class FlatOwnerRegComponent implements OnInit {
   familyCount!: number;
-  inputFields: { count: number }[] = [];
-
-  onhathiyar: boolean = false;
-
+  AddFamilyInput: { count: number }[] = [];
+  onCarSelect: boolean = false;
+  cars: any[] = [];
+  addAnotherCars: boolean = true;
   constructor(
     private _router: Router
   ) { }
 
   ngOnInit() { }
 
-  onInput(event: any) {
-    let input = event.target.value;
-    const digitsOnly = input.replace(/\D/g, '');
-    this.familyCount = parseInt(digitsOnly.slice(0, 1), 10);
-    if (this.familyCount > 5) {
-      this.familyCount = 5;
+  onFamilyInput(event: any) {
+    if (this.familyCount > 7) {
+      event.target.setCustomValidity('Maximum 7 members allowed.');
+      return
     }
-    this.addInputFields();
+    else {
+      event.target.setCustomValidity('');
+      this.addFamilyFields()
+    }
   }
-  addInputFields() {
-    this.inputFields = [];
+  addFamilyFields() {
+    this.AddFamilyInput = [];
     for (let i = 0; i < this.familyCount; i++) {
-      this.inputFields.push({ count: 0 });
+      this.AddFamilyInput.push({ count: 0 });
     }
   }
-  logSelection1(event: any) {
-    this.onhathiyar = event.value === 'Yes';
+  toggleCarInput(event: any) {
+    this.onCarSelect = event.detail.checked;
   }
-
-
+  addAnotherCar() {
+    this.addAnotherCars = false
+    this.cars.push({});
+  }
+  removeAnotherCar(index: number) {
+    this.addAnotherCars = true
+    this.cars.splice(index, 1);
+  }
   onSubmit(): void {
     this._router.navigate(['/home/flatownerlist']);
   }
-
 }

@@ -8,6 +8,8 @@ import { VisitorRegComponent } from './visitor-reg/visitor-reg.component';
 import { FlatOwnerRegComponent } from './flat-owner-reg/flat-owner-reg.component';
 import { FlatOwnerListComponent } from './flat-owner-list/flat-owner-list.component';
 import { VisitorListComponent } from './visitor-list/visitor-list.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { VisitorDetailsComponent } from './visitor-details/visitor-details.component';
 
 const routes: Routes = [
   {
@@ -15,14 +17,16 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
-      {path: 'employeereg', component: EmployeeRegComponent},
-      {path: 'employeelist', component: EmployeeListComponent},
-      {path: 'visitorreg', component:VisitorRegComponent},
-      {path: 'visitorlist', component:VisitorListComponent},
-      {path: 'flatownerreg', component:FlatOwnerRegComponent},
-      {path: 'flatownerlist', component:FlatOwnerListComponent},
+      { path: 'employeereg', component: EmployeeRegComponent },
+      { path: 'employeelist', component: EmployeeListComponent },
+      { path: 'visitorreg', component: VisitorRegComponent },
+      { path: 'visitorlist', component: VisitorListComponent },
+      { path: 'visitordetails', component: VisitorDetailsComponent },
+      { path: 'flatownerreg', component: FlatOwnerRegComponent },
+      { path: 'flatownerlist', component: FlatOwnerListComponent },
     ]
   },
+  { path: 'profile', component: UserProfileComponent }
 
 ];
 

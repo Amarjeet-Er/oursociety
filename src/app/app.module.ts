@@ -14,6 +14,8 @@ import { FlatOwnerRegComponent } from './home/flat-owner-reg/flat-owner-reg.comp
 import { FlatOwnerListComponent } from './home/flat-owner-list/flat-owner-list.component';
 import { VisitorRegComponent } from './home/visitor-reg/visitor-reg.component';
 import { VisitorListComponent } from './home/visitor-list/visitor-list.component';
+import { UserProfileComponent } from './home/user-profile/user-profile.component';
+import { VisitorDetailsComponent } from './home/visitor-details/visitor-details.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { VisitorListComponent } from './home/visitor-list/visitor-list.component
     FlatOwnerRegComponent,
     FlatOwnerListComponent,
     VisitorRegComponent,
-    VisitorListComponent
+    VisitorListComponent,
+    VisitorDetailsComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
