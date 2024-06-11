@@ -1,26 +1,49 @@
-ion-content {
-    ion-input {
-        margin-bottom: 10px;
+.ion-page {
+    ion-header {
+        ion-toolbar {
+            ion-text {
+                position: relative;
+                right: 15px;
+            }
+
+            ion-fab-button::part(native) {
+                border-radius: 50px;
+                box-shadow: none;
+            }
+        }
     }
 
-    ion-select {
-        margin-bottom: 10px;
-    }
-    ion-checkbox{
-        margin-bottom: 10px;
-    }
-    .AddHidden{
-        margin-bottom: 10px;
-    }
-    ion-button {
+    ion-content {
         width: 100%;
-    }
-}
+        height: calc(100vh - 56px);
+        overflow: auto;
 
-ion-fab-button::part(native) {
-    background-color: #0054e9;
-    border-radius: 3px;
-    height: 20px;
-    margin: 8px;
-    padding: 20px;
+        ion-input {
+            margin-bottom: 10px;
+
+            ion-fab-button::part(native) {
+                background-color: #0054e9;
+                border-radius: 3px;
+                height: 20px;
+                margin: 8px;
+                padding: 20px;
+            }
+        }
+
+        ion-select {
+            margin-bottom: 10px;
+        }
+
+        ion-checkbox {
+            margin-bottom: 10px;
+        }
+
+        .AddHidden {
+            margin-bottom: 10px;
+        }
+
+        ion-button {
+            width: 100%;
+        }
+    }
 }

@@ -30,6 +30,9 @@ export class FlatOwnerListComponent implements OnInit {
   onAddOwner() {
     this._router.navigate(['/home/flatownerreg']);
   }
+  onDetails() {
+    this._router.navigate(['/home/flatownerdetails']);
+  }
   onSearch(filter: any) {
 
   }

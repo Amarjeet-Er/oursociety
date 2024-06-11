@@ -1,39 +1,57 @@
-<div class="container">
-  <div class="dataRow">
-    <div class="student_img">
-      <img [src]=" 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png'" alt="stdProfile" width="100">
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <ion-fab-button slot="start" color="secondary" routerLink="/home/visitorlist">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-buttons slot="end">
+        <ion-text> Visitor Details </ion-text>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <div class="container">
+      <div class="dataRow">
+        <div class="student_img">
+          <img [src]=" 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png'" alt="stdProfile"
+            width="100">
+        </div>
+        <p>
+           <img src="../../../assets/icons/user.png" alt="">
+          <span> {{'Amarjeet'}} </span>
+        </p>
+        <p>
+          <img src="../../../assets/icons/phone.png" alt="">
+          <span> {{'8965125478'}} </span>
+        </p>
+        <p>
+          <img src="../../../assets/icons/emp.png" alt="">
+          <span> {{'Visitor Name'}} </span>
+        </p>
+        <p>
+          <img src="../../../assets/icons/age.png" alt="">
+          <span> {{'Visistor Age'}} </span>
+        </p>
+        <p>
+          <img src="../../../assets/icons/phone.png" alt="">
+          <span> {{'Visistor Mobile No'}} </span>
+        </p>
+        <p>
+          <img src="../../../assets/icons/model.png" alt="">
+          <span> {{'Vehical Model'}} </span>
+        </p>
+        <p>
+          <img src="../../../assets/icons/car-no.png" alt="">
+          <span> {{'Vehical Number'}} </span>
+        </p>
+        <p>
+          <img src="../../../assets/icons/parking-car.png" alt="">
+          <span> {{'Vehical Parking'}} </span>
+        </p>
+        <p>
+          <img src="../../../assets/icons/rejected.png" alt="">
+          <span> {{'Status'}} </span>
+        </p>
+      </div>
     </div>
-    <p>
-      <ion-icon name="person-sharp" color="secondary"></ion-icon>
-      <span> Amarjeet </span>
-    </p>
-    <p>
-      <ion-icon name="call-sharp" color="secondary"></ion-icon>
-      <span> 8965125478 </span>
-    </p>
-    <p>
-      <ion-icon name="person-sharp" color="secondary"></ion-icon>
-      <span> Visitor Name </span>
-    </p>
-    <p>
-      <ion-icon name="calendar-number-sharp" color="secondary"></ion-icon>
-      <span> Visistor Age </span>
-    </p>
-    <p>
-      <ion-icon name="call-sharp" color="secondary"></ion-icon>
-      <span> Visistor Mobile No </span>
-    </p>
-    <p>
-      <ion-icon name="invert-mode-sharp" color="secondary"></ion-icon>
-      <span> Vehical Model </span>
-    </p>
-    <p>
-      <ion-icon name="car-sport-sharp" color="secondary"></ion-icon>
-      <span> Vehical Number </span>
-    </p>
-    <p>
-      <ion-icon name="call-sharp" color="secondary"></ion-icon>
-      <span> Vehical Parking </span>
-    </p>
-  </div>
+  </ion-header>
 </div>

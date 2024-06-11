@@ -46,6 +46,6 @@ export class VisitorRegComponent  implements OnInit {
     this.Vehicals.splice(index, 1);
   }
   onSubmit(): void {
-    this._router.navigate(['/home/flatownerlist']);
+    this._router.navigate(['/home/visitorlist']);
   }
 }

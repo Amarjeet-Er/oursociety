@@ -1,82 +1,94 @@
-<ion-content class="ion-padding">
-
-  <ion-select label="Building Blocks" fill="outline" label-placement="floating" interface="action-sheet"
-    placeholder="Select building blocks">
-    <ion-select-option value="Mega Bloks">Mega Bloks</ion-select-option>
-    <ion-select-option value="Rainbow blocks">Rainbow blocks</ion-select-option>
-    <ion-select-option value="Educational blocks">Educational blocks</ion-select-option>
-  </ion-select>
-
-  <ion-input label="Flat No" label-placement="floating" fill="outline" type="text"
-    placeholder="Enter flat no"></ion-input>
-
-  <ion-input label="Name" label-placement="floating" fill="outline" type="text"
-    placeholder="Enter owner name"></ion-input>
-
-  <ion-select label="Designation" fill="outline" label-placement="floating" interface="action-sheet"
-    placeholder="Select designation">
-    <ion-select-option value="Residential">Residential </ion-select-option>
-    <ion-select-option value="Commercial">Commercial</ion-select-option>
-  </ion-select>
-
-  <ion-input label="Primary Mobile No" label-placement="floating" fill="outline" type="number"
-    placeholder="Enter primary mobile no"></ion-input>
-
-  <ion-input label="Alt Mobile No" label-placement="floating" fill="outline" type="number"
-    placeholder="Enter alt mobile no"></ion-input>
-
-  <ion-input type="email" fill="outline" label="Email" labelPlacement="floating" errorText="Invalid email" ngModel
-    email></ion-input>
-
-  <ion-input label="Aadhar No" label-placement="floating" type="number" fill="outline"
-    placeholder="Enter aadhar no"></ion-input>
-
-  <ion-input #familyInput label="Number Of Family Members" label-placement="floating" type="number" fill="outline"
-    placeholder="Enter number of family members" [(ngModel)]="familyCount" (input)="onFamilyInput($event)" ngModel>
-  </ion-input>
-  <ion-text *ngIf="familyCount > 7" color="danger">Maximum 7 members allowed.</ion-text>
-
-  <div *ngFor="let data of AddFamilyInput">
-    <ion-input label-placement="floating" type="text" fill="outline" label="Member Name"
-      placeholder="Enter member name"></ion-input>
-    <ion-input label-placement="floating" type="text" fill="outline" label="Member Age"
-      placeholder="Enter member age"></ion-input>
-    <ion-input label-placement="floating" type="text" fill="outline" label="Member Mobile No"
-      placeholder="Enter member mobile no"></ion-input>
-  </div>
-
-  <ion-checkbox (ionChange)="toggleCarInput($event)"> {{ 'Do you have a car?' }} </ion-checkbox>
-
-  <div *ngIf="onCarSelect">
-    <ion-input label-placement="floating" type="text" fill="outline" label="Car Model"
-      placeholder="Enter car model"></ion-input>
-    <ion-input label-placement="floating" type="text" fill="outline" label="Car Number"
-      placeholder="Enter car number"></ion-input>
-    <ion-input label-placement="floating" type="text" fill="outline" label="Car Parking Area"
-      placeholder="Enter car parking area"></ion-input>
-
-    <div *ngFor="let car of cars; let i = index">
-      <ion-input label-placement="floating" type="text" fill="outline" label="Car Model" placeholder="Enter car model"
-        [(ngModel)]="car.model"></ion-input>
-      <ion-input label-placement="floating" type="text" fill="outline" label="Car Number" placeholder="Enter car number"
-        [(ngModel)]="car.number"></ion-input>
-      <ion-input label-placement="floating" type="text" fill="outline" label="Car Parking Area"
-        placeholder="Enter car parking area" [(ngModel)]="car.parkingArea"></ion-input>
-      <ion-buttons>
-        <ion-button *ngIf="!addAnotherCars" (click)="removeAnotherCar(i)">
-          <ion-icon name="trash-outline"></ion-icon> Remove Another Car</ion-button>
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <ion-fab-button slot="start" color="secondary" routerLink="/home/flatownerlist">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-buttons slot="end">
+        <ion-text> Owner Registration </ion-text>
       </ion-buttons>
-    </div>
+    </ion-toolbar>
+    <ion-content class="ion-padding">
 
-    <ion-buttons *ngIf="addAnotherCars">
-      <ion-button (click)="addAnotherCar()"> <ion-icon name="add-outline"></ion-icon> Add Another Car </ion-button>
-    </ion-buttons>
-  </div>
+      <ion-select label="Building Blocks" fill="outline" label-placement="floating" interface="action-sheet"
+        placeholder="Select building blocks">
+        <ion-select-option value="Mega Bloks">Mega Bloks</ion-select-option>
+        <ion-select-option value="Rainbow blocks">Rainbow blocks</ion-select-option>
+        <ion-select-option value="Educational blocks">Educational blocks</ion-select-option>
+      </ion-select>
 
-  <ion-input label="Owner Image" label-placement="floating" fill="outline" type="file">
-    <ion-icon name="images-outline" slot="end"></ion-icon>
-  </ion-input>
+      <ion-input label="Flat No" label-placement="floating" fill="outline" type="text"
+        placeholder="Enter flat no"></ion-input>
 
-  <ion-button shape="round" (click)="onSubmit()">Submit</ion-button>
+      <ion-input label="Name" label-placement="floating" fill="outline" type="text"
+        placeholder="Enter owner name"></ion-input>
 
-</ion-content>
+      <ion-select label="Designation" fill="outline" label-placement="floating" interface="action-sheet"
+        placeholder="Select designation">
+        <ion-select-option value="Residential">Residential </ion-select-option>
+        <ion-select-option value="Commercial">Commercial</ion-select-option>
+      </ion-select>
+
+      <ion-input label="Primary Mobile No" label-placement="floating" fill="outline" type="number"
+        placeholder="Enter primary mobile no"></ion-input>
+
+      <ion-input label="Alt Mobile No" label-placement="floating" fill="outline" type="number"
+        placeholder="Enter alt mobile no"></ion-input>
+
+      <ion-input type="email" fill="outline" label="Email" labelPlacement="floating" errorText="Invalid email" ngModel
+        email></ion-input>
+
+      <ion-input label="Aadhar No" label-placement="floating" type="number" fill="outline"
+        placeholder="Enter aadhar no"></ion-input>
+
+      <ion-input #familyInput label="Number Of Family Members" label-placement="floating" type="number" fill="outline"
+        placeholder="Enter number of family members" [(ngModel)]="familyCount" (input)="onFamilyInput($event)" ngModel>
+      </ion-input>
+      <ion-text *ngIf="familyCount > 7" color="danger">Maximum 7 members allowed.</ion-text>
+
+      <div *ngFor="let data of AddFamilyInput">
+        <ion-input label-placement="floating" type="text" fill="outline" label="Member Name"
+          placeholder="Enter member name"></ion-input>
+        <ion-input label-placement="floating" type="text" fill="outline" label="Member Age"
+          placeholder="Enter member age"></ion-input>
+        <ion-input label-placement="floating" type="text" fill="outline" label="Member Mobile No"
+          placeholder="Enter member mobile no"></ion-input>
+      </div>
+
+      <ion-checkbox (ionChange)="toggleCarInput($event)"> {{ 'Do you have a car?' }} </ion-checkbox>
+
+      <div *ngIf="onCarSelect">
+        <ion-input label-placement="floating" type="text" fill="outline" label="Car Model"
+          placeholder="Enter car model"></ion-input>
+        <ion-input label-placement="floating" type="text" fill="outline" label="Car Number"
+          placeholder="Enter car number"></ion-input>
+        <ion-input label-placement="floating" type="text" fill="outline" label="Car Parking Area"
+          placeholder="Enter car parking area"></ion-input>
+
+        <div *ngFor="let car of cars; let i = index">
+          <ion-input label-placement="floating" type="text" fill="outline" label="Car Model"
+            placeholder="Enter car model" [(ngModel)]="car.model"></ion-input>
+          <ion-input label-placement="floating" type="text" fill="outline" label="Car Number"
+            placeholder="Enter car number" [(ngModel)]="car.number"></ion-input>
+          <ion-input label-placement="floating" type="text" fill="outline" label="Car Parking Area"
+            placeholder="Enter car parking area" [(ngModel)]="car.parkingArea"></ion-input>
+          <ion-buttons>
+            <ion-button color="danger" *ngIf="!addAnotherCars" (click)="removeAnotherCar(i)">
+              <ion-icon name="trash-outline"></ion-icon> Remove Another Car</ion-button>
+          </ion-buttons>
+        </div>
+
+        <ion-buttons *ngIf="addAnotherCars">
+          <ion-button (click)="addAnotherCar()"> <ion-icon name="add-outline"></ion-icon> Add Another Car </ion-button>
+        </ion-buttons>
+      </div>
+
+      <ion-input label="Owner Image" label-placement="floating" fill="outline" type="file">
+        <ion-icon name="images-outline" slot="end"></ion-icon>
+      </ion-input>
+
+      <ion-button shape="round" (click)="onSubmit()">Submit</ion-button>
+
+    </ion-content>
+  </ion-header>
+</div>

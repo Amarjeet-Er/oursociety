@@ -16,6 +16,9 @@ import { VisitorRegComponent } from './home/visitor-reg/visitor-reg.component';
 import { VisitorListComponent } from './home/visitor-list/visitor-list.component';
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
 import { VisitorDetailsComponent } from './home/visitor-details/visitor-details.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FlatOwnerDetailsComponent } from './home/flat-owner-details/flat-owner-details.component';
+import { EmployeeDetailsComponent } from './home/employee-details/employee-details.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +27,14 @@ import { VisitorDetailsComponent } from './home/visitor-details/visitor-details.
     DashboardComponent,
     EmployeeRegComponent,
     EmployeeListComponent,
+    EmployeeDetailsComponent,
     FlatOwnerRegComponent,
     FlatOwnerListComponent,
+    FlatOwnerDetailsComponent,
     VisitorRegComponent,
     VisitorListComponent,
     VisitorDetailsComponent,
-    UserProfileComponent
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,8 @@ import { VisitorDetailsComponent } from './home/visitor-details/visitor-details.
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    SwiperModule
+    SwiperModule,
+    HttpClientModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

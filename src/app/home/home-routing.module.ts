@@ -10,6 +10,8 @@ import { FlatOwnerListComponent } from './flat-owner-list/flat-owner-list.compon
 import { VisitorListComponent } from './visitor-list/visitor-list.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { VisitorDetailsComponent } from './visitor-details/visitor-details.component';
+import { FlatOwnerDetailsComponent } from './flat-owner-details/flat-owner-details.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 const routes: Routes = [
   {
@@ -17,17 +19,18 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'employeereg', component: EmployeeRegComponent },
       { path: 'employeelist', component: EmployeeListComponent },
-      { path: 'visitorreg', component: VisitorRegComponent },
       { path: 'visitorlist', component: VisitorListComponent },
-      { path: 'visitordetails', component: VisitorDetailsComponent },
-      { path: 'flatownerreg', component: FlatOwnerRegComponent },
       { path: 'flatownerlist', component: FlatOwnerListComponent },
     ]
   },
+  { path: 'employeereg', component: EmployeeRegComponent },
+  { path: 'employeedetails', component: EmployeeDetailsComponent },
+  { path: 'flatownerreg', component: FlatOwnerRegComponent },
+  { path: 'flatownerdetails', component: FlatOwnerDetailsComponent },
+  { path: 'visitorreg', component: VisitorRegComponent },
+  { path: 'visitordetails', component: VisitorDetailsComponent },
   { path: 'profile', component: UserProfileComponent }
-
 ];
 
 @NgModule({

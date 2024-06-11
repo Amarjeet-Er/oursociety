@@ -1,15 +1,39 @@
 <ion-app>
   <ion-menu contentId="main-content">
-    <ion-header>
-      <ion-toolbar color="tertiary">
-        <ion-title>Menu Content</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <ion-title>Menu Content</ion-title>
-      <ion-title (click)="onLogout()">Logout</ion-title>
-    </ion-content>
+    <ion-toolbar color="secondary">
+      <div class="userProfile">
+        <img src="https://smaabacus.com/themes/user/assets/img/avatar/male.png" alt="" width="80px">
+      </div>
+      <div class="titleContent">
+        <span>Amarjeet Kumar</span>
+        <button>
+          <ion-icon name="pencil-outline"></ion-icon>
+        </button>
+      </div>
+    </ion-toolbar>
+    <ion-content>
+      <div class="dataRow">
+        <p>
+          <ion-icon name="call-sharp" color="secondary"></ion-icon>
+          <span> Cantact </span>
+        </p>
 
+        <p>
+          <ion-icon name="alert-circle-sharp" color="secondary"></ion-icon>
+          <span> About </span>
+        </p>
+
+        <p>
+          <ion-icon name="bookmarks-sharp" color="secondary"></ion-icon>
+          <span> Tearm & Condition </span>
+        </p>
+
+        <p>
+          <ion-icon name="git-compare-sharp" color="secondary"></ion-icon>
+          <span> Change Password </span>
+        </p>
+      </div>
+    </ion-content>
   </ion-menu>
   <div class="ion-page" id="main-content">
     <ion-header class="box">
@@ -18,13 +42,9 @@
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-buttons slot="end">
-          <ion-title *ngIf="onRegistration()">Employee Registration</ion-title>
           <ion-title *ngIf="onRegistrationList()">Employee List</ion-title>
-          <ion-title *ngIf="onOwnerReg()">Owner Registration</ion-title>
           <ion-title *ngIf="onOwnerList()">Owner List</ion-title>
-          <ion-title *ngIf="onVisitorReg()">Visitor Registration</ion-title>
           <ion-title *ngIf="onVisitorList()">Visitor List</ion-title>
-          <ion-title *ngIf="onProfile()">Profile</ion-title>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>

@@ -21,11 +21,10 @@ export class EmployeeListComponent implements OnInit {
     { "name": "Munna kumar", "desi": "Angular", "phone": "8956231254" },
     { "name": "Denesh", "desi": "Angular", "phone": "8956231254" },
   ]
-  constructor(private router: Router) { }
+  constructor(
+    private _router: Router
+  ) { }
   ngOnInit(): void {
-  }
-  onCancelButtonClicked() {
-    this.router.navigate(['/home']);
   }
 
   onHeaderBox() {
@@ -37,7 +36,10 @@ export class EmployeeListComponent implements OnInit {
     this.siteSearch = !this.siteSearch;
   }
   onAddEmp() {
-    this.router.navigate(['/home/employeereg']);
+    this._router.navigate(['/home/employeereg']);
+  }
+  onDetails() {
+    this._router.navigate(['/home/employeedetails']);
   }
   onSearch(filter: any) { }
 

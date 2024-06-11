@@ -1,9 +1,29 @@
-ion-content {
-    ion-input {
-        margin: 10px 0px;
+.ion-page {
+    ion-header {
+        ion-toolbar {
+            ion-text {
+                position: relative;
+                right: 15px;
+            }
+
+            ion-fab-button::part(native) {
+                border-radius: 50px;
+                box-shadow: none;
+            }
+        }
     }
 
-    ion-button {
+    ion-content {
         width: 100%;
+        height: calc(100vh - 56px);
+        overflow: auto;
+
+        ion-input {
+            margin: 10px 0px;
+        }
+
+        ion-button {
+            width: 100%;
+        }
     }
 }
