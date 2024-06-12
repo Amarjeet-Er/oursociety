@@ -47,3 +47,47 @@
         }
     }
 }
+
+.dataRow {
+    width: 100%;
+    border: 1px solid black;
+    border-bottom: none;
+    margin-bottom: 10px;
+    border-radius: 5px;
+
+    p {
+        padding: 10px;
+        text-wrap: nowrap;
+        width: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border-bottom: 0.1px solid black;
+        margin: 0px;
+        width: 100%;
+        height: 56px;
+        span {
+            padding-left: 5px;
+            font-weight: 400;
+            font-size: 14px;
+            color: black;
+        }
+
+        img {
+            vertical-align: middle;
+            width: 30px;
+            height: 30px;
+        }
+
+        ion-fab-button::part(native) {
+            background-color: #0054e9;
+            border-radius: 3px;
+            height: 20px;
+            padding: 20px;
+            width: 80px;
+            position: absolute;
+            right: 25px;
+            margin-top: -32px;
+        }
+
+    }
+}

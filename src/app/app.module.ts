@@ -19,6 +19,8 @@ import { VisitorDetailsComponent } from './home/visitor-details/visitor-details.
 import { HttpClientModule } from '@angular/common/http';
 import { FlatOwnerDetailsComponent } from './home/flat-owner-details/flat-owner-details.component';
 import { EmployeeDetailsComponent } from './home/employee-details/employee-details.component';
+import { VisitorReportsComponent } from './home/visitor-reports/visitor-reports.component';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } from "ngx-ui-loader";
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { EmployeeDetailsComponent } from './home/employee-details/employee-detai
     VisitorRegComponent,
     VisitorListComponent,
     VisitorDetailsComponent,
+    VisitorReportsComponent,
     UserProfileComponent,
   ],
   imports: [
@@ -43,9 +46,21 @@ import { EmployeeDetailsComponent } from './home/employee-details/employee-detai
     ReactiveFormsModule,
     FormsModule,
     SwiperModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxUiLoaderModule.forRoot({
+      fgsType: 'rectangle-bounce',
+      fgsColor: '#000000',
+      fgsSize: 70,
+      overlayColor: '#0163aa',
+      pbThickness: 3,
+      pbColor: '#000000',
+    }),
+    // NgxUiLoaderRouterModule,
+    NgxUiLoaderHttpModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
+
+

@@ -2,7 +2,7 @@
   <ion-header>
     <ion-toolbar color="secondary">
       <ion-fab-button slot="start" color="secondary" routerLink="/home/flatownerlist">
-        <ion-icon name="chevron-back-outline"></ion-icon>
+        <ion-icon name="chevron-back-sharp"></ion-icon>
       </ion-fab-button>
       <ion-buttons slot="end">
         <ion-text> Owner Registration </ion-text>
@@ -46,7 +46,10 @@
       </ion-input>
       <ion-text *ngIf="familyCount > 7" color="danger">Maximum 7 members allowed.</ion-text>
 
-      <div *ngFor="let data of AddFamilyInput">
+      <div class="AddFamilyList" *ngFor="let member of AddFamilyInput; let i = index">
+        <span>
+          <p>Member {{ i + 1 }}</p>
+        </span>
         <ion-input label-placement="floating" type="text" fill="outline" label="Member Name"
           placeholder="Enter member name"></ion-input>
         <ion-input label-placement="floating" type="text" fill="outline" label="Member Age"

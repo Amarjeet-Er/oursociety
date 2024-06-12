@@ -2,7 +2,7 @@
   <ion-header>
     <ion-toolbar color="secondary">
       <ion-fab-button slot="start" color="secondary" routerLink="/home/visitorlist">
-        <ion-icon name="chevron-back-outline"></ion-icon>
+        <ion-icon name="chevron-back-sharp"></ion-icon>
       </ion-fab-button>
       <ion-buttons slot="end">
         <ion-text> Visitor Registration </ion-text>
@@ -11,74 +11,66 @@
 
     <ion-content class="ion-padding">
 
-      <ion-input label="Name" label-placement="floating" fill="outline" type="text"
-        placeholder="Enter visitor name"></ion-input>
+      <form [formGroup]="VisitorReg">
 
-      <ion-input label="Mobile No" label-placement="floating" fill="outline" type="number"
-        placeholder="Enter mobile no"></ion-input>
+        <ion-input label="Name" label-placement="floating" fill="outline" type="text" placeholder="Enter visitor name"
+          formControlName="visitorName">
+        </ion-input>
 
-      <ion-input #VisitorInput label="Number Of Visitors" label-placement="floating" type="number" fill="outline"
-        placeholder="Enter number of visitors" [(ngModel)]="visitorsCount" (input)="onVisitorInput($event)" ngModel>
-      </ion-input>
+        <ion-input label="Mobile No" label-placement="floating" fill="outline" type="number"
+          placeholder="Enter mobile no" formControlName="visitorPhone">
+        </ion-input>
 
-      <ion-text *ngIf="visitorsCount > 7" color="danger">Maximum 7 visitor allowed.</ion-text>
+        <ion-input label="Number Of Visitors" label-placement="floating" type="number" fill="outline"
+          placeholder="Enter number of visitors" formControlName="visitorsCount">
+        </ion-input>
 
-      <div *ngFor="let data of AddVisitorInput">
-        <ion-input label-placement="floating" type="text" fill="outline" label="Visitor Name"
-          placeholder="Enter visitor name"></ion-input>
-        <ion-input label-placement="floating" type="text" fill="outline" label="Visitor Age"
-          placeholder="Enter visitor age"></ion-input>
-        <ion-input label-placement="floating" type="text" fill="outline" label="Visitor Mobile No"
-          placeholder="Enter visitor mobile no"></ion-input>
-      </div>
+        <ion-checkbox (ionChange)="toggleVehicleInput($event)"> {{ 'Do you have a vehical?' }} </ion-checkbox>
 
-      <ion-checkbox (ionChange)="toggleVehicleInput($event)"> {{ 'Do you have a vehical?' }} </ion-checkbox>
-
-      <div *ngIf="onVehicleSelect">
-        <ion-input label-placement="floating" type="text" fill="outline" label="Vehicle Model"
-          placeholder="Enter vehical model"></ion-input>
-        <ion-input label-placement="floating" type="text" fill="outline" label="Vehicle Number"
-          placeholder="Enter vehical number"></ion-input>
-        <ion-input label-placement="floating" type="text" fill="outline" label="Vehicle Parking Area"
-          placeholder="Enter vehical parking area"></ion-input>
-
-        <div *ngFor="let vehical of Vehicals; let i = index">
+        <div *ngIf="onVehicleSelect">
           <ion-input label-placement="floating" type="text" fill="outline" label="Vehicle Model"
-            placeholder="Enter vehical model" [(ngModel)]="vehical.model"></ion-input>
+            placeholder="Enter vehical model" formControlName="vehicleModel">
+          </ion-input>
+
           <ion-input label-placement="floating" type="text" fill="outline" label="Vehicle Number"
-            placeholder="Enter vehical number" [(ngModel)]="vehical.number"></ion-input>
+            placeholder="Enter vehical number" formControlName="vehicleNumber">
+          </ion-input>
+
           <ion-input label-placement="floating" type="text" fill="outline" label="Vehicle Parking Area"
-            placeholder="Enter vehical parking area" [(ngModel)]="vehical.parkingArea"></ion-input>
-          <ion-buttons class="AddHidden">
-            <ion-button color="danger" *ngIf="!addAnotherVehicals" (click)="removeAnotherVehicle(i)">
-              <ion-icon name="trash-outline"></ion-icon> Remove Another Vehicle</ion-button>
-          </ion-buttons>
+            placeholder="Enter vehical parking area" formControlName="vehicleParking">
+          </ion-input>
         </div>
 
-        <ion-buttons class="AddHidden" *ngIf="addAnotherVehicals">
-          <ion-button color="success" (click)="addAnotherVehicle()">
-            <ion-icon name="add-outline"></ion-icon> Add Another Vehicle </ion-button>
-        </ion-buttons>
-      </div>
+        <ion-input label="Visitor Image" label-placement="floating" fill="outline" type="file">
+          <ion-icon name="images-outline" slot="end"></ion-icon>
+        </ion-input>
 
-      <ion-input label="Visitor Image" label-placement="floating" fill="outline" type="file">
-        <ion-icon name="images-outline" slot="end"></ion-icon>
-      </ion-input>
+        <ion-input label="Visiting Flat No" label-placement="floating" fill="outline" type="number"
+          formControlName="visitorFlatNo">
+          <ion-fab-button shape="round" slot="end" (click)="onFlatFind()">Find</ion-fab-button>
+        </ion-input>
 
-      <ion-input label="Visiting Flat No" label-placement="floating" fill="outline" type="number"
-        placeholder="Enter visiting no">
-        <ion-fab-button shape="round" slot="end">Find</ion-fab-button>
-      </ion-input>
+        <div class="dataRow" *ngIf="findFlatNo">
+          <p>
+            <img src="../../../assets/icons/user.png" alt="">
+            <span> {{'Amarjeet'}} </span>
+          </p>
+          <p>
+            <img src="../../../assets/icons/phone.png" alt="">
+            <span> {{'8965125478'}} </span>
+            <ion-fab-button slot="end">View More</ion-fab-button>
+          </p>
+        </div>
 
-      <ion-select label="Status" fill="outline" label-placement="floating" interface="action-sheet"
-        placeholder="Select status">
-        <ion-select-option value="Pending">Pending</ion-select-option>
-        <ion-select-option value="Approved">Approved</ion-select-option>
-        <ion-select-option value="Rejected">Rejected</ion-select-option>
-      </ion-select>
+        <ion-select label="Status" fill="outline" label-placement="floating" interface="action-sheet"
+          placeholder="Select status" formControlName="visitorStatus">
+          <ion-select-option value="Pending">Pending</ion-select-option>
+          <ion-select-option value="Approved">Approved</ion-select-option>
+          <ion-select-option value="Rejected">Rejected</ion-select-option>
+        </ion-select>
 
-      <ion-button shape="round" (click)="onSubmit()">Submit</ion-button>
-
+        <ion-button shape="round" (click)="onSubmit()">Submit</ion-button>
+      </form>
     </ion-content>
   </ion-header>
 </div>

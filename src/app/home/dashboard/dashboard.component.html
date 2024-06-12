@@ -1,57 +1,61 @@
 <div id="wrapper">
     <div class="grating" [style.color]="greetingColor">
-        <span style="font-size: 20px; color: aqua;"><b>{{ GratingData() }}</b></span><br>
-        <span style="color: brown;">Amarjeet Kumar</span>
+        <span style="font-size: 20px; color: #0163aa;"><b>{{ GratingData() }}</b></span><br>
+        <span style="color: #0163aa;">Amarjeet Kumar</span>
     </div>
-
-    <ion-card>
-        <swiper [spaceBetween]="30" [centeredSlides]="true" [autoplay]="{
-            delay: 10,
-            disableOnInteraction: false
-        }" [pagination]="{
-            clickable: true
-        }" [grabCursor]="true" [navigation]="true" class="mySwiper">
-            <ng-template swiperSlide *ngFor="let slider of slider_data">
-                <img class="slider_img" src="{{slider?.img_url}}" width="100%" height="200px">
-            </ng-template>
-        </swiper>
-    </ion-card>
 
     <ion-card class="manageContainer">
         <h5>Manage</h5>
         <div class="manage">
-            <div class="manageBox" routerLink="/home/employeereg">
-                <ion-icon name="person-add-sharp" color="danger"></ion-icon>
-                <ion-card-title>Add Employee</ion-card-title>
+            <div class="manageBox" routerLink="/home/flatownerlist">
+                <img src="../../../assets/icons/user.png" alt="">
+                <ion-card-title>Total Owner</ion-card-title>
             </div>
-            <div class="manageBox" routerLink="/home/visitorreg">
-                <ion-icon name="person-add-sharp" color="success"></ion-icon>
-                <ion-card-title>Add Visitors</ion-card-title>
+            <div class="manageBox" routerLink="/home/employeelist">
+                <img src="../../../assets/icons/emp.png" alt="">
+                <ion-card-title>Total Employee</ion-card-title>
             </div>
-            <div class="manageBox" routerLink="/home/flatownerreg">
-                <ion-icon name="person-add-sharp" color="primary"></ion-icon>
-                <ion-card-title>Add Owner</ion-card-title>
-            </div>
-            <div class="manageBox">
-                <ion-icon name="logo-paypal" color="success"></ion-icon>
-                <ion-card-title>Payments</ion-card-title>
+            <div class="manageBox" routerLink="/home/visitorlist">
+                <img src="../../../assets/icons/visitor.png" alt="">
+                <ion-card-title>Total Visitors</ion-card-title>
             </div>
             <div class="manageBox">
-                <ion-icon name="car-sharp" color="tertiary"></ion-icon>
+                <img src="../../../assets/icons/parking-car.png" alt="">
                 <ion-card-title>Car Parking</ion-card-title>
             </div>
             <div class="manageBox">
-                <ion-icon name="headset-sharp" color="warning"></ion-icon>
+                <img src="../../../assets/icons/help-desk.png" alt="">
                 <ion-card-title>Help Desk</ion-card-title>
             </div>
             <div class="manageBox">
-                <ion-icon name="notifications-circle-sharp" color="secondary"></ion-icon>
+                <img src="../../../assets/icons/notice.png" alt="">
                 <ion-card-title>Notic</ion-card-title>
             </div>
+
+        </div>
+    </ion-card>
+
+    <ion-card class="manageContainer">
+        <h5>Reports</h5>
+        <div class="manage">
             <div class="manageBox">
-                <ion-icon name="paw-sharp" color="medium"></ion-icon>
-                <ion-card-title>Events</ion-card-title>
+                <img src="../../../assets/icons/user.png" alt="">
+                <ion-card-title>Flat Owner</ion-card-title>
+            </div>
+            <div class="manageBox">
+                <img src="../../../assets/icons/emp.png" alt="">
+                <ion-card-title>Employee</ion-card-title>
+            </div>
+            <div class="manageBox" routerLink="/home/visitorreports">
+                <img src="../../../assets/icons/visitor.png" alt="">
+                <ion-card-title>Visitor</ion-card-title>
             </div>
         </div>
     </ion-card>
+
+    <ion-content>
+        <canvas id="visitorGraph" width="" height="200"></canvas>
+      </ion-content>
+      
 </div>
+

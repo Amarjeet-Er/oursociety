@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,46 +7,41 @@ import { Router } from '@angular/router';
   templateUrl: './visitor-reg.component.html',
   styleUrls: ['./visitor-reg.component.scss'],
 })
-export class VisitorRegComponent  implements OnInit {
-  visitorsCount!: number;
-  AddVisitorInput: { count: number }[] = [];
+export class VisitorRegComponent implements OnInit {
+  VisitorReg!: FormGroup
   onVehicleSelect: boolean = false;
-  Vehicals: any[] = [];
-  addAnotherVehicals: boolean = true;
+  findFlatNo: boolean = false
   constructor(
-    private _router: Router
+    private _router: Router,
+    private _fb: FormBuilder,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.initializeForm();
+  }
 
-  onVisitorInput(event: any) {
-    if (this.visitorsCount > 7) {
-      event.target.setCustomValidity('Maximum 7 members allowed.');
-      return
-    }
-    else {
-      event.target.setCustomValidity('');
-      this.addFamilyFields()
-    }
+  initializeForm() {
+    this.VisitorReg = this._fb.group({
+      visitorName: [''],
+      visitorPhone: [''],
+      visitorsCount: [''],
+      vehicleModel: [''],
+      vehicleNumber: [''],
+      vehicleParking: [''],
+      visitorFlatNo: [0],
+      visitorStatus: [''],
+    });
   }
-  addFamilyFields() {
-    this.AddVisitorInput = [];
-    for (let i = 0; i < this.visitorsCount; i++) {
-      this.AddVisitorInput.push({ count: 0 });
-    }
-  }
+
   toggleVehicleInput(event: any) {
     this.onVehicleSelect = event.detail.checked;
   }
-  addAnotherVehicle() {
-    this.addAnotherVehicals = false
-    this.Vehicals.push({});
-  }
-  removeAnotherVehicle(index: number) {
-    this.addAnotherVehicals = true
-    this.Vehicals.splice(index, 1);
+  onFlatFind() {
+    this.findFlatNo = true
   }
   onSubmit(): void {
+    console.log(this.VisitorReg.value, 'Visistor data');
+    return
     this._router.navigate(['/home/visitorlist']);
   }
 }

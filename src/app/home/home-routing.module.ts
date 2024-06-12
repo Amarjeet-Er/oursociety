@@ -12,6 +12,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { VisitorDetailsComponent } from './visitor-details/visitor-details.component';
 import { FlatOwnerDetailsComponent } from './flat-owner-details/flat-owner-details.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { VisitorReportsComponent } from './visitor-reports/visitor-reports.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'flatownerreg', component: FlatOwnerRegComponent },
   { path: 'flatownerdetails', component: FlatOwnerDetailsComponent },
   { path: 'visitorreg', component: VisitorRegComponent },
+  { path: 'visitorreports', component: VisitorReportsComponent },
   { path: 'visitordetails', component: VisitorDetailsComponent },
   { path: 'profile', component: UserProfileComponent }
 ];

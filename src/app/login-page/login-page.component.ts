@@ -23,9 +23,8 @@ export class LoginPageComponent implements OnInit {
     });
   }
   onLogin(data:any){
+    this._router.navigate(['home'])
     if(data === '123'){
-      this._router.navigate(['home'])
-      alert('Login Successfully...')
     }
   }
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 SwiperCore.use([Autoplay, Pagination, Navigation]);
+import { SwiperModule } from 'swiper/angular';
+import Chart from 'chart.js/auto';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,7 +14,33 @@ export class DashboardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.createVisitorGraph();
+  }
+
+  createVisitorGraph() {
+    const ctx = document.getElementById('visitorGraph') as HTMLCanvasElement;
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+          label: 'Visitors',
+          data: [100, 200, 150, 300, 50, 400, 350, 10, 450, 600, 550, 700],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
   slider_data = [
     { img_url: 'https://media.istockphoto.com/id/596792426/photo/shinjuku-shopping-district-tokyo-japan.webp?b=1&s=170667a&w=0&k=20&c=eSnM5M0kxisc15MUNA5SLRicOWvaDUS4pCgDrU2mETk=' },
     { img_url: 'https://images.unsplash.com/photo-1537919747229-733016a8058f?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },

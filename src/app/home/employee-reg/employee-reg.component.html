@@ -2,7 +2,7 @@
   <ion-header>
     <ion-toolbar color="secondary">
       <ion-fab-button slot="start" color="secondary" routerLink="/home/employeelist">
-        <ion-icon name="chevron-back-outline"></ion-icon>
+        <ion-icon name="chevron-back-sharp"></ion-icon>
       </ion-fab-button>
       <ion-buttons slot="end">
         <ion-text> Employee Registration </ion-text>
@@ -10,60 +10,82 @@
     </ion-toolbar>
     <ion-content class="ion-padding">
 
-      <ion-select label="Employee Type" fill="outline" label-placement="floating" interface="action-sheet"
-        placeholder="Select employee">
-        <ion-select-option value="Full-time employment">Full-time employment</ion-select-option>
-        <ion-select-option value="Part-time employment">Part-time employment</ion-select-option>
-        <ion-select-option value="Internship">Internship</ion-select-option>
-      </ion-select>
+      <form [formGroup]="employeeReg">
+        <ion-select label="Employee Type" fill="outline" label-placement="floating" interface="action-sheet"
+          placeholder="Select employee">
+          <ion-select-option value="Full-time employment">Full-time employment</ion-select-option>
+          <ion-select-option value="Part-time employment">Part-time employment</ion-select-option>
+          <ion-select-option value="Internship">Internship</ion-select-option>
+        </ion-select>
 
-      <ion-input label="Employee Name" label-placement="floating" fill="outline" type="text"
-        placeholder="Enter employee name"></ion-input>
+        <ion-input label="Employee Name" label-placement="floating" fill="outline" type="text"
+          placeholder="Enter employee name">
+        </ion-input>
 
-      <ion-input label="Contact No" label-placement="floating" fill="outline" type="number"
-        placeholder="Enter contact no"></ion-input>
+        <ion-input label="Contact No" label-placement="floating" fill="outline" type="number"
+          placeholder="Enter contact no">
+        </ion-input>
 
-      <ion-input type="email" fill="outline" label="Email" labelPlacement="floating" errorText="Invalid email" ngModel
-        email></ion-input>
+        <ion-input type="email" fill="outline" label="Email" labelPlacement="floating" errorText="Invalid email" ngModel
+          email>
+        </ion-input>
 
-      <ion-input label="Alt Contact No (1)" label-placement="floating" fill="outline" type="number"
-        placeholder="Enter alt contact no"></ion-input>
+        <ion-input label="Alt Contact No (1)" label-placement="floating" fill="outline" type="number"
+          placeholder="Enter alt contact no">
+        </ion-input>
 
-      <ion-input label="Relation With No (1)" label-placement="floating" fill="outline" type="number"
-        placeholder="Enter relation with no"></ion-input>
+        <ion-select label="Relation With No (1)" fill="outline" label-placement="floating" interface="action-sheet"
+          placeholder="Select relation with no">
+          <ion-select-option value="Father">Father</ion-select-option>
+          <ion-select-option value="Mother">Mother</ion-select-option>
+          <ion-select-option value="Brother">Brother</ion-select-option>
+          <ion-select-option value="Sister">Sister</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
 
-      <ion-input label="Alt Contact No (2)" label-placement="floating" fill="outline" type="number"
-        placeholder="Enter alt contact no"></ion-input>
+        <ion-input label="Alt Contact No (2)" label-placement="floating" fill="outline" type="number"
+          placeholder="Enter alt contact no"></ion-input>
 
-      <ion-input label="Relation With No (2)" label-placement="floating" fill="outline" type="number"
-        placeholder="Enter relation with no"></ion-input>
+        <ion-select label="Relation With No (2)" fill="outline" label-placement="floating" interface="action-sheet"
+          placeholder="Select relation with no">
+          <ion-select-option value="Father">Father</ion-select-option>
+          <ion-select-option value="Mother">Mother</ion-select-option>
+          <ion-select-option value="Brother">Brother</ion-select-option>
+          <ion-select-option value="Sister">Sister</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
 
-      <ion-input label="Aadhar No" label-placement="floating" type="number" fill="outline"
-        placeholder="Enter aadhar no"></ion-input>
+        <ion-input label="Aadhar No" label-placement="floating" type="number" fill="outline"
+          placeholder="Enter aadhar no">
+        </ion-input>
 
-      <ion-input label="Current Address" label-placement="floating" fill="outline" type="text"
-        placeholder="Enter current address"></ion-input>
+        <ion-input label="Current Address" label-placement="floating" fill="outline" type="text"
+          placeholder="Enter current address">
+        </ion-input>
 
-      <ion-input label="Permanent Address" label-placement="floating" fill="outline" type="text"
-        placeholder="Enter permanent address"></ion-input>
+        <ion-input label="Permanent Address" label-placement="floating" fill="outline" type="text"
+          placeholder="Enter permanent address">
+        </ion-input>
 
-      <ion-input label="Aadhar Image" label-placement="floating" fill="outline" type="file">
-        <ion-icon name="images-outline" slot="end"></ion-icon>
-      </ion-input>
+        <ion-input label="Aadhar Image" label-placement="floating" fill="outline" type="file">
+          <ion-icon name="images-outline" slot="end"></ion-icon>
+        </ion-input>
 
-      <ion-input label="Employee Image" label-placement="floating" fill="outline" type="file">
-        <ion-icon name="images-outline" slot="end"></ion-icon>
-      </ion-input>
+        <ion-input label="Employee Image" label-placement="floating" fill="outline" type="file">
+          <ion-icon name="images-outline" slot="end"></ion-icon>
+        </ion-input>
 
-      <ion-input label="Create Password" label-placement="floating" fill="outline" type="text"
-        placeholder="Enter create password"></ion-input>
+        <ion-input label="Create Password" label-placement="floating" fill="outline" type="text"
+          placeholder="Enter create password">
+        </ion-input>
 
-      <ion-input label="Confirm Address" label-placement="floating" fill="outline" type="text"
-        placeholder="Enter confirm password"></ion-input>
+        <ion-input label="Confirm Address" label-placement="floating" fill="outline" type="text"
+          placeholder="Enter confirm password">
+        </ion-input>
 
-      <ion-checkbox class="ion-padding">agree to the terms and conditions</ion-checkbox><br>
-      <ion-button shape="round" (click)="onSubmit()">Submit</ion-button>
-
+        <ion-checkbox class="ion-padding">agree to the terms and conditions</ion-checkbox><br>
+        <ion-button shape="round" (click)="onSubmit()">Submit</ion-button>
+      </form>
     </ion-content>
   </ion-header>
 </div>
