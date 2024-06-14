@@ -12,30 +12,34 @@
 
       <form [formGroup]="employeeReg">
         <ion-select label="Employee Type" fill="outline" label-placement="floating" interface="action-sheet"
-          placeholder="Select employee">
+          placeholder="Select employee" formControlName="emp_type">
           <ion-select-option value="Full-time employment">Full-time employment</ion-select-option>
           <ion-select-option value="Part-time employment">Part-time employment</ion-select-option>
           <ion-select-option value="Internship">Internship</ion-select-option>
         </ion-select>
 
+        <ion-input label="Flat No" label-placement="floating" fill="outline" type="text" placeholder="Enter flat no"
+          formControlName="emp_workArea">
+        </ion-input>
+
         <ion-input label="Employee Name" label-placement="floating" fill="outline" type="text"
-          placeholder="Enter employee name">
+          placeholder="Enter employee name" formControlName="emp_name">
         </ion-input>
 
         <ion-input label="Contact No" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter contact no">
+          placeholder="Enter contact no" formControlName="emp_contact_Num">
         </ion-input>
 
         <ion-input type="email" fill="outline" label="Email" labelPlacement="floating" errorText="Invalid email" ngModel
-          email>
+          email formControlName="emp_email">
         </ion-input>
 
         <ion-input label="Alt Contact No (1)" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter alt contact no">
+          placeholder="Enter alt contact no" formControlName="alternate_Num1">
         </ion-input>
 
         <ion-select label="Relation With No (1)" fill="outline" label-placement="floating" interface="action-sheet"
-          placeholder="Select relation with no">
+          placeholder="Select relation with no" formControlName="rel_altertante_Num1">
           <ion-select-option value="Father">Father</ion-select-option>
           <ion-select-option value="Mother">Mother</ion-select-option>
           <ion-select-option value="Brother">Brother</ion-select-option>
@@ -44,10 +48,11 @@
         </ion-select>
 
         <ion-input label="Alt Contact No (2)" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter alt contact no"></ion-input>
+          placeholder="Enter alt contact no" formControlName="alternate_Num2">
+        </ion-input>
 
         <ion-select label="Relation With No (2)" fill="outline" label-placement="floating" interface="action-sheet"
-          placeholder="Select relation with no">
+          placeholder="Select relation with no" formControlName="rel_altertante_Num2">
           <ion-select-option value="Father">Father</ion-select-option>
           <ion-select-option value="Mother">Mother</ion-select-option>
           <ion-select-option value="Brother">Brother</ion-select-option>
@@ -56,31 +61,88 @@
         </ion-select>
 
         <ion-input label="Aadhar No" label-placement="floating" type="number" fill="outline"
-          placeholder="Enter aadhar no">
+          placeholder="Enter aadhar no" formControlName="emp_aadhar_num">
         </ion-input>
 
         <ion-input label="Current Address" label-placement="floating" fill="outline" type="text"
-          placeholder="Enter current address">
+          placeholder="Enter current address" formControlName="emp_current_address">
         </ion-input>
 
         <ion-input label="Permanent Address" label-placement="floating" fill="outline" type="text"
-          placeholder="Enter permanent address">
+          placeholder="Enter permanent address" formControlName="emp_parmanent_address">
         </ion-input>
 
-        <ion-input label="Aadhar Image" label-placement="floating" fill="outline" type="file">
-          <ion-icon name="images-outline" slot="end"></ion-icon>
-        </ion-input>
+        <div class="EmployeeAadhar">
+          <div class="Documents" [hidden]="EmpAadharSelect">
+            <span>Employee Aadhar</span>
+            <img alt="documents" [src]="Aadhar_img_url">
+            <input class="d-none" type="file" accept=".jpg,.png,.jpeg," #Aadhar (change)="onAadhar(Aadhar.files)">
+          </div>
+          <div class="EmpSelectAadhar" onclick="document.querySelector('#addEmpAadhar').click()">
+            <ion-text>Employee Aadhar</ion-text>
+            <ion-fab>
+              <ion-fab-button size="small">
+                <ion-icon name="add-circle-sharp"></ion-icon>
+              </ion-fab-button>
+              <ion-fab-list side="start">
+                <ion-fab-button (click)="Aadhar.click()">
+                  <ion-icon name="image-outline"></ion-icon>
+                </ion-fab-button>
+              </ion-fab-list>
+            </ion-fab>
+          </div>
+        </div>
 
-        <ion-input label="Employee Image" label-placement="floating" fill="outline" type="file">
-          <ion-icon name="images-outline" slot="end"></ion-icon>
-        </ion-input>
+        <div class="EmployeeImg">
+          <span [hidden]="onCameraOpen">
+            <div class="BoxCamera">
+              <video #video id="video" [width]="WIDTH" [height]="HEIGHT" autoplay></video>
+            </div>
+            <div class="BoxCameraClickBtn">
+              <ion-button mat-raised-button color="primary" (click)="capture()">Click Photo</ion-button>
+            </div>
+          </span>
+
+          <div *ngIf="onCaptureImg">
+            <div class="BoxCamera">
+              <canvas #canvas id="canvas" [hidden]="!onCameraOpen" [width]="WIDTH" [height]="HEIGHT"></canvas>
+            </div>
+          </div>
+
+          <div class="UploadImage">
+            <div class="imgDataBox" [hidden]="onGalleryImg">
+              <span>
+                <img alt="galleryImg" [src]="gallery_img_url">
+                <input class="d-none" type="file" accept=".jpg,.png,.jpeg,.pdf" #galleryImg
+                  (change)="OnGallery(galleryImg.files)">
+              </span>
+            </div>
+          </div>
+
+          <div class="actionCamera" onclick="document.querySelector('#addButtonImg').click()">
+            <ion-text>Employee Image</ion-text>
+            <ion-fab>
+              <ion-fab-button size="small" id="addButtonImg">
+                <ion-icon name="add-circle-sharp"></ion-icon>
+              </ion-fab-button>
+              <ion-fab-list side="start">
+                <ion-fab-button (click)="StartCamera()">
+                  <ion-icon name="camera-outline"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-button (click)="galleryImg.click()">
+                  <ion-icon name="image-outline"></ion-icon>
+                </ion-fab-button>
+              </ion-fab-list>
+            </ion-fab>
+          </div>
+        </div>
 
         <ion-input label="Create Password" label-placement="floating" fill="outline" type="text"
-          placeholder="Enter create password">
+          placeholder="Enter create password" formControlName="emp_password">
         </ion-input>
 
         <ion-input label="Confirm Address" label-placement="floating" fill="outline" type="text"
-          placeholder="Enter confirm password">
+          placeholder="Enter confirm password" formControlName="employeeConfirmPass">
         </ion-input>
 
         <ion-checkbox class="ion-padding">agree to the terms and conditions</ion-checkbox><br>

@@ -1,20 +1,20 @@
 <ion-card>
   <div class="SearchBox" *ngIf="headerBox">
-    <span> <b>Total :-</b>10</span>
+    <span> <b>Total :- </b>10</span>
     <div>
-      <ion-button mat-icon-button class="site-search site-search-reset" (click)="onHeaderBox()">
+      <ion-button color="secondary" class="site-search site-search-reset" (click)="onHeaderBox()">
         <ion-icon name="search-sharp"></ion-icon>
       </ion-button>
-      <ion-button mat-icon-button (click)="onAddEmp()">
+      <ion-button color="secondary" (click)="onAddEmp()">
         <ion-icon name="person-add-sharp"></ion-icon>
       </ion-button>
     </div>
   </div>
 
   <div class="SearchBox" *ngIf="siteSearch">
-    <span style="display: inherit; gap: 5px;"> <b>Total</b> 10</span>
+    <span> <b>Total :- </b> 10</span>
     <input type="text" class="site-search-input" placeholder="Search..." #search (keyup)="onSearch(search.value)">
-    <ion-button mat-icon-button type="reset" class="site-search site-search-reset" (click)="onDataSearch()">
+    <ion-button color="secondary" type="reset" class="site-search site-search-reset" (click)="onDataSearch()">
       <ion-icon name="close-sharp"></ion-icon>
     </ion-button>
   </div>
@@ -28,15 +28,15 @@
     <div class="userdata">
       <table>
         <tr>
-          <ion-icon name="person-outline"></ion-icon>
+          <ion-icon name="person-sharp" color="primary"></ion-icon>
           <td><b>{{data.name}}</b></td>
         </tr>
         <tr>
-          <ion-icon name="briefcase-outline"></ion-icon>
+          <ion-icon name="briefcase-sharp" color="dark"></ion-icon>
           <td>{{data.desi}}</td>
         </tr>
         <tr>
-          <ion-icon name="call-outline"></ion-icon>
+          <ion-icon name="call-sharp" color="success"></ion-icon>
           <td>{{data.phone}}</td>
         </tr>
       </table>

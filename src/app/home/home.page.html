@@ -7,7 +7,7 @@
       <div class="titleContent">
         <span>Amarjeet Kumar</span>
         <button>
-          <ion-icon name="pencil-outline"></ion-icon>
+           <img src="../../assets/icons/pencile.png" alt="" width="20px">
         </button>
       </div>
     </ion-toolbar>
@@ -34,6 +34,16 @@
         </p>
       </div>
     </ion-content>
+    <div class="sideBarBox">
+      <p>
+        <img src="../../assets/images/society app logo .png" alt="" width="30px">
+        <span> App Version 0.1 </span>
+      </p>
+      <p (click)="onLogout()">
+        <img src="../../assets/icons/logout.png" alt="" width="30px">
+        <span> Logout </span>
+      </p>
+    </div>
   </ion-menu>
   <div class="ion-page" id="main-content">
     <ion-header class="box">
@@ -57,7 +67,7 @@
             Home
           </ion-tab-button>
           <ion-tab-button tab="visitorlist">
-            <ion-icon name="compass-sharp"></ion-icon>
+            <ion-icon name="medkit-sharp"></ion-icon>
             Visitor
           </ion-tab-button>
           <ion-tab-button tab="flatownerlist">

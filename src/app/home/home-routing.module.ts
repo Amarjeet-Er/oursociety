@@ -13,6 +13,8 @@ import { VisitorDetailsComponent } from './visitor-details/visitor-details.compo
 import { FlatOwnerDetailsComponent } from './flat-owner-details/flat-owner-details.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { VisitorReportsComponent } from './visitor-reports/visitor-reports.component';
+import { EmployeeReportsComponent } from './employee-reports/employee-reports.component';
+import { FlatOwnerReportsComponent } from './flat-owner-reports/flat-owner-reports.component';
 
 const routes: Routes = [
   {
@@ -27,8 +29,10 @@ const routes: Routes = [
   },
   { path: 'employeereg', component: EmployeeRegComponent },
   { path: 'employeedetails', component: EmployeeDetailsComponent },
+  {path: 'employeereports', component: EmployeeReportsComponent},
   { path: 'flatownerreg', component: FlatOwnerRegComponent },
   { path: 'flatownerdetails', component: FlatOwnerDetailsComponent },
+  { path: 'flatownerreports', component: FlatOwnerReportsComponent },
   { path: 'visitorreg', component: VisitorRegComponent },
   { path: 'visitorreports', component: VisitorReportsComponent },
   { path: 'visitordetails', component: VisitorDetailsComponent },

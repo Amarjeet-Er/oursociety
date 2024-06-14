@@ -28,7 +28,7 @@ ion-app {
             .titleContent {
                 width: 100%;
                 height: auto;
-                padding-bottom: 10px;
+                padding: 10px 0px;
                 text-align: center;
 
                 button {
@@ -46,6 +46,33 @@ ion-app {
                     }
                 }
             }
+        }
+
+        .sideBarBox {
+            p {
+                padding: 0px 10px 10px;
+                text-wrap: nowrap;
+                width: auto;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin: 0px;
+                cursor: pointer;
+
+                span {
+                    padding: 10px;
+                    font-weight: 400;
+                }
+
+                img {
+                    vertical-align: middle;
+                    font-size: 24px;
+                }
+            }
+
+            // p:first-of-type {
+            //     border-top: 1px solid black;
+            //     border-bottom: 1px solid black;
+            // }
         }
 
         ion-content {
@@ -71,5 +98,6 @@ ion-app {
                 }
             }
         }
+
     }
 }

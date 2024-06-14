@@ -41,9 +41,50 @@
           </ion-input>
         </div>
 
-        <ion-input label="Visitor Image" label-placement="floating" fill="outline" type="file">
-          <ion-icon name="images-outline" slot="end"></ion-icon>
-        </ion-input>
+        <div class="VisitorImg">
+          <span [hidden]="onCameraOpen">
+            <div class="BoxCamera">
+              <video #video id="video" [width]="WIDTH" [height]="HEIGHT" autoplay></video>
+            </div>
+            <div class="BoxCameraClickBtn">
+              <ion-button mat-raised-button color="primary" (click)="capture()">Click Photo</ion-button>
+            </div>
+          </span>
+
+          <div *ngIf="onCaptureImg">
+            <div class="BoxCamera">
+              <canvas #canvas id="canvas" [hidden]="!onCameraOpen" [width]="WIDTH" [height]="HEIGHT"></canvas>
+            </div>
+          </div>
+
+          <div class="UploadImage">
+            <div class="imgDataBox" [hidden]="onGalleryImg">
+              <span>
+                <img alt="galleryImg" [src]="gallery_img_url">
+                <input class="d-none" type="file" accept=".jpg,.png,.jpeg,.pdf" #galleryImg
+                  (change)="OnGallery(galleryImg.files)">
+              </span>
+            </div>
+          </div>
+
+          <div class="actionCamera" onclick="document.querySelector('#ownerImg').click()">
+            <ion-text>Visitor Image</ion-text>
+            <ion-fab>
+              <ion-fab-button size="small" id="ownerImg">
+                <ion-icon name="add"></ion-icon>
+              </ion-fab-button>
+              <ion-fab-list side="start">
+                <ion-fab-button (click)="StartCamera()">
+                  <ion-icon name="camera-outline"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-button (click)="galleryImg.click()">
+                  <ion-icon name="image-outline"></ion-icon>
+                </ion-fab-button>
+              </ion-fab-list>
+            </ion-fab>
+          </div>
+        </div>
+
 
         <ion-input label="Visiting Flat No" label-placement="floating" fill="outline" type="number"
           formControlName="visitorFlatNo">
@@ -58,7 +99,7 @@
           <p>
             <img src="../../../assets/icons/phone.png" alt="">
             <span> {{'8965125478'}} </span>
-            <ion-fab-button slot="end">View More</ion-fab-button>
+            <ion-fab-button slot="end" routerLink="/home/employeedetails">View More</ion-fab-button>
           </p>
         </div>
 

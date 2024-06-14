@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
-SwiperCore.use([Autoplay, Pagination, Navigation]);
-import { SwiperModule } from 'swiper/angular';
-import Chart from 'chart.js/auto';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Chart, registerables } from 'chart.js';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,56 +8,75 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  greetingColor: any;
+  @ViewChild('visitorColumnChart', { static: true }) visitorColumnChart!: ElementRef;
+  @ViewChild('ReportChart', { static: true }) ReportChart!: ElementRef;
 
-  constructor() { }
+  constructor(
+    private _router: Router
+  ) { }
 
-  ngOnInit() {
-    this.createVisitorGraph();
+  ngOnInit(): void {
+    this.createColumnChart();
+    this.createPieChart();
   }
 
-  createVisitorGraph() {
-    const ctx = document.getElementById('visitorGraph') as HTMLCanvasElement;
-    new Chart(ctx, {
-      type: 'line',
+  createColumnChart(): void {
+    const ctxColumn = this.visitorColumnChart.nativeElement.getContext('2d');
+    Chart.register(...registerables);
+    new Chart(ctxColumn, {
+      type: 'bar',
       data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
           label: 'Visitors',
-          data: [100, 200, 150, 300, 50, 400, 350, 10, 450, 600, 550, 700],
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
+          data: [100, 200, 150, 300, 280, 600, 350, 200, 450, 600, 550, 700],
+          backgroundColor: '#0163aa',
+          borderColor: '#0163aa',
+          borderWidth: 1
         }]
       },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+    });
+  }
+
+  createPieChart(): void {
+    const ctx = this.ReportChart.nativeElement.getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Flat Owner', 'Employee', 'Visitor'],
+        datasets: [{
+          label: 'Reports',
+          data: [19, 25, 30],
+          backgroundColor: [
+            'orange',
+            'green',
+            'purple',
+          ]
+        }]
+      }
+    });
+
+    ctx.canvas.addEventListener('click', (event: MouseEvent) => {
+      const activeSegment = chart.getActiveElements();
+      if (activeSegment && activeSegment.length > 0) {
+        const clickedSegmentIndex = activeSegment[0].index;
+        switch (clickedSegmentIndex) {
+          case 0:
+            this._router.navigate(['/home/flatownerreports']);
+            break;
+          case 1:
+            this._router.navigate(['/home/employeereports']);
+            break;
+          case 2:
+            this._router.navigate(['/home/visitorreports']);
+            break;
+          default:
+            break;
         }
       }
     });
   }
-  slider_data = [
-    { img_url: 'https://media.istockphoto.com/id/596792426/photo/shinjuku-shopping-district-tokyo-japan.webp?b=1&s=170667a&w=0&k=20&c=eSnM5M0kxisc15MUNA5SLRicOWvaDUS4pCgDrU2mETk=' },
-    { img_url: 'https://images.unsplash.com/photo-1537919747229-733016a8058f?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-    { img_url: 'https://media.istockphoto.com/id/1175150202/photo/a-group-of-friends-meet-in-kabukicho-in-shinjuku.jpg?s=612x612&w=0&k=20&c=mUIFE0JAOuUthh-DAoKc2rUtsY6UvLsmujv79bpT4pw=' },
-    { img_url: 'https://images.pexels.com/photos/7883856/pexels-photo-7883856.jpeg?auto=compress&cs=tinysrgb&h=627&fit=crop&w=1200' },
-    { img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsZVmzs2OhxTamHAZW0HJ6FMrB1pO3lJEkf0LgxeWk_s7vAdMPVvr22nkwWWi4PoJ6v8Y&usqp=CAU' },
-    { img_url: 'https://media.istockphoto.com/id/1362895369/vector/vector-illustration-of-a-group-of-young-people-clapping.jpg?s=612x612&w=0&k=20&c=0E6JI0XzqacKY2Vv-bDYLKnED5IGA-NcHCJOP1Ng0RM=', }
-  ]
 
-  updateGreetingColor(): void {
-    const hours = new Date().getHours();
-    if (hours < 12) {
-      this.greetingColor = 'orange';
-    } else if (hours < 18) {
-      this.greetingColor = 'blueviolet';
-    } else {
-      this.greetingColor = 'rgb(10, 175, 252)';
-    }
-  }
   GratingData(): string {
     const hours = new Date().getHours();
     if (hours < 12) {

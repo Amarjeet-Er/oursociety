@@ -21,6 +21,11 @@ import { FlatOwnerDetailsComponent } from './home/flat-owner-details/flat-owner-
 import { EmployeeDetailsComponent } from './home/employee-details/employee-details.component';
 import { VisitorReportsComponent } from './home/visitor-reports/visitor-reports.component';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } from "ngx-ui-loader";
+import { MatIconModule } from '@angular/material/icon';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MatMenuModule} from '@angular/material/menu';
+import { EmployeeReportsComponent } from './home/employee-reports/employee-reports.component';
+import { FlatOwnerReportsComponent } from './home/flat-owner-reports/flat-owner-reports.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +35,11 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } fro
     EmployeeRegComponent,
     EmployeeListComponent,
     EmployeeDetailsComponent,
+    EmployeeReportsComponent,
     FlatOwnerRegComponent,
     FlatOwnerListComponent,
     FlatOwnerDetailsComponent,
+    FlatOwnerReportsComponent,
     VisitorRegComponent,
     VisitorListComponent,
     VisitorDetailsComponent,
@@ -47,6 +54,8 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } fro
     FormsModule,
     SwiperModule,
     HttpClientModule,
+    MatIconModule,
+    MatMenuModule,
     NgxUiLoaderModule.forRoot({
       fgsType: 'rectangle-bounce',
       fgsColor: '#000000',
@@ -58,7 +67,7 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } fro
     // NgxUiLoaderRouterModule,
     NgxUiLoaderHttpModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
