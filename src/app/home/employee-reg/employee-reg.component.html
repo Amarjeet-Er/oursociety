@@ -78,7 +78,7 @@
             <img alt="documents" [src]="Aadhar_img_url">
             <input class="d-none" type="file" accept=".jpg,.png,.jpeg," #Aadhar (change)="onAadhar(Aadhar.files)">
           </div>
-          <div class="EmpSelectAadhar" onclick="document.querySelector('#addEmpAadhar').click()">
+          <div class="EmpSelectAadhar">
             <ion-text>Employee Aadhar</ion-text>
             <ion-fab>
               <ion-fab-button size="small">
@@ -119,10 +119,10 @@
             </div>
           </div>
 
-          <div class="actionCamera" onclick="document.querySelector('#addButtonImg').click()">
+          <div class="actionCamera">
             <ion-text>Employee Image</ion-text>
             <ion-fab>
-              <ion-fab-button size="small" id="addButtonImg">
+              <ion-fab-button size="small">
                 <ion-icon name="add-circle-sharp"></ion-icon>
               </ion-fab-button>
               <ion-fab-list side="start">
@@ -142,8 +142,14 @@
         </ion-input>
 
         <ion-input label="Confirm Address" label-placement="floating" fill="outline" type="text"
-          placeholder="Enter confirm password" formControlName="employeeConfirmPass">
+          placeholder="Enter confirm password" formControlName="empConfirmPass">
         </ion-input>
+
+        <div *ngIf="PassMatch" class="error-message">
+          <ion-text color="danger" *ngIf="!PassMatch">
+            {{ PassMatch }}
+          </ion-text>
+        </div>
 
         <ion-checkbox class="ion-padding">agree to the terms and conditions</ion-checkbox><br>
         <ion-button shape="round" (click)="onSubmit()">Submit</ion-button>

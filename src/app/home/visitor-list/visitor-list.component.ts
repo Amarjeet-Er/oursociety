@@ -21,17 +21,15 @@ export class VisitorListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onHeaderBox() {
+  onSearchOpen() {
     this.headerBox = !this.headerBox;
     this.siteSearch = !this.siteSearch;
   }
-  onDataSearch() {
+  onSearchClose() {
     this.headerBox = !this.headerBox;
     this.siteSearch = !this.siteSearch;
   }
-  onAddVisistor() {
-    this.router.navigate(['/home/visitorreg']);
-  }
+
   visitorDetails() {
     this.router.navigate(['/home/visitordetails']);
   }

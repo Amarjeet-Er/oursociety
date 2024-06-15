@@ -5,21 +5,33 @@ ion-card {
         background-color: var(--color-2);
         width: 100%;
         transition: opacity 200ms;
-        justify-content: space-between;
         align-items: center;
         display: flex;
+
+        .HeaderBoxSearch {
+            width: calc(100% - 150px);
+            margin: 0px 10px;
+            text-align: end;
+        }
+
+        .HeaderBoxAdd {
+            position: absolute;
+            right: 10px;
+        }
 
         span {
             margin-left: 10px;
         }
-    }
 
-    .site-search-input {
-        display: block;
-        width: 68%;
-        border: 0;
-        background-color: transparent;
-        outline: none;
+        .searchInput {
+            width: calc(100% - 225px);
+            margin-left: 10px;
+        }
+
+        .searchClose {
+            position: absolute;
+            right: 10px;
+        }
     }
 }
 
@@ -58,15 +70,17 @@ table {
     padding: 10px;
 
     tr {
-        ion-icon{
+        ion-icon {
             margin: 0px 9px 0px 0px;
             vertical-align: middle;
         }
+
         td {
             width: 94%;
             font-size: 12px;
             padding: 2px;
-            b{
+
+            b {
                 font-size: 16px;
             }
         }

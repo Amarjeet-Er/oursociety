@@ -24,6 +24,8 @@ export class EmployeeRegComponent implements OnInit {
   Aadhar_img_url: any = "../../../assets/images/documents.jpg"
   EmpAadharSelect: boolean = true
 
+  PassMatch: string = '';
+
   constructor(
     private _router: Router,
     private _fb: FormBuilder
@@ -46,7 +48,7 @@ export class EmployeeRegComponent implements OnInit {
       emp_profile: [''],
       emp_aadharImage: [''],
       emp_password: [''],
-      employeeConfirmPass: [''],
+      empConfirmPass: [''],
     })
   }
   StartCamera() {
@@ -142,13 +144,22 @@ export class EmployeeRegComponent implements OnInit {
     formdata.append('emp_aadhar_num', this.employeeReg.get('emp_aadhar_num')?.value);
     formdata.append('emp_current_address', this.employeeReg.get('emp_current_address')?.value);
     formdata.append('emp_parmanent_address', this.employeeReg.get('emp_parmanent_address')?.value);
-    formdata.append('emp_password', this.employeeReg.get('emp_password')?.value);
-    formdata.append('employeeConfirmPass', this.employeeReg.get('employeeConfirmPass')?.value);
     formdata.append('emp_profile', this.gallery_select);
     formdata.append('emp_aadharImage', this.Aadhar_select);
     console.log(this.gallery_select, 'img');
     console.log(this.Aadhar_select, 'aadhar');
-
+    if (this.employeeReg.get('emp_password')?.value === this.employeeReg.get('empConfirmPass')?.value) {
+      const empPassword = this.employeeReg.get('emp_password')?.value;
+      if (empPassword) {
+        formdata.append('emp_password', empPassword);
+        console.log(empPassword);
+        console.log('Passwords match');
+      }
+    } else {
+      console.log('Passwords do not match');
+      this.PassMatch = 'Passwords do not match';
+      return;
+    }
     return
     this._router.navigate(['/home/employeelist']);
   }

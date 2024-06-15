@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { count } from 'rxjs';
 
 @Component({
   selector: 'app-flat-owner-reg',
@@ -14,7 +15,7 @@ export class FlatOwnerRegComponent implements OnInit {
   onCarSelect: boolean = false;
   cars: any[] = [];
   addAnotherCars: boolean = true;
-
+  CarsCount:any
   WIDTH = 200;
   HEIGHT = 200;
   @ViewChild("video") public video!: ElementRef;
@@ -44,46 +45,84 @@ export class FlatOwnerRegComponent implements OnInit {
       Alt_Number: [''],
       Email: [''],
       AadharNumber: [''],
-      No_Of_Family: [''],
-      Have_car: [''],
       password: [''],
       profilePath: [''],
+      Have_car: [''],
+      No_Of_Family: [''],
+      members: this._fb.array([]),
+      familyCars: this._fb.array([])
+    })
+  }
+  
+  get membersArray() {
+    return this.RegFlatForm.get('members') as FormArray;
+  }
+  get CarsArray() {
+    return this.RegFlatForm.get('familyCars') as FormArray;
+  }
+
+  addMemberControls() {
+    const memberGroup = this._fb.group({
       MemberName: [''],
       Fam_Email: [''],
       MemberAge: [''],
-    })
+      MemberContactNum: ['']
+    });
+    this.membersArray.push(memberGroup);
+  }
+  addCarsControls() {
+    const CarsGroup = this._fb.group({
+      Car_Model: [''],
+      Car_Number: [''],
+      Car_ParkingArea: [''],
+    });
+    this.CarsArray.push(CarsGroup);
   }
 
   onFamilyInput(event: any) {
-    if (this.familyCount > 7) {
-      event.target.setCustomValidity('Maximum 7 members allowed.');
+    const familyCount = parseInt(event.target.value);
+
+    while (this.membersArray.length !== 0) {
+      this.membersArray.removeAt(0);
+    }
+
+    for (let i = 0; i < familyCount; i++) {
+      if (familyCount > 7) {
+        event.target.setCustomValidity('Maximum 7 members allowed.');
+        return
+      }
+      else {
+        event.target.setCustomValidity('');
+        this.addMemberControls();
+      }
+    }
+  }
+
+  toggleCarInput(event: any) {
+    this.onCarSelect = event.detail.checked;
+    if (this.CarsArray.length > 0) {
+      this.CarsArray.removeAt(1);
       return
     }
     else {
-      event.target.setCustomValidity('');
-      this.addFamilyFields()
+      this.addCarsControls();
+      return
     }
-  }
-  addFamilyFields() {
-    this.AddFamilyInput = [];
-    for (let i = 0; i < this.familyCount; i++) {
-      this.AddFamilyInput.push({ count: 0 });
-    }
-  }
-  toggleCarInput(event: any) {
-    this.onCarSelect = event.detail.checked;
-    this.cars.push({});
   }
   addAnotherCar() {
     this.addAnotherCars = false;
-    if (Array.isArray(this.cars) && this.cars.length === 1) {
-      this.cars.push({});
-      return
+    for (let i = 0; i < 1; i++) {
+      if (this.CarsArray.length > 1) {
+        return
+      }
+      else {
+        this.addCarsControls();
+      }
     }
   }
   removeAnotherCar(index: number) {
     this.addAnotherCars = true
-    this.cars.splice(index, 1);
+    this.CarsArray.removeAt(index + 1);
   }
 
   StartCamera() {
