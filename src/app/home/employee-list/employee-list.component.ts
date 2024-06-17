@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSearchbar } from '@ionic/angular';
+import { CurdService } from 'src/app/service/curd.service';
+import { SharedService } from 'src/app/service/shared.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -10,37 +12,59 @@ import { IonSearchbar } from '@ionic/angular';
 export class EmployeeListComponent implements OnInit {
   headerBox: boolean = true;
   siteSearch: boolean = false
-  getDta = [
-    { "name": "John", "desi": "Angular", "phone": "8956231254" },
-    { "name": "Amarjeet", "desi": "Angular", "phone": "8956231254" },
-    { "name": "Akhilesh", "desi": "Angular", "phone": "8956231254" },
-    { "name": "Ayush Singh", "desi": "Angular", "phone": "8956231254" },
-    { "name": "Uday Sir", "desi": "Angular", "phone": "8956231254" },
-    { "name": "Manish", "desi": "Angular", "phone": "8956231254" },
-    { "name": "Alice", "desi": "Angular", "phone": "8956231254" },
-    { "name": "Munna kumar", "desi": "Angular", "phone": "8956231254" },
-    { "name": "Denesh", "desi": "Angular", "phone": "8956231254" },
-  ]
+  reg_data: any;
+  img_url: any;
+  reg_filter_data: any;
   constructor(
-    private _router: Router
+    private _router: Router,
+    private _crud: CurdService,
+    private _shared: SharedService
   ) { }
   ngOnInit(): void {
+    this._shared.img_base_url.subscribe(
+      (res: any) => {
+        console.log(res);
+        this.img_url = res
+      }
+    )
+    this._crud.viewEmpList().subscribe(
+      (res: any) => {
+        console.log(res);
+
+        if (res.Status === 'Success') {
+          this.reg_data = res.AllRegisteredEmployee;
+          this.reg_filter_data = res.AllRegisteredEmployee;
+        }
+      }
+    )
   }
 
-  onHeaderBox() {
+  onSearchOpen() {
     this.headerBox = !this.headerBox;
     this.siteSearch = !this.siteSearch;
   }
-  onDataSearch() {
+  onSearchClose() {
     this.headerBox = !this.headerBox;
     this.siteSearch = !this.siteSearch;
   }
-  onAddEmp() {
-    this._router.navigate(['/home/employeereg']);
-  }
+
   onDetails() {
     this._router.navigate(['/home/employeedetails']);
   }
-  onSearch(filter: any) { }
+  onSearch(filter: any) {
 
+    this.reg_data = this.reg_filter_data.filter((data: any) => {
+      if (data.empName.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        return true;
+      }
+      if (data.empEmail.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        return true;
+      }
+      if (data.empMobNo.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        return true;
+      }
+      return false;
+    }
+    );
+  }
 }

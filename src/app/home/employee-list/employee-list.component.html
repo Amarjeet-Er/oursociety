@@ -1,45 +1,50 @@
 <ion-card>
   <div class="SearchBox" *ngIf="headerBox">
-    <span> <b>Total :- </b>10</span>
-    <div>
-      <ion-button color="secondary" class="site-search site-search-reset" (click)="onHeaderBox()">
+    <span> <b>Total :- </b>{{reg_data?.length}}</span>
+    <div class="HeaderBoxSearch">
+      <ion-button color="secondary" (click)="onSearchOpen()">
         <ion-icon name="search-sharp"></ion-icon>
       </ion-button>
-      <ion-button color="secondary" (click)="onAddEmp()">
+      <ion-button color="secondary" routerLink="/home/employeereg">
         <ion-icon name="person-add-sharp"></ion-icon>
       </ion-button>
     </div>
   </div>
 
   <div class="SearchBox" *ngIf="siteSearch">
-    <span> <b>Total :- </b> 10</span>
-    <input type="text" class="site-search-input" placeholder="Search..." #search (keyup)="onSearch(search.value)">
-    <ion-button color="secondary" type="reset" class="site-search site-search-reset" (click)="onDataSearch()">
-      <ion-icon name="close-sharp"></ion-icon>
-    </ion-button>
+    <span> <b>Total :- </b>{{reg_data?.length}}</span>
+    <ion-input type="text" class="searchInput" placeholder="Search..." #search (keyup)="onSearch(search.value)">
+    </ion-input>
+    <div class="searchClose">
+      <ion-button color="secondary" type="reset" (click)="onSearchClose()">
+        <ion-icon name="close-sharp"></ion-icon>
+      </ion-button>
+    </div>
   </div>
 </ion-card>
 
 <div id="containerBox">
-  <div class="usercard" *ngFor="let data of getDta" (click)="onDetails()">
+  <div class="usercard" *ngFor="let data of reg_data" (click)="onDetails()">
     <div class="userimg">
-      <img src="../../../assets/images/user.webp" alt="" width="100%" height="100%">
+      <img [src]="data.empProfileImagePath? img_url+data.empProfileImagePath : '../../../assets/images/user.webp'"
+        alt="" width="100%" height="100%">
     </div>
     <div class="userdata">
       <table>
         <tr>
           <ion-icon name="person-sharp" color="primary"></ion-icon>
-          <td><b>{{data.name}}</b></td>
+          <td><b>{{data.empName}}</b></td>
         </tr>
         <tr>
-          <ion-icon name="briefcase-sharp" color="dark"></ion-icon>
-          <td>{{data.desi}}</td>
+          <ion-icon name="mail-sharp" color="danger"></ion-icon>
+          <td>{{data.empEmail}}</td>
         </tr>
         <tr>
           <ion-icon name="call-sharp" color="success"></ion-icon>
-          <td>{{data.phone}}</td>
+          <td>{{data.empMobNo}}</td>
         </tr>
       </table>
     </div>
   </div>
+  <p class="NoRecord" *ngIf="reg_data?.length === 0">No Record Found</p>
 </div>

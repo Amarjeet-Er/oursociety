@@ -19,17 +19,15 @@ export class FlatOwnerListComponent implements OnInit {
   ) { }
   ngOnInit(): void {  }
 
-  onHeaderBox() {
+  onSearchOpen() {
     this.headerBox = !this.headerBox;
     this.siteSearch = !this.siteSearch;
   }
-  onDataSearch() {
+  onSearchClose() {
     this.headerBox = !this.headerBox;
     this.siteSearch = !this.siteSearch;
   }
-  onAddOwner() {
-    this._router.navigate(['/home/flatownerreg']);
-  }
+
   onDetails() {
     this._router.navigate(['/home/flatownerdetails']);
   }

@@ -26,6 +26,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {MatMenuModule} from '@angular/material/menu';
 import { EmployeeReportsComponent } from './home/employee-reports/employee-reports.component';
 import { FlatOwnerReportsComponent } from './home/flat-owner-reports/flat-owner-reports.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { FlatOwnerReportsComponent } from './home/flat-owner-reports/flat-owner-
     HttpClientModule,
     MatIconModule,
     MatMenuModule,
+    MatSnackBarModule,
     NgxUiLoaderModule.forRoot({
       fgsType: 'rectangle-bounce',
       fgsColor: '#000000',

@@ -15,7 +15,7 @@ export class FlatOwnerRegComponent implements OnInit {
   onCarSelect: boolean = false;
   cars: any[] = [];
   addAnotherCars: boolean = true;
-  CarsCount:any
+  CarsCount: any
   WIDTH = 200;
   HEIGHT = 200;
   @ViewChild("video") public video!: ElementRef;
@@ -53,7 +53,7 @@ export class FlatOwnerRegComponent implements OnInit {
       familyCars: this._fb.array([])
     })
   }
-  
+
   get membersArray() {
     return this.RegFlatForm.get('members') as FormArray;
   }
@@ -64,7 +64,6 @@ export class FlatOwnerRegComponent implements OnInit {
   addMemberControls() {
     const memberGroup = this._fb.group({
       MemberName: [''],
-      Fam_Email: [''],
       MemberAge: [''],
       MemberContactNum: ['']
     });
@@ -101,7 +100,7 @@ export class FlatOwnerRegComponent implements OnInit {
   toggleCarInput(event: any) {
     this.onCarSelect = event.detail.checked;
     if (this.CarsArray.length > 0) {
-      this.CarsArray.removeAt(1);
+      this.CarsArray.removeAt(0);
       return
     }
     else {
@@ -194,8 +193,26 @@ export class FlatOwnerRegComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.RegFlatForm.value);
-    return
 
+    const formdata = new FormData();
+    formdata.append('b_block', this.RegFlatForm.get('b_block')?.value);
+    formdata.append('flatNum', this.RegFlatForm.get('flatNum')?.value);
+    formdata.append('Name', this.RegFlatForm.get('Name')?.value);
+    formdata.append('Designation', this.RegFlatForm.get('Designation')?.value);
+    formdata.append('Primary_Number', this.RegFlatForm.get('Primary_Number')?.value);
+    formdata.append('Alt_Number', this.RegFlatForm.get('Alt_Number')?.value);
+    formdata.append('Email', this.RegFlatForm.get('Email')?.value);
+    formdata.append('AadharNumber', this.RegFlatForm.get('AadharNumber')?.value);
+    formdata.append('password', this.RegFlatForm.get('password')?.value);
+    formdata.append('Have_car', this.RegFlatForm.get('Have_car')?.value);
+    formdata.append('No_Of_Family', this.RegFlatForm.get('No_Of_Family')?.value);
+    formdata.append('members', this.RegFlatForm.get('members')?.value);
+    console.log('members', this.RegFlatForm.get('members')?.value);
+    formdata.append('familyCars', this.RegFlatForm.get('familyCars')?.value);
+    console.log('cars', this.RegFlatForm.get('familyCars')?.value);
+
+
+    return
     this._router.navigate(['/home/flatownerlist']);
   }
 }

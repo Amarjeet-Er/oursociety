@@ -1,6 +1,6 @@
 <div id="container">
   <div class="wrapper">
-    <form [formGroup]="loginForm">
+    <form [formGroup]="login_form">
       <div class="imgbox">
         <div class="avatar">
           <img src="../../assets/images/login-profile.jpg" alt="login-profile">
@@ -9,7 +9,7 @@
 
       <div class="input-box">
         <img src="../../assets/icons/login-user.png" alt="username" width="30px" height="30px">
-        <input type="text" placeholder="Username" formControlName="Username" #data>
+        <input type="text" placeholder="Username" formControlName="Email" #data>
       </div>
 
       <div class="input-box">
@@ -23,7 +23,7 @@
       <div class="forgot">
         <!-- <p routerLink="forgotpassword">Forgot password?</p> -->
       </div>
-      <ion-button type="submit" class="btn" (click)="onLogin(data.value)">Login</ion-button>
+      <ion-button type="submit" class="btn" (click)="onLogin()">Login</ion-button>
     </form>
   </div>
 </div>

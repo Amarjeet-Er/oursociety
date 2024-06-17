@@ -1,5 +1,7 @@
 ion-card {
-    height: 60px;
+    height: 72px;
+    align-items: center;
+    display: flex;
 
     .SearchBox {
         background-color: var(--color-2);
@@ -9,12 +11,16 @@ ion-card {
         display: flex;
 
         .HeaderBoxSearch {
-            width: calc(100% - 150px);
-            margin: 0px 10px;
+            width: calc(100% - 145px);
+            margin: 0px 0px 0px 10px;
             text-align: end;
+            position: absolute;
+            right: 10px;
         }
-
-        .HeaderBoxAdd {
+        .searchClose {
+            width: calc(100% - 145px);
+            margin: 0px 0px 0px 10px;
+            text-align: end;
             position: absolute;
             right: 10px;
         }
@@ -24,13 +30,8 @@ ion-card {
         }
 
         .searchInput {
-            width: calc(100% - 225px);
-            margin-left: 10px;
-        }
-
-        .searchClose {
-            position: absolute;
-            right: 10px;
+            width: calc(100% - 209px);
+            margin: 0px 10px;
         }
     }
 }

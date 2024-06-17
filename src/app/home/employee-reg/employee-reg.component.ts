@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CurdService } from 'src/app/service/curd.service';
+import { SharedService } from 'src/app/service/shared.service';
 @Component({
   selector: 'app-employee-reg',
   templateUrl: './employee-reg.component.html',
@@ -25,28 +27,41 @@ export class EmployeeRegComponent implements OnInit {
   EmpAadharSelect: boolean = true
 
   PassMatch: string = '';
+  OtherSelectReletion1: boolean = false;
+  OtherSelectReletion2: boolean = false;
+  employee_type: any;
 
   constructor(
     private _router: Router,
-    private _fb: FormBuilder
-  ) { }
+    private _fb: FormBuilder,
+    private _curd: CurdService,
+    private _shared: SharedService
+  ) {
+    this._curd.get_emp_type().subscribe(
+      (res: any) => {
+        this.employee_type = res.EmployeeType
+      },
+    )
+  }
 
   ngOnInit() {
     this.employeeReg = this._fb.group({
       emp_type: [''],
       emp_workArea: [''],
-      emp_name: [''],
-      emp_contact_Num: [''],
-      emp_email: [''],
-      alternate_Num1: [''],
-      rel_altertante_Num1: [''],
-      alternate_Num2: [''],
-      rel_altertante_Num2: [''],
-      emp_aadhar_num: [''],
-      emp_current_address: [''],
-      emp_parmanent_address: [''],
-      emp_profile: [''],
-      emp_aadharImage: [''],
+      empName: [''],
+      empMobNo: [''],
+      empEmail: [''],
+      alternateMob1: [''],
+      relWithAlternateNum1: [''],
+      OtherRelationWithNum1: [''],
+      alternateMob2: [''],
+      relWithAlternateNum2: [''],
+      OtherRelationWithNum2: [''],
+      aadharNumber: [''],
+      currentAddress: [''],
+      parmanentAddress: [''],
+      profileImage: [''],
+      aadharImage: [''],
       emp_password: [''],
       empConfirmPass: [''],
     })
@@ -129,23 +144,40 @@ export class EmployeeRegComponent implements OnInit {
     reader.readAsDataURL(this.Aadhar_select);
   }
 
+  onRelationChange1(event: any) {
+    if (event.detail.value === 'Other') {
+      this.OtherSelectReletion1 = true;
+    } else {
+      this.OtherSelectReletion1 = false;
+    }
+  }
+  onRelationChange2(event: any) {
+    if (event.detail.value === 'Other') {
+      this.OtherSelectReletion2 = true;
+    } else {
+      this.OtherSelectReletion2 = false;
+    }
+  }
+
   onSubmit(): void {
     console.log(this.employeeReg.value);
     const formdata = new FormData()
     formdata.append('emp_type', this.employeeReg.get('emp_type')?.value);
     formdata.append('emp_workArea', this.employeeReg.get('emp_workArea')?.value);
-    formdata.append('emp_name', this.employeeReg.get('emp_name')?.value);
-    formdata.append('emp_contact_Num', this.employeeReg.get('emp_contact_Num')?.value);
-    formdata.append('emp_email', this.employeeReg.get('emp_email')?.value);
-    formdata.append('alternate_Num1', this.employeeReg.get('alternate_Num1')?.value);
-    formdata.append('rel_altertante_Num1', this.employeeReg.get('rel_altertante_Num1')?.value);
-    formdata.append('alternate_Num2', this.employeeReg.get('alternate_Num2')?.value);
-    formdata.append('rel_altertante_Num2', this.employeeReg.get('rel_altertante_Num2')?.value);
-    formdata.append('emp_aadhar_num', this.employeeReg.get('emp_aadhar_num')?.value);
-    formdata.append('emp_current_address', this.employeeReg.get('emp_current_address')?.value);
-    formdata.append('emp_parmanent_address', this.employeeReg.get('emp_parmanent_address')?.value);
-    formdata.append('emp_profile', this.gallery_select);
-    formdata.append('emp_aadharImage', this.Aadhar_select);
+    formdata.append('empName', this.employeeReg.get('empName')?.value);
+    formdata.append('empMobNo', this.employeeReg.get('empMobNo')?.value);
+    formdata.append('empEmail', this.employeeReg.get('empEmail')?.value);
+    formdata.append('alternateMob1', this.employeeReg.get('alternateMob1')?.value);
+    formdata.append('relWithAlternateNum1', this.employeeReg.get('relWithAlternateNum1')?.value);
+    formdata.append('OtherRelationWithNum1', this.employeeReg.get('OtherRelationWithNum1')?.value);
+    formdata.append('alternateMob2', this.employeeReg.get('alternateMob2')?.value);
+    formdata.append('relWithAlternateNum2', this.employeeReg.get('relWithAlternateNum2')?.value);
+    formdata.append('OtherRelationWithNum2', this.employeeReg.get('OtherRelationWithNum2')?.value);
+    formdata.append('aadharNumber', this.employeeReg.get('aadharNumber')?.value);
+    formdata.append('currentAddress', this.employeeReg.get('currentAddress')?.value);
+    formdata.append('parmanentAddress', this.employeeReg.get('parmanentAddress')?.value);
+    formdata.append('profileImage', this.gallery_select);
+    formdata.append('aadharImage', this.Aadhar_select);
     console.log(this.gallery_select, 'img');
     console.log(this.Aadhar_select, 'aadhar');
     if (this.employeeReg.get('emp_password')?.value === this.employeeReg.get('empConfirmPass')?.value) {
@@ -160,7 +192,17 @@ export class EmployeeRegComponent implements OnInit {
       this.PassMatch = 'Passwords do not match';
       return;
     }
-    return
-    this._router.navigate(['/home/employeelist']);
+    if (this.employeeReg.valid) {
+      this._curd.insert_Emp_Reg(formdata).subscribe(
+        (res: any) => {
+          this._shared.tostSuccessTop('Employee Registered Successfully');
+          this._router.navigate(['/home/employeelist']);
+
+        },
+        (err: any) => {
+          this._shared.tostErrorTop('Data Not Insert')
+        }
+      );
+    }
   }
 }

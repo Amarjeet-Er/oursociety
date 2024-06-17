@@ -30,7 +30,7 @@ export class VisitorListComponent implements OnInit {
     this.siteSearch = !this.siteSearch;
   }
 
-  visitorDetails() {
+  onDetails() {
     this.router.navigate(['/home/visitordetails']);
   }
   onSearch(filter: any) {

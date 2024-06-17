@@ -1,11 +1,11 @@
 <ion-card>
   <div class="SearchBox" *ngIf="headerBox">
     <span> <b>Total :- </b>10</span>
-    <div>
-      <ion-button color="secondary" class="site-search site-search-reset" (click)="onHeaderBox()">
+    <div class="HeaderBoxSearch">
+      <ion-button color="secondary" (click)="onSearchOpen()">
         <ion-icon name="search-sharp"></ion-icon>
       </ion-button>
-      <ion-button color="secondary" (click)="onAddOwner()">
+      <ion-button color="secondary" routerLink="/home/flatownerreg">
         <ion-icon name="person-add-sharp"></ion-icon>
       </ion-button>
     </div>
@@ -13,10 +13,13 @@
 
   <div class="SearchBox" *ngIf="siteSearch">
     <span> <b>Total :- </b>10</span>
-    <input type="text" class="site-search-input" placeholder="Search..." #search (keyup)="onSearch(search.value)">
-    <ion-button color="secondary" type="reset" class="site-search site-search-reset" (click)="onDataSearch()">
-      <ion-icon name="close-sharp"></ion-icon>
-    </ion-button>
+    <ion-input type="text" class="searchInput" placeholder="Search..." #search (keyup)="onSearch(search.value)">
+    </ion-input>
+    <div class="searchClose">
+      <ion-button color="secondary" type="reset" (click)="onSearchClose()">
+        <ion-icon name="close-sharp"></ion-icon>
+      </ion-button>
+    </div>
   </div>
 </ion-card>
 

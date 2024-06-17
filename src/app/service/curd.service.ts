@@ -10,7 +10,7 @@ export class CurdService {
   constructor(
     private _shared: SharedService,
     private _http: HttpClient
-  ) { 
+  ) {
     this._shared.base_url.subscribe(
       (res: any) => {
         console.log(res, 'message');
@@ -18,7 +18,17 @@ export class CurdService {
       }
     )
   }
-    login(data: any) {
-      return this._http.post(`${this.base_url}CheckLogin`, data);
-    }
+  login(data: any) {
+    return this._http.post(`${this.base_url}SocietyApi/Check_login`, data);
+  }
+
+  insert_Emp_Reg(data:any) {
+    return this._http.get<[]>(`${this.base_url}EmployeeRegisterApi/EmployeeRegister`, data);
+  }
+  get_emp_type() {
+    return this._http.get<[]>(`${this.base_url}EmployeeTypeApi/GetEmployeeType`);
+  }
+  viewEmpList() {
+    return this._http.get<[]>(`${this.base_url}AllEmployeeListApi/GetAllRegisteredEmployee`);
+  }
 }

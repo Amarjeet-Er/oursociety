@@ -55,3 +55,29 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+
+
+
+/* for all requirement toas notification  */
+
+.tostSuccess {
+    color: white;
+    position: relative;
+    bottom: 50px;
+    --mdc-snackbar-container-color: var(--color-5);
+}
+
+.tostError {
+    color: white;
+    position: relative;
+    bottom: 50px;
+    --mdc-snackbar-container-color: var(--color-4);
+}
+
+.tostWarning {
+    color: white;
+    position: relative;
+    bottom: 50px;
+    --mdc-snackbar-container-color: #e86e30;
+}

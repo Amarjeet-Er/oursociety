@@ -13,9 +13,8 @@
       <form [formGroup]="employeeReg">
         <ion-select label="Employee Type" fill="outline" label-placement="floating" interface="action-sheet"
           placeholder="Select employee" formControlName="emp_type">
-          <ion-select-option value="Full-time employment">Full-time employment</ion-select-option>
-          <ion-select-option value="Part-time employment">Part-time employment</ion-select-option>
-          <ion-select-option value="Internship">Internship</ion-select-option>
+          <ion-select-option *ngFor="let emp_type of employee_type"
+            [value]="emp_type?.id">{{emp_type?.empType}}</ion-select-option>
         </ion-select>
 
         <ion-input label="Flat No" label-placement="floating" fill="outline" type="text" placeholder="Enter flat no"
@@ -23,23 +22,28 @@
         </ion-input>
 
         <ion-input label="Employee Name" label-placement="floating" fill="outline" type="text"
-          placeholder="Enter employee name" formControlName="emp_name">
+          placeholder="Enter employee name" formControlName="empName">
         </ion-input>
 
         <ion-input label="Contact No" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter contact no" formControlName="emp_contact_Num">
+          placeholder="Enter contact no" formControlName="empMobNo">
         </ion-input>
 
         <ion-input type="email" fill="outline" label="Email" labelPlacement="floating" errorText="Invalid email" ngModel
-          email formControlName="emp_email">
+          email formControlName="empEmail">
         </ion-input>
 
         <ion-input label="Alt Contact No (1)" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter alt contact no" formControlName="alternate_Num1">
+          placeholder="Enter alt contact no" formControlName="alternateMob1">
         </ion-input>
 
         <ion-select label="Relation With No (1)" fill="outline" label-placement="floating" interface="action-sheet"
-          placeholder="Select relation with no" formControlName="rel_altertante_Num1">
+          placeholder="Select relation with no" formControlName="relWithAlternateNum1"
+          (ionChange)="onRelationChange1($event)">
+          <ion-select-option>
+            <ion-input label="Search..." label-placement="floating" fill="outline" type="text" placeholder="Search">
+            </ion-input>
+          </ion-select-option>
           <ion-select-option value="Father">Father</ion-select-option>
           <ion-select-option value="Mother">Mother</ion-select-option>
           <ion-select-option value="Brother">Brother</ion-select-option>
@@ -47,12 +51,17 @@
           <ion-select-option value="Other">Other</ion-select-option>
         </ion-select>
 
+        <ion-input *ngIf="OtherSelectReletion1" fill="outline" label="Specify other relation" label-placement="floating"
+          placeholder="Specify other relation" formControlName="OtherRelationWithNum1">
+        </ion-input>
+
         <ion-input label="Alt Contact No (2)" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter alt contact no" formControlName="alternate_Num2">
+          placeholder="Enter alt contact no" formControlName="alternateMob2">
         </ion-input>
 
         <ion-select label="Relation With No (2)" fill="outline" label-placement="floating" interface="action-sheet"
-          placeholder="Select relation with no" formControlName="rel_altertante_Num2">
+          placeholder="Select relation with no" formControlName="relWithAlternateNum2"
+          (ionChange)="onRelationChange2($event)">
           <ion-select-option value="Father">Father</ion-select-option>
           <ion-select-option value="Mother">Mother</ion-select-option>
           <ion-select-option value="Brother">Brother</ion-select-option>
@@ -60,16 +69,20 @@
           <ion-select-option value="Other">Other</ion-select-option>
         </ion-select>
 
+        <ion-input *ngIf="OtherSelectReletion2" fill="outline" label="Specify other relation" label-placement="floating"
+          placeholder="Specify other relation" formControlName="OtherRelationWithNum2">
+        </ion-input>
+
         <ion-input label="Aadhar No" label-placement="floating" type="number" fill="outline"
-          placeholder="Enter aadhar no" formControlName="emp_aadhar_num">
+          placeholder="Enter aadhar no" formControlName="aadharNumber">
         </ion-input>
 
         <ion-input label="Current Address" label-placement="floating" fill="outline" type="text"
-          placeholder="Enter current address" formControlName="emp_current_address">
+          placeholder="Enter current address" formControlName="currentAddress">
         </ion-input>
 
         <ion-input label="Permanent Address" label-placement="floating" fill="outline" type="text"
-          placeholder="Enter permanent address" formControlName="emp_parmanent_address">
+          placeholder="Enter permanent address" formControlName="parmanentAddress">
         </ion-input>
 
         <div class="EmployeeAadhar">

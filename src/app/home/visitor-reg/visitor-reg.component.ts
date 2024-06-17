@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/service/shared.service';
 
 @Component({
   selector: 'app-visitor-reg',
@@ -23,10 +24,11 @@ export class VisitorRegComponent implements OnInit {
   onCaptureImg: boolean = false;
   gallery_select: any = null;
   gallery_img_url: any;
-  
+
   constructor(
     private _router: Router,
     private _fb: FormBuilder,
+    private _shared: SharedService
   ) { }
 
   ngOnInit() {
@@ -122,7 +124,11 @@ export class VisitorRegComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.VisitorReg.value, 'Visistor data');
+    this._shared.tostSuccessTop('H')
     return
+    const formdata = new FormData();
+    formdata.append('name', this.VisitorReg.get('name')?.value);
+
     this._router.navigate(['/home/visitorlist']);
   }
 }
