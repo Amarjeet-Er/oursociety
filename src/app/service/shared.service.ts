@@ -13,6 +13,8 @@ export class SharedService implements OnInit {
   ) { }
   base_url = new BehaviorSubject<string>('https://granlighting.co.in/Api/')
   img_base_url = new BehaviorSubject<string>('https://granlighting.co.in/')
+  shared_details = new BehaviorSubject<object>({})
+
   ngOnInit(): void {
   }
 

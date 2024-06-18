@@ -4,67 +4,93 @@
       <ion-fab-button slot="start" color="secondary" routerLink="/home/employeelist">
         <ion-icon name="chevron-back-sharp"></ion-icon>
       </ion-fab-button>
-      <ion-buttons slot="end">
-        <ion-text> Employee Details </ion-text>
-      </ion-buttons>
+      <ion-text> Employee Details </ion-text>
+      <button slot="end" (click)="onUpdate(emp_details)">
+        Edit
+        <ion-icon name="pencil-sharp"></ion-icon>
+      </button>
     </ion-toolbar>
-
     <div class="container">
       <div class="dataRow">
         <div class="student_img">
-          <img [src]=" 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png'" alt="stdProfile"
-            width="100">
+          <img
+            [src]="emp_details.empProfileImagePath? img_url+emp_details.empProfileImagePath : 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png'"
+            alt="stdProfile" width="100">
         </div>
-        <p>
+        <p *ngIf="emp_details?.employee_type">
           <img src="../../../assets/icons/emp-id.png" alt="">
-          <span> {{'Employee Id'}} </span>
+          <span> {{emp_details?.employee_type}} </span>
         </p>
-        <p>
+
+        <p *ngIf="emp_details?.empName">
           <img src="../../../assets/icons/user.png" alt="">
-          <span> {{'Employee Name'}} </span>
+          <span> {{emp_details?.empName}} </span>
         </p>
-        <p>
+
+        <p *ngIf="emp_details?.empMobNo">
           <img src="../../../assets/icons/phone.png" alt="">
-          <span> {{'Mobile No'}} </span>
+          <span> {{emp_details?.empMobNo}} </span>
         </p>
-        <p>
+
+        <p *ngIf="emp_details?.empEmail">
           <img src="../../../assets/icons/email.png" alt="">
-          <span> {{'Email'}} </span>
+          <span> {{emp_details?.empEmail}} </span>
         </p>
-        <p>
+
+        <p *ngIf="emp_details?.alternateMob1">
           <img src="../../../assets/icons/phone.png" alt="">
-          <span> {{'Alt Mobile No 1'}} </span>
+          <span> {{emp_details?.alternateMob1}} </span>
         </p>
-        <p>
+
+        <p *ngIf="emp_details?.relWithAlternateNum1">
+          <img src="../../../assets/icons/relation1.png" alt="">
+          <span> {{emp_details?.relWithAlternateNum1}} </span>
+        </p>
+
+        <p *ngIf="emp_details?.OtherRelationWithNum1">
+          <img src="../../../assets/icons/relationother1.png" alt="">
+          <span> {{emp_details?.OtherRelationWithNum1}} </span>
+        </p>
+
+        <p *ngIf="emp_details?.alternateMob2">
           <img src="../../../assets/icons/phone.png" alt="">
-          <span> {{'Relation With No 1'}} </span>
+          <span> {{emp_details?.alternateMob2}} </span>
         </p>
-        <p>
-          <img src="../../../assets/icons/phone.png" alt="">
-          <span> {{'Alt Mobile No 2'}} </span>
+
+        <p *ngIf="emp_details?.relWithAlternateNum2">
+          <img src="../../../assets/icons/relation2.png" alt="">
+          <span> {{emp_details.relWithAlternateNum2}} </span>
         </p>
-        <p>
-          <img src="../../../assets/icons/phone.png" alt="">
-          <span> {{'Relation With No 2'}} </span>
+
+        <p *ngIf="emp_details?.OtherRelationWithNum2">
+          <img src="../../../assets/icons/relationother2.png" alt="">
+          <span> {{emp_details.OtherRelationWithNum2}} </span>
         </p>
-        <p>
+
+        <p *ngIf="emp_details?.aadharNumber">
           <img src="../../../assets/icons/aadhar.png" alt="">
-          <span> {{'Aadhar No'}} </span>
+          <span> {{emp_details?.aadharNumber}} </span>
         </p>
-        <p>
+
+        <p *ngIf="emp_details?.currentAddress">
           <img src="../../../assets/icons/address-current.png" alt="">
-          <span> {{'Current Address'}} </span>
+          <span> {{emp_details?.currentAddress}} </span>
         </p>
-        <p>
+
+        <p *ngIf="emp_details?.parmanentAddress">
           <img src="../../../assets/icons/address-permanent.png" alt="">
-          <span> {{'Permanent Address'}} </span>
+          <span> {{emp_details?.parmanentAddress}} </span>
         </p>
-        <p>
+
+        <p *ngIf="emp_details?.emp_password">
           <img src="../../../assets/icons/password.png" alt="">
-          <span> {{'Password'}} </span>
+          <span> {{emp_details?.emp_password}} </span>
         </p>
-        <div class="AadharImg">
-          <img src="../../../assets/images/documents.jpg" alt="stdProfile" width="100">
+
+        <div class="AadharImg" *ngIf="emp_details?.empAadharImagePath">
+          <img
+            [src]="emp_details.empAadharImagePath? img_url+emp_details.empAadharImagePath : '../../../assets/images/documents.jpg '"
+            alt="stdProfile" width="100">
         </div>
       </div>
     </div>

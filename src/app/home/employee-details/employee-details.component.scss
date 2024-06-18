@@ -60,10 +60,14 @@
         }
     }
 }
-
-ion-text {
-    position: relative;
-    right: 15px;
+ion-toolbar{
+    text-align: center;
+    button{
+        padding: 10px;
+        font-size: 20px;
+        background-color: var(--color-1);
+        color: var(--color-2);
+    }
 }
 
 ion-fab-button::part(native) {

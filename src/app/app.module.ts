@@ -23,10 +23,12 @@ import { VisitorReportsComponent } from './home/visitor-reports/visitor-reports.
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } from "ngx-ui-loader";
 import { MatIconModule } from '@angular/material/icon';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { EmployeeReportsComponent } from './home/employee-reports/employee-reports.component';
 import { FlatOwnerReportsComponent } from './home/flat-owner-reports/flat-owner-reports.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TearmAndConditionComponent } from './home/tearm-and-condition/tearm-and-condition.component';
+import { EmployeeUpdateComponent } from './home/employee-update/employee-update.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     LoginPageComponent,
     DashboardComponent,
     EmployeeRegComponent,
+    EmployeeUpdateComponent,
     EmployeeListComponent,
     EmployeeDetailsComponent,
     EmployeeReportsComponent,
@@ -46,6 +49,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     VisitorDetailsComponent,
     VisitorReportsComponent,
     UserProfileComponent,
+    TearmAndConditionComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,16 +62,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatIconModule,
     MatMenuModule,
     MatSnackBarModule,
-    NgxUiLoaderModule.forRoot({
-      fgsType: 'rectangle-bounce',
-      fgsColor: '#000000',
-      fgsSize: 70,
-      overlayColor: '#0163aa',
-      pbThickness: 3,
-      pbColor: '#000000',
-    }),
-    // NgxUiLoaderRouterModule,
-    NgxUiLoaderHttpModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderHttpModule.forRoot({
+      showForeground: true,
+    })
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideAnimationsAsync()],
   bootstrap: [AppComponent],

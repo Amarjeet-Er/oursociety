@@ -22,8 +22,8 @@ export class CurdService {
     return this._http.post(`${this.base_url}SocietyApi/Check_login`, data);
   }
 
-  insert_Emp_Reg(data:any) {
-    return this._http.get<[]>(`${this.base_url}EmployeeRegisterApi/EmployeeRegister`, data);
+  post_emp_add_edit(data:any) {
+    return this._http.post(`${this.base_url}EmployeeRegisterApi/EmployeeRegister`, data);
   }
   get_emp_type() {
     return this._http.get<[]>(`${this.base_url}EmployeeTypeApi/GetEmployeeType`);

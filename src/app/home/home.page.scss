@@ -68,11 +68,6 @@ ion-app {
                     font-size: 24px;
                 }
             }
-
-            // p:first-of-type {
-            //     border-top: 1px solid black;
-            //     border-bottom: 1px solid black;
-            // }
         }
 
         ion-content {
@@ -85,6 +80,7 @@ ion-app {
                     text-overflow: ellipsis;
                     border-bottom: 0.1px solid black;
                     margin: 0px;
+                    cursor: pointer;
 
                     span {
                         padding: 10px;

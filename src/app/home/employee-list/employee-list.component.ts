@@ -30,7 +30,6 @@ export class EmployeeListComponent implements OnInit {
     this._crud.viewEmpList().subscribe(
       (res: any) => {
         console.log(res);
-
         if (res.Status === 'Success') {
           this.reg_data = res.AllRegisteredEmployee;
           this.reg_filter_data = res.AllRegisteredEmployee;
@@ -46,9 +45,19 @@ export class EmployeeListComponent implements OnInit {
   onSearchClose() {
     this.headerBox = !this.headerBox;
     this.siteSearch = !this.siteSearch;
+    this._crud.viewEmpList().subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res.Status === 'Success') {
+          this.reg_data = res.AllRegisteredEmployee;
+          this.reg_filter_data = res.AllRegisteredEmployee;
+        }
+      }
+    )
   }
 
-  onDetails() {
+  onDetails(data:any) {
+    this._shared.shared_details.next(data)    
     this._router.navigate(['/home/employeedetails']);
   }
   onSearch(filter: any) {

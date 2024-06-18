@@ -3,12 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CurdService } from 'src/app/service/curd.service';
 import { SharedService } from 'src/app/service/shared.service';
+
 @Component({
-  selector: 'app-employee-reg',
-  templateUrl: './employee-reg.component.html',
-  styleUrls: ['./employee-reg.component.scss'],
+  selector: 'app-employee-update',
+  templateUrl: './employee-update.component.html',
+  styleUrls: ['./employee-update.component.scss'],
 })
-export class EmployeeRegComponent implements OnInit {
+export class EmployeeUpdateComponent implements OnInit {
   employeeReg!: FormGroup
   WIDTH = 200;
   HEIGHT = 200;
@@ -26,11 +27,15 @@ export class EmployeeRegComponent implements OnInit {
   Aadhar_img_url: any = "../../../assets/images/documents.jpg"
   EmpAadharSelect: boolean = true
 
+  imageSelected: boolean = false
+  EmpAadharSelected: boolean = false
   OtherSelectReletion1: boolean = false;
   OtherSelectReletion2: boolean = false;
   passwordsMatch: boolean = false;
   employee_type: any;
   selectedEmpType: number | null = null;
+  edit_reg: any;
+  img_url: any;
 
   constructor(
     private _router: Router,
@@ -43,11 +48,16 @@ export class EmployeeRegComponent implements OnInit {
         this.employee_type = res.EmployeeType
       },
     )
-
+    this._shared.img_base_url.subscribe(
+      (res: any) => {
+        this.img_url = res
+      }
+    )
   }
 
   ngOnInit() {
     this.employeeReg = this._fb.group({
+      Id: [''],
       emp_type: [''],
       emp_WorkArea: [''],
       empName: [''],
@@ -67,6 +77,14 @@ export class EmployeeRegComponent implements OnInit {
       emp_password: [''],
       empConfirmPass: [''],
     })
+    this._shared.shared_details.subscribe(
+      (res: any) => {
+        console.log(res);
+        this.edit_reg = res
+        this.employeeReg.patchValue(this.edit_reg)
+
+      }
+    )
   }
 
   onEmpTypeChange(event: any) {
@@ -75,6 +93,7 @@ export class EmployeeRegComponent implements OnInit {
   StartCamera() {
     this.onCameraOpen = false
     this.onGalleryImg = true
+    this.imageSelected = true
     this.onCaptureImg = true
     this.setupDevices();
   }
@@ -130,6 +149,7 @@ export class EmployeeRegComponent implements OnInit {
   OnGallery(files: any) {
     this.onCaptureImg = false
     this.onGalleryImg = false
+    this.imageSelected = true
     this.onCameraOpen = true
     let reader = new FileReader();
     this.gallery_select = files[0];
@@ -142,6 +162,7 @@ export class EmployeeRegComponent implements OnInit {
   // for select Aadhar Card
   onAadhar(files: any) {
     this.EmpAadharSelect = false
+    this.EmpAadharSelected = true
     let reader = new FileReader();
     this.Aadhar_select = files[0];
     reader.onload = () => {
@@ -167,6 +188,7 @@ export class EmployeeRegComponent implements OnInit {
 
   onSubmit(): void {
     const formdata = new FormData()
+    formdata.append('Id', this.employeeReg.get('Id')?.value);
     formdata.append('emp_type', this.employeeReg.get('emp_type')?.value);
     formdata.append('emp_WorkArea', this.employeeReg.get('emp_WorkArea')?.value);
     formdata.append('empName', this.employeeReg.get('empName')?.value);
@@ -204,11 +226,11 @@ export class EmployeeRegComponent implements OnInit {
       this._curd.post_emp_add_edit(formdata).subscribe(
         (res: any) => {
           if (res.Status === 'success') {
-            this._shared.tostSuccessTop('Employee Registered Successfully');
+            this._shared.tostSuccessTop('Registered Update Successfully');
             this._router.navigate(['/home/employeelist']);
           }
           if (res.Status === 'Failed') {
-            this._shared.tostErrorTop('Already Registered');
+            this._shared.tostSuccessTop('Already Registered');
           }
         },
         (err: any) => {

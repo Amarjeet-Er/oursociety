@@ -15,6 +15,8 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { VisitorReportsComponent } from './visitor-reports/visitor-reports.component';
 import { EmployeeReportsComponent } from './employee-reports/employee-reports.component';
 import { FlatOwnerReportsComponent } from './flat-owner-reports/flat-owner-reports.component';
+import { TearmAndConditionComponent } from './tearm-and-condition/tearm-and-condition.component';
+import { EmployeeUpdateComponent } from './employee-update/employee-update.component';
 
 const routes: Routes = [
   {
@@ -28,15 +30,17 @@ const routes: Routes = [
     ]
   },
   { path: 'employeereg', component: EmployeeRegComponent },
+  { path: 'employeeUpdate', component: EmployeeUpdateComponent },
   { path: 'employeedetails', component: EmployeeDetailsComponent },
-  {path: 'employeereports', component: EmployeeReportsComponent},
+  { path: 'employeereports', component: EmployeeReportsComponent },
   { path: 'flatownerreg', component: FlatOwnerRegComponent },
   { path: 'flatownerdetails', component: FlatOwnerDetailsComponent },
   { path: 'flatownerreports', component: FlatOwnerReportsComponent },
   { path: 'visitorreg', component: VisitorRegComponent },
   { path: 'visitorreports', component: VisitorReportsComponent },
   { path: 'visitordetails', component: VisitorDetailsComponent },
-  { path: 'profile', component: UserProfileComponent }
+  { path: 'profile', component: UserProfileComponent },
+  { path: 'tearmandcondition', component: TearmAndConditionComponent },
 ];
 
 @NgModule({

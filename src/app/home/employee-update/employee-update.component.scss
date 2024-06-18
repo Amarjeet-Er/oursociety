@@ -1,0 +1,146 @@
+.ion-page {
+    ion-header {
+        ion-toolbar {
+            ion-text {
+                position: relative;
+                right: 15px;
+            }
+
+            ion-fab-button::part(native) {
+                border-radius: 50px;
+                box-shadow: none;
+            }
+        }
+    }
+
+    ion-content {
+        width: 100%;
+        height: calc(100vh - 56px);
+        overflow: auto;
+
+        form {
+            ion-input {
+                margin: 10px 0px;
+            }
+
+            ion-button {
+                width: 100%;
+            }
+
+            .EmployeeAadhar {
+
+                .Documents {
+                    width: 100%;
+                    height: 280px;
+                    margin: 0px 0px 10px 0px;
+                    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                    cursor: pointer;
+                    padding: 10px;
+                    border-radius: 5px;
+
+                    img {
+                        width: 100%;
+                        height: 90%;
+                        margin-top: 10px;
+                    }
+
+                    input {
+                        display: none;
+                    }
+                }
+
+                .EmpSelectAadhar {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding-left: 15px;
+                    width: 100%;
+                    height: 56px;
+                    cursor: pointer;
+                    border: 0.1px solid #9b9b9b;
+                    border-radius: 4px;
+
+                    ion-fab {
+                        position: relative;
+                    }
+                }
+            }
+
+            .EmployeeImg {
+
+                .imgDataBox {
+                    width: 200px;
+                    height: 200px;
+                    margin: 0px 0px 10px 0px;
+                    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                    cursor: pointer;
+                    padding: 10px;
+                    border-radius: 5px;
+                }
+
+
+                .imgDataBox>span>img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .imgDataBox>span>input {
+                    display: none;
+                }
+
+                .actionCamera {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding-left: 15px;
+                    width: 100%;
+                    height: 56px;
+                    cursor: pointer;
+                    border: 0.1px solid #9b9b9b;
+                    border-radius: 4px;
+
+                    ion-fab {
+                        position: relative;
+                    }
+                }
+
+                .UploadImage {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 10px;
+                    margin-top: 10px;
+                }
+
+                .BoxCamera {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 10px;
+                }
+
+                .BoxCamera video {
+                    width: 200px;
+                    height: 200px;
+                    margin: 10px 0px 10px 0px;
+                    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                    cursor: pointer;
+                    padding: 10px;
+                    border-radius: 5px;
+                }
+
+                .BoxCameraClickBtn {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .BoxCamera canvas {
+                    width: 200px;
+                    margin-top: 10px;
+                    height: 200px;
+                    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                }
+            }
+        }
+    }
+}
