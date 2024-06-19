@@ -31,8 +31,6 @@ export class EmployeeDetailsComponent  implements OnInit {
   }
   onUpdate(data:any){
     this._shared.shared_details.next(data);
-    this._router.navigate(['/home/employeeUpdate'])
-    console.log(data);
-    
+    this._router.navigate(['/home/employeeUpdate'])    
   }
 }

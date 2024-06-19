@@ -29,6 +29,7 @@ import { FlatOwnerReportsComponent } from './home/flat-owner-reports/flat-owner-
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TearmAndConditionComponent } from './home/tearm-and-condition/tearm-and-condition.component';
 import { EmployeeUpdateComponent } from './home/employee-update/employee-update.component';
+import { FlatOwnerUpdateComponent } from './home/flat-owner-update/flat-owner-update.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { EmployeeUpdateComponent } from './home/employee-update/employee-update.
     EmployeeDetailsComponent,
     EmployeeReportsComponent,
     FlatOwnerRegComponent,
+    FlatOwnerUpdateComponent,
     FlatOwnerListComponent,
     FlatOwnerDetailsComponent,
     FlatOwnerReportsComponent,

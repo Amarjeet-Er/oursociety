@@ -4,61 +4,73 @@
       <ion-fab-button slot="start" color="secondary" routerLink="/home/flatownerlist">
         <ion-icon name="chevron-back-sharp"></ion-icon>
       </ion-fab-button>
-      <ion-buttons slot="end">
-        <ion-text> Owner Details </ion-text>
-      </ion-buttons>
+      <ion-text> Flat Owner Details </ion-text>
+      <button slot="end" (click)="onUpdate(on_details)">
+        Edit
+        <ion-icon name="pencil-sharp"></ion-icon>
+      </button>
     </ion-toolbar>
-
     <div class="container">
       <div class="dataRow">
         <div class="student_img">
-          <img [src]=" 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png'" alt="stdProfile"
-            width="100">
+          <img
+            [src]="on_details.flatOwnerImagePath? img_url+on_details.flatOwnerImagePath : 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png'"
+            alt="stdProfile" width="100">
         </div>
-        <p>
+        <p *ngIf="on_details?.buildName">
           <img src="../../../assets/icons/building-block.png" alt="">
-          <span> {{'Buildin Block'}} </span>
+          <span> {{on_details?.buildName}} </span>
         </p>
-        <p>
+
+        <p *ngIf="on_details?.flatName">
           <img src="../../../assets/icons/building-no.png" alt="">
-          <span> {{'Flat No'}} </span>
+          <span> {{on_details?.flatName}} </span>
         </p>
-        <p>
+
+        <p *ngIf="on_details?.flatOwnerName">
           <img src="../../../assets/icons/emp.png" alt="">
-          <span> {{'Name'}} </span>
+          <span> {{on_details?.flatOwnerName}} </span>
         </p>
-        <p>
+
+        <p *ngIf="on_details?.ownerDesignation">
           <img src="../../../assets/icons/degignation.png" alt="">
-          <span> {{'Designation'}} </span>
+          <span> {{on_details?.ownerDesignation}} </span>
         </p>
-        <p>
+
+        <p *ngIf="on_details?.primaryNumber">
           <img src="../../../assets/icons/phone.png" alt="">
-          <span> {{'Primary Mobile No'}} </span>
+          <span> {{on_details?.primaryNumber}} </span>
         </p>
-        <p>
+
+        <p *ngIf="on_details?.alternatePhoneNum">
           <img src="../../../assets/icons/phone.png" alt="">
-          <span> {{'Alt Mobile No'}} </span>
+          <span> {{on_details?.alternatePhoneNum}} </span>
         </p>
-        <p>
+
+        <p *ngIf="on_details?.ownerEmail">
           <img src="../../../assets/icons/email.png" alt="">
-          <span> {{'Email'}} </span>
+          <span> {{on_details?.ownerEmail}} </span>
         </p>
-        <p>
+
+        <p *ngIf="on_details?.aadharNumber">
           <img src="../../../assets/icons/aadhar.png" alt="">
-          <span> {{'Aadhar No'}} </span>
+          <span> {{on_details?.aadharNumber}} </span>
         </p>
-        <p>
-          <img src="../../../assets/icons/user.png" alt="">
-          <span> {{'Member Name'}} </span>
-        </p>
-        <p>
-          <img src="../../../assets/icons/age.png" alt="">
-          <span> {{'Member Age'}} </span>
-        </p>
-        <p>
-          <img src="../../../assets/icons/phone.png" alt="">
-          <span> {{'Member Mobile No'}} </span>
-        </p>
+
+        <ion-card *ngFor="let data of on_members">
+          <p>
+            <img src="../../../assets/icons/user.png" alt="">
+            <span> {{data?.MemberName}} </span>
+          </p>
+          <p>
+            <img src="../../../assets/icons/age.png" alt="">
+            <span> {{data?.MemberName}} </span>
+          </p>
+          <p>
+            <img src="../../../assets/icons/phone.png" alt="">
+            <span> {{data?.MemberContact}} </span>
+          </p>
+        </ion-card>
         <p>
           <img src="../../../assets/icons/model.png" alt="">
           <span> {{'Car Model'}} </span>

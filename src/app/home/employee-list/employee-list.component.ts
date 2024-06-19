@@ -27,7 +27,7 @@ export class EmployeeListComponent implements OnInit {
         this.img_url = res
       }
     )
-    this._crud.viewEmpList().subscribe(
+    this._crud.get_emp_list().subscribe(
       (res: any) => {
         console.log(res);
         if (res.Status === 'Success') {
@@ -45,7 +45,7 @@ export class EmployeeListComponent implements OnInit {
   onSearchClose() {
     this.headerBox = !this.headerBox;
     this.siteSearch = !this.siteSearch;
-    this._crud.viewEmpList().subscribe(
+    this._crud.get_emp_list().subscribe(
       (res: any) => {
         console.log(res);
         if (res.Status === 'Success') {

@@ -48,18 +48,18 @@ export class EmployeeRegComponent implements OnInit {
 
   ngOnInit() {
     this.employeeReg = this._fb.group({
-      emp_type: [''],
+      emp_type: ['',Validators.required],
       emp_WorkArea: [''],
-      empName: [''],
-      empMobNo: [''],
-      empEmail: [''],
+      empName: ['', Validators.required],
+      empMobNo: ['', Validators.required],
+      empEmail: ['', Validators.required],
       alternateMob1: [''],
       relWithAlternateNum1: [''],
       OtherRelationWithNum1: [''],
       alternateMob2: [''],
       relWithAlternateNum2: [''],
       OtherRelationWithNum2: [''],
-      aadharNumber: [''],
+      aadharNumber: ['', Validators.required],
       currentAddress: [''],
       parmanentAddress: [''],
       profileImage: [''],

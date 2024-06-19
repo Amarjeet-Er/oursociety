@@ -58,18 +58,18 @@ export class EmployeeUpdateComponent implements OnInit {
   ngOnInit() {
     this.employeeReg = this._fb.group({
       Id: [''],
-      emp_type: [''],
+      emp_type: ['',Validators.required],
       emp_WorkArea: [''],
-      empName: [''],
-      empMobNo: [''],
-      empEmail: [''],
+      empName: ['', Validators.required],
+      empMobNo: ['', Validators.required],
+      empEmail: ['', Validators.required],
       alternateMob1: [''],
       relWithAlternateNum1: [''],
       OtherRelationWithNum1: [''],
       alternateMob2: [''],
       relWithAlternateNum2: [''],
       OtherRelationWithNum2: [''],
-      aadharNumber: [''],
+      aadharNumber: ['', Validators.required],
       currentAddress: [''],
       parmanentAddress: [''],
       profileImage: [''],
@@ -77,14 +77,12 @@ export class EmployeeUpdateComponent implements OnInit {
       emp_password: [''],
       empConfirmPass: [''],
     })
-    this._shared.shared_details.subscribe(
-      (res: any) => {
-        console.log(res);
-        this.edit_reg = res
-        this.employeeReg.patchValue(this.edit_reg)
-
-      }
-    )
+    this._shared.shared_details.subscribe((response: any) => {
+      this.edit_reg = response;
+      this.employeeReg.patchValue(this.edit_reg);
+      this.employeeReg.controls['empConfirmPass'].setValue(this.edit_reg.emp_password);
+      this.employeeReg.controls['empEmail'].setValue(this.edit_reg.empEmail);
+    });
   }
 
   onEmpTypeChange(event: any) {
@@ -186,7 +184,7 @@ export class EmployeeUpdateComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
+  onUpdate(): void {
     const formdata = new FormData()
     formdata.append('Id', this.employeeReg.get('Id')?.value);
     formdata.append('emp_type', this.employeeReg.get('emp_type')?.value);
@@ -226,7 +224,7 @@ export class EmployeeUpdateComponent implements OnInit {
       this._curd.post_emp_add_edit(formdata).subscribe(
         (res: any) => {
           if (res.Status === 'success') {
-            this._shared.tostSuccessTop('Registered Update Successfully');
+            this._shared.tostSuccessTop('Update Successfully');
             this._router.navigate(['/home/employeelist']);
           }
           if (res.Status === 'Failed') {
@@ -234,7 +232,7 @@ export class EmployeeUpdateComponent implements OnInit {
           }
         },
         (err: any) => {
-          this._shared.tostErrorTop('Data Not Insert')
+          this._shared.tostErrorTop('Data Not Update')
           console.log(err);
         }
       );

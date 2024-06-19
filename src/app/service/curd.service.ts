@@ -22,13 +22,29 @@ export class CurdService {
     return this._http.post(`${this.base_url}SocietyApi/Check_login`, data);
   }
 
-  post_emp_add_edit(data:any) {
+  //employee
+  post_emp_add_edit(data: any) {
     return this._http.post(`${this.base_url}EmployeeRegisterApi/EmployeeRegister`, data);
   }
+
   get_emp_type() {
     return this._http.get<[]>(`${this.base_url}EmployeeTypeApi/GetEmployeeType`);
   }
-  viewEmpList() {
+  get_emp_list() {
     return this._http.get<[]>(`${this.base_url}AllEmployeeListApi/GetAllRegisteredEmployee`);
+  }
+
+  //owner
+  get_building_block() {
+    return this._http.get<[]>(`${this.base_url}BuildingBlock/Build_Block`)
+  }
+  get_flat_number(building_id: string) {
+    return this._http.get<[]>(`${this.base_url}FlatNumber/FlatNumber?id=${building_id}`)
+  }
+  post_flat_owner_add_edit(data: any) {
+    return this._http.post(`${this.base_url}RegisteredFlat/FlatRegister`, data);
+  }
+  get_flat_owner_list() {
+    return this._http.get<[]>(`${this.base_url}RegisteredFlat/Flat_List`)
   }
 }

@@ -29,7 +29,8 @@
         </ion-input>
 
         <ion-input label="Contact No" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter contact no" formControlName="empMobNo">
+          placeholder="Enter contact no" onkeypress=" return this.value.length < 10"
+          oninput="if(this.value.length>=10) {this.value = this.value.sclice (0,10);}" formControlName="empMobNo">
         </ion-input>
 
         <ion-input type="email" fill="outline" label="Email" labelPlacement="floating" errorText="Invalid email" ngModel
@@ -37,7 +38,8 @@
         </ion-input>
 
         <ion-input label="Alt Contact No (1)" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter alt contact no" formControlName="alternateMob1">
+          placeholder="Enter alt contact no" onkeypress=" return this.value.length < 10"
+          oninput="if(this.value.length>=10) {this.value = this.value.sclice (0,10);}" formControlName="alternateMob1">
         </ion-input>
 
         <ion-select label="Relation With No (1)" fill="outline" label-placement="floating" interface="action-sheet"
@@ -56,7 +58,8 @@
         </ion-input>
 
         <ion-input label="Alt Contact No (2)" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter alt contact no" formControlName="alternateMob2">
+          placeholder="Enter alt contact no" onkeypress=" return this.value.length < 10"
+          oninput="if(this.value.length>=10) {this.value = this.value.sclice (0,10);}" formControlName="alternateMob2">
         </ion-input>
 
         <ion-select label="Relation With No (2)" fill="outline" label-placement="floating" interface="action-sheet"
@@ -75,7 +78,8 @@
         </ion-input>
 
         <ion-input label="Aadhar No" label-placement="floating" type="number" fill="outline"
-          placeholder="Enter aadhar no" formControlName="aadharNumber">
+          placeholder="Enter aadhar no" onkeypress=" return this.value.length < 16"
+          oninput="if(this.value.length>=16) {this.value = this.value.sclice (0,16);}" formControlName="aadharNumber">
         </ion-input>
 
         <ion-input label="Current Address" label-placement="floating" fill="outline" type="text"

@@ -17,6 +17,7 @@ import { EmployeeReportsComponent } from './employee-reports/employee-reports.co
 import { FlatOwnerReportsComponent } from './flat-owner-reports/flat-owner-reports.component';
 import { TearmAndConditionComponent } from './tearm-and-condition/tearm-and-condition.component';
 import { EmployeeUpdateComponent } from './employee-update/employee-update.component';
+import { FlatOwnerUpdateComponent } from './flat-owner-update/flat-owner-update.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'employeedetails', component: EmployeeDetailsComponent },
   { path: 'employeereports', component: EmployeeReportsComponent },
   { path: 'flatownerreg', component: FlatOwnerRegComponent },
+  { path: 'flatownerupdate', component: FlatOwnerUpdateComponent },
   { path: 'flatownerdetails', component: FlatOwnerDetailsComponent },
   { path: 'flatownerreports', component: FlatOwnerReportsComponent },
   { path: 'visitorreg', component: VisitorRegComponent },

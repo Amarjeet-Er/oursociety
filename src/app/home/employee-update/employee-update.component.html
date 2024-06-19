@@ -90,7 +90,7 @@
           <div class="Documents" [hidden]="EmpAadharSelected">
             <span>Employee Aadhar</span>
             <img
-              [src]="edit_reg.empAadharImagePath? img_url+edit_reg.empAadharImagePath : '../../../assets/images/user.webp'"
+              [src]="edit_reg.empAadharImagePath? img_url+edit_reg.empAadharImagePath : '../../../assets/images/documents.jpg'"
               alt="" width="100%" height="100%">
           </div>
         </div>
@@ -181,7 +181,7 @@
             Passwords do not match!
           </ion-text>
         </div>
-        <ion-button shape="round" (click)="onSubmit()">Submit</ion-button>
+        <ion-button shape="round" (click)="onUpdate()">Update</ion-button>
       </form>
     </ion-content>
   </ion-header>

@@ -1,15 +1,15 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CurdService } from 'src/app/service/curd.service';
 import { SharedService } from 'src/app/service/shared.service';
 
 @Component({
-  selector: 'app-flat-owner-reg',
-  templateUrl: './flat-owner-reg.component.html',
-  styleUrls: ['./flat-owner-reg.component.scss'],
+  selector: 'app-flat-owner-update',
+  templateUrl: './flat-owner-update.component.html',
+  styleUrls: ['./flat-owner-update.component.scss'],
 })
-export class FlatOwnerRegComponent implements OnInit {
+export class FlatOwnerUpdateComponent implements OnInit {
   RegFlatForm!: FormGroup;
   familyCount!: number;
   AddFamilyInput: { count: number }[] = [];
@@ -31,6 +31,7 @@ export class FlatOwnerRegComponent implements OnInit {
   building_block: any;
   building_num: any;
   passwordsMatch: boolean = false;
+  edit_reg: any;
   constructor(
     private _router: Router,
     private _fb: FormBuilder,
@@ -58,6 +59,7 @@ export class FlatOwnerRegComponent implements OnInit {
 
   ngOnInit() {
     this.RegFlatForm = this._fb.group({
+      id: [''],
       b_block: [''],
       flatNum: [''],
       Name: [''],
@@ -74,6 +76,13 @@ export class FlatOwnerRegComponent implements OnInit {
       members: this._fb.array([]),
       familyCars: this._fb.array([])
     })
+    this._shared.shared_details.subscribe(
+      (res:any)=>{
+        console.log(res);
+        this.edit_reg=res
+        this.RegFlatForm.patchValue(this.edit_reg)
+      }
+    )
   }
 
   get membersArray() {
@@ -219,6 +228,7 @@ export class FlatOwnerRegComponent implements OnInit {
     console.log(this.RegFlatForm.value);
 
     const formdata = new FormData();
+    formdata.append('id', this.RegFlatForm.get('id')?.value);
     formdata.append('b_block', this.RegFlatForm.get('b_block')?.value);
     formdata.append('flatNum', this.RegFlatForm.get('flatNum')?.value);
     formdata.append('Name', this.RegFlatForm.get('Name')?.value);
@@ -253,7 +263,7 @@ export class FlatOwnerRegComponent implements OnInit {
       this._crud.post_flat_owner_add_edit(formdata).subscribe(
         (res: any) => {
           if (res.Status === 'Success') {
-            this._shared.tostSuccessTop('Registration Successfully');
+            this._shared.tostSuccessTop('Update Successfully');
             this._router.navigate(['/home/flatownerlist']);
           }
           if (res.Status === 'Failed') {
@@ -261,7 +271,7 @@ export class FlatOwnerRegComponent implements OnInit {
           }
         },
         (err: any) => {
-          this._shared.tostErrorTop('Data Not Insert')
+          this._shared.tostErrorTop('Data Not Update')
           console.log(err);
         }
       );
