@@ -1,34 +1,43 @@
 <div id="container">
-  <div class="wrapper">
-    <form [formGroup]="login_form">
-      <div class="imgbox">
-        <div class="avatar">
-          <img src="../../assets/images/login-profile.jpg" alt="login-profile">
+  <div id="header">
+    <img
+      src="https://www.mydomaine.com/thmb/Lbjq2hM5w_zquM18v3WdNrPriBw=/2048x0/filters:no_upscale():strip_icc()/SuCasaDesign-Modern2-ec89013bd4d74c6693f8247eee10134b.jpg"
+      alt="">
+  </div>
+  <div id="body">
+    <form action="" [formGroup]="login_form">
+
+      <div class="textboxarea">
+        <input type="text" placeholder="Username" #data formControlName="Email">
+        <div class="icon8">
+          <div class="eyeBtn" mat-icon-button matSuffix [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <img src="../../assets/icons/login-user.png">
+          </div>
         </div>
       </div>
 
-      <div class="input-box">
-        <img src="../../assets/icons/login-user.png" alt="username" width="30px" height="30px">
-        <input type="text" placeholder="Username" formControlName="Email" #data>
+      <div class="textboxarea">
+        <input type="password" [type]="hide ? 'password' : 'text'" placeholder="Password" (keyup.enter)="onLogin()"
+          formControlName="Password">
+
+        <div class="icon8">
+          <div class="eyeBtn" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <img [src]="hide ? '../../assets/icons/eyes-off.png' : '../../assets/icons/eyes-open.png'" alt="">
+          </div>
+        </div>
       </div>
 
-      <div class="input-box">
-        <img src="../../assets/icons/login-password.png" alt="password" width="30px" height="30px">
-        <input type="password" [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="Password">
-        <button  (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide">
-          <ion-icon [name]="hide ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
-        </button>
+      <p routerLink="forgotpassword" class="forgotpassword">I forgot my password</p>
+      <div class="loginBtn">
+        <button type="submit" (click)="onLogin()">Login</button>
       </div>
-      <div class="forgot">
-        <!-- <p routerLink="forgotpassword">Forgot password?</p> -->
-      </div>
-      <ion-button type="submit" class="btn" (click)="onLogin()">Login</ion-button>
+
     </form>
   </div>
-</div>
-<div class="companyInfo">
-  <div class="compInfo">
-    <span>Developed By </span><img src="https://macreel.co.in/img/logo4.png" alt="macreel icon">
+  <div id="foot">
+    <div class="compInfo">
+      <span>Developed By </span><img src="https://macreel.co.in/img/logo4.png" alt="macreel icon">
+    </div>
   </div>
 </div>

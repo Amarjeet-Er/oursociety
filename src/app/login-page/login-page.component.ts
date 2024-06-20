@@ -47,11 +47,11 @@ export class LoginPageComponent implements OnInit {
               this._shared.tostSuccessBottom('Login Successfully...')
             }
 
-            // if (res.user_type === 'Employee') {
-            //   localStorage.setItem('empId', JSON.stringify(res.user_id))
-            //   this._router.navigate(['employee'])
-            //   this._shared.tostSuccessBottom('Login Successfully...')
-            // }
+            if (res.user_type === 'Employee') {
+              localStorage.setItem('empId', JSON.stringify(res.user_id))
+              this._router.navigate(['employee'])
+              this._shared.tostSuccessBottom('Login Successfully...')
+            }
           }
           else {
             this._shared.tostErrorTop('Invalid Username or Password')

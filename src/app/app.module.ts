@@ -30,6 +30,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TearmAndConditionComponent } from './home/tearm-and-condition/tearm-and-condition.component';
 import { EmployeeUpdateComponent } from './home/employee-update/employee-update.component';
 import { FlatOwnerUpdateComponent } from './home/flat-owner-update/flat-owner-update.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { FlatOwnerUpdateComponent } from './home/flat-owner-update/flat-owner-up
     VisitorReportsComponent,
     UserProfileComponent,
     TearmAndConditionComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

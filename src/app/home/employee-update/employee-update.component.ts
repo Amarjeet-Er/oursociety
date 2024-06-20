@@ -58,7 +58,7 @@ export class EmployeeUpdateComponent implements OnInit {
   ngOnInit() {
     this.employeeReg = this._fb.group({
       Id: [''],
-      emp_type: ['',Validators.required],
+      emp_type: ['', Validators.required],
       emp_WorkArea: [''],
       empName: ['', Validators.required],
       empMobNo: ['', Validators.required],
@@ -81,7 +81,6 @@ export class EmployeeUpdateComponent implements OnInit {
       this.edit_reg = response;
       this.employeeReg.patchValue(this.edit_reg);
       this.employeeReg.controls['empConfirmPass'].setValue(this.edit_reg.emp_password);
-      this.employeeReg.controls['empEmail'].setValue(this.edit_reg.empEmail);
     });
   }
 
@@ -201,10 +200,14 @@ export class EmployeeUpdateComponent implements OnInit {
     formdata.append('aadharNumber', this.employeeReg.get('aadharNumber')?.value);
     formdata.append('currentAddress', this.employeeReg.get('currentAddress')?.value);
     formdata.append('parmanentAddress', this.employeeReg.get('parmanentAddress')?.value);
-    formdata.append('profileImage', this.gallery_select);
-    formdata.append('aadharImage', this.Aadhar_select);
-    console.log(this.gallery_select, 'img');
-    console.log(this.Aadhar_select, 'aadhar');
+
+    if (this.gallery_select) {
+      formdata.append('profileImage', this.gallery_select);
+    }
+    if (this.Aadhar_select) {
+      formdata.append('aadharImage', this.Aadhar_select);
+    }
+
     if (this.employeeReg.get('emp_password')?.value === this.employeeReg.get('empConfirmPass')?.value) {
       const empPassword = this.employeeReg.get('emp_password')?.value;
       if (empPassword) {
