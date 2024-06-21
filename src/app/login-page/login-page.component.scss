@@ -23,6 +23,12 @@
         padding: 20px;
         // background-color: rgb(4, 0, 128);
         overflow: auto;
+        display: flex;
+        align-items: center;
+
+        form {
+            width: 100%;
+        }
 
         .textboxarea {
             width: 100%;
@@ -107,7 +113,6 @@
             img {
                 width: 130px;
                 height: 50px;
-                margin: 0 5px;
                 border-radius: 0;
                 background: none;
             }

@@ -42,7 +42,7 @@ export class LoginPageComponent implements OnInit {
           console.log(res);
           if (res.Status === 'Success') {
             if (res.RollId === 'Admin') {
-              localStorage.setItem('userId', JSON.stringify(res.user_id))
+              localStorage.setItem('userId', JSON.stringify(res.RollId))
               this._router.navigate(['home'])
               this._shared.tostSuccessBottom('Login Successfully...')
             }

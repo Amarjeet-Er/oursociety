@@ -44,7 +44,16 @@ export class CurdService {
   post_flat_owner_add_edit(data: any) {
     return this._http.post(`${this.base_url}RegisteredFlat/FlatRegister`, data);
   }
+
   get_flat_owner_list() {
     return this._http.get<[]>(`${this.base_url}RegisteredFlat/Flat_List`)
+  }
+
+  //visitors
+  get_visistors_list() {
+    return this._http.get<[]>(`${this.base_url}VisitorData/VisitorList`)
+  }
+  post_visitor_add(data: any) {
+    return this._http.post(`${this.base_url}VisitorData/AddVisitor`, data);
   }
 }

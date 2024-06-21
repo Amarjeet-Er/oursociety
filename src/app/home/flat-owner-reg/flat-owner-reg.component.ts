@@ -39,32 +39,38 @@ export class FlatOwnerRegComponent implements OnInit {
   ) {
     this._crud.get_building_block().subscribe(
       (res: any) => {
-        console.log(res, 'value');
         this.building_block = res.Data
       }
     )
   }
   get_filter_by_flat_num(building_id: any) {
-    const flat_building_no = building_id.target.value
-    console.log(flat_building_no, 'id');
+    const flat_building_no = building_id.target.value;
+    
     this._crud.get_flat_number(flat_building_no).subscribe(
       (res: any) => {
-        console.log(res, 'value flat no');
-        this.building_num = res.Data
-        console.log(this.building_num, 'value flat no');
+        if (res.Data && Array.isArray(res.Data)) {
+          this.building_num = res.Data.filter((item: any) => item.regStatus === 1); 
+          console.log('Filtered flat numbers:', this.building_num);
+        } else {
+          this.building_num = [];
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching flat numbers:', error);
+        this.building_num = [];
       }
-    )
+    );
   }
 
   ngOnInit() {
     this.RegFlatForm = this._fb.group({
-      b_block: [''],
-      flatNum: [''],
-      Name: [''],
+      b_block: ['', Validators.required],
+      flatNum: ['', Validators.required],
+      Name: ['', Validators.required],
       Designation: [''],
-      Primary_Number: [''],
+      Primary_Number: ['', Validators.required],
       Alt_Number: [''],
-      Email: [''],
+      Email: ['', Validators.required],
       AadharNumber: [''],
       password: [''],
       empConfirmPass: [''],
@@ -227,14 +233,21 @@ export class FlatOwnerRegComponent implements OnInit {
     formdata.append('Alt_Number', this.RegFlatForm.get('Alt_Number')?.value);
     formdata.append('Email', this.RegFlatForm.get('Email')?.value);
     formdata.append('AadharNumber', this.RegFlatForm.get('AadharNumber')?.value);
-    formdata.append('Have_car', this.RegFlatForm.get('Have_car')?.value);
+
+    const haveCarValue = this.RegFlatForm.get('Have_car')?.value ? 'Yes' : 'No';
+    formdata.append('Have_car', haveCarValue);
+
     formdata.append('No_Of_Family', this.RegFlatForm.get('No_Of_Family')?.value);
-    formdata.append('members', this.RegFlatForm.get('members')?.value);
+
+    formdata.append('members', JSON.stringify(this.RegFlatForm.get('members')?.value));
     console.log('members', this.RegFlatForm.get('members')?.value);
-    formdata.append('familyCars', this.RegFlatForm.get('familyCars')?.value);
-    console.log('cars', this.RegFlatForm.get('familyCars')?.value);
+
+    formdata.append('familyCars', JSON.stringify(this.RegFlatForm.get('familyCars')?.value));
+    console.log('familyCars', this.RegFlatForm.get('familyCars')?.value);
+
     formdata.append('profilePath', this.gallery_select);
     console.log(this.gallery_select, 'img');
+
     if (this.RegFlatForm.get('password')?.value === this.RegFlatForm.get('empConfirmPass')?.value) {
       const OwnerPassword = this.RegFlatForm.get('password')?.value;
       if (OwnerPassword) {
@@ -252,11 +265,11 @@ export class FlatOwnerRegComponent implements OnInit {
     if (this.RegFlatForm.valid) {
       this._crud.post_flat_owner_add_edit(formdata).subscribe(
         (res: any) => {
-          if (res.Status === 'Success') {
+          if (res.Status === 'success') {
             this._shared.tostSuccessTop('Registration Successfully');
             this._router.navigate(['/home/flatownerlist']);
           }
-          if (res.Status === 'Failed') {
+          if (res.Status === 'Error') {
             this._shared.tostErrorTop('Already Registered');
           }
         },

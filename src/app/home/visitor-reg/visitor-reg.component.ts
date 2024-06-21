@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CurdService } from 'src/app/service/curd.service';
 import { SharedService } from 'src/app/service/shared.service';
 
 @Component({
@@ -24,12 +25,44 @@ export class VisitorRegComponent implements OnInit {
   onCaptureImg: boolean = false;
   gallery_select: any = null;
   gallery_img_url: any;
+  building_block: any;
+  building_num: any;
+  selectedFlat: any;
+  reg_data: any;
+  flat_owner_list: any;
 
   constructor(
     private _router: Router,
     private _fb: FormBuilder,
-    private _shared: SharedService
-  ) { }
+    private _shared: SharedService,
+    private _crud: CurdService
+  ) {
+    this._crud.get_building_block().subscribe(
+      (res: any) => {
+        console.log(res, 'value');
+        this.building_block = res.Data
+      }
+    )
+
+  }
+  get_filter_by_flat_num(building_id: any) {
+    const flat_building_no = building_id.target.value;
+    
+    this._crud.get_flat_number(flat_building_no).subscribe(
+      (res: any) => {
+        if (res.Data && Array.isArray(res.Data)) {
+          this.building_num = res.Data.filter((item: any) => item.regStatus === 0); 
+          console.log('Filtered flat numbers:', this.building_num);
+        } else {
+          this.building_num = [];
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching flat numbers:', error);
+        this.building_num = [];
+      }
+    );
+  }
 
   ngOnInit() {
     this.initializeForm();
@@ -38,23 +71,49 @@ export class VisitorRegComponent implements OnInit {
   initializeForm() {
     this.VisitorReg = this._fb.group({
       visitorName: [''],
-      visitorPhone: [''],
-      visitorsCount: [''],
-      vehicleModel: [''],
-      vehicleNumber: [''],
-      vehicleParking: [''],
-      visitorFlatNo: [0],
-      visitorStatus: [''],
+      visitorMobileNum: [''],
+      totalVisitors: [''],
+      havingVehicle: [false],
+      visitorVehicleModel: [''],
+      visitorVehicleNumber: [''],
+      visitorVehicleParkingArea: [''],
+      buildingBlock: [''],
+      flatNum: [],
+      approvalStatus: [''],
+      visitorImage: [''],
     });
   }
 
   toggleVehicleInput(event: any) {
     this.onVehicleSelect = event.detail.checked;
   }
-  onFlatFind() {
-    this.findFlatNo = true
-  }
 
+  onFlatFind() {
+    const selectedFlatId = this.VisitorReg.value.flatNum;
+    const selectedFlat = this.building_num.find((flat: { id: any; }) => flat.id === selectedFlatId);
+    if (selectedFlat) {
+      if (selectedFlat.regStatus === 0) {
+        this._crud.get_flat_owner_list().subscribe(
+          (res: any) => {
+            console.log(res);
+
+            const filteredOwners = res.Data.filter((owner: any) => owner.FlatNum === selectedFlatId);
+            this.flat_owner_list = filteredOwners;
+            console.log(this.flat_owner_list, 'list');
+
+            console.log('Flat number found with regStatus 0 and matching flatNum');
+            this.findFlatNo = true;
+          }
+        );
+      }
+    }
+  }
+  onDetails(data: any) {
+    this._shared.shared_details.next(data)
+    console.log(data);
+    
+    this._router.navigate(['/home/flatownerdetails'])
+  }
   StartCamera() {
     this.onCameraOpen = false
     this.onGalleryImg = true
@@ -123,12 +182,37 @@ export class VisitorRegComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.VisitorReg.value, 'Visistor data');
-    this._shared.tostSuccessTop('H')
-    return
-    const formdata = new FormData();
-    formdata.append('name', this.VisitorReg.get('name')?.value);
 
-    this._router.navigate(['/home/visitorlist']);
+    const formdata = new FormData();
+    formdata.append('visitorName', this.VisitorReg.get('visitorName')?.value);
+    formdata.append('visitorMobileNum', this.VisitorReg.get('visitorMobileNum')?.value);
+    formdata.append('totalVisitors', this.VisitorReg.get('totalVisitors')?.value);
+    formdata.append('havingVehicle', this.VisitorReg.get('havingVehicle')?.value);
+    formdata.append('visitorVehicleModel', this.VisitorReg.get('visitorVehicleModel')?.value);
+    formdata.append('visitorVehicleNumber', this.VisitorReg.get('visitorVehicleNumber')?.value);
+    formdata.append('visitorVehicleParkingArea', this.VisitorReg.get('visitorVehicleParkingArea')?.value);
+    formdata.append('buildingBlock', this.VisitorReg.get('buildingBlock')?.value);
+    formdata.append('flatNum', this.VisitorReg.get('flatNum')?.value);
+    formdata.append('approvalStatus', this.VisitorReg.get('approvalStatus')?.value);
+    if (this.VisitorReg.valid) {
+      this._crud.post_visitor_add(formdata).subscribe(
+        (res: any) => {
+          if (res.Status === 'Success') {
+            this._shared.tostSuccessTop('Registration Successfully');
+            this._router.navigate(['/home/visitorlist']);
+          }
+          if (res.Status === 'Failed') {
+            this._shared.tostErrorTop('Already Registered');
+          }
+        },
+        (err: any) => {
+          this._shared.tostErrorTop('Data Not Insert')
+          console.log(err);
+        }
+      );
+    }
+    else {
+      this._shared.tostWarningTop('Please fill up the form')
+    }
   }
 }
