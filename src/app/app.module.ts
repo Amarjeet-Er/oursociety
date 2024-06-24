@@ -31,6 +31,7 @@ import { TearmAndConditionComponent } from './home/tearm-and-condition/tearm-and
 import { EmployeeUpdateComponent } from './home/employee-update/employee-update.component';
 import { FlatOwnerUpdateComponent } from './home/flat-owner-update/flat-owner-update.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { EmpHomeComponent } from './employee-home/emp-home/emp-home.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     VisitorReportsComponent,
     UserProfileComponent,
     TearmAndConditionComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    EmpHomeComponent,
   ],
   imports: [
     BrowserModule,

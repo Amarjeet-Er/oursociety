@@ -22,13 +22,11 @@ export class FlatOwnerListComponent implements OnInit {
   ngOnInit(): void {
     this._shared.img_base_url.subscribe(
       (res: any) => {
-        console.log(res);
         this.img_url = res
       }
     )
     this._crud.get_flat_owner_list().subscribe(
       (res: any) => {
-        console.log(res);
         if (res.Status === 'Success') {
           this.reg_data = res.Data;
           this.reg_filter_data = res.Data;
@@ -46,7 +44,6 @@ export class FlatOwnerListComponent implements OnInit {
     this.siteSearch = !this.siteSearch;
     this._crud.get_flat_owner_list().subscribe(
       (res: any) => {
-        console.log(res);
         if (res.Status === 'Success') {
           this.reg_data = res.Data;
           this.reg_filter_data = res.Data;

@@ -187,7 +187,10 @@ export class VisitorRegComponent implements OnInit {
     formdata.append('visitorName', this.VisitorReg.get('visitorName')?.value);
     formdata.append('visitorMobileNum', this.VisitorReg.get('visitorMobileNum')?.value);
     formdata.append('totalVisitors', this.VisitorReg.get('totalVisitors')?.value);
-    formdata.append('havingVehicle', this.VisitorReg.get('havingVehicle')?.value);
+
+    const haveCarValue = this.VisitorReg.get('havingVehicle')?.value ? 'Yes' : 'No';
+    formdata.append('havingVehicle', haveCarValue);
+    
     formdata.append('visitorVehicleModel', this.VisitorReg.get('visitorVehicleModel')?.value);
     formdata.append('visitorVehicleNumber', this.VisitorReg.get('visitorVehicleNumber')?.value);
     formdata.append('visitorVehicleParkingArea', this.VisitorReg.get('visitorVehicleParkingArea')?.value);
@@ -197,13 +200,13 @@ export class VisitorRegComponent implements OnInit {
     if (this.VisitorReg.valid) {
       this._crud.post_visitor_add(formdata).subscribe(
         (res: any) => {
-          if (res.Status === 'Success') {
+          // if (res.Status === 'Success') {
             this._shared.tostSuccessTop('Registration Successfully');
             this._router.navigate(['/home/visitorlist']);
-          }
-          if (res.Status === 'Failed') {
-            this._shared.tostErrorTop('Already Registered');
-          }
+          // }
+          // if (res.Status === 'Failed') {
+          //   this._shared.tostErrorTop('Already Registered');
+          // }
         },
         (err: any) => {
           this._shared.tostErrorTop('Data Not Insert')

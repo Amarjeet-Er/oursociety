@@ -12,7 +12,8 @@
       <form [formGroup]="RegFlatForm">
 
         <ion-select label="Building Blocks" fill="outline" label-placement="floating" interface="action-sheet"
-          placeholder="Select building blocks" (ionChange)="get_filter_by_flat_num($event)" formControlName="b_block">
+          placeholder="Select building blocks" (ionChange)="get_filter_by_flat_num($event)"
+          formControlName="buildingBlock">
           <ion-select-option *ngFor="let building_list of building_block" [value]="building_list?.id">{{
             building_list?.buildingBlockName }}</ion-select-option>
         </ion-select>
@@ -24,36 +25,36 @@
         </ion-select>
 
         <ion-input label="Name" label-placement="floating" fill="outline" type="text" placeholder="Enter owner name"
-          formControlName="Name">
+          formControlName="flatOwnerName">
         </ion-input>
 
         <ion-input label="Designation" label-placement="floating" fill="outline" type="text"
-          placeholder="Enter designation" formControlName="Designation">
+          placeholder="Enter designation" formControlName="ownerDesignation">
         </ion-input>
 
         <ion-input label="Primary Mobile No" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter primary mobile no" formControlName="Primary_Number">
+          placeholder="Enter primary mobile no" formControlName="primaryNumber">
         </ion-input>
 
         <ion-input label="Alt Mobile No" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter alt mobile no" formControlName="Alt_Number">
+          placeholder="Enter alt mobile no" formControlName="alternatePhoneNum">
         </ion-input>
 
         <ion-input type="email" fill="outline" label="Email" labelPlacement="floating" errorText="Invalid email" ngModel
-          email formControlName="Email">
+          email formControlName="ownerEmail">
         </ion-input>
 
         <ion-input label="Aadhar No" label-placement="floating" type="number" fill="outline"
-          placeholder="Enter aadhar no" formControlName="AadharNumber">
+          placeholder="Enter aadhar no" formControlName="aadharNumber">
         </ion-input>
 
         <ion-input #familyInput label="Number Of Family Members" label-placement="floating" type="number" fill="outline"
-          placeholder="Enter number of family members " [(ngModel)]="familyCount" formControlName="No_Of_Family"
+          placeholder="Enter number of family members " [(ngModel)]="familyCount" formControlName="totalFamilyMember"
           (input)="onFamilyInput($event)">
         </ion-input>
         <ion-text *ngIf="familyCount > 7" color="danger">Maximum 7 members allowed.</ion-text>
 
-        <div formArrayName="members">
+        <div formArrayName="familyDataList">
           <div *ngFor="let member of membersArray.controls; let i = index">
             <div [formGroupName]="i">
               <span>
@@ -66,28 +67,29 @@
                 placeholder="Enter member age" formControlName="MemberAge{{i + 1}}" type="number"></ion-input>
 
               <ion-input label-placement="floating" type="text" fill="outline" label="Member Mobile No"
-                placeholder="Enter member mobile no" formControlName="MemberContactNum{{i + 1}}" type="number"></ion-input>
+                placeholder="Enter member mobile no" formControlName="MemberContactNum{{i + 1}}"
+                type="number"></ion-input>
             </div>
           </div>
         </div>
 
-        <ion-checkbox (ionChange)="toggleCarInput($event)" [(ngModel)]="CarsCount" formControlName="Have_car">
+        <ion-checkbox (ionChange)="toggleCarInput($event)" [(ngModel)]="CarsCount" formControlName="havingCar">
           {{ CarsCount ? 'Yes, I have a car' : 'Do you have a car' }}
         </ion-checkbox>
 
-        <div *ngIf="onCarSelect" formArrayName="familyCars">
+        <div *ngIf="onCarSelect" formArrayName="familyCarData">
           <div *ngFor="let car of CarsArray.controls; let i = index">
             <div [formGroupName]="i">
               <ion-input label-placement="floating" type="text" fill="outline" label="Car Model"
-                placeholder="Enter car model" formControlName="Car_Model">
+                placeholder="Enter car model" formControlName="carModel{{i + 1}}">
               </ion-input>
 
               <ion-input label-placement="floating" type="text" fill="outline" label="Car Number"
-                placeholder="Enter car number" formControlName="Car_Number">
+                placeholder="Enter car number" formControlName="carNumber{{i + 1}}">
               </ion-input>
 
               <ion-input label-placement="floating" type="text" fill="outline" label="Car Parking Area"
-                placeholder="Enter car parking area" formControlName="Car_ParkingArea">
+                placeholder="Enter car parking area" formControlName="parkingArea{{i + 1}}">
               </ion-input>
 
               <ion-buttons>

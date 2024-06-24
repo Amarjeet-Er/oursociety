@@ -36,7 +36,7 @@ export class BackBtnService {
           this.showExitConfirmation()
           return
         }
-        else if (pathname === '/home/dashboard') {
+        else if (pathname === '/home') {
           console.log('closed');
           this.showExitConfirmation()
           return

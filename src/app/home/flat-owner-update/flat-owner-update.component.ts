@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CurdService } from 'src/app/service/curd.service';
 import { SharedService } from 'src/app/service/shared.service';
@@ -13,83 +13,129 @@ export class FlatOwnerUpdateComponent implements OnInit {
   RegFlatForm!: FormGroup;
   familyCount!: number;
   AddFamilyInput: { count: number }[] = [];
-  onCarSelect: boolean = false;
+  onCarSelect = false;
   cars: any[] = [];
-  addAnotherCars: boolean = true;
-  CarsCount: any
+  addAnotherCars = true;
+  CarsCount: any;
   WIDTH = 200;
   HEIGHT = 200;
   @ViewChild("video") public video!: ElementRef;
   @ViewChild("canvas") public canvas!: ElementRef;
   captures: string[] = [];
   error: any;
-  onGalleryImg: boolean = true
-  onCameraOpen: boolean = true
-  onCaptureImg: boolean = false;
+  onGalleryImg = true;
+  onCameraOpen = true;
+  onCaptureImg = false;
   gallery_select: any = null;
   gallery_img_url: any;
   building_block: any;
   building_num: any;
-  passwordsMatch: boolean = false;
+  passwordsMatch = false;
   edit_reg: any;
+  img_url: any;
+  imageSelected = false;
+
   constructor(
     private _router: Router,
     private _fb: FormBuilder,
     private _crud: CurdService,
     private _shared: SharedService
   ) {
-    this._crud.get_building_block().subscribe(
+    this._shared.img_base_url.subscribe(
       (res: any) => {
-        console.log(res, 'value');
-        this.building_block = res.Data
+        this.img_url = res;
       }
-    )
+    );
+  }
+
+  ngOnInit() {
+    this.initForm();
+    this.fetchDropdownData();
+    this.subscribeSharedDetails();
+    this.populateFormArrays();
+  }
+
+  initForm() {
+    this.RegFlatForm = this._fb.group({
+      Id: [''],
+      buildingBlock: ['', Validators.required],
+      flatNum: ['', Validators.required],
+      flatOwnerName: ['', Validators.required],
+      ownerDesignation: [''],
+      primaryNumber: ['', Validators.required],
+      alternatePhoneNum: [''],
+      ownerEmail: ['', Validators.required],
+      aadharNumber: [''],
+      totalFamilyMember: [],
+      havingCar: [true],
+      password: [''],
+      empConfirmPass: [''],
+      profile: [''],
+      familyDataList: this._fb.array([]),
+      familyCarData: this._fb.array([])
+    });
+  }
+
+  fetchDropdownData(): void {
+    this._crud.get_building_block().subscribe((res: any) => {
+      this.building_block = res.Data;
+    });
   }
   get_filter_by_flat_num(building_id: any) {
-    const flat_building_no = building_id.target.value
-    console.log(flat_building_no, 'id');
+    const flat_building_no = building_id.detail.value
     this._crud.get_flat_number(flat_building_no).subscribe(
       (res: any) => {
-        console.log(res, 'value flat no');
         this.building_num = res.Data
         console.log(this.building_num, 'value flat no');
       }
     )
   }
 
-  ngOnInit() {
-    this.RegFlatForm = this._fb.group({
-      id: [''],
-      b_block: [''],
-      flatNum: [''],
-      Name: [''],
-      Designation: [''],
-      Primary_Number: [''],
-      Alt_Number: [''],
-      Email: [''],
-      AadharNumber: [''],
-      password: [''],
-      empConfirmPass: [''],
-      profilePath: [''],
-      Have_car: [''],
-      No_Of_Family: [''],
-      members: this._fb.array([]),
-      familyCars: this._fb.array([])
-    })
+  subscribeSharedDetails() {
     this._shared.shared_details.subscribe(
-      (res:any)=>{
+      (res: any) => {
+        this.edit_reg = res;
         console.log(res);
-        this.edit_reg=res
-        this.RegFlatForm.patchValue(this.edit_reg)
+        if (this.edit_reg) {
+          this.RegFlatForm.patchValue(this.edit_reg)
+          this.RegFlatForm.controls['empConfirmPass'].setValue(this.edit_reg.password);
+          this.RegFlatForm.controls['totalFamilyMember'].setValue(this.edit_reg.flatOwnerName);
+          this.RegFlatForm.controls['havingCar'].setValue(this.edit_reg.havingCar === 'Yes');
+        }
       }
-    )
+    );
+  }
+
+  populateFormArrays() {
+    const familyCountArray = this.RegFlatForm.get('familyDataList') as FormArray;
+    familyCountArray.clear();
+    this.edit_reg.familyDataList.forEach((member: any, index: number) => {
+      const memberGroup = this._fb.group({
+        [`MemberName${index + 1}`]: [member.MemberName],
+        [`MemberAge${index + 1}`]: [member.MemberAge],
+        [`MemberContactNum${index + 1}`]: [member.MemberContact]
+      });
+      familyCountArray.push(memberGroup);
+    });
+
+    const familyCarsArray = this.RegFlatForm.get('familyCarData') as FormArray;
+    familyCarsArray.clear();
+    this.edit_reg.familyCarData.forEach((cars: any, index: number) => {
+      const CarsGroup = this._fb.group({
+        [`carModel${index + 1}`]: [cars.carModel],
+        [`carNumber${index + 1}`]: [cars.carNumber],
+        [`parkingArea${index + 1}`]: [cars.parkingArea]
+      });
+      familyCarsArray.push(CarsGroup);
+    });
   }
 
   get membersArray() {
-    return this.RegFlatForm.get('members') as FormArray;
+    return this.RegFlatForm.get('familyDataList') as FormArray;
   }
+
   get CarsArray() {
-    return this.RegFlatForm.get('familyCars') as FormArray;
+    return this.RegFlatForm.get('familyCarData') as FormArray;
   }
 
   addMemberControls() {
@@ -103,10 +149,11 @@ export class FlatOwnerUpdateComponent implements OnInit {
   }
 
   addCarsControls() {
+    const CarsNumber = this.CarsArray.length + 1;
     const CarsGroup = this._fb.group({
-      Car_Model: [''],
-      Car_Number: [''],
-      Car_ParkingArea: [''],
+      [`carModel${CarsNumber}`]: [''],
+      [`carNumber${CarsNumber}`]: [''],
+      [`parkingArea${CarsNumber}`]: ['']
     });
     this.CarsArray.push(CarsGroup);
   }
@@ -121,9 +168,8 @@ export class FlatOwnerUpdateComponent implements OnInit {
     for (let i = 0; i < familyCount; i++) {
       if (familyCount > 7) {
         event.target.setCustomValidity('Maximum 7 members allowed.');
-        return
-      }
-      else {
+        return;
+      } else {
         event.target.setCustomValidity('');
         this.addMemberControls();
       }
@@ -134,52 +180,41 @@ export class FlatOwnerUpdateComponent implements OnInit {
     this.onCarSelect = event.detail.checked;
     if (this.CarsArray.length > 0) {
       this.CarsArray.removeAt(0);
-      return
-    }
-    else {
+    } else {
       this.addCarsControls();
-      return
     }
   }
+
   addAnotherCar() {
     this.addAnotherCars = false;
-    for (let i = 0; i < 1; i++) {
-      if (this.CarsArray.length > 1) {
-        return
-      }
-      else {
-        this.addCarsControls();
-      }
-    }
+    this.addCarsControls();
   }
+
   removeAnotherCar(index: number) {
-    this.addAnotherCars = true
+    this.addAnotherCars = true;
     this.CarsArray.removeAt(index + 1);
   }
 
   StartCamera() {
-    this.onCameraOpen = false
-    this.onGalleryImg = true
-    this.onCaptureImg = true
+    this.onCameraOpen = false;
+    this.onGalleryImg = true;
+    this.onCaptureImg = true;
+    this.imageSelected = true;
     this.setupDevices();
   }
 
   async setupDevices() {
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-        });
-        if (stream) {
-          this.video.nativeElement.srcObject = stream;
-          this.video.nativeElement.play();
-          this.error = null;
-        } else {
-          this.error = "You have no output video device";
-        }
-      } catch (e) {
-        this.error = e;
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      if (stream) {
+        this.video.nativeElement.srcObject = stream;
+        this.video.nativeElement.play();
+        this.error = null;
+      } else {
+        this.error = "You have no output video device";
       }
+    } catch (e) {
+      this.error = e;
     }
   }
 
@@ -193,7 +228,7 @@ export class FlatOwnerUpdateComponent implements OnInit {
           lastModified: Date.now(),
           type: 'image/png'
         });
-        this.gallery_select = captureImg
+        this.gallery_select = captureImg;
         alert('Successfully captured image.');
         const stream = this.video.nativeElement.srcObject;
         const tracks = stream.getTracks();
@@ -205,17 +240,16 @@ export class FlatOwnerUpdateComponent implements OnInit {
   }
 
   drawImageToCanvas(image: any) {
-    this.onCameraOpen = true
-    this.onGalleryImg = true
-    this.canvas.nativeElement
-      .getContext("2d")
-      .drawImage(image, 0, 0, this.WIDTH, this.HEIGHT);
+    this.onCameraOpen = true;
+    this.onGalleryImg = true;
+    this.canvas.nativeElement.getContext("2d").drawImage(image, 0, 0, this.WIDTH, this.HEIGHT);
   }
 
   OnGallery(files: any) {
-    this.onCaptureImg = false
-    this.onGalleryImg = false
-    this.onCameraOpen = true
+    this.onCaptureImg = false;
+    this.onGalleryImg = false;
+    this.imageSelected = true;
+    this.onCameraOpen = true;
     let reader = new FileReader();
     this.gallery_select = files[0];
     reader.onload = () => {
@@ -224,60 +258,56 @@ export class FlatOwnerUpdateComponent implements OnInit {
     reader.readAsDataURL(this.gallery_select);
   }
 
-  onSubmit(): void {
-    console.log(this.RegFlatForm.value);
+  onUpdate(): void {
+    const updateData = new FormData();
+    updateData.append('Id', this.RegFlatForm.get('Id')?.value);
+    updateData.append('buildingBlock', this.RegFlatForm.get('buildingBlock')?.value);
+    updateData.append('flatNum', this.RegFlatForm.get('flatNum')?.value);
+    updateData.append('flatOwnerName', this.RegFlatForm.get('flatOwnerName')?.value);
+    updateData.append('ownerDesignation', this.RegFlatForm.get('ownerDesignation')?.value);
+    updateData.append('primaryNumber', this.RegFlatForm.get('primaryNumber')?.value);
+    updateData.append('alternatePhoneNum', this.RegFlatForm.get('alternatePhoneNum')?.value);
+    updateData.append('ownerEmail', this.RegFlatForm.get('ownerEmail')?.value);
+    updateData.append('aadharNumber', this.RegFlatForm.get('aadharNumber')?.value);
+    updateData.append('totalFamilyMember', this.RegFlatForm.get('totalFamilyMember')?.value);
 
-    const formdata = new FormData();
-    formdata.append('id', this.RegFlatForm.get('id')?.value);
-    formdata.append('b_block', this.RegFlatForm.get('b_block')?.value);
-    formdata.append('flatNum', this.RegFlatForm.get('flatNum')?.value);
-    formdata.append('Name', this.RegFlatForm.get('Name')?.value);
-    formdata.append('Designation', this.RegFlatForm.get('Designation')?.value);
-    formdata.append('Primary_Number', this.RegFlatForm.get('Primary_Number')?.value);
-    formdata.append('Alt_Number', this.RegFlatForm.get('Alt_Number')?.value);
-    formdata.append('Email', this.RegFlatForm.get('Email')?.value);
-    formdata.append('AadharNumber', this.RegFlatForm.get('AadharNumber')?.value);
-    formdata.append('Have_car', this.RegFlatForm.get('Have_car')?.value);
-    formdata.append('No_Of_Family', this.RegFlatForm.get('No_Of_Family')?.value);
-    formdata.append('members', this.RegFlatForm.get('members')?.value);
-    console.log('members', this.RegFlatForm.get('members')?.value);
-    formdata.append('familyCars', this.RegFlatForm.get('familyCars')?.value);
-    console.log('cars', this.RegFlatForm.get('familyCars')?.value);
-    formdata.append('profilePath', this.gallery_select);
-    console.log(this.gallery_select, 'img');
+    const haveCarValue = this.RegFlatForm.get('havingCar')?.value;
+    // const haveCarValue = this.RegFlatForm.get('havingCar')?.value ? 'Yes' : 'No';
+    updateData.append('havingCar', haveCarValue);
+
+    updateData.append('familyDataList', JSON.stringify(this.RegFlatForm.get('familyDataList')?.value));
+    updateData.append('familyCarData', JSON.stringify(this.RegFlatForm.get('familyCarData')?.value));
+
+    updateData.append('profile', this.gallery_select);
+
     if (this.RegFlatForm.get('password')?.value === this.RegFlatForm.get('empConfirmPass')?.value) {
       const OwnerPassword = this.RegFlatForm.get('password')?.value;
       if (OwnerPassword) {
-        formdata.append('password', OwnerPassword);
-        console.log(OwnerPassword);
-        console.log('Passwords match');
+        updateData.append('password', OwnerPassword);
         this.passwordsMatch = false;
       }
     } else {
-      console.log('Passwords do not match');
       this.passwordsMatch = true;
       return;
     }
 
     if (this.RegFlatForm.valid) {
-      this._crud.post_flat_owner_add_edit(formdata).subscribe(
+      this._crud.post_flat_owner_add_edit(updateData).subscribe(
         (res: any) => {
           if (res.Status === 'Success') {
             this._shared.tostSuccessTop('Update Successfully');
             this._router.navigate(['/home/flatownerlist']);
-          }
-          if (res.Status === 'Failed') {
+          } else if (res.Status === 'Error') {
             this._shared.tostErrorTop('Already Registered');
           }
         },
         (err: any) => {
-          this._shared.tostErrorTop('Data Not Update')
+          this._shared.tostErrorTop('Data Not Update');
           console.log(err);
         }
       );
-    }
-    else {
-      this._shared.tostWarningTop('Please fill up the form')
+    } else {
+      this._shared.tostWarningTop('Please fill up the form');
     }
   }
 }
