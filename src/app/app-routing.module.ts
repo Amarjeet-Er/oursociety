@@ -13,8 +13,12 @@ const routes: Routes = [
     path: 'employee',
     loadChildren: () => import('./employee-home/employee-home.module').then(m => m.EmployeeHomeModule)
   },
+  {
+    path: 'flatowner',
+    loadChildren: () => import('./flat-owner-home/flat-owner-home.module').then(m => m.FlatOwnerHomeModule)
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  {path: 'forgotpassword', component: ForgotPasswordComponent}
+  { path: 'forgotpassword', component: ForgotPasswordComponent }
 ];
 
 @NgModule({

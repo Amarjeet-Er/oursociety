@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                <div class="card cardColor5">
+                <div class="card cardColor5" routerLink="/home/helpdesk">
                     <div>
                         <h3>Help Desk</h3>
                         <p>{{'1'}}</p>
@@ -73,13 +73,18 @@
     </div>
 
     <ion-card class="manageContainer">
-        <h5>Visitor</h5>
+        <h1>Visitor</h1>
         <canvas #visitorColumnChart width="400" height="400"></canvas>
     </ion-card>
 
     <ion-card class="manageContainer">
-        <h5>Reports</h5>
-        <canvas #ReportChart></canvas>
+        <h1>All Employee</h1>
+        <canvas #EmpChart></canvas>
+    </ion-card>
+
+    <ion-card class="manageContainer">
+        <h1>Flat Data </h1>
+        <canvas #FlatChart></canvas>
     </ion-card>
 
 </div>

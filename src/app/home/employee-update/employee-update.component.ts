@@ -72,8 +72,8 @@ export class EmployeeUpdateComponent implements OnInit {
       aadharNumber: ['', Validators.required],
       currentAddress: [''],
       parmanentAddress: [''],
-      profileImage: [''],
-      aadharImage: [''],
+      empProfileImagePath: [''],
+      empAadharImagePath: [''],
       emp_password: [''],
       empConfirmPass: [''],
     })
@@ -190,34 +190,40 @@ export class EmployeeUpdateComponent implements OnInit {
   }
 
   onUpdate(): void {
-    const formdata = new FormData()
-    formdata.append('Id', this.employeeReg.get('Id')?.value);
-    formdata.append('emp_type', this.employeeReg.get('emp_type')?.value);
-    formdata.append('emp_WorkArea', this.employeeReg.get('emp_WorkArea')?.value);
-    formdata.append('empName', this.employeeReg.get('empName')?.value);
-    formdata.append('empMobNo', this.employeeReg.get('empMobNo')?.value);
-    formdata.append('empEmail', this.employeeReg.get('empEmail')?.value);
-    formdata.append('alternateMob1', this.employeeReg.get('alternateMob1')?.value);
-    formdata.append('relWithAlternateNum1', this.employeeReg.get('relWithAlternateNum1')?.value);
-    formdata.append('OtherRelationWithNum1', this.employeeReg.get('OtherRelationWithNum1')?.value);
-    formdata.append('alternateMob2', this.employeeReg.get('alternateMob2')?.value);
-    formdata.append('relWithAlternateNum2', this.employeeReg.get('relWithAlternateNum2')?.value);
-    formdata.append('OtherRelationWithNum2', this.employeeReg.get('OtherRelationWithNum2')?.value);
-    formdata.append('aadharNumber', this.employeeReg.get('aadharNumber')?.value);
-    formdata.append('currentAddress', this.employeeReg.get('currentAddress')?.value);
-    formdata.append('parmanentAddress', this.employeeReg.get('parmanentAddress')?.value);
+    const updateData = new FormData()
+    updateData.append('Id', this.employeeReg.get('Id')?.value);
+    updateData.append('emp_type', this.employeeReg.get('emp_type')?.value);
+    updateData.append('emp_WorkArea', this.employeeReg.get('emp_WorkArea')?.value);
+    updateData.append('empName', this.employeeReg.get('empName')?.value);
+    updateData.append('empMobNo', this.employeeReg.get('empMobNo')?.value);
+    updateData.append('empEmail', this.employeeReg.get('empEmail')?.value);
+    updateData.append('alternateMob1', this.employeeReg.get('alternateMob1')?.value);
+    updateData.append('relWithAlternateNum1', this.employeeReg.get('relWithAlternateNum1')?.value);
+    updateData.append('OtherRelationWithNum1', this.employeeReg.get('OtherRelationWithNum1')?.value);
+    updateData.append('alternateMob2', this.employeeReg.get('alternateMob2')?.value);
+    updateData.append('relWithAlternateNum2', this.employeeReg.get('relWithAlternateNum2')?.value);
+    updateData.append('OtherRelationWithNum2', this.employeeReg.get('OtherRelationWithNum2')?.value);
+    updateData.append('aadharNumber', this.employeeReg.get('aadharNumber')?.value);
+    updateData.append('currentAddress', this.employeeReg.get('currentAddress')?.value);
+    updateData.append('parmanentAddress', this.employeeReg.get('parmanentAddress')?.value);
 
     if (this.gallery_select) {
-      formdata.append('profileImage', this.gallery_select);
+      updateData.append('empProfileImagePath', this.gallery_select);
+    }
+    else if (this.edit_reg.empProfileImagePath) {
+      updateData.append('empProfileImagePath', this.edit_reg.empProfileImagePath);
     }
     if (this.Aadhar_select) {
-      formdata.append('aadharImage', this.Aadhar_select);
+      updateData.append('empAadharImagePath', this.Aadhar_select);
+    }
+    else if (this.edit_reg.empAadharImagePath) {
+      updateData.append('empAadharImagePath', this.edit_reg.empAadharImagePath);
     }
 
     if (this.employeeReg.get('emp_password')?.value === this.employeeReg.get('empConfirmPass')?.value) {
       const empPassword = this.employeeReg.get('emp_password')?.value;
       if (empPassword) {
-        formdata.append('emp_password', empPassword);
+        updateData.append('emp_password', empPassword);
         console.log(empPassword);
         console.log('Passwords match');
         this.passwordsMatch = false;
@@ -230,7 +236,7 @@ export class EmployeeUpdateComponent implements OnInit {
     console.log(this.employeeReg.value);
 
     if (this.employeeReg.valid) {
-      this._curd.post_emp_add_edit(formdata).subscribe(
+      this._curd.post_emp_add_edit(updateData).subscribe(
         (res: any) => {
           if (res.Status === 'success') {
             this._shared.tostSuccessTop('Update Successfully');

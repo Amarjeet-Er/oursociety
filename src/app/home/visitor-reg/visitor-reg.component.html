@@ -97,7 +97,7 @@
           placeholder="Select flat no" formControlName="flatNum">
           <ion-select-option *ngFor="let flat_num of building_num" [value]="flat_num?.f_id">{{
             flat_num?.flatNum }}</ion-select-option>
-          <ion-fab-button color="secondary" slot="end" (click)="onFlatFind()">Find</ion-fab-button>
+        <ion-fab-button color="secondary" slot="end" (click)="onFlatFind()">Find</ion-fab-button>
         </ion-select>
 
         <div class="dataRow" *ngIf="findFlatNo">

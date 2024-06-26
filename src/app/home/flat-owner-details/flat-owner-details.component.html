@@ -57,6 +57,11 @@
           <span> {{on_details?.aadharNumber}} </span>
         </p>
 
+        <p *ngIf="on_details?.password">
+          <img src="../../../assets/icons/password.png" alt="">
+          <span> {{on_details?.password}} </span>
+        </p>
+
         <ion-card *ngFor="let data of on_members; let i = index">
           <span>
             <p>Member {{ i + 1 }}</p>

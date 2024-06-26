@@ -18,6 +18,7 @@ import { FlatOwnerReportsComponent } from './flat-owner-reports/flat-owner-repor
 import { TearmAndConditionComponent } from './tearm-and-condition/tearm-and-condition.component';
 import { EmployeeUpdateComponent } from './employee-update/employee-update.component';
 import { FlatOwnerUpdateComponent } from './flat-owner-update/flat-owner-update.component';
+import { HelpDeskComponent } from './help-desk/help-desk.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'visitordetails', component: VisitorDetailsComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'tearmandcondition', component: TearmAndConditionComponent },
+  { path: 'helpdesk', component: HelpDeskComponent },
 ];
 
 @NgModule({

@@ -89,14 +89,17 @@ export class VisitorRegComponent implements OnInit {
 
   onFlatFind() {
     const selectedFlatId = this.VisitorReg.value.flatNum;
-    const selectedFlat = this.building_num.find((flat: { id: any; }) => flat.id === selectedFlatId);
+    console.log(selectedFlatId, 'fhsdjk');
+    
+    const selectedFlat = this.building_num.find((flat: { f_id: any; }) => flat.f_id === selectedFlatId);
+    console.log(selectedFlat, 'selectedFlat');
     if (selectedFlat) {
       if (selectedFlat.regStatus === 0) {
         this._crud.get_flat_owner_list().subscribe(
           (res: any) => {
             console.log(res);
 
-            const filteredOwners = res.Data.filter((owner: any) => owner.FlatNum === selectedFlatId);
+            const filteredOwners = res.Data.filter((owner: any) => owner.f_id === selectedFlatId);
             this.flat_owner_list = filteredOwners;
             console.log(this.flat_owner_list, 'list');
 
@@ -201,13 +204,13 @@ export class VisitorRegComponent implements OnInit {
     if (this.VisitorReg.valid) {
       this._crud.post_visitor_add(formdata).subscribe(
         (res: any) => {
-          // if (res.Status === 'Success') {
+          if (res.Status === 'Success') {
           this._shared.tostSuccessTop('Registration Successfully');
           this._router.navigate(['/home/visitorlist']);
-          // }
-          // if (res.Status === 'Failed') {
-          //   this._shared.tostErrorTop('Already Registered');
-          // }
+          }
+          if (res.Status === 'Error') {
+            this._shared.tostErrorTop('Already Registered');
+          }
         },
         (err: any) => {
           this._shared.tostErrorTop('Data Not Insert')

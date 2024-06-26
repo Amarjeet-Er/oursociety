@@ -73,7 +73,7 @@ export class FlatOwnerUpdateComponent implements OnInit {
       havingCar: [true],
       password: [''],
       empConfirmPass: [''],
-      profile: [''],
+      flatOwnerImagePath: [''],
       familyDataList: this._fb.array([]),
       familyCarData: this._fb.array([])
     });
@@ -84,14 +84,22 @@ export class FlatOwnerUpdateComponent implements OnInit {
       this.building_block = res.Data;
     });
   }
-  get_filter_by_flat_num(building_id: any) {
-    const flat_building_no = building_id.detail.value
-    this._crud.get_flat_number(flat_building_no).subscribe(
+  get_filter_by_flat_num(building_id: string) {
+
+    this._crud.get_flat_number(building_id).subscribe(
       (res: any) => {
-        this.building_num = res.Data
-        console.log(this.building_num, 'value flat no');
+        if (res.Data && Array.isArray(res.Data)) {
+          this.building_num = res.Data.filter((item: any) => item.regStatus === 0);
+          console.log('Filtered flat numbers:', this.building_num);
+        } else {
+          this.building_num = [];
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching flat numbers:', error);
+        this.building_num = [];
       }
-    )
+    );
   }
 
   SharedDetails() {
@@ -102,49 +110,62 @@ export class FlatOwnerUpdateComponent implements OnInit {
           console.error('Invalid edit_reg:', this.edit_reg);
           return;
         }
-        this.flat_no=this.edit_reg?.f_id
-        console.log(this.flat_no, 'ahjsadas');
-        
         console.log(res);
         if (this.edit_reg) {
+          this.flat_no = this.edit_reg?.b_id
+          this.get_filter_by_flat_num(this.flat_no);
           this.RegFlatForm.patchValue(this.edit_reg)
           this.RegFlatForm.controls['empConfirmPass'].setValue(this.edit_reg?.password);
           this.RegFlatForm.controls['buildingBlock'].setValue(this.edit_reg?.b_id);
-          this.RegFlatForm.controls['flatNum'].setValue(this.edit_reg?.f_id);
+          this.RegFlatForm.controls['flatNum'].setValue(this.edit_reg.f_id);
+          console.log(this.edit_reg.f_id, 'name');
+
           if (this.edit_reg.familyCarData.length !== 0) {
             this.CarsCount = true
           }
         }
-        this.get_filter_by_flat_num(this.flat_no)
-        console.log(this.edit_reg.f_id, 'sdhgsdhdshgds');
-        
       }
     );
   }
 
   FormArrays() {
+    console.log('this.edit_reg:', this.edit_reg);
+
     const familyCountArray = this.RegFlatForm.get('familyDataList') as FormArray;
+    console.log('familyCountArray:', familyCountArray);
+
     familyCountArray.clear();
-    this.edit_reg.familyDataList.forEach((member: any, index: number) => {
-      const memberGroup = this._fb.group({
-        [`MemberName${index + 1}`]: [member.MemberName],
-        [`MemberAge${index + 1}`]: [member.MemberAge],
-        [`MemberContactNum${index + 1}`]: [member.MemberContact]
+    if (this.edit_reg.familyDataList) {
+      this.edit_reg.familyDataList.forEach((member: any, index: number) => {
+        const memberGroup = this._fb.group({
+          [`MemberName${index + 1}`]: [member.MemberName],
+          [`MemberAge${index + 1}`]: [member.MemberAge],
+          [`MemberContactNum${index + 1}`]: [member.MemberContact]
+        });
+        familyCountArray.push(memberGroup);
       });
-      familyCountArray.push(memberGroup);
-    });
+    } else {
+      console.warn('this.edit_reg.familyDataList is null or undefined.');
+    }
 
     const familyCarsArray = this.RegFlatForm.get('familyCarData') as FormArray;
+    console.log('familyCarsArray:', familyCarsArray);
+
     familyCarsArray.clear();
-    this.edit_reg.familyCarData.forEach((cars: any, index: number) => {
-      const CarsGroup = this._fb.group({
-        [`carModel${index + 1}`]: [cars.carModel],
-        [`carNumber${index + 1}`]: [cars.carNumber],
-        [`parkingArea${index + 1}`]: [cars.parkingArea]
+    if (this.edit_reg.familyCarData) {
+      this.edit_reg.familyCarData.forEach((cars: any, index: number) => {
+        const CarsGroup = this._fb.group({
+          [`carModel${index + 1}`]: [cars.carModel],
+          [`carNumber${index + 1}`]: [cars.carNumber],
+          [`parkingArea${index + 1}`]: [cars.parkingArea]
+        });
+        familyCarsArray.push(CarsGroup);
       });
-      familyCarsArray.push(CarsGroup);
-    });
+    } else {
+      console.warn('this.edit_reg.familyCarData is null or undefined.');
+    }
   }
+
 
   get membersArray() {
     return this.RegFlatForm.get('familyDataList') as FormArray;
@@ -294,7 +315,10 @@ export class FlatOwnerUpdateComponent implements OnInit {
     updateData.append('familyCarData', JSON.stringify(this.RegFlatForm.get('familyCarData')?.value));
 
     if (this.gallery_select) {
-      updateData.append('profile', this.gallery_select);
+      updateData.append('flatOwnerImagePath', this.gallery_select);
+    }
+    else if (this.edit_reg.flatOwnerImagePath) {
+      updateData.append('flatOwnerImagePath', this.edit_reg.flatOwnerImagePath);
     }
     if (this.RegFlatForm.get('password')?.value === this.RegFlatForm.get('empConfirmPass')?.value) {
       const OwnerPassword = this.RegFlatForm.get('password')?.value;

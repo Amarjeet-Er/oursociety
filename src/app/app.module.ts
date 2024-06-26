@@ -32,7 +32,9 @@ import { EmployeeUpdateComponent } from './home/employee-update/employee-update.
 import { FlatOwnerUpdateComponent } from './home/flat-owner-update/flat-owner-update.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { EmpHomeComponent } from './employee-home/emp-home/emp-home.component';
-
+import {MatSelectModule} from '@angular/material/select';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { HelpDeskComponent } from './home/help-desk/help-desk.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +58,7 @@ import { EmpHomeComponent } from './employee-home/emp-home/emp-home.component';
     TearmAndConditionComponent,
     ForgotPasswordComponent,
     EmpHomeComponent,
+    HelpDeskComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,8 @@ import { EmpHomeComponent } from './employee-home/emp-home/emp-home.component';
     MatMenuModule,
     MatSnackBarModule,
     NgxUiLoaderModule,
+    MatSelectModule,
+    CanvasJSAngularChartsModule,
     NgxUiLoaderHttpModule.forRoot({
       showForeground: true,
     })

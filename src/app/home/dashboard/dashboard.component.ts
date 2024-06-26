@@ -9,7 +9,8 @@ import { Chart, registerables } from 'chart.js';
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('visitorColumnChart', { static: true }) visitorColumnChart!: ElementRef;
-  @ViewChild('ReportChart', { static: true }) ReportChart!: ElementRef;
+  @ViewChild('EmpChart', { static: true }) EmpChart!: ElementRef;
+  @ViewChild('FlatChart', { static: true }) FlatChart!: ElementRef;
 
   constructor(
     private _router: Router
@@ -17,7 +18,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.createColumnChart();
-    this.createPieChart();
+    this.AllEmpChart();
+    this.AllFlatChart();
   }
 
   createColumnChart(): void {
@@ -38,42 +40,38 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  createPieChart(): void {
-    const ctx = this.ReportChart.nativeElement.getContext('2d');
+  AllEmpChart(): void {
+    const ctx = this.EmpChart.nativeElement.getContext('2d');
     const chart = new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ['Flat Owner', 'Employee', 'Visitor'],
+        labels: ['Peon', 'Security Guard'],
         datasets: [{
-          label: 'Reports',
-          data: [19, 25, 30],
+          label: 'All Employee',
+          data: [19, 9],
           backgroundColor: [
             'orange',
             'green',
-            'purple',
           ]
         }]
       }
     });
-
-    ctx.canvas.addEventListener('click', (event: MouseEvent) => {
-      const activeSegment = chart.getActiveElements();
-      if (activeSegment && activeSegment.length > 0) {
-        const clickedSegmentIndex = activeSegment[0].index;
-        switch (clickedSegmentIndex) {
-          case 0:
-            this._router.navigate(['/home/flatownerreports']);
-            break;
-          case 1:
-            this._router.navigate(['/home/employeereports']);
-            break;
-          case 2:
-            this._router.navigate(['/home/visitorreports']);
-            break;
-          default:
-            break;
-        }
-      }
+  }
+  AllFlatChart(): void {
+    const ctx = this.FlatChart.nativeElement.getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Registered', 'Available'],
+        datasets: [{
+          label: 'All Flat',
+          data: [7, 12],
+          backgroundColor: [
+            'red',
+            'green',
+          ],
+        }],
+      },
     });
   }
 
