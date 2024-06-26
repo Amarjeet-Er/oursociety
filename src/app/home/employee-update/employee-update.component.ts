@@ -81,6 +81,12 @@ export class EmployeeUpdateComponent implements OnInit {
       this.edit_reg = response;
       this.employeeReg.patchValue(this.edit_reg);
       this.employeeReg.controls['empConfirmPass'].setValue(this.edit_reg.emp_password);
+      if (this.edit_reg.relWithAlternateNum1 === 'Other') {
+        this.OtherSelectReletion1 = true
+      }
+      if (this.edit_reg.relWithAlternateNum2 === 'Other') {
+        this.OtherSelectReletion2 = true
+      }
     });
   }
 

@@ -43,15 +43,14 @@ export class VisitorRegComponent implements OnInit {
         this.building_block = res.Data
       }
     )
-
   }
   get_filter_by_flat_num(building_id: any) {
     const flat_building_no = building_id.target.value;
-    
+
     this._crud.get_flat_number(flat_building_no).subscribe(
       (res: any) => {
         if (res.Data && Array.isArray(res.Data)) {
-          this.building_num = res.Data.filter((item: any) => item.regStatus === 0); 
+          this.building_num = res.Data.filter((item: any) => item.regStatus === 0);
           console.log('Filtered flat numbers:', this.building_num);
         } else {
           this.building_num = [];
@@ -74,12 +73,12 @@ export class VisitorRegComponent implements OnInit {
       visitorMobileNum: [''],
       totalVisitors: [''],
       havingVehicle: [false],
-      visitorVehicleModel: [''],
-      visitorVehicleNumber: [''],
-      visitorVehicleParkingArea: [''],
       buildingBlock: [''],
-      flatNum: [],
       approvalStatus: [''],
+      flatNum: [''],
+      visitorVehicleModel: [''],
+      visitorVehicleNumber: [],
+      visitorVehicleParkingArea: [''],
       visitorImage: [''],
     });
   }
@@ -111,7 +110,7 @@ export class VisitorRegComponent implements OnInit {
   onDetails(data: any) {
     this._shared.shared_details.next(data)
     console.log(data);
-    
+
     this._router.navigate(['/home/flatownerdetails'])
   }
   StartCamera() {
@@ -190,19 +189,21 @@ export class VisitorRegComponent implements OnInit {
 
     const haveCarValue = this.VisitorReg.get('havingVehicle')?.value ? 'Yes' : 'No';
     formdata.append('havingVehicle', haveCarValue);
-    
+
     formdata.append('visitorVehicleModel', this.VisitorReg.get('visitorVehicleModel')?.value);
     formdata.append('visitorVehicleNumber', this.VisitorReg.get('visitorVehicleNumber')?.value);
     formdata.append('visitorVehicleParkingArea', this.VisitorReg.get('visitorVehicleParkingArea')?.value);
     formdata.append('buildingBlock', this.VisitorReg.get('buildingBlock')?.value);
     formdata.append('flatNum', this.VisitorReg.get('flatNum')?.value);
     formdata.append('approvalStatus', this.VisitorReg.get('approvalStatus')?.value);
+    formdata.append('visitorImage', this.gallery_select);
+
     if (this.VisitorReg.valid) {
       this._crud.post_visitor_add(formdata).subscribe(
         (res: any) => {
           // if (res.Status === 'Success') {
-            this._shared.tostSuccessTop('Registration Successfully');
-            this._router.navigate(['/home/visitorlist']);
+          this._shared.tostSuccessTop('Registration Successfully');
+          this._router.navigate(['/home/visitorlist']);
           // }
           // if (res.Status === 'Failed') {
           //   this._shared.tostErrorTop('Already Registered');

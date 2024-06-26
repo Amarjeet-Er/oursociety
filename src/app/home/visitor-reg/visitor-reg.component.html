@@ -89,13 +89,13 @@
         <ion-select label="Building Blocks" fill="outline" label-placement="floating" interface="action-sheet"
           placeholder="Select building blocks" (ionChange)="get_filter_by_flat_num($event)"
           formControlName="buildingBlock">
-          <ion-select-option *ngFor="let building_list of building_block" [value]="building_list?.id">{{
+          <ion-select-option *ngFor="let building_list of building_block" [value]="building_list?.b_id">{{
             building_list?.buildingBlockName }}</ion-select-option>
         </ion-select>
 
         <ion-select label="Flat No" fill="outline" label-placement="floating" interface="action-sheet"
           placeholder="Select flat no" formControlName="flatNum">
-          <ion-select-option *ngFor="let flat_num of building_num" [value]="flat_num?.id">{{
+          <ion-select-option *ngFor="let flat_num of building_num" [value]="flat_num?.f_id">{{
             flat_num?.flatNum }}</ion-select-option>
           <ion-fab-button color="secondary" slot="end" (click)="onFlatFind()">Find</ion-fab-button>
         </ion-select>
@@ -116,9 +116,9 @@
 
         <ion-select label="Status" fill="outline" label-placement="floating" interface="action-sheet"
           placeholder="Select status" formControlName="approvalStatus">
-          <ion-select-option value="Pending">Pending</ion-select-option>
-          <ion-select-option value="Approved">Approved</ion-select-option>
-          <ion-select-option value="Rejected">Rejected</ion-select-option>
+          <ion-select-option value="">Pending</ion-select-option>
+          <ion-select-option value="1">Approved</ion-select-option>
+          <ion-select-option value="0">Rejected</ion-select-option>
         </ion-select>
 
         <ion-button shape="round" (click)="onSubmit()">Submit</ion-button>

@@ -34,7 +34,9 @@ export class FlatOwnerUpdateComponent implements OnInit {
   edit_reg: any;
   img_url: any;
   imageSelected = false;
-
+  totalMember = true
+  totalmemberCount = false
+  flat_no: any;
   constructor(
     private _router: Router,
     private _fb: FormBuilder,
@@ -50,9 +52,9 @@ export class FlatOwnerUpdateComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.fetchDropdownData();
-    this.subscribeSharedDetails();
-    this.populateFormArrays();
+    this.DropdownData();
+    this.SharedDetails();
+    this.FormArrays();
   }
 
   initForm() {
@@ -66,7 +68,8 @@ export class FlatOwnerUpdateComponent implements OnInit {
       alternatePhoneNum: [''],
       ownerEmail: ['', Validators.required],
       aadharNumber: [''],
-      totalFamilyMember: [],
+      CountFamilyMember: [''],
+      totalFamilyMember: [''],
       havingCar: [true],
       password: [''],
       empConfirmPass: [''],
@@ -76,7 +79,7 @@ export class FlatOwnerUpdateComponent implements OnInit {
     });
   }
 
-  fetchDropdownData(): void {
+  DropdownData(): void {
     this._crud.get_building_block().subscribe((res: any) => {
       this.building_block = res.Data;
     });
@@ -91,22 +94,35 @@ export class FlatOwnerUpdateComponent implements OnInit {
     )
   }
 
-  subscribeSharedDetails() {
+  SharedDetails() {
     this._shared.shared_details.subscribe(
       (res: any) => {
         this.edit_reg = res;
+        if (!this.edit_reg) {
+          console.error('Invalid edit_reg:', this.edit_reg);
+          return;
+        }
+        this.flat_no=this.edit_reg?.f_id
+        console.log(this.flat_no, 'ahjsadas');
+        
         console.log(res);
         if (this.edit_reg) {
           this.RegFlatForm.patchValue(this.edit_reg)
-          this.RegFlatForm.controls['empConfirmPass'].setValue(this.edit_reg.password);
-          this.RegFlatForm.controls['totalFamilyMember'].setValue(this.edit_reg.flatOwnerName);
-          this.RegFlatForm.controls['havingCar'].setValue(this.edit_reg.havingCar === 'Yes');
+          this.RegFlatForm.controls['empConfirmPass'].setValue(this.edit_reg?.password);
+          this.RegFlatForm.controls['buildingBlock'].setValue(this.edit_reg?.b_id);
+          this.RegFlatForm.controls['flatNum'].setValue(this.edit_reg?.f_id);
+          if (this.edit_reg.familyCarData.length !== 0) {
+            this.CarsCount = true
+          }
         }
+        this.get_filter_by_flat_num(this.flat_no)
+        console.log(this.edit_reg.f_id, 'sdhgsdhdshgds');
+        
       }
     );
   }
 
-  populateFormArrays() {
+  FormArrays() {
     const familyCountArray = this.RegFlatForm.get('familyDataList') as FormArray;
     familyCountArray.clear();
     this.edit_reg.familyDataList.forEach((member: any, index: number) => {
@@ -160,6 +176,7 @@ export class FlatOwnerUpdateComponent implements OnInit {
 
   onFamilyInput(event: any) {
     const familyCount = parseInt(event.target.value);
+
 
     while (this.membersArray.length !== 0) {
       this.membersArray.removeAt(0);
@@ -270,16 +287,15 @@ export class FlatOwnerUpdateComponent implements OnInit {
     updateData.append('ownerEmail', this.RegFlatForm.get('ownerEmail')?.value);
     updateData.append('aadharNumber', this.RegFlatForm.get('aadharNumber')?.value);
     updateData.append('totalFamilyMember', this.RegFlatForm.get('totalFamilyMember')?.value);
-
-    const haveCarValue = this.RegFlatForm.get('havingCar')?.value;
-    // const haveCarValue = this.RegFlatForm.get('havingCar')?.value ? 'Yes' : 'No';
+    const haveCarValue = this.RegFlatForm.get('havingCar')?.value ? 'Yes' : 'No';
     updateData.append('havingCar', haveCarValue);
 
     updateData.append('familyDataList', JSON.stringify(this.RegFlatForm.get('familyDataList')?.value));
     updateData.append('familyCarData', JSON.stringify(this.RegFlatForm.get('familyCarData')?.value));
 
-    updateData.append('profile', this.gallery_select);
-
+    if (this.gallery_select) {
+      updateData.append('profile', this.gallery_select);
+    }
     if (this.RegFlatForm.get('password')?.value === this.RegFlatForm.get('empConfirmPass')?.value) {
       const OwnerPassword = this.RegFlatForm.get('password')?.value;
       if (OwnerPassword) {

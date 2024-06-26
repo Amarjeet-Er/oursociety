@@ -39,7 +39,7 @@ export class CurdService {
     return this._http.get<[]>(`${this.base_url}BuildingBlock/Build_Block`)
   }
   get_flat_number(building_id: string) {
-    return this._http.get<[]>(`${this.base_url}FlatNumber/FlatNumber?id=${building_id}`)
+    return this._http.get<[]>(`${this.base_url}FlatNumber/FlatNumber?b_id=${building_id}`)
   }
   post_flat_owner_add_edit(data: any) {
     return this._http.post(`${this.base_url}RegisteredFlat/FlatRegister`, data);

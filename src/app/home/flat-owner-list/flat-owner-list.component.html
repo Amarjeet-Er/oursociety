@@ -26,22 +26,22 @@
 <div id="containerBox">
   <div class="usercard" *ngFor="let data of reg_data" (click)="onDetails(data)">
     <div class="userimg">
-      <img [src]="data.flatOwnerImagePath? img_url+data.flatOwnerImagePath : '../../../assets/images/user.webp'"
-        alt="" width="100%" height="100%">
+      <img [src]="data.flatOwnerImagePath? img_url+data.flatOwnerImagePath : '../../../assets/images/user.webp'" alt=""
+        width="100%" height="100%">
     </div>
     <div class="userdata">
       <table>
         <tr>
           <ion-icon name="person-sharp" color="primary"></ion-icon>
-          <td><b>{{data.flatOwnerName}}</b></td>
-        </tr>
-        <tr>
-          <ion-icon name="briefcase-sharp" color="dark"></ion-icon>
-          <td>{{data.ownerDesignation}}</td>
+          <td><b>{{data?.flatOwnerName}}</b></td>
         </tr>
         <tr>
           <ion-icon name="call-sharp" color="success"></ion-icon>
-          <td>{{data.primaryNumber}}</td>
+          <td>{{data?.primaryNumber}}</td>
+        </tr>
+        <tr>
+          <ion-icon name="business-sharp" color="danger"></ion-icon>
+          <td>{{data?.buildName}} / {{data.flatName}}</td>
         </tr>
       </table>
     </div>

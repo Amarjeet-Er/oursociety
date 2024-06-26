@@ -12,16 +12,15 @@
       <form [formGroup]="RegFlatForm">
 
         <ion-select label="Building Blocks" fill="outline" label-placement="floating" interface="action-sheet"
-          placeholder="Select building blocks" (ionChange)="get_filter_by_flat_num($event)"
-          formControlName="buildingBlock">
-          <ion-select-option *ngFor="let building_list of building_block" [value]="building_list?.id">{{
+          placeholder="Select building blocks" (ionChange)="get_filter_by_flat_num($event)" formControlName="buildingBlock">
+          <ion-select-option *ngFor="let building_list of building_block" [value]="building_list?.b_id">{{
             building_list?.buildingBlockName }}</ion-select-option>
         </ion-select>
 
         <ion-select label="Flat No" fill="outline" label-placement="floating" interface="action-sheet"
           placeholder="Select flat no" formControlName="flatNum">
-          <ion-select-option *ngFor="let flat_num of building_num" [value]="flat_num?.id">{{
-            flat_num?.flatNum }}</ion-select-option>
+          <ion-select-option *ngFor="let flat_num of building_num" [value]="flat_num?.f_id">
+            {{ flat_num?.flatNum}}</ion-select-option>
         </ion-select>
 
         <ion-input label="Name" label-placement="floating" fill="outline" type="text" placeholder="Enter owner name"
@@ -48,10 +47,12 @@
         </ion-input>
 
         <ion-input #familyInput label="Number Of Family Members" label-placement="floating" type="number" fill="outline"
-          placeholder="Enter number of family members " [(ngModel)]="familyCount" formControlName="totalFamilyMember"
+          placeholder="Enter number of family members " formControlName="totalFamilyMember"
           (input)="onFamilyInput($event)">
         </ion-input>
-        <ion-text *ngIf="familyCount > 7" color="danger">Maximum 7 members allowed.</ion-text>
+        <ion-text *ngIf="RegFlatForm.get('totalFamilyMember')?.value > 7" color="danger">Maximum 7 members
+          allowed.</ion-text>
+
 
         <div formArrayName="familyDataList">
           <div *ngFor="let member of membersArray.controls; let i = index">
@@ -76,7 +77,7 @@
           {{ CarsCount ? 'Yes, I have a car' : 'Do you have a car' }}
         </ion-checkbox>
 
-        <div *ngIf="onCarSelect" formArrayName="familyCarData">
+        <div *ngIf="this.CarsCount" formArrayName="familyCarData">
           <div *ngFor="let car of CarsArray.controls; let i = index">
             <div [formGroupName]="i">
               <ion-input label-placement="floating" type="text" fill="outline" label="Car Model"
