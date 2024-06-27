@@ -19,6 +19,7 @@ import { TearmAndConditionComponent } from './tearm-and-condition/tearm-and-cond
 import { EmployeeUpdateComponent } from './employee-update/employee-update.component';
 import { FlatOwnerUpdateComponent } from './flat-owner-update/flat-owner-update.component';
 import { HelpDeskComponent } from './help-desk/help-desk.component';
+import { VisitorByFlatOwnerFindComponent } from './visitor-by-flat-owner-find/visitor-by-flat-owner-find.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'visitorreg', component: VisitorRegComponent },
   { path: 'visitorreports', component: VisitorReportsComponent },
   { path: 'visitordetails', component: VisitorDetailsComponent },
+  { path: 'visitorbyflatownerfind', component: VisitorByFlatOwnerFindComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'tearmandcondition', component: TearmAndConditionComponent },
   { path: 'helpdesk', component: HelpDeskComponent },

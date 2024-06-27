@@ -9,7 +9,7 @@
                 <div class="card cardColor1" routerLink="/home/visitorlist">
                     <div>
                         <h3>Visitors</h3>
-                        <p>{{'10'}}
+                        <p>{{ list_dashboard && list_dashboard.length > 0 ? list_dashboard[0] : '0' }}
                             <span>Today</span>
                         </p>
                     </div>
@@ -20,8 +20,8 @@
 
                 <div class="card cardColor2" routerLink="/home/flatownerlist">
                     <div>
-                        <h3>Owner</h3>
-                        <p>{{'4'}}</p>
+                        <h3>Flat Owner</h3>
+                        <p>{{list_dashboard && list_dashboard.length > 1 ? list_dashboard[1] : '0'}}</p>
                     </div>
                     <div>
                         <img src="../../../assets/icons/user.png" alt="" width="30px">
@@ -31,10 +31,28 @@
                 <div class="card cardColor3" routerLink="/home/employeelist">
                     <div>
                         <h3>Employee</h3>
-                        <p>{{'200'}}</p>
+                        <p>{{list_emp_total?.length}}</p>
                     </div>
                     <div>
                         <img src="../../../assets/icons/emp.png" alt="" width="30px">
+                    </div>
+                </div>
+                <div class="card cardColor7" routerLink="#">
+                    <div>
+                        <h3>Security Gaurd</h3>
+                        <p>{{list_dashboard && list_dashboard.length > 2 ? list_dashboard[2] : '0'}}</p>
+                    </div>
+                    <div>
+                        <img src="../../../assets/icons/guard.png" alt="" width="30px">
+                    </div>
+                </div>
+                <div class="card cardColor8" routerLink="#">
+                    <div>
+                        <h3>Maid</h3>
+                        <p>{{list_dashboard && list_dashboard.length > 3 ? list_dashboard[3] : '0'}}</p>
+                    </div>
+                    <div>
+                        <img src="../../../assets/icons/maid.png" alt="" width="30px">
                     </div>
                 </div>
 

@@ -11,9 +11,9 @@
 
     <div class="container">
       <div class="dataRow">
-        <div class="student_img">
+        <div class="student_img" *ngIf="on_details?.visitorImagePath">
           <img
-            [src]="on_details.flatOwnerImagePath? img_url+on_details.flatOwnerImagePath : '../../../assets/images/user.webp'"
+            [src]="on_details.visitorImagePath? img_url+on_details.visitorImagePath : '../../../assets/images/user.webp'"
             alt="stdProfile" width="100">
         </div>
         <p *ngIf="on_details?.visitorName">
@@ -27,29 +27,46 @@
         </p>
 
         <p *ngIf="on_details?.totalVisitors">
-          <img src="../../../assets/icons/emp.png" alt="">
+          <img src="../../../assets/icons/relation1.png" alt="">
           <span> {{on_details?.totalVisitors}} </span>
         </p>
 
-        <p *ngIf="on_details?.visitorVehicleModel">
-          <img src="../../../assets/icons/model.png" alt="">
-          <span> {{on_details?.visitorVehicleModel}} </span>
+        <p *ngIf="on_details?.visitingDate">
+          <img src="../../../assets/icons/reg_date.png" alt="">
+          <span> {{on_details?.visitingDate}} </span>
         </p>
 
-        <p *ngIf="on_details?.visitorVehicleNumber">
-          <img src="../../../assets/icons/car-no.png" alt="">
-          <span> {{on_details?.visitorVehicleNumber}} </span>
+        <p>
+          <img *ngIf="on_details.approvalStatus === 0" src="../../../assets/icons/rejected.png" alt="">
+          <img *ngIf="on_details.approvalStatus === 1" src="../../../assets/icons/approved.png" alt="">
+          <span
+            [ngStyle]="{'color': on_details.approvalStatus === 1 ? 'green' : on_details.approvalStatus === 0 ? 'red' : 'red'}">
+            {{on_details.approvalStatus === 1 ? 'Approved' : on_details.approvalStatus === 0 ? 'Rejected' : 'Pending'}}
+          </span>
         </p>
 
-        <p *ngIf="on_details?.visitorVehicleParkingArea">
-          <img src="../../../assets/icons/parking-car.png" alt="">
-          <span> {{on_details?.visitorVehicleParkingArea}} </span>
-        </p>
+        <ion-card>
+          <p *ngIf="on_details?.havingVehicle">
+            <img src="../../../assets/icons/car-no.png" alt="">
+            <span> {{on_details?.havingVehicle}} </span>
+          </p>
 
-        <p *ngIf="on_details?.approvalStatus">
-          <img src="../../../assets/icons/rejected.png" alt="">
-          <span> {{on_details.approvalStatus}} </span>
-        </p>
+          <p *ngIf="on_details?.visitorVehicleModel">
+            <img src="../../../assets/icons/model.png" alt="">
+            <span> {{on_details?.visitorVehicleModel}} </span>
+          </p>
+
+          <p *ngIf="on_details?.visitorVehicleNumber">
+            <img src="../../../assets/icons/car-no.png" alt="">
+            <span> {{on_details?.visitorVehicleNumber}} </span>
+          </p>
+
+          <p *ngIf="on_details?.visitorVehicleParkingArea">
+            <img src="../../../assets/icons/parking-car.png" alt="">
+            <span> {{on_details?.visitorVehicleParkingArea}} </span>
+          </p>
+
+        </ion-card>
       </div>
     </div>
   </ion-header>

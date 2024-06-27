@@ -110,11 +110,11 @@ export class VisitorRegComponent implements OnInit {
       }
     }
   }
-  onDetails(data: any) {
+  onFindDetails(data: any) {
     this._shared.shared_details.next(data)
     console.log(data);
 
-    this._router.navigate(['/home/flatownerdetails'])
+    this._router.navigate(['/home/visitorbyflatownerfind'])
   }
   StartCamera() {
     this.onCameraOpen = false

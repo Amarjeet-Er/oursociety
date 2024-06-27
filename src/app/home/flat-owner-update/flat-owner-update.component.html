@@ -35,18 +35,22 @@
         </ion-input>
 
         <ion-input label="Primary Mobile No" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter primary mobile no" formControlName="primaryNumber">
+          placeholder="Enter primary mobile no" onkeypress=" return this.value.length < 10"
+          oninput="if(this.value.length>=10) {this.value = this.value.sclice (0,10);}" formControlName="primaryNumber">
         </ion-input>
 
         <ion-input label="Alt Mobile No" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter alt mobile no" formControlName="alternatePhoneNum">
+          placeholder="Enter alt mobile no" onkeypress=" return this.value.length < 10"
+          oninput="if(this.value.length>=10) {this.value = this.value.sclice (0,10);}"
+          formControlName="alternatePhoneNum">
         </ion-input>
 
         <ion-input type="email" fill="outline" label="Email" labelPlacement="floating" formControlName="ownerEmail">
         </ion-input>
 
         <ion-input label="Aadhar No" label-placement="floating" type="number" fill="outline"
-          placeholder="Enter aadhar no" formControlName="aadharNumber">
+          placeholder="Enter aadhar no" onkeypress=" return this.value.length < 16"
+          oninput="if(this.value.length>=16) {this.value = this.value.sclice (0,16);}" formControlName="aadharNumber">
         </ion-input>
 
         <ion-input #familyInput label="Number Of Family Members" label-placement="floating" type="number" fill="outline"
@@ -70,8 +74,9 @@
                 placeholder="Enter member age" formControlName="MemberAge{{i + 1}}" type="number"></ion-input>
 
               <ion-input label-placement="floating" type="text" fill="outline" label="Member Mobile No"
-                placeholder="Enter member mobile no" formControlName="MemberContactNum{{i + 1}}"
-                type="number"></ion-input>
+                placeholder="Enter member mobile no" onkeypress=" return this.value.length < 10"
+                oninput="if(this.value.length>=10) {this.value = this.value.sclice (0,10);}"
+                formControlName="MemberContactNum{{i + 1}}" type="number"></ion-input>
             </div>
           </div>
         </div>

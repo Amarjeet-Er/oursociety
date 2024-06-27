@@ -35,6 +35,9 @@ import { EmpHomeComponent } from './employee-home/emp-home/emp-home.component';
 import {MatSelectModule} from '@angular/material/select';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { HelpDeskComponent } from './home/help-desk/help-desk.component';
+import { OwnerHomeComponent } from './flat-owner-home/owner-home/owner-home.component';
+import { FlatDashboardComponent } from './flat-owner-home/flat-dashboard/flat-dashboard.component';
+import { VisitorByFlatOwnerFindComponent } from './home/visitor-by-flat-owner-find/visitor-by-flat-owner-find.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,11 +57,14 @@ import { HelpDeskComponent } from './home/help-desk/help-desk.component';
     VisitorListComponent,
     VisitorDetailsComponent,
     VisitorReportsComponent,
+    VisitorByFlatOwnerFindComponent,
     UserProfileComponent,
     TearmAndConditionComponent,
     ForgotPasswordComponent,
     EmpHomeComponent,
     HelpDeskComponent,
+    OwnerHomeComponent,
+    FlatDashboardComponent
   ],
   imports: [
     BrowserModule,

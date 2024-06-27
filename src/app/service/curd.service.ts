@@ -56,4 +56,18 @@ export class CurdService {
   post_visitor_add(data: any) {
     return this._http.post(`${this.base_url}VisitorData/AddVisitor`, data);
   }
+
+  //dashboards 
+  get_chart_flat_list() {
+    return this._http.get<[]>(`${this.base_url}flatChart/FlatChartData`)
+  }
+  get_chart_emp_list() {
+    return this._http.get<[]>(`${this.base_url}EmpChart/EmpChartData`)
+  }
+  get_chart_visitors_list() {
+    return this._http.get<[]>(`${this.base_url}Visitor/VisitorData`)
+  }
+  get_dashboard_list() {
+    return this._http.get<[]>(`${this.base_url}Dashboard/DashboardData`)
+  }
 }

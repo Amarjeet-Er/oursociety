@@ -18,7 +18,8 @@
         </ion-input>
 
         <ion-input label="Mobile No" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter mobile no" formControlName="visitorMobileNum">
+          placeholder="Enter mobile no"  onkeypress=" return this.value.length < 10"
+          oninput="if(this.value.length>=10) {this.value = this.value.sclice (0,10);}" formControlName="visitorMobileNum">
         </ion-input>
 
         <ion-input label="Number Of Visitors" label-placement="floating" type="number" fill="outline"
@@ -109,7 +110,7 @@
             <p>
               <img src="../../../assets/icons/phone.png" alt="">
               <span> {{data.primaryNumber}} </span>
-              <ion-fab-button slot="end" (click)="onDetails(data)">View More</ion-fab-button>
+              <ion-fab-button slot="end" (click)="onFindDetails(data)">View More</ion-fab-button>
             </p>
           </ion-card>
         </div>
