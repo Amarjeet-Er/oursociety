@@ -6,7 +6,7 @@
       </div>
       <div class="titleContent">
         <span>Amarjeet Kumar</span>
-        <button>
+        <button routerLink="/home/profile">
           <img src="../../assets/icons/pencile.png" alt="" width="20px">
         </button>
       </div>
@@ -56,6 +56,7 @@
           <ion-title *ngIf="onRegistrationList()">Employee List</ion-title>
           <ion-title *ngIf="onOwnerList()">Owner List</ion-title>
           <ion-title *ngIf="onVisitorList()">Visitor List</ion-title>
+          <ion-title *ngIf="onReportsDashboard()">Reports</ion-title>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -79,9 +80,9 @@
             <ion-icon name="person-sharp"></ion-icon>
             Employee
           </ion-tab-button>
-          <ion-tab-button tab="profile">
-            <ion-icon name="person-circle-outline"></ion-icon>
-            Profile
+          <ion-tab-button tab="adminreports">
+            <ion-icon name="reader-sharp"></ion-icon>
+            Reports
           </ion-tab-button>
         </ion-tab-bar>
       </ion-tabs>

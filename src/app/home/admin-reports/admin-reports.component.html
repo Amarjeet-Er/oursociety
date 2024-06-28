@@ -1,0 +1,34 @@
+<div class="manageContainer">
+  <div class="manage">
+    <div class="card cardColor1" routerLink="/home/visitorreports">
+      <div>
+        <h3>Visitors</h3>
+        <p>{{ visitor_data?.length || 0}}
+        </p>
+      </div>
+      <div>
+        <img src="../../../assets/icons/visitor.png" alt="" width="30px">
+      </div>
+    </div>
+
+    <div class="card cardColor2" routerLink="/home/flatownerreports">
+      <div>
+        <h3>Flat Owner</h3>
+        <p>{{flat_owner_data?.length || 0}}</p>
+      </div>
+      <div>
+        <img src="../../../assets/icons/user.png" alt="" width="30px">
+      </div>
+    </div>
+
+    <div class="card cardColor3" routerLink="/home/employeereports">
+      <div>
+        <h3>Employee</h3>
+        <p>{{emp_data?.length || 0}}</p>
+      </div>
+      <div>
+        <img src="../../../assets/icons/emp.png" alt="" width="30px">
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,6 +20,9 @@ import { EmployeeUpdateComponent } from './employee-update/employee-update.compo
 import { FlatOwnerUpdateComponent } from './flat-owner-update/flat-owner-update.component';
 import { HelpDeskComponent } from './help-desk/help-desk.component';
 import { VisitorByFlatOwnerFindComponent } from './visitor-by-flat-owner-find/visitor-by-flat-owner-find.component';
+import { AdminReportsComponent } from './admin-reports/admin-reports.component';
+import { EmployeeGuardListComponent } from './employee-guard-list/employee-guard-list.component';
+import { EmployeeMaidListComponent } from './employee-maid-list/employee-maid-list.component';
 
 const routes: Routes = [
   {
@@ -30,12 +33,15 @@ const routes: Routes = [
       { path: 'employeelist', component: EmployeeListComponent },
       { path: 'visitorlist', component: VisitorListComponent },
       { path: 'flatownerlist', component: FlatOwnerListComponent },
+      { path: 'adminreports', component: AdminReportsComponent },
     ]
   },
   { path: 'employeereg', component: EmployeeRegComponent },
   { path: 'employeeUpdate', component: EmployeeUpdateComponent },
   { path: 'employeedetails', component: EmployeeDetailsComponent },
   { path: 'employeereports', component: EmployeeReportsComponent },
+  { path: 'employeeguard', component: EmployeeGuardListComponent },
+  { path: 'employeemaid', component: EmployeeMaidListComponent },
   { path: 'flatownerreg', component: FlatOwnerRegComponent },
   { path: 'flatownerupdate', component: FlatOwnerUpdateComponent },
   { path: 'flatownerdetails', component: FlatOwnerDetailsComponent },

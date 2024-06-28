@@ -1,83 +1,120 @@
-ion-card {
-    height: 60px;
-
-    .SearchBox {
-        background-color: var(--color-2);
-        width: 100%;
-        transition: opacity 200ms;
-        justify-content: space-between;
-        align-items: center;
-        display: flex;
-
-        span {
-            margin-left: 10px;
-        }
-    }
-
-    .site-search-input {
-        display: block;
-        width: 98%;
-        border: 0;
-        background-color: transparent;
-        outline: none;
-    }
-}
-
 #containerBox {
     width: 100%;
-    height: 100vh;
-    //   background-color: red;
-    padding: 0px 10px 0px 10px;
+    height: auto;
     overflow: auto;
-}
-
-.usercard {
-    width: 100%;
-    height: 100px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    margin-bottom: 10px;
-}
-
-.userimg {
-    width: 100px;
-    height: 100%;
-    float: right;
-    padding: 10px;
-}
-
-.userdata {
-    width: calc(100% - 100px);
-    float: left;
-    height: 100%;
-    padding: 10px;
-    line-height: 22px;
-}
-
-table {
-    width: 100%;
-    padding: 10px;
-
-    tr {
-        ion-icon{
-            margin: 0px 9px 0px 0px;
-            vertical-align: middle;
+  
+    #wrapper {
+      width: 100%;
+      position: sticky;
+      top: 0px;
+      z-index: 1000;
+  
+      .site-header {
+        background-color: var(--color-1);
+        height: 60px;
+        border-bottom: 1px solid #ccc;
+        width: 100%;
+        transition: opacity 200ms;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #fff;
+  
+        .TotalBack {
+          display: flex;
+          align-items: center;
+  
+          ion-fab-button::part(native) {
+            background-color: var(--color-1);
+            box-shadow: none;
+          }
         }
-        td {
-            width: 94%;
-            font-size: 12px;
-            padding: 2px;
-            b{
-                font-size: 16px;
-            }
+  
+        .documentDownload {
+          button {
+            color: #fff;
+          }
         }
+      }
     }
-}
-ion-text {
-    position: relative;
-    right: 15px;
-}
-
-ion-fab-button::part(native) {
-    border-radius: 50px;
-    box-shadow: none;
-}
+  
+    #DataBox {
+      padding: 10px;
+      overflow: auto;
+  
+      .select-header {
+        width: 100%;
+  
+        .searchInput {
+          height: 55px;
+          margin-bottom: 10px;
+          box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+          border-radius: 5px;
+          padding: 0px 15px;
+  
+          input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+          }
+        }
+      }
+  
+      mat-expansion-panel {
+        margin-bottom: 5px;
+        padding: 10px 15px 10px 10px;
+      }
+  
+      .mat-expansion-panel-header {
+        padding: 0px;
+      }
+  
+      .dataRow {
+        width: 100%;
+        padding: 10px;
+  
+        p {
+          padding: 12px 0px 6px 0px;
+          border-bottom: 0.1px solid black;
+          margin: 0px !important;
+        }
+  
+        p:last-child {
+          margin-bottom: 10px !important;
+        }
+      }
+  
+      .mat-expansion-panel-header-description {
+        flex-grow: 11;
+      }
+  
+      .imgDataBox {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+  
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  
+  tr {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  td {
+    width: auto;
+    text-align: left;
+    margin: 5px;
+  }
+  
+  .onCloseApply {
+    text-align: center;
+  }

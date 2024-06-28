@@ -23,6 +23,9 @@ export class HomePage {
   onVisitorList(): boolean {
     return this._router.isActive('/home/visitorlist', true);
   }
+  onReportsDashboard(): boolean {
+    return this._router.isActive('/home/adminreports', true);
+  }
 
   onLogout() {
     this._router.navigate(['/'])

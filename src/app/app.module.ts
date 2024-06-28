@@ -38,6 +38,16 @@ import { HelpDeskComponent } from './home/help-desk/help-desk.component';
 import { OwnerHomeComponent } from './flat-owner-home/owner-home/owner-home.component';
 import { FlatDashboardComponent } from './flat-owner-home/flat-dashboard/flat-dashboard.component';
 import { VisitorByFlatOwnerFindComponent } from './home/visitor-by-flat-owner-find/visitor-by-flat-owner-find.component';
+import { AdminReportsComponent } from './home/admin-reports/admin-reports.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
+import { EmployeeGuardListComponent } from './home/employee-guard-list/employee-guard-list.component';
+import { EmployeeMaidListComponent } from './home/employee-maid-list/employee-maid-list.component';
+import { EmpDashboardComponent } from './employee-home/emp-dashboard/emp-dashboard.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +74,13 @@ import { VisitorByFlatOwnerFindComponent } from './home/visitor-by-flat-owner-fi
     EmpHomeComponent,
     HelpDeskComponent,
     OwnerHomeComponent,
-    FlatDashboardComponent
+    FlatDashboardComponent,
+    AdminReportsComponent,
+    EmployeeGuardListComponent,
+    EmployeeMaidListComponent,
+
+    // employe
+    EmpDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +96,11 @@ import { VisitorByFlatOwnerFindComponent } from './home/visitor-by-flat-owner-fi
     NgxUiLoaderModule,
     MatSelectModule,
     CanvasJSAngularChartsModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatButtonModule,
     NgxUiLoaderHttpModule.forRoot({
       showForeground: true,
     })
