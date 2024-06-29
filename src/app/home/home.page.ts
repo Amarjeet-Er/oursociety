@@ -12,6 +12,9 @@ export class HomePage {
     private _router: Router
   ) { }
 
+  onDashboardChat(): boolean {
+    return this._router.isActive('/home/dashboard', true);
+  }
   onRegistrationList(): boolean {
     return this._router.isActive('/home/employeelist', true);
   }

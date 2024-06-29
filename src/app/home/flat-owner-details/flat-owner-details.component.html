@@ -17,14 +17,10 @@
             [src]="on_details.flatOwnerImagePath? img_url+on_details.flatOwnerImagePath : '../../../assets/images/user.webp'"
             alt="stdProfile" width="100">
         </div>
-        <p *ngIf="on_details?.buildName">
-          <img src="../../../assets/icons/building-block.png" alt="">
-          <span> {{on_details?.buildName}} </span>
-        </p>
 
-        <p *ngIf="on_details?.flatName">
+        <p *ngIf="on_details?.flatName || on_details?.buildName">
           <img src="../../../assets/icons/building-no.png" alt="">
-          <span> {{on_details?.flatName}} </span>
+          <span> {{on_details?.buildName}} / {{on_details?.flatName}} </span>
         </p>
 
         <p *ngIf="on_details?.flatOwnerName">

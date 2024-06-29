@@ -1,0 +1,129 @@
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <ion-fab-button slot="start" color="secondary" routerLink="/employee/empvisitorlist">
+        <ion-icon name="chevron-back-sharp"></ion-icon>
+      </ion-fab-button>
+      <ion-buttons slot="end">
+        <ion-text> Visitor Registration </ion-text>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <ion-content class="ion-padding">
+
+      <form [formGroup]="VisitorReg">
+
+        <ion-input label="Name" label-placement="floating" fill="outline" type="text" placeholder="Enter visitor name"
+          formControlName="visitorName">
+        </ion-input>
+
+        <ion-input label="Mobile No" label-placement="floating" fill="outline" type="number"
+          placeholder="Enter mobile no"  onkeypress=" return this.value.length < 10"
+          oninput="if(this.value.length>=10) {this.value = this.value.sclice (0,10);}" formControlName="visitorMobileNum">
+        </ion-input>
+
+        <ion-input label="Number Of Visitors" label-placement="floating" type="number" fill="outline"
+          placeholder="Enter number of visitors" formControlName="totalVisitors">
+        </ion-input>
+
+        <ion-checkbox (ionChange)="toggleVehicleInput($event)" formControlName="havingVehicle">
+          {{ 'Do you have a vehical?' }} </ion-checkbox>
+
+        <div *ngIf="onVehicleSelect">
+          <ion-input label-placement="floating" type="text" fill="outline" label="Vehicle Model"
+            placeholder="Enter vehical model" formControlName="visitorVehicleModel">
+          </ion-input>
+
+          <ion-input label-placement="floating" type="text" fill="outline" label="Vehicle Number"
+            placeholder="Enter vehical number" formControlName="visitorVehicleNumber">
+          </ion-input>
+
+          <ion-input label-placement="floating" type="text" fill="outline" label="Vehicle Parking Area"
+            placeholder="Enter vehical parking area" formControlName="visitorVehicleParkingArea">
+          </ion-input>
+        </div>
+
+        <div class="VisitorImg">
+          <span [hidden]="onCameraOpen">
+            <div class="BoxCamera">
+              <video #video id="video" [width]="WIDTH" [height]="HEIGHT" autoplay></video>
+            </div>
+            <div class="BoxCameraClickBtn">
+              <ion-button mat-raised-button color="primary" (click)="capture()">Click Photo</ion-button>
+            </div>
+          </span>
+
+          <div *ngIf="onCaptureImg">
+            <div class="BoxCamera">
+              <canvas #canvas id="canvas" [hidden]="!onCameraOpen" [width]="WIDTH" [height]="HEIGHT"></canvas>
+            </div>
+          </div>
+
+          <div class="UploadImage">
+            <div class="imgDataBox" [hidden]="onGalleryImg">
+              <span>
+                <img alt="galleryImg" [src]="gallery_img_url">
+                <input class="d-none" type="file" accept=".jpg,.png,.jpeg,.pdf" #galleryImg
+                  (change)="OnGallery(galleryImg.files)">
+              </span>
+            </div>
+          </div>
+
+          <div class="actionCamera">
+            <ion-text>Visitor Image</ion-text>
+            <ion-fab>
+              <ion-fab-button size="small">
+                <ion-icon name="add-circle-sharp"></ion-icon>
+              </ion-fab-button>
+              <ion-fab-list side="start">
+                <ion-fab-button (click)="StartCamera()">
+                  <ion-icon name="camera-outline"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-button (click)="galleryImg.click()">
+                  <ion-icon name="image-outline"></ion-icon>
+                </ion-fab-button>
+              </ion-fab-list>
+            </ion-fab>
+          </div>
+        </div>
+
+        <ion-select label="Building Blocks" fill="outline" label-placement="floating" interface="action-sheet"
+          placeholder="Select building blocks" (ionChange)="get_filter_by_flat_num($event)"
+          formControlName="buildingBlock">
+          <ion-select-option *ngFor="let building_list of building_block" [value]="building_list?.b_id">{{
+            building_list?.buildingBlockName }}</ion-select-option>
+        </ion-select>
+
+        <ion-select label="Flat No" fill="outline" label-placement="floating" interface="action-sheet"
+          placeholder="Select flat no" formControlName="flatNum">
+          <ion-select-option *ngFor="let flat_num of building_num" [value]="flat_num?.f_id">{{
+            flat_num?.flatNum }}</ion-select-option>
+        <ion-fab-button color="secondary" slot="end" (click)="onFlatFind()">Find</ion-fab-button>
+        </ion-select>
+
+        <div class="dataRow" *ngIf="findFlatNo">
+          <ion-card *ngFor="let data of flat_owner_list">
+            <p>
+              <img src="../../../assets/icons/user.png" alt="">
+              <span> {{data?.flatOwnerName}} </span>
+            </p>
+            <p>
+              <img src="../../../assets/icons/phone.png" alt="">
+              <span> {{data.primaryNumber}} </span>
+              <ion-fab-button slot="end" (click)="onFindDetails(data)">View More</ion-fab-button>
+            </p>
+          </ion-card>
+        </div>
+
+        <ion-select label="Status" fill="outline" label-placement="floating" interface="action-sheet"
+          placeholder="Select status" formControlName="approvalStatus">
+          <ion-select-option value="">Pending</ion-select-option>
+          <ion-select-option value="1">Approved</ion-select-option>
+          <ion-select-option value="0">Rejected</ion-select-option>
+        </ion-select>
+
+        <ion-button shape="round" (click)="onSubmit()">Submit</ion-button>
+      </form>
+    </ion-content>
+  </ion-header>
+</div>

@@ -11,6 +11,12 @@ import { Location } from '@angular/common';
 export class AppComponent {
   user_id: any;
   UserId: any
+  flatId: any;
+  flat_id: any;
+  flatOwnerId: any;
+  empId: any;
+  emp_id: any;
+  employeeId: any;
   constructor(
     private _router: Router,
     private _backbtn: BackBtnService,
@@ -26,11 +32,32 @@ export class AppComponent {
   isLogin() {
     this.UserId = localStorage.getItem('userId');
     this.user_id = JSON.parse(this.UserId);
-    console.log(this.user_id, 'user id');
+
+    this.flatId = localStorage.getItem('flatId');
+    this.flat_id = JSON.parse(this.flatId);
+    this.flatOwnerId = this.flat_id.RollId;
+
+    this.empId = localStorage.getItem('empId');
+    this.emp_id = JSON.parse(this.empId);
+    this.employeeId = this.emp_id.RollId;
 
     if (this.user_id) {
       if (this._location.path() == '') {
         this._router.navigate(['/home'])
+      }
+      else {
+      }
+    }
+    if (this.flatOwnerId) {
+      if (this._location.path() == '') {
+        this._router.navigate(['/flatowner'])
+      }
+      else {
+      }
+    }
+    if (this.employeeId) {
+      if (this._location.path() == '') {
+        this._router.navigate(['/employee'])
       }
       else {
       }

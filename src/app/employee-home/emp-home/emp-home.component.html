@@ -2,12 +2,13 @@
   <ion-menu contentId="main-content">
     <ion-toolbar color="secondary">
       <div class="userProfile">
-        <img src="https://smaabacus.com/themes/user/assets/img/avatar/male.png" alt="" width="80px">
+        <img [src]="emp_filter_data?.empProfileImagePath? img_url+emp_filter_data.empProfileImagePath : 'ProfileImg '"
+          alt="stdProfile" width="80">
       </div>
       <div class="titleContent">
-        <span>Amarjeet Kumar</span>
-        <button>
-          <img src="../../assets/icons/pencile.png" alt="" width="20px">
+        <span>{{emp_filter_data?.empName}}</span>
+        <button (click)="onProfileDetails(emp_filter_data)">
+          <ion-icon name="eye-sharp"></ion-icon>
         </button>
       </div>
     </ion-toolbar>
@@ -23,22 +24,19 @@
           <span> About </span>
         </p>
 
-        <p routerLink="/home/tearmandcondition">
-          <ion-icon name="bookmarks-sharp" color="secondary"></ion-icon>
-          <span> Terms & conditions </span>
-        </p>
-
         <p>
           <ion-icon name="git-compare-sharp" color="secondary"></ion-icon>
           <span> Change Password </span>
         </p>
+
+        <p routerLink="#">
+          <ion-icon name="bookmarks-sharp" color="secondary"></ion-icon>
+          <span> Terms & conditions </span>
+        </p>
+
       </div>
     </ion-content>
     <div class="sideBarBox">
-      <p>
-        <img src="../../assets/images/society app logo .png" alt="" width="30px">
-        <span> App Version 0.1 </span>
-      </p>
       <p (click)="onLogout()">
         <img src="../../assets/icons/logout.png" alt="" width="30px">
         <span> Logout </span>
@@ -53,8 +51,6 @@
         </ion-buttons>
         <ion-buttons slot="end">
           <ion-title *ngIf="onRegistrationList()">Employee List</ion-title>
-          <ion-title *ngIf="onOwnerList()">Owner List</ion-title>
-          <ion-title *ngIf="onVisitorList()">Visitor List</ion-title>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -66,11 +62,11 @@
             <ion-icon name="home-sharp"></ion-icon>
             Home
           </ion-tab-button>
-          <ion-tab-button tab="visitorlist">
+          <ion-tab-button tab="empvisitorlist">
             <ion-icon name="person-sharp"></ion-icon>
             Visitor
           </ion-tab-button>
-          <ion-tab-button tab="profile">
+          <ion-tab-button (click)="onProfileDetails(emp_filter_data)">
             <ion-icon name="person-circle-outline"></ion-icon>
             Profile
           </ion-tab-button>

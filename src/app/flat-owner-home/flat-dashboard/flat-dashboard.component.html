@@ -1,50 +1,31 @@
-<ion-card>
-  <div class="SearchBox" *ngIf="headerBox">
-    <span> <b>Total :- </b>{{reg_data?.length}}</span>
-    <div class="HeaderBoxSearch">
-      <ion-button color="secondary" (click)="onSearchOpen()">
-        <ion-icon name="search-sharp"></ion-icon>
-      </ion-button>
-      <ion-button color="secondary" routerLink="/home/employeereg">
-        <ion-icon name="person-add-sharp"></ion-icon>
-      </ion-button>
+<div id="wrapper">
+  <div id="dashboardBox">
+    <div class="grating">
+      <span style="font-size: 20px; color: #fff;"><b>{{ GratingData() }}</b></span><br>
+      <span style="color: #fff;">{{flat_filter_data?.flatOwnerName}}</span>
+    </div>
+    <div class="manageContainer">
+      <div class="manage">
+        <div class="card cardColor1" routerLink="#">
+          <div>
+            <h3>Employee</h3>
+            <p>{{ list_emp_total? list_emp_total.length : '0' }}</p>
+          </div>
+          <div>
+            <img src="../../../assets/icons/visitor.png" alt="" width="30px">
+          </div>
+        </div>
+        <div class="card cardColor2" routerLink="#">
+          <div>
+            <h3>Flat Owner</h3>
+            <p>{{ flat_owner_list? flat_owner_list.length : '0' }}
+            </p>
+          </div>
+          <div>
+            <img src="../../../assets/icons/visitor.png" alt="" width="30px">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="SearchBox" *ngIf="siteSearch">
-    <span> <b>Total :- </b>{{reg_data?.length}}</span>
-    <ion-input type="text" class="searchInput" placeholder="Search..." #search (keyup)="onSearch(search.value)">
-    </ion-input>
-    <div class="searchClose">
-      <ion-button color="secondary" type="reset" (click)="onSearchClose()">
-        <ion-icon name="close-sharp"></ion-icon>
-      </ion-button>
-    </div>
-  </div>
-</ion-card>
-
-<div id="containerBox">
-  <div class="usercard" *ngFor="let data of reg_data" (click)="onDetails(data)">
-    <div class="userimg">
-      <img [src]="data.empProfileImagePath? img_url+data.empProfileImagePath : '../../../assets/images/user.webp'"
-        alt="" width="100%" height="100%">
-    </div>
-    <div class="userdata">
-      <table>
-        <tr>
-          <ion-icon name="person-sharp" color="primary"></ion-icon>
-          <td><b>{{data.empName}}</b></td>
-        </tr>
-        <tr>
-          <ion-icon name="mail-sharp" color="danger"></ion-icon>
-          <td>{{data.empEmail}}</td>
-        </tr>
-        <tr>
-          <ion-icon name="call-sharp" color="success"></ion-icon>
-          <td>{{data.empMobNo}}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-  <p class="NoRecord" *ngIf="reg_data?.length === 0">No Record Found</p>
 </div>

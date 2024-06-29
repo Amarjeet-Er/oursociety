@@ -23,6 +23,9 @@ import { VisitorByFlatOwnerFindComponent } from './visitor-by-flat-owner-find/vi
 import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 import { EmployeeGuardListComponent } from './employee-guard-list/employee-guard-list.component';
 import { EmployeeMaidListComponent } from './employee-maid-list/employee-maid-list.component';
+import { AdminAboutComponent } from './admin-about/admin-about.component';
+import { AdminContactComponent } from './admin-contact/admin-contact.component';
+import { AdminChangePasswordComponent } from './admin-change-password/admin-change-password.component';
 
 const routes: Routes = [
   {
@@ -53,6 +56,9 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent },
   { path: 'tearmandcondition', component: TearmAndConditionComponent },
   { path: 'helpdesk', component: HelpDeskComponent },
+  { path: 'adminabout', component: AdminAboutComponent },
+  { path: 'admincontact', component: AdminContactComponent },
+  { path: 'changepassword', component: AdminChangePasswordComponent },
 ];
 
 @NgModule({

@@ -1,0 +1,169 @@
+.ion-page {
+    ion-header {
+        ion-toolbar {
+            ion-text {
+                position: relative;
+                right: 15px;
+            }
+
+            ion-fab-button::part(native) {
+                border-radius: 50px;
+                box-shadow: none;
+            }
+        }
+    }
+
+    ion-content {
+        width: 100%;
+        height: calc(100vh - 56px);
+        overflow: auto;
+
+        ion-input {
+            margin-bottom: 10px;
+        }
+
+        ion-select {
+            margin-bottom: 10px;
+            ion-fab-button::part(native) {
+                border-radius: 3px;
+                height: 20px;
+                margin: 8px 0px;
+                padding: 20px;
+                text-align: center;
+            }
+        }
+
+        ion-checkbox {
+            margin-bottom: 10px;
+        }
+
+        .AddHidden {
+            margin-bottom: 10px;
+        }
+
+        ion-button {
+            width: 100%;
+        }
+
+        .VisitorImg {
+            margin-bottom: 10px;
+
+            .imgDataBox {
+                width: 200px;
+                height: 200px;
+                margin: 0px 0px 10px 0px;
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                cursor: pointer;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+
+            .imgDataBox>span>img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .imgDataBox>span>input {
+                display: none;
+            }
+
+            .actionCamera {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding-left: 15px;
+                width: 100%;
+                height: 56px;
+                cursor: pointer;
+                border: 0.1px solid #9b9b9b;
+                border-radius: 4px;
+
+                ion-fab {
+                    position: relative;
+                }
+            }
+
+            .UploadImage {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 10px;
+                margin-top: 10px;
+            }
+
+            .BoxCamera {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+
+            .BoxCamera video {
+                width: 200px;
+                height: 200px;
+                margin: 10px 0px 10px 0px;
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                cursor: pointer;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .BoxCameraClickBtn {
+                display: flex;
+                justify-content: center;
+            }
+
+            .BoxCamera canvas {
+                width: 200px;
+                margin-top: 10px;
+                height: 200px;
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+            }
+        }
+    }
+
+    .dataRow {
+        width: 100%;
+        border-bottom: none;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        p:first-child {
+            border-bottom: 1px solid #000;
+        }
+        p {
+            padding: 10px;
+            text-wrap: nowrap;
+            width: auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 0px;
+            width: 100%;
+            height: 56px;
+
+            span {
+                padding-left: 5px;
+                font-weight: 400;
+                font-size: 14px;
+                color: black;
+            }
+
+            img {
+                vertical-align: middle;
+                width: 30px;
+                height: 30px;
+            }
+
+            ion-fab-button::part(native) {
+                border-radius: 3px;
+                height: 20px;
+                font-size: 12px;
+                padding: 20px;
+                width: 80px;
+                position: absolute;
+                right: 25px;
+                margin-top: -32px;
+            }
+        }
+    }
+}

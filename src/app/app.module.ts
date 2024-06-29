@@ -32,24 +32,38 @@ import { EmployeeUpdateComponent } from './home/employee-update/employee-update.
 import { FlatOwnerUpdateComponent } from './home/flat-owner-update/flat-owner-update.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { EmpHomeComponent } from './employee-home/emp-home/emp-home.component';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { HelpDeskComponent } from './home/help-desk/help-desk.component';
 import { OwnerHomeComponent } from './flat-owner-home/owner-home/owner-home.component';
 import { FlatDashboardComponent } from './flat-owner-home/flat-dashboard/flat-dashboard.component';
 import { VisitorByFlatOwnerFindComponent } from './home/visitor-by-flat-owner-find/visitor-by-flat-owner-find.component';
 import { AdminReportsComponent } from './home/admin-reports/admin-reports.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatButtonModule} from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 import { EmployeeGuardListComponent } from './home/employee-guard-list/employee-guard-list.component';
 import { EmployeeMaidListComponent } from './home/employee-maid-list/employee-maid-list.component';
 import { EmpDashboardComponent } from './employee-home/emp-dashboard/emp-dashboard.component';
+import { EmpProfileComponent } from './employee-home/emp-profile/emp-profile.component';
+import { EmpVisitorsRegComponent } from './employee-home/emp-visitors-reg/emp-visitors-reg.component';
+import { EmpVisitorsDetailsComponent } from './employee-home/emp-visitors-details/emp-visitors-details.component';
+import { EmpVisitorsListComponent } from './employee-home/emp-visitors-list/emp-visitors-list.component';
+import { FlatEmployeeListComponent } from './flat-owner-home/flat-employee-list/flat-employee-list.component';
+import { OwnerFlatListComponent } from './flat-owner-home/owner-flat-list/owner-flat-list.component';
+import { FlatOwnerProfileComponent } from './flat-owner-home/flat-owner-profile/flat-owner-profile.component';
+import { AdminAboutComponent } from './home/admin-about/admin-about.component';
+import { AdminContactComponent } from './home/admin-contact/admin-contact.component';
+import { MatBadgeModule } from '@angular/material/badge';
+import { FlatOwnerChatComponent } from './flat-owner-home/flat-owner-chat/flat-owner-chat.component';
+import { AdminChangePasswordComponent } from './home/admin-change-password/admin-change-password.component';
+import { VisitorFlatOwnerFindComponent } from './employee-home/visitor-flat-owner-find/visitor-flat-owner-find.component';
 
 @NgModule({
   declarations: [
+    // admin
     AppComponent,
     LoginPageComponent,
     DashboardComponent,
@@ -71,16 +85,31 @@ import { EmpDashboardComponent } from './employee-home/emp-dashboard/emp-dashboa
     UserProfileComponent,
     TearmAndConditionComponent,
     ForgotPasswordComponent,
-    EmpHomeComponent,
     HelpDeskComponent,
-    OwnerHomeComponent,
     FlatDashboardComponent,
     AdminReportsComponent,
     EmployeeGuardListComponent,
     EmployeeMaidListComponent,
+    AdminAboutComponent,
+    AdminContactComponent,
+    AdminChangePasswordComponent,
 
     // employe
-    EmpDashboardComponent
+    EmpHomeComponent,
+    EmpDashboardComponent,
+    EmpProfileComponent,
+    EmpVisitorsListComponent,
+    EmpVisitorsRegComponent,
+    EmpVisitorsDetailsComponent,
+    VisitorFlatOwnerFindComponent,
+
+    // owner 
+    OwnerHomeComponent,
+    FlatEmployeeListComponent,
+    FlatOwnerListComponent,
+    OwnerFlatListComponent,
+    FlatOwnerProfileComponent,
+    FlatOwnerChatComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,6 +130,7 @@ import { EmpDashboardComponent } from './employee-home/emp-dashboard/emp-dashboa
     MatInputModule,
     MatCheckboxModule,
     MatButtonModule,
+    MatBadgeModule,
     NgxUiLoaderHttpModule.forRoot({
       showForeground: true,
     })

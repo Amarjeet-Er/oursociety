@@ -1,0 +1,28 @@
+.ion-page {
+    ion-header {
+        ion-toolbar {
+            ion-text {
+                position: relative;
+                right: 15px;
+            }
+
+            ion-fab-button::part(native) {
+                border-radius: 50px;
+                box-shadow: none;
+            }
+        }
+    }
+
+    ion-card {
+        padding: 10px;
+        font-size: 16px;
+        text-align: justify;
+        line-height: 25px;
+        overflow: auto;
+        height: calc(100vh - 50px);
+    }
+
+    ion-card::first-letter {
+        font-size:xx-large;
+    }
+}

@@ -1,0 +1,55 @@
+<div class="wrapper">
+    <div class="headBox">
+        <ion-fab-button slot="start" color="secondary" routerLink="/flatowner">
+            <ion-icon name="chevron-back-sharp"></ion-icon>
+        </ion-fab-button>
+        <div class="details_box">
+            <div class="card_profile_img">
+                <img [src]="ProfileData?.flatOwnerImagePath? img_url+ProfileData.flatOwnerImagePath : 'ProfileImg '"
+                    alt="stdProfile" width="100" height="100">
+                <h2>{{ProfileData?.flatOwnerName}}</h2>
+                <p>{{ProfileData?.ownerEmail}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="dataRow">
+
+        <p>
+            <img src="../../../assets/icons/building-block.png" alt="">
+            <span> {{ProfileData?.buildName}} / {{ProfileData?.flatName}}</span>
+        </p>
+        <p>
+            <img src="../../../assets/icons/emp.png" alt="">
+            <span> {{ProfileData?.flatOwnerName}} </span>
+        </p>
+
+        <p>
+            <img src="../../../assets/icons/email.png" alt="">
+            <span> {{ProfileData?.ownerEmail}} </span>
+        </p>
+
+        <p>
+            <img src="../../../assets/icons/phone.png" alt="">
+            <span> {{ProfileData?.primaryNumber}} </span>
+        </p>
+
+        <p>
+            <img src="../../../assets/icons/aadhar.png" alt="">
+            <span> {{ProfileData?.aadharNumber}} </span>
+        </p>
+        <p>
+            <img src="../../../assets/icons/members.png" alt="">
+            <span> {{ProfileData?.totalFamilyMember}} </span>
+        </p>
+        <p>
+            <img src="../../../assets/icons/car-no.png" alt="">
+            <span> {{ProfileData?.havingCar}} </span>
+        </p>
+
+        <p>
+            <img src="../../../assets/icons/password.png" alt="">
+            <span> {{ProfileData?.password}} </span>
+        </p>
+
+    </div>
+</div>

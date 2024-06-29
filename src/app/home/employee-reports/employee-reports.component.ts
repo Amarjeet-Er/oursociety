@@ -30,6 +30,7 @@ export class EmployeeReportsComponent implements OnInit {
   EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=UTF-8';
   documentDefinition: any;
   reg_filter_data: any;
+  emp_type_list: any;
 
   // Constructor
   constructor(
@@ -49,8 +50,28 @@ export class EmployeeReportsComponent implements OnInit {
         this.reg_filter_data = res.AllRegisteredEmployee;
       }
     )
+    this._crud.get_emp_type().subscribe(
+      (res: any) => {
+        console.log(res, 'reg');
+        this.emp_type_list = res.EmployeeType;
+      }
+    )
   }
-
+  get_emp_type_name(data: any) {
+    if (!data) {
+      this.reg_data = [];
+      return;
+    }
+    this._crud.get_emp_list().subscribe(
+      (res: any) => {
+        const filteredData = res.AllRegisteredEmployee.filter((item: { employee_type: string; }) => item.employee_type === data);
+        this.reg_data = filteredData;
+      },
+      (error: any) => {
+        console.error("Error fetching subDepartment data:", error);
+      }
+    );
+  }
   // Lifecycle Hook - ngOnInit
   async ngOnInit() {
     const granted = await LocalNotifications.requestPermissions();

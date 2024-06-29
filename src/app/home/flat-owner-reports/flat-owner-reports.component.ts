@@ -29,6 +29,7 @@ export class FlatOwnerReportsComponent implements OnInit {
   EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=UTF-8';
   documentDefinition: any;
   reg_filter_data: any;
+  block_list: any;
 
   // Constructor
   constructor(
@@ -43,11 +44,30 @@ export class FlatOwnerReportsComponent implements OnInit {
 
     this._crud.get_flat_owner_list().subscribe(
       (res: any) => {
-        console.log(res, 'reg');
         this.reg_data = res.Data;
         this.reg_filter_data = res.Data;
       }
     )
+    this._crud.get_building_block().subscribe(
+      (res: any) => {
+        this.block_list = res.Data;
+      }
+    )
+  }
+  get_block_name(data:any){
+    if (!data) {
+      this.reg_data = [];
+      return;
+    }
+    this._crud.get_flat_owner_list().subscribe(
+      (res: any) => {        
+        const filteredData = res.Data.filter((item: { buildName: string; }) => item.buildName === data);
+        this.reg_data = filteredData;
+      },
+      (error: any) => {
+        console.error("Error fetching subDepartment data:", error);
+      }
+    );
   }
 
   // Lifecycle Hook - ngOnInit

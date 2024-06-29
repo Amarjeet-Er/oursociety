@@ -47,14 +47,14 @@ export class LoginPageComponent implements OnInit {
               this._shared.tostSuccessBottom('Login Successfully...')
             }
 
-            if (res.RollId === 'Guard') {
-              localStorage.setItem('empId', JSON.stringify(res.RollId))
+            else if (res.RollId === 'Guard') {
+              localStorage.setItem('empId', JSON.stringify(res))
               this._router.navigate(['employee'])
               this._shared.tostSuccessBottom('Login Successfully...')
             }
 
             if (res.RollId === 'FlatOwner') {
-              localStorage.setItem('flatownerId', JSON.stringify(res.RollId))
+              localStorage.setItem('flatId', JSON.stringify(res))
               this._router.navigate(['flatowner'])
               this._shared.tostSuccessBottom('Login Successfully...')
             }

@@ -27,6 +27,13 @@
             <div class="searchInput">
                 <input type="text" matInput placeholder="Search..." #search (keyup)="onSearch(search.value)" />
             </div>
+            <div class="searchInput">
+                <mat-label>Select Building Block</mat-label>
+                <mat-select (valueChange)="get_emp_type_name($event)">
+                    <mat-option *ngFor="let empName of emp_type_list"
+                        [value]="empName?.empType">{{empName?.empType}}</mat-option>
+                </mat-select>
+            </div>
         </div>
 
         <mat-accordion class="container" *ngIf="onViewFilterList">
