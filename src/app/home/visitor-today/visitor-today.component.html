@@ -1,0 +1,92 @@
+<div id="containerBox">
+  <div id="wrapper">
+      <div class="site-header">
+          <div class="TotalBack">
+              <ion-fab-button routerLink="/home">
+                  <ion-icon name="arrow-back-sharp"></ion-icon>
+              </ion-fab-button>
+              <span> <b>Total :-</b> {{reg_data?.length}}</span>
+          </div>
+          <div class="documentDownload">
+              <button mat-button>
+                  <span>Today Visitors</span>
+              </button>
+          </div>
+      </div>
+  </div>
+
+  <div id="DataBox">
+
+      <div class="select-header">
+          <div class="searchInput">
+              <input type="text" matInput placeholder="Search..." #search (keyup)="onSearch(search.value)" />
+          </div>
+      </div>
+
+      <mat-accordion class="container" *ngIf="onViewFilterList">
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+              *ngFor="let data of reg_data">
+              <mat-expansion-panel-header>
+                  <mat-panel-title>
+                      <div class="imgDataBox">
+                          <img [src]="data.visitorImagePath? img_url+data.visitorImagePath : '../../../assets/images/user.webp'"
+                              alt="">
+                      </div>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                      <b> {{data.visitorName}}</b>
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="dataRow">
+                  <p>
+                      <b>Name :- </b>
+                      <span>{{data?.visitorName}}</span>
+                  </p>
+                  <p>
+                      <b>Mobile No :- </b>
+                      <span>{{data?.visitorMobileNum}}</span>
+                  </p>
+                  <p>
+                      <b>Total Visitors :- </b>
+                      <span>{{data?.totalVisitors}}</span>
+                  </p>
+                  <p>
+                      <b>Registration Date :- </b>
+                      <span>{{data?.visitingDate}}</span>
+                  </p>
+
+                  <p>
+                      <b>Status</b>
+                      <span
+                          [ngStyle]="{'color': data.approvalStatus === 1 ? 'green' : data?.approvalStatus === 0 ? 'red' : 'red'}">
+                          {{data?.approvalStatus === 1 ? 'Approved' : data?.approvalStatus === 0 ? 'Rejected' :
+                          'Pending'}}
+                      </span>
+                  </p>
+
+
+                  <p>
+                      <b>Vehicle :- </b>
+                      <span> {{data?.havingVehicle}} </span>
+                  </p>
+
+                  <p>
+                      <b>Vehicle Model :- </b>
+                      <span> {{data?.visitorVehicleModel}} </span>
+                  </p>
+
+                  <p>
+                      <b>Vehicle Number :- </b>
+                      <span> {{data?.visitorVehicleNumber}} </span>
+                  </p>
+
+                  <p>
+                      <b>Parking Area :- </b>
+                      <span> {{data?.visitorVehicleParkingArea}} </span>
+                  </p>
+
+              </div>
+          </mat-expansion-panel>
+      </mat-accordion>
+  </div>
+</div>

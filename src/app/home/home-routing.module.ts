@@ -26,6 +26,7 @@ import { EmployeeMaidListComponent } from './employee-maid-list/employee-maid-li
 import { AdminAboutComponent } from './admin-about/admin-about.component';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
 import { AdminChangePasswordComponent } from './admin-change-password/admin-change-password.component';
+import { VisitorTodayComponent } from './visitor-today/visitor-today.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,7 @@ const routes: Routes = [
   { path: 'visitorreg', component: VisitorRegComponent },
   { path: 'visitorreports', component: VisitorReportsComponent },
   { path: 'visitordetails', component: VisitorDetailsComponent },
+  { path: 'visitortoday', component: VisitorTodayComponent },
   { path: 'visitorbyflatownerfind', component: VisitorByFlatOwnerFindComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'tearmandcondition', component: TearmAndConditionComponent },

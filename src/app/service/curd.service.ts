@@ -57,6 +57,7 @@ export class CurdService {
     return this._http.post(`${this.base_url}VisitorData/AddVisitor`, data);
   }
 
+
   //dashboards 
   get_chart_flat_list() {
     return this._http.get<[]>(`${this.base_url}flatChart/FlatChartData`)
@@ -69,5 +70,17 @@ export class CurdService {
   }
   get_dashboard_list() {
     return this._http.get<[]>(`${this.base_url}Dashboard/DashboardData`)
+  }
+
+  // chating
+  get_admin_chat_any(){
+    return this._http.get<[]>(`${this.base_url}chatSectionList/GetChatList`)
+  }
+  get_chat_any(user_id: string) {
+    return this._http.get<[]>(`${this.base_url}ChatData/GetUserMessage?userId=${user_id}`)
+  }
+
+  post_chating_mes(data: any) {
+    return this._http.post(`${this.base_url}ChatData/SendMessage`, data);
   }
 }

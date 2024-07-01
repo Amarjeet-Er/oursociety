@@ -60,6 +60,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { FlatOwnerChatComponent } from './flat-owner-home/flat-owner-chat/flat-owner-chat.component';
 import { AdminChangePasswordComponent } from './home/admin-change-password/admin-change-password.component';
 import { VisitorFlatOwnerFindComponent } from './employee-home/visitor-flat-owner-find/visitor-flat-owner-find.component';
+import { VisitorTodayComponent } from './home/visitor-today/visitor-today.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { VisitorFlatOwnerFindComponent } from './employee-home/visitor-flat-owne
     VisitorDetailsComponent,
     VisitorReportsComponent,
     VisitorByFlatOwnerFindComponent,
+    VisitorTodayComponent,
     UserProfileComponent,
     TearmAndConditionComponent,
     ForgotPasswordComponent,

@@ -17,6 +17,7 @@ export class AppComponent {
   empId: any;
   emp_id: any;
   employeeId: any;
+  admin_id: any;
   constructor(
     private _router: Router,
     private _backbtn: BackBtnService,
@@ -32,16 +33,17 @@ export class AppComponent {
   isLogin() {
     this.UserId = localStorage.getItem('userId');
     this.user_id = JSON.parse(this.UserId);
+    this.admin_id = this.user_id?.RollId;
 
     this.flatId = localStorage.getItem('flatId');
     this.flat_id = JSON.parse(this.flatId);
-    this.flatOwnerId = this.flat_id.RollId;
+    this.flatOwnerId = this.flat_id?.RollId;
 
     this.empId = localStorage.getItem('empId');
     this.emp_id = JSON.parse(this.empId);
-    this.employeeId = this.emp_id.RollId;
+    this.employeeId = this.emp_id?.RollId;
 
-    if (this.user_id) {
+    if (this.admin_id) {
       if (this._location.path() == '') {
         this._router.navigate(['/home'])
       }
