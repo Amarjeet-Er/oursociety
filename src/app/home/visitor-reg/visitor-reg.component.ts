@@ -32,7 +32,7 @@ export class VisitorRegComponent implements OnInit {
   flat_owner_list: any;
 
   constructor(
-    private _router: Router,
+    private _router:Router,
     private _fb: FormBuilder,
     private _shared: SharedService,
     private _crud: CurdService

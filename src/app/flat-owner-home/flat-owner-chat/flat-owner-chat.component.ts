@@ -29,7 +29,7 @@ export class FlatOwnerChatComponent implements OnInit {
     this.flatOwnerId = this.flat_id?.Username;
     console.log(this.flatOwnerId, 'email');
 
-    this._shared.shared_details.subscribe(
+    this._shared.img_base_url.subscribe(
       (res:any)=>{
         this.img_url=res
       }

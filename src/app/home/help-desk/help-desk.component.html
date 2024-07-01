@@ -1,6 +1,6 @@
 <div class="chat-container">
   <div class="profilebOX">
-    <div class="BackBtn" routerLink="/home">
+    <div class="BackBtn" routerLink="/home/adminchatlist">
       <ion-icon name="arrow-back-sharp"></ion-icon>
     </div>
     <div>
@@ -12,22 +12,24 @@
   </div>
   <div class="boxarea">
     <div class="chat-messages">
-      <div class="message received">
-        <img src="../../../assets/images/user.webp" alt="User Avatar" class="avatar">
-        <div class="message-content">
-          <p>H! I'm Akhilesh Kumar</p>
-        </div>
-      </div>
-      <div class="message sent">
-        <div class="message-content">
-          <p>Hello I'm Amarjeet Kumar</p>
-        </div>
-        <img src="../../../assets/images/login-profile.jpg" alt="User Avatar" class="avatar">
+      <div class="message received" *ngFor="let admin_data of chat_mes_list">
+        <img [src]="admin_data.profilePath? img_url+admin_data.profilePath : '../../../assets/images/user.webp'"
+        class="avatar">
+        <table>
+          <tr>
+            <td>{{admin_data?.time}}</td>
+          </tr>
+          <tr>
+            <td class="message-content">{{admin_data?.message}}</td>
+          </tr>
+        </table>
       </div>
     </div>
     <div class="chat-input">
-      <input type="text" placeholder="Type your message...">
-      <button>Send</button>
+      <form [formGroup]="chat_message">
+        <input type="text" placeholder="Type your message..." formControlName="message">
+        <button (click)="onSendChat()">Send</button>
+      </form>
     </div>
   </div>
 </div>

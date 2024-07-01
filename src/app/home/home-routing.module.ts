@@ -27,6 +27,7 @@ import { AdminAboutComponent } from './admin-about/admin-about.component';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
 import { AdminChangePasswordComponent } from './admin-change-password/admin-change-password.component';
 import { VisitorTodayComponent } from './visitor-today/visitor-today.component';
+import { AdminChatListComponent } from './admin-chat-list/admin-chat-list.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
       { path: 'visitorlist', component: VisitorListComponent },
       { path: 'flatownerlist', component: FlatOwnerListComponent },
       { path: 'adminreports', component: AdminReportsComponent },
+      { path: 'adminchatlist', component: AdminChatListComponent },
     ]
   },
   { path: 'employeereg', component: EmployeeRegComponent },
