@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { CurdService } from 'src/app/service/curd.service';
 import { SharedService } from 'src/app/service/shared.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-emp-visitors-list',
@@ -27,6 +28,14 @@ export class EmpVisitorsListComponent  implements OnInit {
         this.img_url = res
       }
     )
+    this._router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      this.loadData();
+    });
+
+    this.loadData();
+  }
+
+  loadData() {
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
         console.log(res);
@@ -37,7 +46,7 @@ export class EmpVisitorsListComponent  implements OnInit {
       }
     )
   }
-
+  
   onSearchOpen() {
     this.headerBox = !this.headerBox;
     this.siteSearch = !this.siteSearch;
