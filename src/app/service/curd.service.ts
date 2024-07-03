@@ -83,4 +83,11 @@ export class CurdService {
   post_chating_mes(data: any) {
     return this._http.post(`${this.base_url}ChatData/SendMessage`, data);
   }
+
+  //change password
+  
+  post_change_password(data: any) {
+    return this._http.post(`${this.base_url}ChangePass/changePass`, data);
+  }
+
 }

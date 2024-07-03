@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card appSharedDirective>
   <div class="SearchBox" *ngIf="headerBox">
     <span> <b>Total :- </b>{{reg_data?.length}}</span>
     <div class="HeaderBoxSearch">
@@ -23,7 +23,7 @@
   </div>
 </ion-card>
 
-<div id="containerBox">
+<div id="containerBox" >
   <div class="usercard" *ngFor="let data of reg_data" (click)="onDetails(data)">
     <div class="userimg">
       <img [src]="data.visitorImagePath? img_url+data.visitorImagePath : '../../../assets/images/user.webp'" alt=""

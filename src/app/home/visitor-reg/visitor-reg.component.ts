@@ -30,13 +30,20 @@ export class VisitorRegComponent implements OnInit {
   selectedFlat: any;
   reg_data: any;
   flat_owner_list: any;
+  UserId: any;
+  user_id: any;
+  admin_id: any;
 
   constructor(
-    private _router:Router,
+    private _router: Router,
     private _fb: FormBuilder,
     private _shared: SharedService,
     private _crud: CurdService
   ) {
+    this.UserId = localStorage.getItem('userId');
+    this.user_id = JSON.parse(this.UserId);
+    this.admin_id = this.user_id?.Username;
+    
     this._crud.get_building_block().subscribe(
       (res: any) => {
         console.log(res, 'value');
@@ -90,7 +97,7 @@ export class VisitorRegComponent implements OnInit {
   onFlatFind() {
     const selectedFlatId = this.VisitorReg.value.flatNum;
     console.log(selectedFlatId, 'fhsdjk');
-    
+
     const selectedFlat = this.building_num.find((flat: { f_id: any; }) => flat.f_id === selectedFlatId);
     console.log(selectedFlat, 'selectedFlat');
     if (selectedFlat) {
@@ -186,6 +193,8 @@ export class VisitorRegComponent implements OnInit {
   onSubmit(): void {
 
     const formdata = new FormData();
+    formdata.append('actionBy', this.admin_id);
+
     formdata.append('visitorName', this.VisitorReg.get('visitorName')?.value);
     formdata.append('visitorMobileNum', this.VisitorReg.get('visitorMobileNum')?.value);
     formdata.append('totalVisitors', this.VisitorReg.get('totalVisitors')?.value);
@@ -205,8 +214,8 @@ export class VisitorRegComponent implements OnInit {
       this._crud.post_visitor_add(formdata).subscribe(
         (res: any) => {
           if (res.Status === 'Success') {
-          this._shared.tostSuccessTop('Registration Successfully');
-          this._router.navigate(['/home/visitorlist']);
+            this._shared.tostSuccessTop('Registration Successfully');
+            this._router.navigate(['/home/visitorlist']);
           }
           if (res.Status === 'Error') {
             this._shared.tostErrorTop('Already Registered');

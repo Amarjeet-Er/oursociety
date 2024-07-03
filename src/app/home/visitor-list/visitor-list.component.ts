@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { CurdService } from 'src/app/service/curd.service';
 import { SharedService } from 'src/app/service/shared.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-visitor-list',
@@ -19,6 +20,7 @@ export class VisitorListComponent implements OnInit {
     private _crud: CurdService,
     private _shared: SharedService
   ) { }
+
   ngOnInit(): void {
     this._shared.img_base_url.subscribe(
       (res: any) => {
@@ -26,6 +28,15 @@ export class VisitorListComponent implements OnInit {
         this.img_url = res
       }
     )
+
+    this._router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      this.loadData();
+    });
+
+    this.loadData();
+  }
+
+  loadData() {
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
         console.log(res);
@@ -36,6 +47,8 @@ export class VisitorListComponent implements OnInit {
       }
     )
   }
+
+
 
   onSearchOpen() {
     this.headerBox = !this.headerBox;
@@ -55,8 +68,8 @@ export class VisitorListComponent implements OnInit {
     )
   }
 
-  onDetails(data:any) {
-    this._shared.shared_details.next(data)    
+  onDetails(data: any) {
+    this._shared.shared_details.next(data)
     this._router.navigate(['/home/visitordetails']);
   }
   onSearch(filter: any) {

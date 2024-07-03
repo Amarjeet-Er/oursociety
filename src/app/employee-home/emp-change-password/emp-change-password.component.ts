@@ -5,11 +5,11 @@ import { CurdService } from 'src/app/service/curd.service';
 import { SharedService } from 'src/app/service/shared.service';
 
 @Component({
-  selector: 'app-admin-change-password',
-  templateUrl: './admin-change-password.component.html',
-  styleUrls: ['./admin-change-password.component.scss'],
+  selector: 'app-emp-change-password',
+  templateUrl: './emp-change-password.component.html',
+  styleUrls: ['./emp-change-password.component.scss'],
 })
-export class AdminChangePasswordComponent implements OnInit {
+export class EmpChangePasswordComponent  implements OnInit {
   changePassword!: FormGroup
   UserId: any;
   admin_id: any;

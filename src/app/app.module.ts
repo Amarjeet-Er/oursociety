@@ -62,6 +62,8 @@ import { AdminChangePasswordComponent } from './home/admin-change-password/admin
 import { VisitorFlatOwnerFindComponent } from './employee-home/visitor-flat-owner-find/visitor-flat-owner-find.component';
 import { VisitorTodayComponent } from './home/visitor-today/visitor-today.component';
 import { AdminChatListComponent } from './home/admin-chat-list/admin-chat-list.component';
+import { Home2Component } from './home/home2/home2.component';
+import { EmpChangePasswordComponent } from './employee-home/emp-change-password/emp-change-password.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +99,7 @@ import { AdminChatListComponent } from './home/admin-chat-list/admin-chat-list.c
     AdminContactComponent,
     AdminChangePasswordComponent,
     AdminChatListComponent,
+    Home2Component,
 
     // employe
     EmpHomeComponent,
@@ -106,6 +109,7 @@ import { AdminChatListComponent } from './home/admin-chat-list/admin-chat-list.c
     EmpVisitorsRegComponent,
     EmpVisitorsDetailsComponent,
     VisitorFlatOwnerFindComponent,
+    EmpChangePasswordComponent,
 
     // owner 
     OwnerHomeComponent,

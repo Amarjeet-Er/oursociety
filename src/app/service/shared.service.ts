@@ -19,39 +19,39 @@ export class SharedService implements OnInit {
   ngOnInit(): void {
   }
 
- // for messages toast notification
- tostSuccessTop(title: any) {
-  this._snacker.open(title, '', {
-    duration: 1000, verticalPosition: 'top', horizontalPosition: 'end',
-    panelClass: ['tostSuccess']
-  });
-}
+  // for messages toast notification
+  tostSuccessTop(title: any) {
+    this._snacker.open(title, '', {
+      duration: 1000, verticalPosition: 'top', horizontalPosition: 'end',
+      panelClass: ['tostSuccess']
+    });
+  }
 
-tostSuccessBottom(title: any) {
-  this._snacker.open(title, '', {
-    duration: 1000, verticalPosition: 'bottom', horizontalPosition: 'end',
-    panelClass: ['tostSuccess']
-  });
-}
+  tostSuccessBottom(title: any) {
+    this._snacker.open(title, '', {
+      duration: 1000, verticalPosition: 'bottom', horizontalPosition: 'end',
+      panelClass: ['tostSuccess']
+    });
+  }
 
-tostErrorTop(title: any) {
-  this._snacker.open(title, '', {
-    duration: 1000, verticalPosition: 'top', horizontalPosition: 'end',
-    panelClass: ['tostError']
-  });
-}
+  tostErrorTop(title: any) {
+    this._snacker.open(title, '', {
+      duration: 1000, verticalPosition: 'top', horizontalPosition: 'end',
+      panelClass: ['tostError']
+    });
+  }
 
-tostErrorBottom(title: any) {
-  this._snacker.open(title, '', {
-    duration: 1000, verticalPosition: 'bottom', horizontalPosition: 'end',
-    panelClass: ['tostError']
-  });
-}
-tostWarningTop(title: any) {
-  this._snacker.open(title, '', {
-    duration: 1000, verticalPosition: 'top', horizontalPosition: 'end',
-    panelClass: ['tostWarning']
-  });
-}
+  tostErrorBottom(title: any) {
+    this._snacker.open(title, '', {
+      duration: 1000, verticalPosition: 'bottom', horizontalPosition: 'end',
+      panelClass: ['tostError']
+    });
+  }
+  tostWarningTop(title: any) {
+    this._snacker.open(title, '', {
+      duration: 1000, verticalPosition: 'top', horizontalPosition: 'end',
+      panelClass: ['tostWarning']
+    });
+  }
 }
 

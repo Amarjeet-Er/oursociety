@@ -28,41 +28,51 @@ import { AdminContactComponent } from './admin-contact/admin-contact.component';
 import { AdminChangePasswordComponent } from './admin-change-password/admin-change-password.component';
 import { VisitorTodayComponent } from './visitor-today/visitor-today.component';
 import { AdminChatListComponent } from './admin-chat-list/admin-chat-list.component';
+import { Home2Component } from './home2/home2.component';
 
 const routes: Routes = [
   {
-    path: '', component: HomePage,
+    path: '',
+    component: HomePage,
     children: [
-      { path: '', component: DashboardComponent },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'employeelist', component: EmployeeListComponent },
-      { path: 'visitorlist', component: VisitorListComponent },
-      { path: 'flatownerlist', component: FlatOwnerListComponent },
-      { path: 'adminreports', component: AdminReportsComponent },
-      { path: 'adminchatlist', component: AdminChatListComponent },
+      {
+        path: '', 
+        component: Home2Component,
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          { path: 'dashboard', component: DashboardComponent },
+          { path: 'employeelist', component: EmployeeListComponent },
+          { path: 'visitorlist', component: VisitorListComponent, pathMatch: 'full' },
+          { path: 'flatownerlist', component: FlatOwnerListComponent },
+          { path: 'adminreports', component: AdminReportsComponent },
+          { path: 'adminchatlist', component: AdminChatListComponent },
+        ],
+        data: { name: 'Home 2' }  
+      },
+      { path: 'employeereg', component: EmployeeRegComponent },
+      { path: 'employeeUpdate', component: EmployeeUpdateComponent },
+      { path: 'employeedetails', component: EmployeeDetailsComponent },
+      { path: 'employeereports', component: EmployeeReportsComponent },
+      { path: 'employeeguard', component: EmployeeGuardListComponent },
+      { path: 'employeemaid', component: EmployeeMaidListComponent },
+      { path: 'flatownerreg', component: FlatOwnerRegComponent },
+      { path: 'flatownerupdate', component: FlatOwnerUpdateComponent },
+      { path: 'flatownerdetails', component: FlatOwnerDetailsComponent },
+      { path: 'flatownerreports', component: FlatOwnerReportsComponent },
+      { path: 'visitorreg', component: VisitorRegComponent },
+      { path: 'visitorreports', component: VisitorReportsComponent },
+      { path: 'visitordetails', component: VisitorDetailsComponent },
+      { path: 'visitortoday', component: VisitorTodayComponent },
+      { path: 'visitorbyflatownerfind', component: VisitorByFlatOwnerFindComponent },
+      { path: 'profile', component: UserProfileComponent },
+      { path: 'tearmandcondition', component: TearmAndConditionComponent },
+      { path: 'helpdesk', component: HelpDeskComponent },
+      { path: 'adminabout', component: AdminAboutComponent },
+      { path: 'admincontact', component: AdminContactComponent },
+      { path: 'changepassword', component: AdminChangePasswordComponent },
+      { path: 'home2', redirectTo: '', pathMatch: 'full' }
     ]
-  },
-  { path: 'employeereg', component: EmployeeRegComponent },
-  { path: 'employeeUpdate', component: EmployeeUpdateComponent },
-  { path: 'employeedetails', component: EmployeeDetailsComponent },
-  { path: 'employeereports', component: EmployeeReportsComponent },
-  { path: 'employeeguard', component: EmployeeGuardListComponent },
-  { path: 'employeemaid', component: EmployeeMaidListComponent },
-  { path: 'flatownerreg', component: FlatOwnerRegComponent },
-  { path: 'flatownerupdate', component: FlatOwnerUpdateComponent },
-  { path: 'flatownerdetails', component: FlatOwnerDetailsComponent },
-  { path: 'flatownerreports', component: FlatOwnerReportsComponent },
-  { path: 'visitorreg', component: VisitorRegComponent },
-  { path: 'visitorreports', component: VisitorReportsComponent },
-  { path: 'visitordetails', component: VisitorDetailsComponent },
-  { path: 'visitortoday', component: VisitorTodayComponent },
-  { path: 'visitorbyflatownerfind', component: VisitorByFlatOwnerFindComponent },
-  { path: 'profile', component: UserProfileComponent },
-  { path: 'tearmandcondition', component: TearmAndConditionComponent },
-  { path: 'helpdesk', component: HelpDeskComponent },
-  { path: 'adminabout', component: AdminAboutComponent },
-  { path: 'admincontact', component: AdminContactComponent },
-  { path: 'changepassword', component: AdminChangePasswordComponent },
+  }
 ];
 
 @NgModule({
