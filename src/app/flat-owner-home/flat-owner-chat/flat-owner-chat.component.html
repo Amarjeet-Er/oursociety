@@ -12,9 +12,8 @@
   </div>
   <div class="boxarea">
     <div class="chat-messages">
-      <div class="message received" *ngFor="let admin_data of chat_mes_list">
-        <img [src]="admin_data.profilePath? img_url+admin_data.profilePath : '../../../assets/images/user.webp'"
-        class="avatar">
+      <div class="message received" *ngFor="let admin_data of chat_mes_list"
+        [ngClass]="{'received': admin_data.userId === 'Admin', 'sent': admin_data.userId !== 'Admin'}">
         <table>
           <tr>
             <td>{{admin_data?.time}}</td>

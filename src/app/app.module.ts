@@ -64,6 +64,7 @@ import { VisitorTodayComponent } from './home/visitor-today/visitor-today.compon
 import { AdminChatListComponent } from './home/admin-chat-list/admin-chat-list.component';
 import { Home2Component } from './home/home2/home2.component';
 import { EmpChangePasswordComponent } from './employee-home/emp-change-password/emp-change-password.component';
+import { NewChatComponent } from './home/new-chat/new-chat.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { EmpChangePasswordComponent } from './employee-home/emp-change-password/
     AdminChangePasswordComponent,
     AdminChatListComponent,
     Home2Component,
+    NewChatComponent,
 
     // employe
     EmpHomeComponent,

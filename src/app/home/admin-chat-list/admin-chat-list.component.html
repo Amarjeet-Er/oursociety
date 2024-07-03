@@ -1,13 +1,30 @@
-<div class="manageContainer">
-  <div class="manage" *ngFor="let data of chat_mes_list">
-    <div class="card cardColor7" (click)="ondetailschat(data)">
-      <div>
-        <p>{{data?.name}}</p>
-        <h3>{{data?.date}} </h3>
-      </div>
-      <div>
-        <img [src]="data.profilePath? img_url+data.profilePath : '../../../assets/images/user.webp'" width="40px">
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <ion-fab-button slot="start" color="secondary" routerLink="/home">
+        <ion-icon name="chevron-back-sharp"></ion-icon>
+      </ion-fab-button>
+      <button slot="end" routerLink="/home/newchatadmin">
+        New Chat
+      </button>
+    </ion-toolbar>
+    <div class="container">
+      <div class="dataRow">
+        <div class="manageContainer">
+          <div class="manage" *ngFor="let data of chat_mes_list">
+            <div class="card cardColor1" (click)="ondetailschat(data)">
+              <div>
+                <p>{{data?.name}}</p>
+                <h3>{{data?.totalMessage}} </h3>
+              </div>
+              <div>
+                <img [src]="data.profilePath? img_url+data.profilePath : '../../../assets/images/user.webp'"
+                  width="40px">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </ion-header>
 </div>

@@ -85,36 +85,7 @@
           placeholder="Enter permanent address" formControlName="parmanentAddress">
         </ion-input>
 
-        <div class="EmployeeAadhar">
-          <div class="Documents" [hidden]="EmpAadharSelected">
-            <span>Employee Aadhar</span>
-            <img
-              [src]="edit_reg.empAadharImagePath? img_url+edit_reg.empAadharImagePath : '../../../assets/images/documents.jpg'"
-              alt="" width="100%" height="100%">
-          </div>
-        </div>
-
-        <div class="EmployeeAadhar">
-          <div class="Documents" [hidden]="EmpAadharSelect">
-            <span>Employee Aadhar</span>
-            <img alt="documents" [src]="Aadhar_img_url">
-            <input class="d-none" type="file" accept=".jpg,.png,.jpeg," #Aadhar (change)="onAadhar(Aadhar.files)">
-          </div>
-          <div class="EmpSelectAadhar">
-            <ion-text>Employee Aadhar</ion-text>
-            <ion-fab>
-              <ion-fab-button size="small">
-                <ion-icon name="add-circle-sharp"></ion-icon>
-              </ion-fab-button>
-              <ion-fab-list side="start">
-                <ion-fab-button (click)="Aadhar.click()">
-                  <ion-icon name="image-outline"></ion-icon>
-                </ion-fab-button>
-              </ion-fab-list>
-            </ion-fab>
-          </div>
-        </div>
-
+        
         <div class="EmployeeImg">
           <span [hidden]="onCameraOpen">
             <div class="BoxCamera">
@@ -166,6 +137,37 @@
             </ion-fab>
           </div>
         </div>
+
+        <div class="EmployeeAadhar">
+          <div class="Documents" [hidden]="EmpAadharSelected">
+            <span>Employee Aadhar</span>
+            <img
+              [src]="edit_reg.empAadharImagePath? img_url+edit_reg.empAadharImagePath : '../../../assets/images/documents.jpg'"
+              alt="" width="100%" height="100%">
+          </div>
+        </div>
+
+        <div class="EmployeeAadhar">
+          <div class="Documents" [hidden]="EmpAadharSelect">
+            <span>Employee Aadhar</span>
+            <img alt="documents" [src]="Aadhar_img_url">
+            <input class="d-none" type="file" accept=".jpg,.png,.jpeg," #Aadhar (change)="onAadhar(Aadhar.files)">
+          </div>
+          <div class="EmpSelectAadhar">
+            <ion-text>Employee Aadhar</ion-text>
+            <ion-fab>
+              <ion-fab-button size="small">
+                <ion-icon name="add-circle-sharp"></ion-icon>
+              </ion-fab-button>
+              <ion-fab-list side="start">
+                <ion-fab-button (click)="Aadhar.click()">
+                  <ion-icon name="image-outline"></ion-icon>
+                </ion-fab-button>
+              </ion-fab-list>
+            </ion-fab>
+          </div>
+        </div>
+
 
         <ion-input label="Create Password" label-placement="floating" fill="outline" type="text"
           placeholder="Enter create password" formControlName="emp_password">

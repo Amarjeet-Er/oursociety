@@ -6,11 +6,12 @@ import { SharedService } from 'src/app/service/shared.service';
 import { filter } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-help-desk',
-  templateUrl: './help-desk.component.html',
-  styleUrls: ['./help-desk.component.scss'],
+  selector: 'app-new-chat',
+  templateUrl: './new-chat.component.html',
+  styleUrls: ['./new-chat.component.scss'],
 })
-export class HelpDeskComponent implements OnInit {
+export class NewChatComponent implements OnInit {
+
   chat_message!: FormGroup
 
   chat_user: any;
@@ -32,21 +33,6 @@ export class HelpDeskComponent implements OnInit {
     this.UserId = localStorage.getItem('userId');
     this.user_id = JSON.parse(this.UserId);
     this.admin_id = this.user_id?.RollId;
-    this._shared.img_base_url.subscribe(
-      (res: any) => {
-        this.img_url = res
-      }
-    )
-    this._shared.shared_details.subscribe(
-      (res: any) => {
-        this.chat_name = res
-        this.chat_name_list = res.userId
-        console.log(this.chat_name_list, 'dsasad');
-      },
-      (error) => {
-        console.error('Error fetching chat data:', error);
-      }
-    );
 
     this._router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
       this.fetchChatMessages();
@@ -70,7 +56,7 @@ export class HelpDeskComponent implements OnInit {
     const formdata = new FormData();
     formdata.append('message', this.chat_message.get('message')?.value);
     formdata.append('responseBy', this.admin_id);
-    formdata.append('responseTo', this.chat_name_list);
+    formdata.append('responseTo', this.chat_message.get('responseTo')?.value);
     formdata.append('userId', this.admin_id);
 
     if (this.chat_message.valid) {
@@ -78,6 +64,8 @@ export class HelpDeskComponent implements OnInit {
         (res) => {
           this.fetchChatMessages();
           this.chat_message.reset();
+          this._router.navigate(['/home/adminchatlist'])
+          this._shared.tostSuccessTop('Message Success')
         },
         (error) => {
           console.error('Error sending chat message:', error);

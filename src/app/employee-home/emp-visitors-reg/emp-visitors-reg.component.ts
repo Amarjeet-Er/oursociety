@@ -30,6 +30,9 @@ export class EmpVisitorsRegComponent implements OnInit {
   selectedFlat: any;
   reg_data: any;
   flat_owner_list: any;
+  UserId: any;
+  user_id: any;
+  admin_id: any;
 
   constructor(
     private _router: Router,
@@ -37,6 +40,10 @@ export class EmpVisitorsRegComponent implements OnInit {
     private _shared: SharedService,
     private _crud: CurdService
   ) {
+    this.UserId = localStorage.getItem('empId');
+    this.user_id = JSON.parse(this.UserId);
+    this.admin_id = this.user_id?.Username;
+    
     this._crud.get_building_block().subscribe(
       (res: any) => {
         console.log(res, 'value');
@@ -113,7 +120,8 @@ export class EmpVisitorsRegComponent implements OnInit {
   onFindDetails(data: any) {
     this._shared.shared_details.next(data)
     console.log(data);
-    this._router.navigate(['/employee/empvisitorflatfind'])
+
+    this._router.navigate(['/home/visitorbyflatownerfind'])
   }
   StartCamera() {
     this.onCameraOpen = false
@@ -185,6 +193,8 @@ export class EmpVisitorsRegComponent implements OnInit {
   onSubmit(): void {
 
     const formdata = new FormData();
+    formdata.append('actionBy', this.admin_id);
+
     formdata.append('visitorName', this.VisitorReg.get('visitorName')?.value);
     formdata.append('visitorMobileNum', this.VisitorReg.get('visitorMobileNum')?.value);
     formdata.append('totalVisitors', this.VisitorReg.get('totalVisitors')?.value);
@@ -195,8 +205,8 @@ export class EmpVisitorsRegComponent implements OnInit {
     formdata.append('visitorVehicleModel', this.VisitorReg.get('visitorVehicleModel')?.value);
     formdata.append('visitorVehicleNumber', this.VisitorReg.get('visitorVehicleNumber')?.value);
     formdata.append('visitorVehicleParkingArea', this.VisitorReg.get('visitorVehicleParkingArea')?.value);
-    formdata.append('buildingBlock', this.VisitorReg.get('buildingBlock')?.value);
-    formdata.append('flatNum', this.VisitorReg.get('flatNum')?.value);
+    formdata.append('b_id', this.VisitorReg.get('buildingBlock')?.value);
+    formdata.append('f_id', this.VisitorReg.get('flatNum')?.value);
     formdata.append('approvalStatus', this.VisitorReg.get('approvalStatus')?.value);
     formdata.append('visitorImage', this.gallery_select);
 
@@ -205,7 +215,7 @@ export class EmpVisitorsRegComponent implements OnInit {
         (res: any) => {
           if (res.Status === 'Success') {
             this._shared.tostSuccessTop('Registration Successfully');
-            this._router.navigate(['/employee/empvisitorlist']);
+            this._router.navigate(['/home/visitorlist']);
           }
           if (res.Status === 'Error') {
             this._shared.tostErrorTop('Already Registered');

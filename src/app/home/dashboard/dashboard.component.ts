@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   flat_owner_list: any;
   list_dashboard: any;
   list_emp_total: any;
+  chat_mes_list: any;
 
   constructor(
     private _router: Router,
@@ -31,6 +32,14 @@ export class DashboardComponent implements OnInit {
         this.list_dashboard = res.Data;
       }
     )
+    this._crud.get_admin_chat_any().subscribe(
+      (res: any) => {
+        this.chat_mes_list = res.Data
+      },
+      (error) => {
+        console.error('Error fetching chat data:', error);
+      }
+    );
   }
 
   ngOnInit(): void {

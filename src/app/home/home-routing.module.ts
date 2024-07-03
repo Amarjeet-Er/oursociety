@@ -29,6 +29,7 @@ import { AdminChangePasswordComponent } from './admin-change-password/admin-chan
 import { VisitorTodayComponent } from './visitor-today/visitor-today.component';
 import { AdminChatListComponent } from './admin-chat-list/admin-chat-list.component';
 import { Home2Component } from './home2/home2.component';
+import { NewChatComponent } from './new-chat/new-chat.component';
 
 const routes: Routes = [
   {
@@ -45,10 +46,10 @@ const routes: Routes = [
           { path: 'visitorlist', component: VisitorListComponent, pathMatch: 'full' },
           { path: 'flatownerlist', component: FlatOwnerListComponent },
           { path: 'adminreports', component: AdminReportsComponent },
-          { path: 'adminchatlist', component: AdminChatListComponent },
         ],
         data: { name: 'Home 2' }  
       },
+      { path: 'adminchatlist', component: AdminChatListComponent },
       { path: 'employeereg', component: EmployeeRegComponent },
       { path: 'employeeUpdate', component: EmployeeUpdateComponent },
       { path: 'employeedetails', component: EmployeeDetailsComponent },
@@ -69,6 +70,7 @@ const routes: Routes = [
       { path: 'helpdesk', component: HelpDeskComponent },
       { path: 'adminabout', component: AdminAboutComponent },
       { path: 'admincontact', component: AdminContactComponent },
+      { path: 'newchatadmin', component: NewChatComponent },
       { path: 'changepassword', component: AdminChangePasswordComponent },
       { path: 'home2', redirectTo: '', pathMatch: 'full' }
     ]

@@ -79,6 +79,9 @@ export class CurdService {
   get_chat_any(user_id: string) {
     return this._http.get<[]>(`${this.base_url}ChatData/GetUserMessage?userId=${user_id}`)
   }
+  get_chat_admin_by_flat(id: string) {
+    return this._http.get<[]>(`${this.base_url}adminChatSection/adminMessage?userId=${id}`)
+  }
 
   post_chating_mes(data: any) {
     return this._http.post(`${this.base_url}ChatData/SendMessage`, data);

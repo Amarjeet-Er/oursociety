@@ -205,8 +205,8 @@ export class VisitorRegComponent implements OnInit {
     formdata.append('visitorVehicleModel', this.VisitorReg.get('visitorVehicleModel')?.value);
     formdata.append('visitorVehicleNumber', this.VisitorReg.get('visitorVehicleNumber')?.value);
     formdata.append('visitorVehicleParkingArea', this.VisitorReg.get('visitorVehicleParkingArea')?.value);
-    formdata.append('buildingBlock', this.VisitorReg.get('buildingBlock')?.value);
-    formdata.append('flatNum', this.VisitorReg.get('flatNum')?.value);
+    formdata.append('b_id', this.VisitorReg.get('buildingBlock')?.value);
+    formdata.append('f_id', this.VisitorReg.get('flatNum')?.value);
     formdata.append('approvalStatus', this.VisitorReg.get('approvalStatus')?.value);
     formdata.append('visitorImage', this.gallery_select);
 

@@ -1,0 +1,15 @@
+<div class="chat-container">
+  <div class="profilebOX">
+    <div class="BackBtn" routerLink="/home/adminchatlist">
+      <ion-icon name="arrow-back-sharp"></ion-icon>
+    </div>
+    <ion-text>New Chatting</ion-text>
+  </div>
+  <div class="chat-input">
+    <form [formGroup]="chat_message">
+      <input type="text" placeholder="Enter Email" formControlName="responseTo">
+      <input type="text" placeholder="Type your message..." formControlName="message">
+      <button (click)="onSendChat()">Send</button>
+    </form>
+  </div>
+</div>

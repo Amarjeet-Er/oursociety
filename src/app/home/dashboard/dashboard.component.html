@@ -69,7 +69,8 @@
                 <div class="card cardColor5" routerLink="/home/adminchatlist">
                     <div>
                         <h3>Help Desk</h3>
-                        <p>{{'1'}}</p>
+                        <p>{{chat_mes_list?.length? chat_mes_list?.length : '0'}}</p>
+
                     </div>
                     <div>
                         <img src="../../../assets/icons/help-desk.png" alt="" width="30px">
