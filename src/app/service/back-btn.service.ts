@@ -40,9 +40,9 @@ export class BackBtnService {
     const pathname = urlObject.pathname;
 
     if (pathname === '/' ||
-      pathname === '/home' ||
-      pathname === '/flatowner' ||
-      pathname === '/employee') {
+      pathname === '/home/dashboard' ||
+      pathname === '/flatowner/dashboard' ||
+      pathname === '/employee/dashboard') {
       this.showExitConfirmation();
     } else {
       window.history.back();
