@@ -30,7 +30,8 @@ export class EmployeeRegComponent implements OnInit {
   OtherSelectReletion2: boolean = false;
   passwordsMatch: boolean = false;
   employee_type: any;
-  selectedEmpType: number | null = null;
+  selectedEmpType:any;
+  emp_type_name: any;
 
   constructor(
     private _router: Router,
@@ -48,7 +49,7 @@ export class EmployeeRegComponent implements OnInit {
 
   ngOnInit() {
     this.employeeReg = this._fb.group({
-      emp_type: ['',Validators.required],
+      emp_type: ['', Validators.required],
       emp_WorkArea: [''],
       empName: ['', Validators.required],
       empMobNo: ['', Validators.required],
@@ -70,8 +71,21 @@ export class EmployeeRegComponent implements OnInit {
   }
 
   onEmpTypeChange(event: any) {
-    this.selectedEmpType = event.detail.value;
+    const selectedId = event.detail.value;
+    console.log(selectedId);
+    this.getEmpTypeDetailsById(selectedId);
   }
+  getEmpTypeDetailsById(id: number) {
+    this.selectedEmpType = this.employee_type.find((emp_type: { id: number; }) => emp_type.id === id);
+    if (this.selectedEmpType) {
+      this.emp_type_name=this.selectedEmpType.empType
+      console.log(this.selectedEmpType.empType);
+    } else {
+      console.log('Employee type not found');
+    }
+  }
+
+
   StartCamera() {
     this.onCameraOpen = false
     this.onGalleryImg = true
@@ -166,6 +180,9 @@ export class EmployeeRegComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log(this.employeeReg.value);
+
+    return
     const formdata = new FormData()
     formdata.append('emp_type', this.employeeReg.get('emp_type')?.value);
     formdata.append('emp_WorkArea', this.employeeReg.get('emp_WorkArea')?.value);

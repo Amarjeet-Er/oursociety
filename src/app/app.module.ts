@@ -65,6 +65,16 @@ import { AdminChatListComponent } from './home/admin-chat-list/admin-chat-list.c
 import { Home2Component } from './home/home2/home2.component';
 import { EmpChangePasswordComponent } from './employee-home/emp-change-password/emp-change-password.component';
 import { NewChatComponent } from './home/new-chat/new-chat.component';
+import { TotalFlatOwnerComponent } from './employee-home/total-flat-owner/total-flat-owner.component';
+import { TotalEmployeeComponent } from './employee-home/total-employee/total-employee.component';
+import { TotalVisitorReportsComponent } from './employee-home/total-visitor-reports/total-visitor-reports.component';
+import { EmpAboutComponent } from './employee-home/emp-about/emp-about.component';
+import { EmpContactComponent } from './employee-home/emp-contact/emp-contact.component';
+import { EmpTermConditionComponent } from './employee-home/emp-term-condition/emp-term-condition.component';
+import { FlatAboutComponent } from './flat-owner-home/flat-about/flat-about.component';
+import { FlatContactComponent } from './flat-owner-home/flat-contact/flat-contact.component';
+import { FlatTermConditionComponent } from './flat-owner-home/flat-term-condition/flat-term-condition.component';
+import { FlatChangePasswordComponent } from './flat-owner-home/flat-change-password/flat-change-password.component';
 
 @NgModule({
   declarations: [
@@ -102,8 +112,6 @@ import { NewChatComponent } from './home/new-chat/new-chat.component';
     AdminChatListComponent,
     Home2Component,
     NewChatComponent,
-
-    // employe
     EmpHomeComponent,
     EmpDashboardComponent,
     EmpProfileComponent,
@@ -112,14 +120,22 @@ import { NewChatComponent } from './home/new-chat/new-chat.component';
     EmpVisitorsDetailsComponent,
     VisitorFlatOwnerFindComponent,
     EmpChangePasswordComponent,
-
-    // owner 
     OwnerHomeComponent,
     FlatEmployeeListComponent,
     FlatOwnerListComponent,
     OwnerFlatListComponent,
     FlatOwnerProfileComponent,
     FlatOwnerChatComponent,
+    TotalFlatOwnerComponent,
+    TotalEmployeeComponent,
+    TotalVisitorReportsComponent,
+    EmpAboutComponent,
+    EmpContactComponent,
+    EmpTermConditionComponent,
+    FlatAboutComponent,
+    FlatContactComponent,
+    FlatTermConditionComponent,
+    FlatChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -33,9 +33,10 @@ export class EmployeeUpdateComponent implements OnInit {
   OtherSelectReletion2: boolean = false;
   passwordsMatch: boolean = false;
   employee_type: any;
-  selectedEmpType: number | null = null;
+  selectedEmpType:any;
   edit_reg: any;
   img_url: any;
+  emp_type_name: any;
 
   constructor(
     private _router: Router,
@@ -91,7 +92,17 @@ export class EmployeeUpdateComponent implements OnInit {
   }
 
   onEmpTypeChange(event: any) {
-    this.selectedEmpType = event.detail.value;
+    const selectedId = event.detail.value;
+    console.log(selectedId);
+    this.getEmpTypeDetailsById(selectedId);
+  }
+  getEmpTypeDetailsById(id: number) {
+    this.selectedEmpType = this.employee_type.find((emp_type: { id: number; }) => emp_type.id === id);
+    if (this.selectedEmpType) {
+      this.emp_type_name=this.selectedEmpType.empType
+    } else {
+      console.log('Employee type not found');
+    }
   }
   StartCamera() {
     this.onCameraOpen = false

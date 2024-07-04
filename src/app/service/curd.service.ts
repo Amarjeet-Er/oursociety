@@ -73,7 +73,7 @@ export class CurdService {
   }
 
   // chating
-  get_admin_chat_any(){
+  get_admin_chat_any() {
     return this._http.get<[]>(`${this.base_url}chatSectionList/GetChatList`)
   }
   get_chat_any(user_id: string) {
@@ -88,9 +88,20 @@ export class CurdService {
   }
 
   //change password
-  
+
   post_change_password(data: any) {
     return this._http.post(`${this.base_url}ChangePass/changePass`, data);
+  }
+
+  //password forgot
+  send_otp(data: any) {
+    return this._http.post(`${this.base_url}SendOTP/SendOTP`, data);
+  }
+  // veryfy_otp(email: string, data: any) {
+  //   return this._http.post(`${this.base_url}SendOTP/SendOTP`, data)
+  // }
+  change_password(data: any) {
+    return this._http.post(`${this.base_url}ForgetPass/ChangePass`, data)
   }
 
 }

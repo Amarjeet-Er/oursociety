@@ -291,22 +291,31 @@ export class FlatOwnerReportsComponent implements OnInit {
   }
   onSearch(filter: any) {
     this.reg_data = this.reg_filter_data.filter((data: any) => {
-      if (data?.employee_type.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+      if (data?.buildName.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
         return true;
       }
-      if (data?.empName.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+      if (data?.flatName.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
         return true;
       }
-      if (data?.empMobNo.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+      if (data?.flatOwnerName.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        return true;
+      }
+      if (data?.primaryNumber.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
         return true;
       }
       if (data?.aadharNumber.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
         return true;
       }
-      if (data?.empEmail.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+      if (data?.ownerEmail.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
         return true;
       }
-      if (data?.currentAddress.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+      if (data?.ownerDesignation.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        return true;
+      }
+      if (data?.totalFamilyMember.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        return true;
+      }
+      if (data?.havingCar.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
         return true;
       }
       return false;

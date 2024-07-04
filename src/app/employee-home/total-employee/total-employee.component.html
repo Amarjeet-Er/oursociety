@@ -1,0 +1,56 @@
+<div id="containerBox">
+  <div id="DataBox">
+
+    <div class="select-header">
+      <div class="searchInput">
+        <input type="text" matInput placeholder="Search..." #search (keyup)="onSearch(search.value)" />
+      </div>
+    </div>
+
+    <mat-accordion class="container">
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+        *ngFor="let data of reg_data">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="imgDataBox">
+              <img
+                [src]="data.empProfileImagePath? base_url+data.empProfileImagePath : '../../../assets/images/user.webp'"
+                alt="">
+            </div>
+          </mat-panel-title>
+          <mat-panel-description>
+            <b> {{data.empName}}</b>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="dataRow">
+          <p>
+            <b>Employee Type :- </b>
+            <span>{{data?.employee_type}}</span>
+          </p>
+          <p>
+            <b>Name :- </b>
+            <span>{{data?.empName}}</span>
+          </p>
+          <p>
+            <b>Mobile :- </b>
+            <span>{{data?.empMobNo}}</span>
+          </p>
+          <p>
+            <b>Aadhar :- </b>
+            <span>{{data?.aadharNumber}}</span>
+          </p>
+          <p>
+            <b>Email :- </b>
+            <span>{{data?.empEmail}}</span>
+          </p>
+
+          <p>
+            <b>Current Address :- </b>
+            <span>{{data?.currentAddress}}</span>
+          </p>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <p class="NoRecord" *ngIf="reg_data?.length === 0">No Record Found</p>
+  </div>
+</div>

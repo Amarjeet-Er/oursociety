@@ -6,6 +6,10 @@ import { FlatEmployeeListComponent } from './flat-employee-list/flat-employee-li
 import { OwnerFlatListComponent } from './owner-flat-list/owner-flat-list.component';
 import { FlatOwnerProfileComponent } from './flat-owner-profile/flat-owner-profile.component';
 import { FlatOwnerChatComponent } from './flat-owner-chat/flat-owner-chat.component';
+import { FlatAboutComponent } from './flat-about/flat-about.component';
+import { FlatContactComponent } from './flat-contact/flat-contact.component';
+import { FlatTermConditionComponent } from './flat-term-condition/flat-term-condition.component';
+import { FlatChangePasswordComponent } from './flat-change-password/flat-change-password.component';
 
 const routes: Routes = [
   {
@@ -19,6 +23,10 @@ const routes: Routes = [
   },
   {path: 'ownerprofile' , component : FlatOwnerProfileComponent},
   {path: 'flatownerchat' , component : FlatOwnerChatComponent},
+  {path: 'flatabout' , component : FlatAboutComponent},
+  {path: 'flatcontact' , component : FlatContactComponent},
+  {path: 'flattermandcondition' , component : FlatTermConditionComponent},
+  {path: 'flatchangepassword' , component : FlatChangePasswordComponent},
 ];
 
 @NgModule({

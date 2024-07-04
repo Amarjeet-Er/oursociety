@@ -21,7 +21,7 @@ export class EmpChangePasswordComponent  implements OnInit {
     private _shared: SharedService,
     private _router: Router
   ) {
-    this.UserId = localStorage.getItem('userId');
+    this.UserId = localStorage.getItem('empId');
     this.user_id = JSON.parse(this.UserId);
     this.admin_id = this.user_id?.Username;
   }
@@ -44,7 +44,7 @@ export class EmpChangePasswordComponent  implements OnInit {
         (res: any) => {
           if (res.Status === "Success") {
             this._shared.tostSuccessTop('Change Password Successfully...')
-            this._router.navigate(['/home'])
+            this._router.navigate(['/employee'])
           }
           if (res.Status === "error") {
             this._shared.tostErrorTop('Incorrect Old Password')

@@ -26,7 +26,7 @@ export class AppComponent {
 
   }
   ngOnInit(): void {
-    this._backbtn.back();
+    // this._backbtn.back();
     this.isLogin()
   }
 

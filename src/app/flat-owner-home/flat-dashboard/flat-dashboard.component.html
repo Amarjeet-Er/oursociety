@@ -6,23 +6,23 @@
     </div>
     <div class="manageContainer">
       <div class="manage">
-        <div class="card cardColor1" routerLink="#">
+        <div class="card cardColor3" routerLink="/flatowner/flatemplist">
           <div>
             <h3>Employee</h3>
             <p>{{ list_emp_total? list_emp_total.length : '0' }}</p>
           </div>
           <div>
-            <img src="../../../assets/icons/visitor.png" alt="" width="30px">
+            <img src="../../../assets/icons/emp.png" alt="" width="30px">
           </div>
         </div>
-        <div class="card cardColor2" routerLink="#">
+        <div class="card cardColor2" routerLink="/flatowner/flatownerlist">
           <div>
             <h3>Flat Owner</h3>
             <p>{{ flat_owner_list? flat_owner_list.length : '0' }}
             </p>
           </div>
           <div>
-            <img src="../../../assets/icons/visitor.png" alt="" width="30px">
+            <img src="../../../assets/icons/user.png" alt="" width="30px">
           </div>
         </div>
       </div>

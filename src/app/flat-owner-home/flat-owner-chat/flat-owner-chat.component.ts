@@ -20,6 +20,8 @@ export class FlatOwnerChatComponent implements OnInit {
   admin_chat_data: any;
   admin_data: any;
   img_url: any;
+  flat_data: any;
+  flat_filter_data: any;
 
   constructor(
     private _fb: FormBuilder,
@@ -79,6 +81,10 @@ export class FlatOwnerChatComponent implements OnInit {
       (res: any) => {
         console.log(res.Data);
         this.chat_mes_list = res.Data;
+        if (res && res.Data) {
+          this.flat_data = res.Data.filter((flat: any) => flat.userId === "Admin");
+          this.flat_filter_data = this.flat_data[0];          
+        }
       },
       (error) => {
         console.error('Error fetching chat data:', error);

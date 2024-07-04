@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { App } from '@capacitor/app';
 import { Platform } from '@ionic/angular';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,42 +19,39 @@ export class BackBtnService {
       if (event instanceof NavigationEnd) {
         this.previousUrl = this.currentUrl;
         this.currentUrl = event.url;
-      };
+        console.log(this.currentUrl, 'current');
+
+      }
+    });
+
+    this.initializeBackButtonHandler();
+  }
+
+  private initializeBackButtonHandler() {
+    this.platform.ready().then(() => {
+      App.addListener('backButton', () => {
+        this.handleBackButton();
+      });
     });
   }
 
-  back() {
-    // for home page back 
+  private handleBackButton() {
+    const urlObject = new URL(window.location.href);
+    const pathname = urlObject.pathname;
 
-    this.platform.ready().then(() => {
-      App.addListener('backButton', () => {
-        let urlObject = new URL(window.location.href);
-        let pathname = urlObject.pathname;
-        console.log(pathname);
-
-        if (pathname === '/') {
-          console.log('appclosed');
-          this.showExitConfirmation()
-          return
-        }
-        else if (pathname === '/home/dashboard' || '/flatowner/dashboard' || '/employee/dashboard') {
-          console.log('closed');
-          this.showExitConfirmation()
-          return
-        } else {
-          console.log('pri');
-          window.location.replace(this.previousUrl)
-          window.location.href = this.previousUrl;
-        }
-      })
-    })
+    if (pathname === '/' ||
+      pathname === '/home' ||
+      pathname === '/flatowner' ||
+      pathname === '/employee') {
+      this.showExitConfirmation();
+    } else {
+      window.history.back();
+    }
   }
 
-
-  showExitConfirmation() {
+  private showExitConfirmation() {
     const confirmed = window.confirm('Do you want to close the app?');
     if (confirmed) {
-      // User confirmed, exit the app
       App.exitApp();
     }
   }

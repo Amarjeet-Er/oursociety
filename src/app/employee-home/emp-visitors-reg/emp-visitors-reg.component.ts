@@ -121,7 +121,7 @@ export class EmpVisitorsRegComponent implements OnInit {
     this._shared.shared_details.next(data)
     console.log(data);
 
-    this._router.navigate(['/home/visitorbyflatownerfind'])
+    this._router.navigate(['/employee/empvisitorflatfind'])
   }
   StartCamera() {
     this.onCameraOpen = false
@@ -215,7 +215,7 @@ export class EmpVisitorsRegComponent implements OnInit {
         (res: any) => {
           if (res.Status === 'Success') {
             this._shared.tostSuccessTop('Registration Successfully');
-            this._router.navigate(['/home/visitorlist']);
+            this._router.navigate(['/employee/empvisitorlist']);
           }
           if (res.Status === 'Error') {
             this._shared.tostErrorTop('Already Registered');

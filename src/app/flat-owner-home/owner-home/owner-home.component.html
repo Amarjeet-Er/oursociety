@@ -2,7 +2,7 @@
   <ion-menu contentId="main-content">
     <ion-toolbar color="secondary">
       <div class="userProfile">
-        <img [src]="flat_filter_data?.flatOwnerImagePath? img_url+flat_filter_data.flatOwnerImagePath : 'ProfileImg '"
+        <img [src]="flat_filter_data?.flatOwnerImagePath? img_url+flat_filter_data?.flatOwnerImagePath : 'ProfileImg '"
           alt="stdProfile" width="80">
       </div>
       <div class="titleContent">
@@ -14,25 +14,26 @@
     </ion-toolbar>
     <ion-content>
       <div class="dataRow">
-        <p>
+        <p routerLink="/flatowner/flatcontact">
           <ion-icon name="call-sharp" color="secondary"></ion-icon>
           <span> Cantact </span>
         </p>
 
-        <p>
+        <p routerLink="/flatowner/flatabout">
           <ion-icon name="alert-circle-sharp" color="secondary"></ion-icon>
           <span> About </span>
         </p>
 
-        <p routerLink="#">
+        <p routerLink="/flatowner/flatchangepassword">
+          <ion-icon name="git-compare-sharp" color="secondary"></ion-icon>
+          <span> Change Password </span>
+        </p>
+
+        <p routerLink="/flatowner/flattermandcondition">
           <ion-icon name="bookmarks-sharp" color="secondary"></ion-icon>
           <span> Terms & conditions </span>
         </p>
 
-        <p>
-          <ion-icon name="git-compare-sharp" color="secondary"></ion-icon>
-          <span> Change Password </span>
-        </p>
       </div>
     </ion-content>
     <div class="sideBarBox">

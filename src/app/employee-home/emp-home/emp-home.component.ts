@@ -50,7 +50,13 @@ export class EmpHomeComponent implements OnInit {
 
   }
   onRegistrationList(): boolean {
-    return this._router.isActive('/home/employeelist', true);
+    return this._router.isActive('/employee/empvisitorlist', true);
+  }
+  onTotalFlatList(): boolean {
+    return this._router.isActive('/employee/totalflatowner', true);
+  }
+  onTotalEmployeeList(): boolean {
+    return this._router.isActive('/employee/totalemployee', true);
   }
   onLogout() {
     this._router.navigate(['/'])

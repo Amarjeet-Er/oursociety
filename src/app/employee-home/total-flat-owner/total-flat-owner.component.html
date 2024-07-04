@@ -1,0 +1,69 @@
+<div id="containerBox">
+  <div id="DataBox">
+
+      <div class="select-header">
+          <div class="searchInput">
+              <input type="text" matInput placeholder="Search..." #search (keyup)="onSearch(search.value)" />
+          </div>
+      </div>
+
+      <mat-accordion class="container">
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+              *ngFor="let data of reg_data">
+              <mat-expansion-panel-header>
+                  <mat-panel-title>
+                      <div class="imgDataBox">
+                          <img [src]="data.flatOwnerImagePath? base_url+data.flatOwnerImagePath : '../../../assets/images/user.webp'"
+                              alt="">
+                      </div>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                      <b> {{data.flatOwnerName}}</b>
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="dataRow">
+                  <p>
+                      <b>Block Name:- </b>
+                      <span>{{data?.buildName}}</span>
+                  </p>
+
+                  <p>
+                      <b>Flat Number :- </b>
+                      <span>{{data?.flatName}}</span>
+                  </p>
+
+                  <p>
+                      <b>Name :- </b>
+                      <span>{{data?.flatOwnerName}}</span>
+                  </p>
+                  <p>
+                      <b>Mobile :- </b>
+                      <span>{{data?.primaryNumber}}</span>
+                  </p>
+                  <p>
+                      <b>Aadhar Number :- </b>
+                      <span>{{data?.aadharNumber}}</span>
+                  </p>
+                  <p>
+                      <b>Email :- </b>
+                      <span>{{data?.ownerEmail}}</span>
+                  </p>
+                  <p>
+                      <b>Designation :- </b>
+                      <span>{{data?.ownerDesignation}}</span>
+                  </p>
+                  <p>
+                      <b>Family Member :- </b>
+                      <span>{{data?.totalFamilyMember}}</span>
+                  </p>
+
+                  <p>
+                      <b>Having Car :- </b>
+                      <span>{{data?.havingCar}}</span>
+                  </p>
+              </div>
+          </mat-expansion-panel>
+      </mat-accordion>
+      <p class="NoRecord" *ngIf="reg_data?.length === 0">No Record Found</p>
+  </div>
+</div>

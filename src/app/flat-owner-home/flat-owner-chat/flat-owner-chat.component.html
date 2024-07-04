@@ -4,10 +4,12 @@
       <ion-icon name="arrow-back-sharp"></ion-icon>
     </div>
     <div>
-      <img src="../../../assets/images/user.webp" alt="User Avatar" class="avatar">
+      <img
+        [src]="flat_filter_data?.profilePath ? img_url+flat_filter_data?.profilePath :'../../../assets/images/user.webp'"
+        alt="User Avatar" class="avatar">
     </div>
     <div class="profile">
-      <span>Amarjeet Kumar</span>
+      <span>{{flat_filter_data?.name}}</span>
     </div>
   </div>
   <div class="boxarea">
