@@ -31,13 +31,11 @@ export class VisitorTodayComponent  implements OnInit {
   ngOnInit(): void {
     this._shared.img_base_url.subscribe(
       (res: any) => {
-        console.log(res);
         this.img_url = res
       }
     )
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
-        console.log(res);
         if (res.Status === 'Success') {
           const today = new Date().toISOString().split('T')[0]; 
           const filteredData = res.Data.filter((item: any) => item.visitingDate === today);

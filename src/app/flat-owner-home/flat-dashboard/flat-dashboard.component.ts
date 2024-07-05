@@ -31,9 +31,6 @@ export class FlatDashboardComponent implements OnInit {
     this.flatId = localStorage.getItem('flatId');
     this.flat_id = JSON.parse(this.flatId);
     this.flatEmail = this.flat_id.Username
-    console.log(this.flatEmail, 'email');
-
-
     this._crud.get_emp_list().subscribe(
       (res: any) => {
         this.list_emp_total = res.AllRegisteredEmployee;

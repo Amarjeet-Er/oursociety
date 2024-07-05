@@ -29,10 +29,8 @@ export class EmployeeGuardListComponent implements OnInit {
 
     this._crud.get_emp_list().subscribe(
       (res: any) => {
-        console.log(res, 'reg');
         if (res && res.AllRegisteredEmployee) {
           this.reg_data = res.AllRegisteredEmployee.filter((employee: any) => employee.employee_type === "Security Guard");
-          console.log(this.reg_data, 'dsdsds');
           this.reg_filter_data = this.reg_data;
         }
       }

@@ -93,7 +93,6 @@ export class EmployeeUpdateComponent implements OnInit {
 
   onEmpTypeChange(event: any) {
     const selectedId = event.detail.value;
-    console.log(selectedId);
     this.getEmpTypeDetailsById(selectedId);
   }
   getEmpTypeDetailsById(id: number) {
@@ -142,7 +141,6 @@ export class EmployeeUpdateComponent implements OnInit {
           type: 'image/png'
         });
         this.gallery_select = captureImg
-        alert('Successfully captured image.');
         const stream = this.video.nativeElement.srcObject;
         const tracks = stream.getTracks();
         tracks[0].stop();
@@ -235,16 +233,12 @@ export class EmployeeUpdateComponent implements OnInit {
       const empPassword = this.employeeReg.get('emp_password')?.value;
       if (empPassword) {
         updateData.append('emp_password', empPassword);
-        console.log(empPassword);
-        console.log('Passwords match');
         this.passwordsMatch = false;
       }
     } else {
-      console.log('Passwords do not match');
       this.passwordsMatch = true;
       return;
     }
-    console.log(this.employeeReg.value);
 
     if (this.employeeReg.valid) {
       this._curd.post_emp_add_edit(updateData).subscribe(
@@ -259,7 +253,6 @@ export class EmployeeUpdateComponent implements OnInit {
         },
         (err: any) => {
           this._shared.tostErrorTop('Data Not Update')
-          console.log(err);
         }
       );
     }

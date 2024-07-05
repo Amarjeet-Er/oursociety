@@ -7,9 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./home2.component.scss'],
 })
 export class Home2Component  implements OnInit {
-
- 
- 
   constructor(
     private _router: Router
   ) { }

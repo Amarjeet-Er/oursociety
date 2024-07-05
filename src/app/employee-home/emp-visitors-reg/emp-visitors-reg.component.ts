@@ -46,7 +46,6 @@ export class EmpVisitorsRegComponent implements OnInit {
     
     this._crud.get_building_block().subscribe(
       (res: any) => {
-        console.log(res, 'value');
         this.building_block = res.Data
       }
     )
@@ -58,7 +57,6 @@ export class EmpVisitorsRegComponent implements OnInit {
       (res: any) => {
         if (res.Data && Array.isArray(res.Data)) {
           this.building_num = res.Data.filter((item: any) => item.regStatus === 0);
-          console.log('Filtered flat numbers:', this.building_num);
         } else {
           this.building_num = [];
         }
@@ -96,21 +94,13 @@ export class EmpVisitorsRegComponent implements OnInit {
 
   onFlatFind() {
     const selectedFlatId = this.VisitorReg.value.flatNum;
-    console.log(selectedFlatId, 'fhsdjk');
-
     const selectedFlat = this.building_num.find((flat: { f_id: any; }) => flat.f_id === selectedFlatId);
-    console.log(selectedFlat, 'selectedFlat');
     if (selectedFlat) {
       if (selectedFlat.regStatus === 0) {
         this._crud.get_flat_owner_list().subscribe(
           (res: any) => {
-            console.log(res);
-
             const filteredOwners = res.Data.filter((owner: any) => owner.f_id === selectedFlatId);
             this.flat_owner_list = filteredOwners;
-            console.log(this.flat_owner_list, 'list');
-
-            console.log('Flat number found with regStatus 0 and matching flatNum');
             this.findFlatNo = true;
           }
         );
@@ -119,8 +109,6 @@ export class EmpVisitorsRegComponent implements OnInit {
   }
   onFindDetails(data: any) {
     this._shared.shared_details.next(data)
-    console.log(data);
-
     this._router.navigate(['/employee/empvisitorflatfind'])
   }
   StartCamera() {
@@ -160,7 +148,6 @@ export class EmpVisitorsRegComponent implements OnInit {
           type: 'image/png'
         });
         this.gallery_select = captureImg
-        alert('Successfully captured image.');
         const stream = this.video.nativeElement.srcObject;
         const tracks = stream.getTracks();
         tracks[0].stop();
@@ -223,7 +210,6 @@ export class EmpVisitorsRegComponent implements OnInit {
         },
         (err: any) => {
           this._shared.tostErrorTop('Data Not Insert')
-          console.log(err);
         }
       );
     }

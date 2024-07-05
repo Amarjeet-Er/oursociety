@@ -22,20 +22,16 @@ export class TotalEmployeeComponent implements OnInit {
     this._shared.img_base_url.subscribe((res: any) => {
       this.base_url = res;
     });
-
-
   }
 
   async ngOnInit() {
     this._crud.get_emp_list().subscribe(
       (res: any) => {
-        console.log(res, 'reg');
         this.reg_data = res.AllRegisteredEmployee;
         this.reg_filter_data = res.AllRegisteredEmployee;
       }
     )
   }
-
 
   onSearch(filter: any) {
     this.reg_data = this.reg_filter_data.filter((data: any) => {

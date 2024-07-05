@@ -14,7 +14,5 @@ export class UserProfileComponent  implements OnInit {
   ) { }
 
   ngOnInit() {}
-  onLogout() {
-    this._router.navigate(['/'])
-  }
+
 }

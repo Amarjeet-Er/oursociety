@@ -18,19 +18,16 @@ export class AdminReportsComponent implements OnInit {
   ngOnInit() {
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
-        console.log(res);
         this.visitor_data = res.Data
       }
     )
     this._crud.get_flat_owner_list().subscribe(
       (res: any) => {
-        console.log(res);
         this.flat_owner_data = res.Data
       }
     )
     this._crud.get_emp_list().subscribe(
       (res: any) => {
-        console.log(res);
         this.emp_data = res.AllRegisteredEmployee;
       }
     )

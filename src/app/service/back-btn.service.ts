@@ -19,40 +19,45 @@ export class BackBtnService {
       if (event instanceof NavigationEnd) {
         this.previousUrl = this.currentUrl;
         this.currentUrl = event.url;
-        console.log(this.currentUrl, 'current');
-
       }
     });
-
-    this.initializeBackButtonHandler();
   }
 
-  private initializeBackButtonHandler() {
+  back() {
     this.platform.ready().then(() => {
+      console.log('Platform ready');
       App.addListener('backButton', () => {
-        this.handleBackButton();
+        console.log('Back button pressed');
+        let urlObject = new URL(window.location.href);
+        let pathname = urlObject.pathname;
+        console.log('Current pathname:', pathname);
+
+        if (pathname === '/') {
+          console.log('App will be closed');
+          this.showExitConfirmation();
+          return;
+        } else if (pathname === '/home/dashboard' || pathname === '/flatowner/dashboard' || pathname === '/employee/dashboard') {
+          console.log('Dashboard route detected, app will be closed');
+          this.showExitConfirmation();
+          return;
+        } else {
+          console.log('Navigating to previous URL:', this.previousUrl);
+          window.location.replace(this.previousUrl);
+          window.location.href = this.previousUrl;
+        }
       });
+    }).catch(error => {
+      console.error('Platform not ready', error);
     });
   }
 
-  private handleBackButton() {
-    const urlObject = new URL(window.location.href);
-    const pathname = urlObject.pathname;
-
-    if (pathname === '/' ||
-      pathname === '/home/dashboard' ||
-      pathname === '/flatowner/dashboard' ||
-      pathname === '/employee/dashboard') {
-      this.showExitConfirmation();
-    } else {
-      window.history.back();
-    }
-  }
-
-  private showExitConfirmation() {
+  showExitConfirmation() {
     const confirmed = window.confirm('Do you want to close the app?');
     if (confirmed) {
+      console.log('User confirmed exit');
       App.exitApp();
+    } else {
+      console.log('User canceled exit');
     }
   }
 }

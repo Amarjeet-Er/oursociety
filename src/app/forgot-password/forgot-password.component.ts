@@ -4,12 +4,14 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CurdService } from '../service/curd.service';
 import { SharedService } from '../service/shared.service';
 import { filter } from 'rxjs/operators';
+
+
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss']
 })
-export class ForgotPasswordComponent {
+export class ForgotPasswordComponent implements OnInit {
   disableSelect = new FormControl(false);
   EmailVerification!: FormGroup;
   hide = true;
@@ -18,113 +20,110 @@ export class ForgotPasswordComponent {
   onSendCondition = true;
   onverificationCondition = true;
   onchangePassCondition = false;
+
   constructor(
     private _router: Router,
     private _formBuilder: FormBuilder,
-    private _crud:CurdService,
-    private _shared:SharedService
+    private _crud: CurdService,
+    private _shared: SharedService
   ) {
-    this._router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-    });
+    this._router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => { });
   }
+
   ngOnInit(): void {
     this.EmailVerification = this._formBuilder.group({
-      email: ['', Validators.required],
-      inp1: [''],
-      inp2: [''],
-      inp3: [''],
-      inp4: [''],
-    })
+      email: ['', [Validators.required, Validators.email]],
+      pass1: [''],
+      pass2: [''],
+      pass3: [''],
+      pass4: [''],
+    });
 
     this.create_password = this._formBuilder.group({
       change_pass: ['', Validators.required],
       confirm_pass: ['', Validators.required],
-    })
+    },);
   }
-
-  /////////////////// register email otp send  /////////////////
 
   onSend() {
-    console.log(this.EmailVerification.value);
-    
-    const formdata = new FormData();
-    formdata.append('email', this.EmailVerification.value.email);
     if (this.EmailVerification.valid) {
+      const formdata = new FormData();
+      formdata.append('email', this.EmailVerification.value.email);
+
       this._crud.send_otp(formdata).subscribe(
         (res: any) => {
-          console.log(res);
-          if (res.Status == 'Success') {
-            this._shared.tostSuccessTop('Send OTP Successfully')
+          if (res.Status === 'Success') {
+            localStorage.setItem('passwordId', JSON.stringify(res));
+            this._shared.tostSuccessTop('Send OTP Successfully');
             this.onVerifyCondition = true;
             this.onSendCondition = false;
-          }
-          else {
-            this._shared.tostWarningTop('Invalid Email')
+          } else {
+            this._shared.tostWarningTop('Invalid Email');
           }
         },
         (error: any) => {
           console.error(error);
-          this._shared.tostErrorTop('Invalid email try again')
+          this._shared.tostErrorTop('Invalid email, try again');
         }
       );
     } else {
-      this._shared.tostErrorTop('Please fill out this field')
+      this._shared.tostErrorTop('Please fill out this field');
     }
   }
-
-  /////////////////// otp verifyed  /////////////////
 
   onVerify() {
-    const formdata = new FormData()
-    formdata.append('OTP', this.EmailVerification.get('inp1')?.value)
-    formdata.append('OTP', this.EmailVerification.get('inp2')?.value)
-    formdata.append('OTP', this.EmailVerification.get('inp3')?.value)
-    formdata.append('OTP', this.EmailVerification.get('inp4')?.value)
-    formdata.append('Email', this.EmailVerification.get('email')?.value)
-    if (this.EmailVerification.valid) {
-      console.log(this.EmailVerification.value);
-      this._crud.send_otp(formdata).subscribe(
-        (res: any) => {
-          console.log(res);
-          this._shared.tostSuccessTop('Verify OTP Successfully')
-          this.onverificationCondition = false;
-          this.onchangePassCondition = true
-        },
-        (error: any) => {
-          console.error(error);
-          this._shared.tostErrorTop('Invalid otp try again')
-        }
-      );
+    const pass1 = this.EmailVerification.get('pass1')?.value;
+    const pass2 = this.EmailVerification.get('pass2')?.value;
+    const pass3 = this.EmailVerification.get('pass3')?.value;
+    const pass4 = this.EmailVerification.get('pass4')?.value;
+
+    const otpData = `${pass1}${pass2}${pass3}${pass4}`;
+    const email = this.EmailVerification.get('email')?.value;
+    const passwordId = JSON.parse(localStorage.getItem('passwordId') || '{}');
+    const passwordIdEmail = passwordId.Email;
+    const passwordIdOTP = passwordId.OTP;
+    console.log('Stored Email:', passwordIdEmail);
+    console.log('Stored OTP:', passwordIdOTP);
+    console.log('Entered OTP:', otpData);
+    console.log('Entered Email:', email);
+    if (otpData == passwordIdOTP && email == passwordIdEmail) {
+      this._shared.tostSuccessTop('Password Changed Successfully');
+      this.onverificationCondition = false;
+      this.onchangePassCondition = true;
     } else {
-      this._shared.tostErrorTop('Please fill out this field')
+      this._shared.tostErrorTop('Invalid OTP, try again');
     }
   }
-  /////////////////// register email otp send  /////////////////
 
   onChange() {
     if (this.create_password.valid) {
+      const passwordId = JSON.parse(localStorage.getItem('passwordId') || '{}');
+      const passwordIdEmail = passwordId.Email;
       if (this.create_password.get('change_pass')?.value === this.create_password.get('confirm_pass')?.value) {
         const formdata = new FormData();
-        formdata.append('email', this.create_password.get('email')?.value);
+        formdata.append('email', passwordIdEmail);
         formdata.append('NewPass', this.create_password.get('change_pass')?.value);
         formdata.append('confirmPass', this.create_password.get('confirm_pass')?.value);
         this._crud.change_password(formdata).subscribe(
           (res: any) => {
-            console.log(res);
-            this._shared.tostSuccessTop('Password Changed Successfully')
-            this._router.navigate(['/']);
+            if (res.Status === 'Success') {
+              this._shared.tostSuccessTop('Password Changed Successfully');
+              this._router.navigate(['/']);
+            } else {
+              this._shared.tostErrorTop('Invalid password, try again');
+            }
           },
           (error: any) => {
             console.error(error);
-            this._shared.tostErrorTop('Invalid password try again')
+            this._shared.tostErrorTop('Invalid password, try again');
           }
         );
       } else {
-        this._shared.tostErrorTop('Password and Confirm Password does not match')
+        this._shared.tostErrorTop('Password and Confirm Password do not match');
       }
     }
     else {
-      this._shared.tostErrorTop('Please fill out this field')
+      this._shared.tostErrorTop('Please fill out all fields correctly');
     }
   }
 

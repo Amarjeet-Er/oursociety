@@ -1,0 +1,102 @@
+<div id="containerBox">
+    <div id="wrapper">
+        <div class="site-header">
+            <div class="TotalBack">
+                <ion-fab-button routerLink="/home/adminreports">
+                    <ion-icon name="arrow-back-sharp"></ion-icon>
+                </ion-fab-button>
+                <span> <b>Total :-</b> {{reg_data?.length}}</span>
+            </div>
+            <div class="documentDownload">
+                <button mat-button (click)="PdfDownload()">
+                    <span>PDF</span>
+                </button>
+                <button mat-button (click)="excelDowbload()">
+                    <span>Excel</span>
+                </button>
+                <button mat-button (click)="onFilterData()">
+                    <span>Filter</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="DataBox">
+
+        <div class="select-header" *ngIf="siteSearch">
+            <div class="searchInput">
+                <input type="text" matInput placeholder="Search..." #search (keyup)="onSearch(search.value)" />
+            </div>
+            <ion-select class="searchInput" label="Building Blocks" fill="fill" label-placement="floating"
+                interface="action-sheet" placeholder="Select building blocks"
+                (ionChange)="get_filter_by_flat_num($event)">
+                <ion-select-option *ngFor="let building_list of block_list" [value]="building_list?.b_id">{{
+                    building_list?.buildingBlockName }}</ion-select-option>
+            </ion-select>
+            <ion-select class="searchInput" label="Building Blocks" fill="fill" label-placement="floating"
+                interface="action-sheet" placeholder="Select building blocks"
+                (ionChange)="get_filter_by_flat_num($event)">
+                <ion-select-option *ngFor="let building_list of building_num" [value]="building_list?.b_id">{{
+                    building_list?.buildingBlockName }}</ion-select-option>
+            </ion-select>
+        </div>
+
+        <mat-accordion class="container" *ngIf="onViewFilterList">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                *ngFor="let data of reg_data">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="imgDataBox">
+                            <img [src]="data.flatOwnerImagePath? base_url+data.flatOwnerImagePath : '../../../assets/images/user.webp'"
+                                alt="">
+                        </div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <b> {{data.flatOwnerName}}</b>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="dataRow">
+                    <p>
+                        <b>Block Name:- </b>
+                        <span>{{data?.buildName}}</span>
+                    </p>
+
+                    <p>
+                        <b>Flat Number :- </b>
+                        <span>{{data?.flatName}}</span>
+                    </p>
+
+                    <p>
+                        <b>Name :- </b>
+                        <span>{{data?.flatOwnerName}}</span>
+                    </p>
+                    <p>
+                        <b>Mobile :- </b>
+                        <span>{{data?.primaryNumber}}</span>
+                    </p>
+                    <p>
+                        <b>Aadhar Number :- </b>
+                        <span>{{data?.aadharNumber}}</span>
+                    </p>
+                    <p>
+                        <b>Email :- </b>
+                        <span>{{data?.ownerEmail}}</span>
+                    </p>
+                    <p>
+                        <b>Designation :- </b>
+                        <span>{{data?.ownerDesignation}}</span>
+                    </p>
+                    <p>
+                        <b>Family Member :- </b>
+                        <span>{{data?.totalFamilyMember}}</span>
+                    </p>
+
+                    <p>
+                        <b>Having Car :- </b>
+                        <span>{{data?.havingCar}}</span>
+                    </p>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

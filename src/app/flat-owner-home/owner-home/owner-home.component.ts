@@ -27,7 +27,6 @@ export class OwnerHomeComponent implements OnInit {
     this.flatId = localStorage.getItem('flatId');
     this.flat_id = JSON.parse(this.flatId);
     this.flatEmail = this.flat_id.Username
-    console.log(this.flatEmail, 'email');
   }
 
   ngOnInit() {
@@ -41,8 +40,6 @@ export class OwnerHomeComponent implements OnInit {
         if (res && res.Data) {
           this.flat_data = res.Data.filter((employee: any) => employee.ownerEmail === this.flatEmail);
           this.flat_filter_data = this.flat_data[0];
-          console.log(this.flat_filter_data, 'sdsd');
-
         }
       }
     );

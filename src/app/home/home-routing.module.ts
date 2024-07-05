@@ -30,6 +30,7 @@ import { VisitorTodayComponent } from './visitor-today/visitor-today.component';
 import { AdminChatListComponent } from './admin-chat-list/admin-chat-list.component';
 import { Home2Component } from './home2/home2.component';
 import { NewChatComponent } from './new-chat/new-chat.component';
+import { FlatRegAviReportsComponent } from './flat-reg-avi-reports/flat-reg-avi-reports.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,7 @@ const routes: Routes = [
       { path: 'admincontact', component: AdminContactComponent },
       { path: 'newchatadmin', component: NewChatComponent },
       { path: 'changepassword', component: AdminChangePasswordComponent },
+      { path: 'flatregisteravailable', component: FlatRegAviReportsComponent },
       { path: 'home2', redirectTo: '', pathMatch: 'full' }
     ]
   }

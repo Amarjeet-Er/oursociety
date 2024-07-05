@@ -39,8 +39,6 @@ export class FlatOwnerRegComponent implements OnInit {
   ) {
     this._crud.get_building_block().subscribe(
       (res: any) => {
-        console.log(res, 'block');
-
         this.building_block = res.Data
       }
     )
@@ -52,7 +50,6 @@ export class FlatOwnerRegComponent implements OnInit {
       (res: any) => {
         if (res.Data && Array.isArray(res.Data)) {
           this.building_num = res.Data.filter((item: any) => item.regStatus === 1);
-          console.log('Filtered flat numbers:', this.building_num);
         } else {
           this.building_num = [];
         }
@@ -194,7 +191,6 @@ export class FlatOwnerRegComponent implements OnInit {
           type: 'image/png'
         });
         this.gallery_select = captureImg
-        alert('Successfully captured image.');
         const stream = this.video.nativeElement.srcObject;
         const tracks = stream.getTracks();
         tracks[0].stop();
@@ -225,8 +221,6 @@ export class FlatOwnerRegComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.RegFlatForm.value);
-
     const formdata = new FormData();
     formdata.append('buildingBlock', this.RegFlatForm.get('buildingBlock')?.value);
     formdata.append('flatNum', this.RegFlatForm.get('flatNum')?.value);
@@ -240,26 +234,17 @@ export class FlatOwnerRegComponent implements OnInit {
 
     const haveCarValue = this.RegFlatForm.get('havingCar')?.value ? 'Yes' : 'No';
     formdata.append('havingCar', haveCarValue);
-
     formdata.append('familyDataList', JSON.stringify(this.RegFlatForm.get('familyDataList')?.value));
-    console.log('familyDataList', this.RegFlatForm.get('familyDataList')?.value);
-
     formdata.append('familyCarData', JSON.stringify(this.RegFlatForm.get('familyCarData')?.value));
-    console.log('familyCarData', this.RegFlatForm.get('familyCarData')?.value);
-
     formdata.append('profile', this.gallery_select);
-    console.log(this.gallery_select, 'img');
 
     if (this.RegFlatForm.get('password')?.value === this.RegFlatForm.get('empConfirmPass')?.value) {
       const OwnerPassword = this.RegFlatForm.get('password')?.value;
       if (OwnerPassword) {
         formdata.append('password', OwnerPassword);
-        console.log(OwnerPassword);
-        console.log('Passwords match');
         this.passwordsMatch = false;
       }
     } else {
-      console.log('Passwords do not match');
       this.passwordsMatch = true;
       return;
     }
@@ -277,7 +262,6 @@ export class FlatOwnerRegComponent implements OnInit {
         },
         (err: any) => {
           this._shared.tostErrorTop('Data Not Insert')
-          console.log(err);
         }
       );
     }

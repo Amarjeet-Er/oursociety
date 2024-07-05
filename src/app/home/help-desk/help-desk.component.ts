@@ -41,7 +41,6 @@ export class HelpDeskComponent implements OnInit {
       (res: any) => {
         this.chat_name = res
         this.chat_name_list = res.userId
-        console.log(this.chat_name_list, 'dsasad');
       },
       (error) => {
         console.error('Error fetching chat data:', error);
@@ -90,7 +89,6 @@ export class HelpDeskComponent implements OnInit {
   private fetchChatMessages() {
     this._crud.get_chat_admin_by_flat(this.chat_name_list).subscribe(
       (res: any) => {
-        console.log(res);
         this.chat_mes_list = res.Data;
       },
       (error) => {

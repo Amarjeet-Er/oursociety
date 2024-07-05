@@ -13,7 +13,6 @@ export class CurdService {
   ) {
     this._shared.base_url.subscribe(
       (res: any) => {
-        console.log(res, 'message');
         this.base_url = res;
       }
     )
@@ -97,9 +96,6 @@ export class CurdService {
   send_otp(data: any) {
     return this._http.post(`${this.base_url}SendOTP/SendOTP`, data);
   }
-  // veryfy_otp(email: string, data: any) {
-  //   return this._http.post(`${this.base_url}SendOTP/SendOTP`, data)
-  // }
   change_password(data: any) {
     return this._http.post(`${this.base_url}ForgetPass/ChangePass`, data)
   }

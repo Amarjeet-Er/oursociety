@@ -32,7 +32,6 @@ export class FlatOwnerChatComponent implements OnInit {
     this.flatId = localStorage.getItem('flatId');
     this.flat_id = JSON.parse(this.flatId);
     this.flatOwnerId = this.flat_id?.Username;
-    console.log(this.flatOwnerId, 'email');
 
     this._shared.img_base_url.subscribe((res: any) => {
       this.img_url = res;
@@ -64,7 +63,6 @@ export class FlatOwnerChatComponent implements OnInit {
     if (this.chat_message.valid) {
       this._crud.post_chating_mes(formdata).subscribe(
         (res) => {
-          console.log(res, 'res');
           this.fetchChatMessages();
           this.chat_message.reset(); 
         },
@@ -79,7 +77,6 @@ export class FlatOwnerChatComponent implements OnInit {
   private fetchChatMessages() {
     this._crud.get_chat_any(this.flatOwnerId).subscribe(
       (res: any) => {
-        console.log(res.Data);
         this.chat_mes_list = res.Data;
         if (res && res.Data) {
           this.flat_data = res.Data.filter((flat: any) => flat.userId === "Admin");

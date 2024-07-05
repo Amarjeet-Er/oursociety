@@ -26,12 +26,9 @@ export class LoginPageComponent implements OnInit {
     this.login_form = this.fb.group({
       Email: ['', Validators.required],
       Password: ['', Validators.required],
-    }
-    )
+    })
   }
   onLogin() {
-    console.log(this.login_form.get('Email')?.value);
-    console.log(this.login_form.get('Password')?.value);
     if (this.login_form.valid) {
       const formdata = new FormData();
       formdata.append('Email', this.login_form.get('Email')?.value)
@@ -39,7 +36,6 @@ export class LoginPageComponent implements OnInit {
 
       this._crud.login(formdata).subscribe(
         (res: any) => {
-          console.log(res);
           if (res.Status === 'Success') {
             if (res.RollId === 'Admin') {
               localStorage.setItem('userId', JSON.stringify(res))
@@ -64,7 +60,6 @@ export class LoginPageComponent implements OnInit {
           }
         },
         (err: any) => {
-          console.log(err);
           this._shared.tostErrorTop('Login Field')
         }
       )

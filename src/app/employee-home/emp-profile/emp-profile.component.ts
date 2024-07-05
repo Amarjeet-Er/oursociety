@@ -27,12 +27,9 @@ export class EmpProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this._shared.shared_details.subscribe(
       (data) => {
         this.ProfileData = data;
-        console.log(this.ProfileData, 'prfdf');
-
       }
     )
   }

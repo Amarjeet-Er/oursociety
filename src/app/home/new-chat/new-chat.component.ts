@@ -78,7 +78,6 @@ export class NewChatComponent implements OnInit {
   private fetchChatMessages() {
     this._crud.get_chat_admin_by_flat(this.chat_name_list).subscribe(
       (res: any) => {
-        console.log(res);
         this.chat_mes_list = res.Data;
       },
       (error) => {

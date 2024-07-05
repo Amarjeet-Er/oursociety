@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { CurdService } from 'src/app/service/curd.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,20 @@ export class DashboardComponent implements OnInit {
   constructor(
     private _router: Router,
     private _crud: CurdService
-  ) {
+  ) { }
+
+  ngOnInit(): void {
+
+    this._router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      this.loadData();
+    });
+
+    this.loadData();
+    this.createColumnChart();
+    this.AllEmpChart();
+    this.AllFlatChart();
+  }
+  loadData() {
     this._crud.get_emp_list().subscribe(
       (res: any) => {
         this.list_emp_total = res.AllRegisteredEmployee;
@@ -41,19 +55,11 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
-  ngOnInit(): void {
-    this.createColumnChart();
-    this.AllEmpChart();
-    this.AllFlatChart();
-  }
-
   createColumnChart(): void {
     const ctxColumn = this.visitorColumnChart.nativeElement.getContext('2d');
     Chart.register(...registerables);
     this._crud.get_chart_visitors_list().subscribe(
       (res: any) => {
-        console.log(res);
         this.list_visistor = res.Data
         const myChart = new Chart(ctxColumn, {
           type: 'bar',
@@ -98,7 +104,6 @@ export class DashboardComponent implements OnInit {
     this._crud.get_chart_emp_list().subscribe(
       (res: any) => {
         this.flat_owner_list = res.data;
-        console.log(this.flat_owner_list);
         const chart = new Chart(ctx, {
           type: 'pie',
           data: {
@@ -124,7 +129,6 @@ export class DashboardComponent implements OnInit {
     this._crud.get_chart_flat_list().subscribe(
       (res: any) => {
         this.flat_owner_list = res.data;
-        console.log(this.flat_owner_list);
         const chart = new Chart(ctx, {
           type: 'pie',
           data: {

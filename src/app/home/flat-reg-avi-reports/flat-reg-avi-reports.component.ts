@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { SharedService } from 'src/app/service/shared.service';
 import { Platform } from '@ionic/angular';
 import * as XLSX from 'xlsx';
@@ -14,12 +13,11 @@ const pdfFontsX = require('pdfmake/build/vfs_fonts');
 pdfMakeX.vfs = pdfFontsX.pdfMake.vfs;
 
 @Component({
-  selector: 'app-total-visitor-reports',
-  templateUrl: './total-visitor-reports.component.html',
-  styleUrls: ['./total-visitor-reports.component.scss'],
+  selector: 'app-flat-reg-avi-reports',
+  templateUrl: './flat-reg-avi-reports.component.html',
+  styleUrls: ['./flat-reg-avi-reports.component.scss'],
 })
-export class TotalVisitorReportsComponent  implements OnInit {
-
+export class FlatRegAviReportsComponent implements OnInit {
   siteSearch: boolean = false;
   panelOpenState = false;
   reg_data: any;
@@ -31,12 +29,13 @@ export class TotalVisitorReportsComponent  implements OnInit {
   EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=UTF-8';
   documentDefinition: any;
   reg_filter_data: any;
+  block_list: any;
+  building_num: any;
 
   // Constructor
   constructor(
     private _crud: CurdService,
     private _shared: SharedService,
-    private _router: Router,
     private _Platform: Platform,
   ) {
 
@@ -44,16 +43,45 @@ export class TotalVisitorReportsComponent  implements OnInit {
       this.base_url = res;
     });
 
-    this._crud.get_visistors_list().subscribe(
+    this._crud.get_building_block().subscribe(
       (res: any) => {
-        if (res.Status === 'Success') {
-          const today = new Date().toISOString().split('T')[0]; 
-          const filteredData = res.Data.filter((item: any) => item.visitingDate === today);
-          this.reg_data = filteredData;
-          this.reg_filter_data = filteredData;
-        }
+        this.block_list = res.Data
       }
     )
+  }
+  get_filter_by_flat_num(building_id: any) {
+    const flat_building_no = building_id.target.value;
+
+    this._crud.get_flat_number(flat_building_no).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.building_num=res.Data
+      //   if (res.Data && Array.isArray(res.Data)) {
+      //     this.building_num = res.Data.filter((item: any) => item.regStatus === 1);
+      //   } else {
+      //     this.building_num = [];
+      //   }
+      // },
+      // (error: any) => {
+      //   console.error('Error fetching flat numbers:', error);
+      //   this.building_num = [];
+      }
+    );
+  }
+  get_block_name(data: any) {
+    if (!data) {
+      this.reg_data = [];
+      return;
+    }
+    this._crud.get_flat_owner_list().subscribe(
+      (res: any) => {
+        const filteredData = res.Data.filter((item: { buildName: string; }) => item.buildName === data);
+        this.reg_data = filteredData;
+      },
+      (error: any) => {
+        console.error("Error fetching subDepartment data:", error);
+      }
+    );
   }
 
   // Lifecycle Hook - ngOnInit
@@ -71,61 +99,10 @@ export class TotalVisitorReportsComponent  implements OnInit {
       }
     });
   }
-  get_reg_date(reg: any) {
-    const regDate = reg.target.value
-
-    if (!regDate) {
-      this.reg_data = [];
-      return;
-    }
-
-    this._crud.get_visistors_list().subscribe(
-      (res: any) => {
-        const filteredData = res.Data.filter((item: { visitingDate: string; }) => item.visitingDate === regDate);
-        this.reg_data = filteredData;
-      },
-      (error: any) => {
-        console.error("Error fetching reg date:", error);
-      }
-    );
-  }
 
   onFilterData() {
     this.siteSearch = !this.siteSearch;
     this.onViewFilterList = true;
-    this._crud.get_visistors_list().subscribe(
-      (res: any) => {
-        if (res.Status === 'Success') {
-          const today = new Date().toISOString().split('T')[0]; 
-          const filteredData = res.Data.filter((item: any) => item.visitingDate === today);
-          this.reg_data = filteredData;
-          this.reg_filter_data = filteredData;
-        }
-      }
-    )
-  }
-
-  onFilterClose() {
-    this.siteSearch = !this.siteSearch;
-    this._crud.get_visistors_list().subscribe(
-      (res: any) => {
-        if (res.Status === 'Success') {
-          const today = new Date().toISOString().split('T')[0]; 
-          const filteredData = res.Data.filter((item: any) => item.visitingDate === today);
-          this.reg_data = filteredData;
-          this.reg_filter_data = filteredData;
-        }
-    });
-  }
-
-  onFilterList() {
-    this.onViewFilterList = true;
-    this.onAllClose = true;
-    this.onSelectApply = true;
-  }
-
-  onCloseApply() {
-    this.siteSearch = false;
   }
 
   // Generate Excel file
@@ -135,15 +112,15 @@ export class TotalVisitorReportsComponent  implements OnInit {
       const rowData: any = {
         'S.N': serialNo++,
       };
-      rowData['Name'] = reg.visitorName;
-      rowData['Mobile'] = reg.visitorMobileNum;
-      rowData['Total Visitors'] = reg.totalVisitors;
-      rowData['Registration Date'] = reg.visitingDate;
-      rowData['Status'] = reg.approvalStatus === 0 ? 'Rejected' : 'Approved';
-      rowData['Vehicle'] = reg.havingVehicle;
-      rowData['Vehicle Model'] = reg.visitorVehicleModel;
-      rowData['Vehicle Number'] = reg.visitorVehicleNumber;
-      rowData['Vehicle Parking'] = reg.visitorVehicleParkingArea;
+      rowData['Block Name'] = reg.buildName;
+      rowData['Flat Number'] = reg.flatName;
+      rowData['Name'] = reg.flatOwnerName;
+      rowData['Mobile Number'] = reg.primaryNumber;
+      rowData['Aadhar Number'] = reg.aadharNumber;
+      rowData['Email'] = reg.ownerEmail;
+      rowData['Designation'] = reg.ownerDesignation;
+      rowData['Family Member'] = reg.totalFamilyMember;
+      rowData['Having Car'] = reg.havingCar;
       return rowData;
     });
     try {
@@ -167,7 +144,7 @@ export class TotalVisitorReportsComponent  implements OnInit {
 
       const now = new Date();
       const timestamp = `${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
-      const filename = `Visitors_${timestamp}.xlsx`;
+      const filename = `Flat_owner_${timestamp}.xlsx`;
       if (this._Platform.is('cordova') || this._Platform.is('mobile') || this._Platform.is('android')) {
         const excelBuffer = XLSX.write(wb, { type: 'array', bookType: 'xlsx' });
         const excelData: Blob = new Blob([excelBuffer], { type: this.EXCEL_TYPE });
@@ -194,7 +171,7 @@ export class TotalVisitorReportsComponent  implements OnInit {
 
       const now = new Date();
       const timestamp = `${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
-      const filename = `Visitors_${timestamp}.pdf`;
+      const filename = `Flat_owner_${timestamp}.pdf`;
 
       if (this._Platform.is('cordova') || this._Platform.is('mobile') || this._Platform.is('android')) {
         pdfMake.createPdf(this.documentDefinition).getBuffer(async (buffer: ArrayBuffer) => {
@@ -218,32 +195,33 @@ export class TotalVisitorReportsComponent  implements OnInit {
 
   generateDocumentDefinition(): any {
     const content = [];
-    content.push({ text: 'Visitors', style: 'header', margin: [0, 0, 0, 10] });
+    content.push({ text: 'Flat Owner', style: 'header', margin: [0, 0, 0, 10] });
     content.push('\n');
 
     const tableHeaders: any[] = [];
     if (1) tableHeaders.push({ text: 'S.N', style: 'tableHeader' });
+    tableHeaders.push({ text: 'Block Name', style: 'tableHeader' });
+    tableHeaders.push({ text: 'Flat Number', style: 'tableHeader' });
     tableHeaders.push({ text: 'Name', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Mobile', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Total Visitors', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Registration Date', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Status', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Vehicle', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Vehicle Model', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Vehicle Number', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Vehicle Parking', style: 'tableHeader' });
+    tableHeaders.push({ text: 'Mobile Number', style: 'tableHeader' });
+    tableHeaders.push({ text: 'Aadhar Number', style: 'tableHeader' });
+    tableHeaders.push({ text: 'Email', style: 'tableHeader' });
+    tableHeaders.push({ text: 'Designation', style: 'tableHeader' });
+    tableHeaders.push({ text: 'Family Member', style: 'tableHeader' });
+    tableHeaders.push({ text: 'Having Car', style: 'tableHeader' });
+
 
     const tableBody: any[][] = this.reg_data.map((reg: any, index: number) => {
       const rowData: any[] = [{ text: (index + 1).toString(), style: 'tableBody', margin: [0, 5, 0, 5] }];
-      rowData.push({ text: reg.visitorName, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.visitorVehicleModel, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.totalVisitors, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.visitingDate, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.approvalStatus, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.havingVehicle, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.visitorVehicleModel, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.visitorVehicleNumber, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.visitorVehicleParkingArea, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.buildName, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.flatName, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.flatOwnerName, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.primaryNumber, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.aadharNumber, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.ownerEmail, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.ownerDesignation, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.totalFamilyMember, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.havingCar, style: 'tableBody', margin: [0, 5, 0, 5] });
       return rowData;
     });
 
@@ -269,18 +247,18 @@ export class TotalVisitorReportsComponent  implements OnInit {
       content: content,
       styles: {
         header: {
-          fontSize: 8,
+          fontSize: 12,
           bold: true,
           margin: [0, 0, 0, 10]
         },
         tableHeader: {
           bold: true,
-          fontSize: 7,
+          fontSize: 10,
           color: 'black',
           margin: [0, 5, 0, 5]
         },
         tableBody: {
-          fontSize: 7,
+          fontSize: 10,
           margin: [0, 5, 0, 5]
         }
       },
@@ -326,15 +304,32 @@ export class TotalVisitorReportsComponent  implements OnInit {
     }
   }
   onSearch(filter: any) {
-
     this.reg_data = this.reg_filter_data.filter((data: any) => {
-      if (data?.visitorName.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+      if (data?.buildName.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
         return true;
       }
-      if (data?.havingVehicle.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+      if (data?.flatName.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
         return true;
       }
-      if (data?.visitorMobileNum.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+      if (data?.flatOwnerName.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        return true;
+      }
+      if (data?.primaryNumber.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        return true;
+      }
+      if (data?.aadharNumber.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        return true;
+      }
+      if (data?.ownerEmail.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        return true;
+      }
+      if (data?.ownerDesignation.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        return true;
+      }
+      if (data?.totalFamilyMember.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+        return true;
+      }
+      if (data?.havingCar.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
         return true;
       }
       return false;

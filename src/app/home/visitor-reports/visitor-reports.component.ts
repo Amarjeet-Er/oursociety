@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/service/shared.service';
 import { Platform } from '@ionic/angular';
@@ -35,7 +34,6 @@ export class VisitorReportsComponent implements OnInit {
 
   // Constructor
   constructor(
-    private _dialog: MatDialog,
     private _crud: CurdService,
     private _shared: SharedService,
     private _router: Router,
@@ -71,7 +69,6 @@ export class VisitorReportsComponent implements OnInit {
   }
   get_reg_date(reg: any) {
     const regDate = reg.target.value
-    console.log(regDate);
 
     if (!regDate) {
       this.reg_data = [];
@@ -82,8 +79,6 @@ export class VisitorReportsComponent implements OnInit {
       (res: any) => {
         const filteredData = res.Data.filter((item: { visitingDate: string; }) => item.visitingDate === regDate);
         this.reg_data = filteredData;
-        console.log(this.reg_data);
-
       },
       (error: any) => {
         console.error("Error fetching reg date:", error);

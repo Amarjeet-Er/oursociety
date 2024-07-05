@@ -54,7 +54,6 @@ export class FlatChangePasswordComponent  implements OnInit {
         },
         (err: any) => {
           this._shared.tostErrorTop('Something went wrong')
-          console.log(err);
         }
       );
     }

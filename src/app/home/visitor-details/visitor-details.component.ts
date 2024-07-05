@@ -24,7 +24,6 @@ export class VisitorDetailsComponent implements OnInit {
     )
     this._shared.shared_details.subscribe(
       (res: any) => {
-        console.log(res);
         this.on_details = res
       }
     )

@@ -27,8 +27,6 @@ export class OwnerFlatListComponent implements OnInit {
     )
     this._crud.get_flat_owner_list().subscribe(
       (res: any) => {
-        console.log(res);
-
         if (res.Status === 'Success') {
           this.reg_data = res.Data;
           this.reg_filter_data = res.Data;

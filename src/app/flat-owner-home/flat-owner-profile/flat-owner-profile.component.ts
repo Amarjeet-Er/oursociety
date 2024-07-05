@@ -13,7 +13,6 @@ export class FlatOwnerProfileComponent  implements OnInit {
   img_url: any;
   ProfileData: any;
 
-
   constructor(
     private _router: Router,
     private _crud: CurdService,
@@ -31,8 +30,6 @@ export class FlatOwnerProfileComponent  implements OnInit {
     this._shared.shared_details.subscribe(
       (data) => {
         this.ProfileData = data;
-        console.log(this.ProfileData, 'prfdf');
-
       }
     )
   }

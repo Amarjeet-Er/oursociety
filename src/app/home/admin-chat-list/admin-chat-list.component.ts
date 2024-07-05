@@ -27,7 +27,6 @@ export class AdminChatListComponent  implements OnInit {
   ngOnInit() {
     this._crud.get_admin_chat_any().subscribe(
       (res: any) => {
-        console.log(res.Data);
         this.chat_mes_list = res.Data
       },
       (error) => {
@@ -37,7 +36,6 @@ export class AdminChatListComponent  implements OnInit {
   }
   ondetailschat(data:any){
     this._shared.shared_details.next(data)
-    console.log(data);
     this._router.navigate(['/home/helpdesk'])
   }
 }

@@ -24,7 +24,6 @@ export class EmpVisitorsListComponent  implements OnInit {
   ngOnInit(): void {
     this._shared.img_base_url.subscribe(
       (res: any) => {
-        console.log(res);
         this.img_url = res
       }
     )
@@ -38,7 +37,6 @@ export class EmpVisitorsListComponent  implements OnInit {
   loadData() {
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
-        console.log(res);
         if (res.Status === 'Success') {
           this.reg_data = res.Data;
           this.reg_filter_data = res.Data;
@@ -56,7 +54,6 @@ export class EmpVisitorsListComponent  implements OnInit {
     this.siteSearch = !this.siteSearch;
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
-        console.log(res);
         if (res.Status === 'Success') {
           this.reg_data = res.Data;
           this.reg_filter_data = res.Data;

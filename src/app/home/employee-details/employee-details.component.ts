@@ -24,7 +24,6 @@ export class EmployeeDetailsComponent  implements OnInit {
     )
     this._shared.shared_details.subscribe(
       (res:any)=>{
-        console.log(res);
         this.emp_details=res
       }
     )

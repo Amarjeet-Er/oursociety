@@ -75,6 +75,7 @@ import { FlatAboutComponent } from './flat-owner-home/flat-about/flat-about.comp
 import { FlatContactComponent } from './flat-owner-home/flat-contact/flat-contact.component';
 import { FlatTermConditionComponent } from './flat-owner-home/flat-term-condition/flat-term-condition.component';
 import { FlatChangePasswordComponent } from './flat-owner-home/flat-change-password/flat-change-password.component';
+import { FlatRegAviReportsComponent } from './home/flat-reg-avi-reports/flat-reg-avi-reports.component';
 
 @NgModule({
   declarations: [
@@ -136,6 +137,7 @@ import { FlatChangePasswordComponent } from './flat-owner-home/flat-change-passw
     FlatContactComponent,
     FlatTermConditionComponent,
     FlatChangePasswordComponent,
+    FlatRegAviReportsComponent,
   ],
   imports: [
     BrowserModule,

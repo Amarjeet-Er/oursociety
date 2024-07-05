@@ -72,14 +72,12 @@ export class EmployeeRegComponent implements OnInit {
 
   onEmpTypeChange(event: any) {
     const selectedId = event.detail.value;
-    console.log(selectedId);
     this.getEmpTypeDetailsById(selectedId);
   }
   getEmpTypeDetailsById(id: number) {
     this.selectedEmpType = this.employee_type.find((emp_type: { id: number; }) => emp_type.id === id);
     if (this.selectedEmpType) {
       this.emp_type_name=this.selectedEmpType.empType
-      console.log(this.selectedEmpType.empType);
     } else {
       console.log('Employee type not found');
     }
@@ -123,7 +121,6 @@ export class EmployeeRegComponent implements OnInit {
           type: 'image/png'
         });
         this.gallery_select = captureImg
-        alert('Successfully captured image.');
         const stream = this.video.nativeElement.srcObject;
         const tracks = stream.getTracks();
         tracks[0].stop();
@@ -180,9 +177,6 @@ export class EmployeeRegComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.employeeReg.value);
-
-    return
     const formdata = new FormData()
     formdata.append('emp_type', this.employeeReg.get('emp_type')?.value);
     formdata.append('emp_WorkArea', this.employeeReg.get('emp_WorkArea')?.value);
@@ -200,22 +194,16 @@ export class EmployeeRegComponent implements OnInit {
     formdata.append('parmanentAddress', this.employeeReg.get('parmanentAddress')?.value);
     formdata.append('profileImage', this.gallery_select);
     formdata.append('aadharImage', this.Aadhar_select);
-    console.log(this.gallery_select, 'img');
-    console.log(this.Aadhar_select, 'aadhar');
     if (this.employeeReg.get('emp_password')?.value === this.employeeReg.get('empConfirmPass')?.value) {
       const empPassword = this.employeeReg.get('emp_password')?.value;
       if (empPassword) {
         formdata.append('emp_password', empPassword);
-        console.log(empPassword);
-        console.log('Passwords match');
         this.passwordsMatch = false;
       }
     } else {
-      console.log('Passwords do not match');
       this.passwordsMatch = true;
       return;
     }
-    console.log(this.employeeReg.value);
 
     if (this.employeeReg.valid) {
       this._curd.post_emp_add_edit(formdata).subscribe(
@@ -230,7 +218,6 @@ export class EmployeeRegComponent implements OnInit {
         },
         (err: any) => {
           this._shared.tostErrorTop('Data Not Insert')
-          console.log(err);
         }
       );
     }

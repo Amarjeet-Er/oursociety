@@ -90,7 +90,6 @@ export class FlatOwnerUpdateComponent implements OnInit {
       (res: any) => {
         if (res.Data && Array.isArray(res.Data)) {
           this.building_num = res.Data.filter((item: any) => item.regStatus === 0);
-          console.log('Filtered flat numbers:', this.building_num);
         } else {
           this.building_num = [];
         }
@@ -110,7 +109,6 @@ export class FlatOwnerUpdateComponent implements OnInit {
           console.error('Invalid edit_reg:', this.edit_reg);
           return;
         }
-        console.log(res);
         if (this.edit_reg) {
           this.flat_no = this.edit_reg?.b_id
           this.get_filter_by_flat_num(this.flat_no);
@@ -118,7 +116,6 @@ export class FlatOwnerUpdateComponent implements OnInit {
           this.RegFlatForm.controls['empConfirmPass'].setValue(this.edit_reg?.password);
           this.RegFlatForm.controls['buildingBlock'].setValue(this.edit_reg?.b_id);
           this.RegFlatForm.controls['flatNum'].setValue(this.edit_reg.f_id);
-          console.log(this.edit_reg.f_id, 'name');
 
           if (this.edit_reg.familyCarData.length !== 0) {
             this.CarsCount = true
@@ -129,11 +126,7 @@ export class FlatOwnerUpdateComponent implements OnInit {
   }
 
   FormArrays() {
-    console.log('this.edit_reg:', this.edit_reg);
-
     const familyCountArray = this.RegFlatForm.get('familyDataList') as FormArray;
-    console.log('familyCountArray:', familyCountArray);
-
     familyCountArray.clear();
     if (this.edit_reg.familyDataList) {
       this.edit_reg.familyDataList.forEach((member: any, index: number) => {
@@ -149,7 +142,6 @@ export class FlatOwnerUpdateComponent implements OnInit {
     }
 
     const familyCarsArray = this.RegFlatForm.get('familyCarData') as FormArray;
-    console.log('familyCarsArray:', familyCarsArray);
 
     familyCarsArray.clear();
     if (this.edit_reg.familyCarData) {
@@ -267,7 +259,6 @@ export class FlatOwnerUpdateComponent implements OnInit {
           type: 'image/png'
         });
         this.gallery_select = captureImg;
-        alert('Successfully captured image.');
         const stream = this.video.nativeElement.srcObject;
         const tracks = stream.getTracks();
         tracks[0].stop();
@@ -343,7 +334,6 @@ export class FlatOwnerUpdateComponent implements OnInit {
         },
         (err: any) => {
           this._shared.tostErrorTop('Data Not Update');
-          console.log(err);
         }
       );
     } else {

@@ -25,7 +25,6 @@ export class EmpHomeComponent implements OnInit {
     this.empId = localStorage.getItem('empId');
     this.emp_id = JSON.parse(this.empId);
     this.empEmail = this.emp_id.Username
-    console.log(this.empEmail, 'user id');
   }
 
   ngOnInit() {
@@ -39,7 +38,6 @@ export class EmpHomeComponent implements OnInit {
         if (res && res.AllRegisteredEmployee) {
           this.profile_data = res.AllRegisteredEmployee.filter((employee: any) => employee.empEmail === this.empEmail);
           this.emp_filter_data = this.profile_data[0];
-          console.log(this.emp_filter_data, 'data');
         }
       }
     );

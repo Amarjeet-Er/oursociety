@@ -12,7 +12,6 @@ const pdfMakeX = require('pdfmake/build/pdfmake');
 const pdfFontsX = require('pdfmake/build/vfs_fonts');
 pdfMakeX.vfs = pdfFontsX.pdfMake.vfs;
 
-
 @Component({
   selector: 'app-employee-reports',
   templateUrl: './employee-reports.component.html',
@@ -45,14 +44,12 @@ export class EmployeeReportsComponent implements OnInit {
 
     this._crud.get_emp_list().subscribe(
       (res: any) => {
-        console.log(res, 'reg');
         this.reg_data = res.AllRegisteredEmployee;
         this.reg_filter_data = res.AllRegisteredEmployee;
       }
     )
     this._crud.get_emp_type().subscribe(
       (res: any) => {
-        console.log(res, 'reg');
         this.emp_type_list = res.EmployeeType;
       }
     )
