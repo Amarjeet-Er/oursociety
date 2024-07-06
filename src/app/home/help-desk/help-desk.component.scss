@@ -23,7 +23,6 @@
     .boxarea {
         position: relative;
         height: auto;
-        position: absolute;
         width: 100%;
         bottom: 0px;
     }
@@ -31,14 +30,15 @@
 
 .chat-messages {
     height: calc(100vh - 50px);
-    padding: 16px;
+    padding: 0px 12px;
     background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .chatBox {
-    height: calc(100vh - 132px);
+    height: calc(100vh - 105px);
+    padding: 10px 0px;
     overflow: auto;
 }
 
@@ -85,7 +85,6 @@
     width: 100%;
     position: sticky;
     bottom: 0px;
-    height: 60px;
 }
 
 .chat-input input[type="text"] {

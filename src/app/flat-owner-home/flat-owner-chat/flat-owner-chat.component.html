@@ -14,12 +14,12 @@
   </div>
   <div class="boxarea">
     <div class="chat-messages">
-      <div class="chatBox">
+      <div class="chatBox" #chatMessages>
         <div class="message received " *ngFor="let admin_data of chat_mes_list"
           [ngClass]="{'received': admin_data.userId === 'Admin', 'sent': admin_data.userId !== 'Admin'}">
           <table>
             <tr>
-              <td>{{admin_data?.date}}</td>
+              <td style="font-size:12px;">{{admin_data?.date}}</td>
             </tr>
             <tr>
               <td class="message-content">{{admin_data?.message}} &nbsp; <span>{{admin_data?.time}}</span></td>

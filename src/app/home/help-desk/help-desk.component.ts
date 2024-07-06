@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { CurdService } from 'src/app/service/curd.service';
@@ -10,9 +10,9 @@ import { filter } from 'rxjs/operators';
   templateUrl: './help-desk.component.html',
   styleUrls: ['./help-desk.component.scss'],
 })
-export class HelpDeskComponent implements OnInit {
+export class HelpDeskComponent implements OnInit, AfterViewChecked {
+  @ViewChild('chatMessages') private chatMessagesContainer!: ElementRef;
   chat_message!: FormGroup
-
   chat_user: any;
   UserId: any;
   user_id: any;
@@ -63,9 +63,19 @@ export class HelpDeskComponent implements OnInit {
       userId: [''],
     });
   }
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.chatMessagesContainer.nativeElement.scrollTop = this.chatMessagesContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.error('Scroll to bottom failed:', err);
+    }
+  }
 
   onSendChat() {
-
     const formdata = new FormData();
     formdata.append('message', this.chat_message.get('message')?.value);
     formdata.append('responseBy', this.admin_id);

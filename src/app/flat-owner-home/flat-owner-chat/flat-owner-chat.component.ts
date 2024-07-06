@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { CurdService } from 'src/app/service/curd.service';
@@ -10,6 +10,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./flat-owner-chat.component.scss'],
 })
 export class FlatOwnerChatComponent implements OnInit {
+  @ViewChild('chatMessages') private chatMessagesContainer!: ElementRef;
   chat_message!: FormGroup;
   flatId: any;
   flat_id: any;
@@ -51,9 +52,19 @@ export class FlatOwnerChatComponent implements OnInit {
       userId: [''],
     });
   }
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.chatMessagesContainer.nativeElement.scrollTop = this.chatMessagesContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.error('Scroll to bottom failed:', err);
+    }
+  }
 
   onSendChat() {
-
     const formdata = new FormData();
     formdata.append('message', this.chat_message.get('message')?.value);
     formdata.append('responseBy', this.flatOwnerId);
@@ -64,7 +75,7 @@ export class FlatOwnerChatComponent implements OnInit {
       this._crud.post_chating_mes(formdata).subscribe(
         (res) => {
           this.fetchChatMessages();
-          this.chat_message.reset(); 
+          this.chat_message.reset();
         },
         (error) => {
           console.error('Error sending chat message:', error);
@@ -80,7 +91,7 @@ export class FlatOwnerChatComponent implements OnInit {
         this.chat_mes_list = res.Data;
         if (res && res.Data) {
           this.flat_data = res.Data.filter((flat: any) => flat.userId === "Admin");
-          this.flat_filter_data = this.flat_data[0];          
+          this.flat_filter_data = this.flat_data[0];
         }
       },
       (error) => {
