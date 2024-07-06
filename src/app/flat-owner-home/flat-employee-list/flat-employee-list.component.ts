@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { CurdService } from 'src/app/service/curd.service';
 import { SharedService } from 'src/app/service/shared.service';
 
@@ -8,7 +7,7 @@ import { SharedService } from 'src/app/service/shared.service';
   templateUrl: './flat-employee-list.component.html',
   styleUrls: ['./flat-employee-list.component.scss'],
 })
-export class FlatEmployeeListComponent  implements OnInit {
+export class FlatEmployeeListComponent implements OnInit {
 
   headerBox: boolean = true;
   siteSearch: boolean = false
@@ -16,7 +15,6 @@ export class FlatEmployeeListComponent  implements OnInit {
   img_url: any;
   reg_filter_data: any;
   constructor(
-    private _router: Router,
     private _crud: CurdService,
     private _shared: SharedService
   ) { }
@@ -36,27 +34,6 @@ export class FlatEmployeeListComponent  implements OnInit {
     )
   }
 
-  onSearchOpen() {
-    this.headerBox = !this.headerBox;
-    this.siteSearch = !this.siteSearch;
-  }
-  onSearchClose() {
-    this.headerBox = !this.headerBox;
-    this.siteSearch = !this.siteSearch;
-    this._crud.get_emp_list().subscribe(
-      (res: any) => {
-        if (res.Status === 'Success') {
-          this.reg_data = res.AllRegisteredEmployee;
-          this.reg_filter_data = res.AllRegisteredEmployee;
-        }
-      }
-    )
-  }
-
-  onDetails(data:any) {
-    this._shared.shared_details.next(data)    
-    this._router.navigate(['/home/employeedetails']);
-  }
   onSearch(filter: any) {
 
     this.reg_data = this.reg_filter_data.filter((data: any) => {

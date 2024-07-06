@@ -62,7 +62,7 @@
 
 
         <div formArrayName="familyDataList">
-          <div *ngFor="let member of membersArray.controls; let i = index">
+          <div *ngFor="let member of membersArray?.controls; let i = index">
             <div [formGroupName]="i">
               <span>
                 <p>Member {{ i + 1 }}</p>
@@ -86,7 +86,7 @@
         </ion-checkbox>
 
         <div *ngIf="this.CarsCount" formArrayName="familyCarData">
-          <div *ngFor="let car of CarsArray.controls; let i = index">
+          <div *ngFor="let car of CarsArray?.controls; let i = index">
             <div [formGroupName]="i">
               <span>
                 <p>Car {{ i + 1 }}</p>

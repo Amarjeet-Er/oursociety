@@ -35,6 +35,11 @@ export class EmpDashboardComponent implements OnInit {
         this.list_emp_total = res.AllRegisteredEmployee;
       }
     )
+    this._crud.get_flat_owner_list().subscribe(
+      (res: any) => {
+        this.flat_owner_list = res.Data;
+      }
+    )
     this._crud.get_dashboard_list().subscribe(
       (res: any) => {
         this.list_dashboard = res.Data;

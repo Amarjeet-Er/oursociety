@@ -29,8 +29,12 @@
             </div>
 
             <div class="searchInput">
-                <ion-input label="Registration Date" label-placement="floating" type="date"
-                    (change)="get_reg_date($event)"></ion-input>
+                <ion-input label="From Date" label-placement="floating" type="date"
+                    (change)="get_form_date($event)"></ion-input>
+            </div>
+            <div class="searchInput">
+                <ion-input label="To Date" label-placement="floating" type="date"
+                    (change)="get_to_date($event)"></ion-input>
             </div>
         </div>
 
@@ -67,7 +71,7 @@
                     </p>
 
                     <p>
-                        <b>Status</b>
+                        <b>Status :-</b>
                         <span
                             [ngStyle]="{'color': data.approvalStatus === 1 ? 'green' : data?.approvalStatus === 0 ? 'red' : 'red'}">
                             {{data?.approvalStatus === 1 ? 'Approved' : data?.approvalStatus === 0 ? 'Rejected' :

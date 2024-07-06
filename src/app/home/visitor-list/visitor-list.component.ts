@@ -70,19 +70,23 @@ export class VisitorListComponent implements OnInit {
     this._router.navigate(['/home/visitordetails']);
   }
   onSearch(filter: any) {
+    const lowerCaseFilter = filter.toLowerCase();
 
     this.reg_data = this.reg_filter_data.filter((data: any) => {
-      if (data?.visitorName.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-        return true;
+      const visitorNameMatch = data?.visitorName?.toString().toLowerCase().indexOf(lowerCaseFilter) !== -1;
+      const visitorMobileNumMatch = data?.visitorMobileNum?.toString().toLowerCase().indexOf(lowerCaseFilter) !== -1;
+
+      let approvalStatusString = '';
+      if (data?.approvalStatus === 1) {
+        approvalStatusString = 'Approved';
+      } else if (data?.approvalStatus === 0) {
+        approvalStatusString = 'Rejected';
+      } else {
+        approvalStatusString = 'Pending';
       }
-      if (data?.havingVehicle.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-        return true;
-      }
-      if (data?.visitorMobileNum.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-        return true;
-      }
-      return false;
-    }
-    );
+      const approvalStatusMatch = approvalStatusString.toLowerCase().indexOf(lowerCaseFilter) !== -1;
+
+      return visitorNameMatch || approvalStatusMatch || visitorMobileNumMatch;
+    });
   }
 }

@@ -10,27 +10,12 @@ ion-card {
         align-items: center;
         display: flex;
 
-        .HeaderBoxSearch {
-            width: calc(100% - 145px);
-            margin: 0px 0px 0px 10px;
-            text-align: end;
-            position: absolute;
-            right: 10px;
-        }
-        .searchClose {
-            width: calc(100% - 145px);
-            margin: 0px 0px 0px 10px;
-            text-align: end;
-            position: absolute;
-            right: 10px;
-        }
-
         span {
             margin-left: 10px;
         }
 
         .searchInput {
-            width: calc(100% - 209px);
+            width: calc(100% - 150px);
             margin: 0px 10px;
         }
     }

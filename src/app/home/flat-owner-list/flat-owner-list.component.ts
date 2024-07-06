@@ -20,7 +20,7 @@ export class FlatOwnerListComponent implements OnInit {
     private _router: Router,
     private _crud: CurdService,
     private _shared: SharedService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._shared.img_base_url.subscribe((res: any) => {
@@ -60,17 +60,13 @@ export class FlatOwnerListComponent implements OnInit {
   }
 
   onSearch(filter: any) {
+    const lowerCaseFilter = filter.toLowerCase();
     this.reg_data = this.reg_filter_data.filter((data: any) => {
-      if (data?.flatOwnerName.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-        return true;
-      }
-      if (data?.ownerDesignation.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-        return true;
-      }
-      if (data?.primaryNumber.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-        return true;
-      }
-      return false;
+      const flatOwnerNameMatch = data?.flatOwnerName?.toString().toLowerCase().indexOf(lowerCaseFilter) !== -1;
+      const combinedBuildAndFlatName = `${data?.buildName || ''} / ${data?.flatName || ''}`.toLowerCase();
+      const buildAndFlatNameMatch = combinedBuildAndFlatName.indexOf(lowerCaseFilter) !== -1;
+      const primaryNumberMatch = data?.primaryNumber?.toString().toLowerCase().indexOf(lowerCaseFilter) !== -1;
+      return flatOwnerNameMatch || buildAndFlatNameMatch || primaryNumberMatch;
     });
   }
 }

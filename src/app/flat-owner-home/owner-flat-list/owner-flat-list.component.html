@@ -1,22 +1,8 @@
 <ion-card>
-  <div class="SearchBox" *ngIf="headerBox">
-    <span> <b>Total :- </b>{{reg_data?.length}}</span>
-    <div class="HeaderBoxSearch">
-      <ion-button color="secondary" (click)="onSearchOpen()">
-        <ion-icon name="search-sharp"></ion-icon>
-      </ion-button>
-    </div>
-  </div>
-
-  <div class="SearchBox" *ngIf="siteSearch">
+  <div class="SearchBox">
     <span> <b>Total :- </b>{{reg_data?.length}}</span>
     <ion-input type="text" class="searchInput" placeholder="Search..." #search (keyup)="onSearch(search.value)">
     </ion-input>
-    <div class="searchClose">
-      <ion-button color="secondary" type="reset" (click)="onSearchClose()">
-        <ion-icon name="close-sharp"></ion-icon>
-      </ion-button>
-    </div>
   </div>
 </ion-card>
 

@@ -97,7 +97,7 @@ export class EmployeeReportsComponent implements OnInit {
       const rowData: any = {
         'S.N': serialNo++,
       };
-      rowData['Employee Typee'] = reg.employee_type;
+      rowData['Employee Type'] = reg.employee_type;
       rowData['Name'] = reg.empName;
       rowData['Mobile Number'] = reg.empMobNo;
       rowData['Aadhar Number'] = reg.aadharNumber;

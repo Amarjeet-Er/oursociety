@@ -19,7 +19,6 @@ pdfMakeX.vfs = pdfFontsX.pdfMake.vfs;
   styleUrls: ['./total-visitor-reports.component.scss'],
 })
 export class TotalVisitorReportsComponent  implements OnInit {
-
   siteSearch: boolean = false;
   panelOpenState = false;
   reg_data: any;
@@ -31,7 +30,8 @@ export class TotalVisitorReportsComponent  implements OnInit {
   EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=UTF-8';
   documentDefinition: any;
   reg_filter_data: any;
-
+  formDate: string | null = null;
+  toDate: string | null = null;
   // Constructor
   constructor(
     private _crud: CurdService,
@@ -46,12 +46,8 @@ export class TotalVisitorReportsComponent  implements OnInit {
 
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
-        if (res.Status === 'Success') {
-          const today = new Date().toISOString().split('T')[0]; 
-          const filteredData = res.Data.filter((item: any) => item.visitingDate === today);
-          this.reg_data = filteredData;
-          this.reg_filter_data = filteredData;
-        }
+        this.reg_data = res.Data;
+        this.reg_filter_data = res.Data;
       }
     )
   }
@@ -71,21 +67,35 @@ export class TotalVisitorReportsComponent  implements OnInit {
       }
     });
   }
-  get_reg_date(reg: any) {
-    const regDate = reg.target.value
+  get_form_date(reg: any) {
+    this.formDate = reg.target.value;
+    this.filterDataByDateRange();
+  }
 
-    if (!regDate) {
+  get_to_date(reg: any) {
+    this.toDate = reg.target.value;
+    this.filterDataByDateRange();
+  }
+
+  filterDataByDateRange() {
+    if (!this.formDate || !this.toDate) {
       this.reg_data = [];
       return;
     }
 
+    const formDate = new Date(this.formDate);
+    const toDate = new Date(this.toDate);
+
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
-        const filteredData = res.Data.filter((item: { visitingDate: string; }) => item.visitingDate === regDate);
+        const filteredData = res.Data.filter((item: { visitingDate: string; }) => {
+          const visitingDate = new Date(item.visitingDate);
+          return visitingDate >= formDate && visitingDate <= toDate;
+        });
         this.reg_data = filteredData;
       },
       (error: any) => {
-        console.error("Error fetching reg date:", error);
+        console.error("Error fetching registration date:", error);
       }
     );
   }
@@ -95,26 +105,16 @@ export class TotalVisitorReportsComponent  implements OnInit {
     this.onViewFilterList = true;
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
-        if (res.Status === 'Success') {
-          const today = new Date().toISOString().split('T')[0]; 
-          const filteredData = res.Data.filter((item: any) => item.visitingDate === today);
-          this.reg_data = filteredData;
-          this.reg_filter_data = filteredData;
-        }
+        this.reg_data = res.Data;
+        this.reg_filter_data = res.Data;
       }
     )
   }
 
   onFilterClose() {
     this.siteSearch = !this.siteSearch;
-    this._crud.get_visistors_list().subscribe(
-      (res: any) => {
-        if (res.Status === 'Success') {
-          const today = new Date().toISOString().split('T')[0]; 
-          const filteredData = res.Data.filter((item: any) => item.visitingDate === today);
-          this.reg_data = filteredData;
-          this.reg_filter_data = filteredData;
-        }
+    this._crud.get_visistors_list().subscribe((res: any) => {
+      this.reg_data = res;
     });
   }
 
@@ -285,7 +285,7 @@ export class TotalVisitorReportsComponent  implements OnInit {
         }
       },
       pageSize: 'A4',
-      pageOrientation: 'landscape',
+      // pageOrientation: 'landscape',
       pageMargins: [20, 20, 20, 20]
     };
   }
@@ -325,20 +325,28 @@ export class TotalVisitorReportsComponent  implements OnInit {
       alert('Error retrieving file path:' + JSON.stringify(error));
     }
   }
-  onSearch(filter: any) {
-
+  onSearch(filter: string) {
+    const lowerCaseFilter = filter.toLowerCase();
+    console.log("Filter: ", lowerCaseFilter); // Debugging line
     this.reg_data = this.reg_filter_data.filter((data: any) => {
-      if (data?.visitorName.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-        return true;
-      }
-      if (data?.havingVehicle.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-        return true;
-      }
-      if (data?.visitorMobileNum.toString().toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-        return true;
-      }
-      return false;
-    }
-    );
+      const fieldsToCheck = [
+        data?.visitorName,
+        data?.visitorMobileNum,
+        data?.totalVisitors,
+        data?.visitingDate,
+        data?.havingVehicle,
+        data?.visitorVehicleModel,
+        data?.visitorVehicleNumber,
+        data?.visitorVehicleParkingArea
+      ];
+      const approvalStatusString = data?.approvalStatus === 1 ? 'Approved' : data?.approvalStatus === 0 ? 'Rejected' : 'Pending';
+      fieldsToCheck.push(approvalStatusString);
+
+      // Debugging line to check the fields being searched
+      console.log("Fields to check: ", fieldsToCheck);
+
+      return fieldsToCheck.some(field => field?.toString().toLowerCase().includes(lowerCaseFilter));
+    });
+    console.log("Filtered Data: ", this.reg_data); // Debugging line
   }
 }
