@@ -1,16 +1,17 @@
 .chat-container {
-    background-color: #ffffff;
+    background-color: #f0f2f5;
     width: 100%;
     max-width: 600px;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
-    .profilebOX {
+    .profileBox {
         display: flex;
         align-items: center;
         height: 50px;
         padding: 10px;
+        background-color: #f0f2f5;
 
         .BackBtn {
             margin: 0px 5px 0px 0px;
@@ -29,15 +30,22 @@
 }
 
 .chat-messages {
-    overflow-y: auto;
-    height: calc(100vh - 132px);
+    height: calc(100vh - 50px);
     padding: 16px;
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.chatBox {
+    height: calc(100vh - 132px);
+    overflow: auto;
 }
 
 .message {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .received {
@@ -49,17 +57,18 @@
 }
 
 .message-content {
-    background-color: #f0f0f0;
-    padding: 12px 16px;
+    background-color: #fff;
+    padding: 7px 12px;
     border-radius: 20px;
     max-width: 70%;
     word-wrap: break-word;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .sent .message-content {
-    background-color: #0084ff;
-    color: #fff;
+    background-color: #d9fdd3;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    color: #111b21;
 }
 
 .avatar {
@@ -67,16 +76,16 @@
     height: 36px;
     border-radius: 50%;
     margin-right: 12px;
+    margin-top: 5px;
 }
 
 .chat-input {
     display: flex;
     align-items: center;
-    padding: 12px;
-    border-top: 1px solid #ddd;
-    background-color: #f6f6f6;
-    margin-bottom: 10px;
     width: 100%;
+    position: sticky;
+    bottom: 0px;
+    height: 60px;
 }
 
 .chat-input input[type="text"] {
@@ -102,9 +111,20 @@
 .chat-input button:hover {
     background-color: #0063cc;
 }
-form, input, optgroup, select {
+
+form,
+input,
+optgroup,
+select {
     margin: 0;
     font: inherit;
     color: inherit;
     width: 100%;
+}
+
+td>span {
+    float: inline-end;
+    font-size: 10px;
+    position: relative;
+    bottom: -8px;
 }

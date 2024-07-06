@@ -1,5 +1,5 @@
 <div class="chat-container">
-  <div class="profilebOX">
+  <div class="profileBox">
     <div class="BackBtn" routerLink="/flatowner">
       <ion-icon name="arrow-back-sharp"></ion-icon>
     </div>
@@ -14,23 +14,24 @@
   </div>
   <div class="boxarea">
     <div class="chat-messages">
-      <div class="message received" *ngFor="let admin_data of chat_mes_list"
-        [ngClass]="{'received': admin_data.userId === 'Admin', 'sent': admin_data.userId !== 'Admin'}">
-        <table>
-          <tr>
-            <td>{{admin_data?.time}}</td>
-          </tr>
-          <tr>
-            <td class="message-content">{{admin_data?.message}}</td>
-          </tr>
-        </table>
+      <div class="chatBox">
+        <div class="message received " *ngFor="let admin_data of chat_mes_list"
+          [ngClass]="{'received': admin_data.userId === 'Admin', 'sent': admin_data.userId !== 'Admin'}">
+          <table>
+            <tr>
+              <td>{{admin_data?.date}}</td>
+            </tr>
+            <tr>
+              <td class="message-content">{{admin_data?.message}} &nbsp; <span>{{admin_data?.time}}</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="chat-input">
+        <form [formGroup]="chat_message">
+          <input type="text" placeholder="Type your message..." formControlName="message">
+          <button (click)="onSendChat()">Send</button>
+        </form>
       </div>
     </div>
-    <div class="chat-input">
-      <form [formGroup]="chat_message">
-        <input type="text" placeholder="Type your message..." formControlName="message">
-        <button (click)="onSendChat()">Send</button>
-      </form>
-    </div>
   </div>
-</div>
