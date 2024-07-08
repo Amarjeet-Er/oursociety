@@ -18,7 +18,7 @@ pdfMakeX.vfs = pdfFontsX.pdfMake.vfs;
   templateUrl: './total-visitor-reports.component.html',
   styleUrls: ['./total-visitor-reports.component.scss'],
 })
-export class TotalVisitorReportsComponent  implements OnInit {
+export class TotalVisitorReportsComponent implements OnInit {
   siteSearch: boolean = false;
   panelOpenState = false;
   reg_data: any;
@@ -239,8 +239,11 @@ export class TotalVisitorReportsComponent  implements OnInit {
       rowData.push({ text: reg.visitorVehicleModel, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.totalVisitors, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.visitingDate, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.approvalStatus, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.havingVehicle, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({
+        text: reg.approvalStatus === 0 ? 'Rejected' : reg.approvalStatus === 1 ? 'Approved' : 'unknown',
+        style: 'tableBody',
+        margin: [0, 5, 0, 5]
+      }); rowData.push({ text: reg.havingVehicle, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.visitorVehicleModel, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.visitorVehicleNumber, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.visitorVehicleParkingArea, style: 'tableBody', margin: [0, 5, 0, 5] });

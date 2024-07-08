@@ -31,6 +31,7 @@ export class FlatRegAviReportsComponent implements OnInit {
   reg_filter_data: any;
   block_list: any;
   building_num: any;
+  status_id: any;
 
   // Constructor
   constructor(
@@ -45,47 +46,47 @@ export class FlatRegAviReportsComponent implements OnInit {
 
     this._crud.get_building_block().subscribe(
       (res: any) => {
+        console.log(res);
+
         this.block_list = res.Data
       }
     )
   }
   get_filter_by_flat_num(building_id: any) {
     const flat_building_no = building_id.target.value;
+    console.log(flat_building_no);
 
-    this._crud.get_flat_number(flat_building_no).subscribe(
+    this._crud.get_flat_block_reports_list().subscribe(
       (res: any) => {
-        console.log(res);
-        this.building_num=res.Data
-      //   if (res.Data && Array.isArray(res.Data)) {
-      //     this.building_num = res.Data.filter((item: any) => item.regStatus === 1);
-      //   } else {
-      //     this.building_num = [];
-      //   }
-      // },
-      // (error: any) => {
-      //   console.error('Error fetching flat numbers:', error);
-      //   this.building_num = [];
+        if (res && Array.isArray(res.Data)) {
+          this.reg_data = res.Data.filter((item: any) => item.blockName === flat_building_no);
+        } else {
+          this.reg_data = [];
+        }
       }
-    );
-  }
-  get_block_name(data: any) {
-    if (!data) {
-      this.reg_data = [];
-      return;
-    }
-    this._crud.get_flat_owner_list().subscribe(
-      (res: any) => {
-        const filteredData = res.Data.filter((item: { buildName: string; }) => item.buildName === data);
-        this.reg_data = filteredData;
-      },
-      (error: any) => {
-        console.error("Error fetching subDepartment data:", error);
-      }
-    );
+    )
   }
 
+  get_filter_flat(id: any) {
+    const flat_status = id.target.value;
+    this._crud.get_flat_block_reports_list().subscribe(
+      (res: any) => {
+        if (res && Array.isArray(res.Data)) {
+          this.reg_data = res.Data.filter((item: any) => item.flatStatus === flat_status);
+        } else {
+          this.reg_data = [];
+        }
+      }
+    )
+  }
   // Lifecycle Hook - ngOnInit
   async ngOnInit() {
+    this._crud.get_flat_block_reports_list().subscribe(
+      (res: any) => {
+        console.log(res);
+        this.reg_data = res.Data
+      }
+    )
     const granted = await LocalNotifications.requestPermissions();
     if (granted.display !== 'granted') {
       alert('Notifications permission not granted');
@@ -112,15 +113,9 @@ export class FlatRegAviReportsComponent implements OnInit {
       const rowData: any = {
         'S.N': serialNo++,
       };
-      rowData['Block Name'] = reg.buildName;
-      rowData['Flat Number'] = reg.flatName;
-      rowData['Name'] = reg.flatOwnerName;
-      rowData['Mobile Number'] = reg.primaryNumber;
-      rowData['Aadhar Number'] = reg.aadharNumber;
-      rowData['Email'] = reg.ownerEmail;
-      rowData['Designation'] = reg.ownerDesignation;
-      rowData['Family Member'] = reg.totalFamilyMember;
-      rowData['Having Car'] = reg.havingCar;
+      rowData['Block Name'] = reg.blockName;
+      rowData['Flat Number'] = reg.flatNum;
+      rowData['Status'] = (reg.flatStatus === 1) ? 'Available' : (reg.flatStatus === 0) ? 'Registered' : 'unknown';
       return rowData;
     });
     try {
@@ -144,7 +139,7 @@ export class FlatRegAviReportsComponent implements OnInit {
 
       const now = new Date();
       const timestamp = `${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
-      const filename = `Flat_owner_${timestamp}.xlsx`;
+      const filename = `Flat_building${timestamp}.xlsx`;
       if (this._Platform.is('cordova') || this._Platform.is('mobile') || this._Platform.is('android')) {
         const excelBuffer = XLSX.write(wb, { type: 'array', bookType: 'xlsx' });
         const excelData: Blob = new Blob([excelBuffer], { type: this.EXCEL_TYPE });
@@ -171,7 +166,7 @@ export class FlatRegAviReportsComponent implements OnInit {
 
       const now = new Date();
       const timestamp = `${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
-      const filename = `Flat_owner_${timestamp}.pdf`;
+      const filename = `Flat_building_${timestamp}.pdf`;
 
       if (this._Platform.is('cordova') || this._Platform.is('mobile') || this._Platform.is('android')) {
         pdfMake.createPdf(this.documentDefinition).getBuffer(async (buffer: ArrayBuffer) => {
@@ -195,33 +190,24 @@ export class FlatRegAviReportsComponent implements OnInit {
 
   generateDocumentDefinition(): any {
     const content = [];
-    content.push({ text: 'Flat Owner', style: 'header', margin: [0, 0, 0, 10] });
+    content.push({ text: 'Flat Reports', style: 'header', margin: [0, 0, 0, 10] });
     content.push('\n');
 
     const tableHeaders: any[] = [];
     if (1) tableHeaders.push({ text: 'S.N', style: 'tableHeader' });
     tableHeaders.push({ text: 'Block Name', style: 'tableHeader' });
     tableHeaders.push({ text: 'Flat Number', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Name', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Mobile Number', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Aadhar Number', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Email', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Designation', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Family Member', style: 'tableHeader' });
-    tableHeaders.push({ text: 'Having Car', style: 'tableHeader' });
-
+    tableHeaders.push({ text: 'Status', style: 'tableHeader' });
 
     const tableBody: any[][] = this.reg_data.map((reg: any, index: number) => {
       const rowData: any[] = [{ text: (index + 1).toString(), style: 'tableBody', margin: [0, 5, 0, 5] }];
-      rowData.push({ text: reg.buildName, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.flatName, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.flatOwnerName, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.primaryNumber, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.aadharNumber, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.ownerEmail, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.ownerDesignation, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.totalFamilyMember, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.havingCar, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.blockName, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.flatNum, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({
+        text: reg.flatStatus === 0 ? 'Registered' : reg.flatStatus === 1 ? 'Available' : 'unknown',
+        style: 'tableBody',
+        margin: [0, 5, 0, 5]
+      });
       return rowData;
     });
 
@@ -263,7 +249,6 @@ export class FlatRegAviReportsComponent implements OnInit {
         }
       },
       pageSize: 'A4',
-      pageOrientation: 'landscape',
       pageMargins: [20, 20, 20, 20]
     };
   }

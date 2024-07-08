@@ -53,24 +53,28 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div class="dataRow">
-                    <p>
+                    <p *ngIf="data?.visitorName">
                         <b>Name :- </b>
                         <span>{{data?.visitorName}}</span>
                     </p>
-                    <p>
+                    <p *ngIf="data?.visitorMobileNum">
                         <b>Mobile No :- </b>
                         <span>{{data?.visitorMobileNum}}</span>
                     </p>
-                    <p>
+                    <p *ngIf="data?.totalVisitors">
                         <b>Total Visitors :- </b>
                         <span>{{data?.totalVisitors}}</span>
                     </p>
-                    <p>
+                    <p *ngIf="data?.actionBy">
+                        <b>Gate Incharge :- </b>
+                        <span>{{data?.actionBy}}</span>
+                    </p>
+                    <p *ngIf="data?.visitingDate">
                         <b>Registration Date :- </b>
                         <span>{{data?.visitingDate}}</span>
                     </p>
-
-                    <p>
+  
+                    <p *ngIf="data?.approvalStatus">
                         <b>Status :-</b>
                         <span
                             [ngStyle]="{'color': data.approvalStatus === 1 ? 'green' : data?.approvalStatus === 0 ? 'red' : 'red'}">
@@ -78,28 +82,28 @@
                             'Pending'}}
                         </span>
                     </p>
-
-
-                    <p>
+  
+  
+                    <p *ngIf="data?.havingVehicle">
                         <b>Vehicle :- </b>
                         <span> {{data?.havingVehicle}} </span>
                     </p>
-
-                    <p>
+  
+                    <p *ngIf="data?.visitorVehicleModel">
                         <b>Vehicle Model :- </b>
                         <span> {{data?.visitorVehicleModel}} </span>
                     </p>
-
-                    <p>
+  
+                    <p *ngIf="data?.visitorVehicleNumber">
                         <b>Vehicle Number :- </b>
                         <span> {{data?.visitorVehicleNumber}} </span>
                     </p>
-
-                    <p>
+  
+                    <p *ngIf="data?.visitorVehicleParkingArea">
                         <b>Parking Area :- </b>
                         <span> {{data?.visitorVehicleParkingArea}} </span>
                     </p>
-
+  
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

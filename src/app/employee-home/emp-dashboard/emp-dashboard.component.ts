@@ -45,11 +45,6 @@ export class EmpDashboardComponent implements OnInit {
         this.list_dashboard = res.Data;
       }
     )
-    this._crud.get_visistors_list().subscribe(
-      (res: any) => {
-        this.visitor_list = res.Data;
-      }
-    )
   }
 
   ngOnInit(): void {

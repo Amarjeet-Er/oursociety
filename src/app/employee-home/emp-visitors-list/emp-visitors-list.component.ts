@@ -16,11 +16,18 @@ export class EmpVisitorsListComponent  implements OnInit {
   reg_data: any;
   img_url: any;
   reg_filter_data: any;
+  UserId: any;
+  user_id: any;
+  admin_id: any;
   constructor(
     private _router: Router,
     private _crud: CurdService,
     private _shared: SharedService
-  ) { }
+  ) {
+    this.UserId = localStorage.getItem('empId');
+    this.user_id = JSON.parse(this.UserId);
+    this.admin_id = this.user_id?.Username;
+   }
   ngOnInit(): void {
     this._shared.img_base_url.subscribe(
       (res: any) => {

@@ -139,6 +139,7 @@ export class VisitorReportsComponent implements OnInit {
       rowData['Name'] = reg.visitorName;
       rowData['Mobile'] = reg.visitorMobileNum;
       rowData['Total Visitors'] = reg.totalVisitors;
+      rowData['Gate Incharge'] = reg.actionBy;
       rowData['Registration Date'] = reg.visitingDate;
       rowData['Status'] = reg.approvalStatus === 0 ? 'Rejected' : 'Approved';
       rowData['Vehicle'] = reg.havingVehicle;
@@ -227,6 +228,7 @@ export class VisitorReportsComponent implements OnInit {
     tableHeaders.push({ text: 'Name', style: 'tableHeader' });
     tableHeaders.push({ text: 'Mobile', style: 'tableHeader' });
     tableHeaders.push({ text: 'Total Visitors', style: 'tableHeader' });
+    tableHeaders.push({ text: 'Gate Incharge', style: 'tableHeader' });
     tableHeaders.push({ text: 'Registration Date', style: 'tableHeader' });
     tableHeaders.push({ text: 'Status', style: 'tableHeader' });
     tableHeaders.push({ text: 'Vehicle', style: 'tableHeader' });
@@ -239,8 +241,13 @@ export class VisitorReportsComponent implements OnInit {
       rowData.push({ text: reg.visitorName, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.visitorVehicleModel, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.totalVisitors, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.actionBy, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.visitingDate, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.approvalStatus, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({
+        text: reg.approvalStatus === 0 ? 'Rejected' : reg.approvalStatus === 1 ? 'Approved' : 'unknown',
+        style: 'tableBody',
+        margin: [0, 5, 0, 5]
+      });
       rowData.push({ text: reg.havingVehicle, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.visitorVehicleModel, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.visitorVehicleNumber, style: 'tableBody', margin: [0, 5, 0, 5] });

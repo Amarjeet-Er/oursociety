@@ -47,6 +47,9 @@ export class CurdService {
   get_flat_owner_list() {
     return this._http.get<[]>(`${this.base_url}RegisteredFlat/Flat_List`)
   }
+  get_flat_block_reports_list() {
+    return this._http.get<[]>(`${this.base_url}FlatReportList/FlatListNumber`)
+  }
 
   //visitors
   get_visistors_list() {

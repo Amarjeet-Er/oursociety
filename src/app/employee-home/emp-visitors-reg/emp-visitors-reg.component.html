@@ -18,8 +18,9 @@
         </ion-input>
 
         <ion-input label="Mobile No" label-placement="floating" fill="outline" type="number"
-          placeholder="Enter mobile no"  onkeypress=" return this.value.length < 10"
-          oninput="if(this.value.length>=10) {this.value = this.value.sclice (0,10);}" formControlName="visitorMobileNum">
+          placeholder="Enter mobile no" onkeypress=" return this.value.length < 10"
+          oninput="if(this.value.length>=10) {this.value = this.value.sclice (0,10);}"
+          formControlName="visitorMobileNum">
         </ion-input>
 
         <ion-input label="Number Of Visitors" label-placement="floating" type="number" fill="outline"
@@ -98,7 +99,7 @@
           placeholder="Select flat no" formControlName="flatNum">
           <ion-select-option *ngFor="let flat_num of building_num" [value]="flat_num?.f_id">{{
             flat_num?.flatNum }}</ion-select-option>
-        <ion-fab-button color="secondary" slot="end" (click)="onFlatFind()">Find</ion-fab-button>
+          <ion-fab-button color="secondary" slot="end" (click)="onFlatFind()">Find</ion-fab-button>
         </ion-select>
 
         <div class="dataRow" *ngIf="findFlatNo">
@@ -109,7 +110,7 @@
             </p>
             <p>
               <img src="../../../assets/icons/phone.png" alt="">
-              <span> {{data.primaryNumber}} </span>
+              <span> <a [href]="'tel:' + data.primaryNumber">{{data.primaryNumber}}</a></span>
               <ion-fab-button slot="end" (click)="onFindDetails(data)">View More</ion-fab-button>
             </p>
           </ion-card>

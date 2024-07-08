@@ -10,6 +10,7 @@ export class AdminReportsComponent implements OnInit {
   visitor_data: any;
   emp_data: any;
   flat_owner_data: any;
+  flat_data: any;
 
   constructor(
     private _crud: CurdService
@@ -29,6 +30,11 @@ export class AdminReportsComponent implements OnInit {
     this._crud.get_emp_list().subscribe(
       (res: any) => {
         this.emp_data = res.AllRegisteredEmployee;
+      }
+    )
+    this._crud.get_flat_block_reports_list().subscribe(
+      (res: any) => {
+        this.flat_data = res.Data;
       }
     )
   }
