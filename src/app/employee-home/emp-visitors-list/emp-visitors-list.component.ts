@@ -9,7 +9,7 @@ import { filter } from 'rxjs/operators';
   templateUrl: './emp-visitors-list.component.html',
   styleUrls: ['./emp-visitors-list.component.scss'],
 })
-export class EmpVisitorsListComponent  implements OnInit {
+export class EmpVisitorsListComponent implements OnInit {
 
   headerBox: boolean = true;
   siteSearch: boolean = false
@@ -27,7 +27,7 @@ export class EmpVisitorsListComponent  implements OnInit {
     this.UserId = localStorage.getItem('empId');
     this.user_id = JSON.parse(this.UserId);
     this.admin_id = this.user_id?.Username;
-   }
+  }
   ngOnInit(): void {
     this._shared.img_base_url.subscribe(
       (res: any) => {
@@ -45,13 +45,15 @@ export class EmpVisitorsListComponent  implements OnInit {
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
         if (res.Status === 'Success') {
-          this.reg_data = res.Data;
-          this.reg_filter_data = res.Data;
+          if (res && res.Data) {
+            this.reg_data = res.Data.filter((visistor: any) => visistor.actionBy === this.admin_id);
+            this.reg_filter_data = this.reg_data;
+          }
         }
       }
     )
   }
-  
+
   onSearchOpen() {
     this.headerBox = !this.headerBox;
     this.siteSearch = !this.siteSearch;
@@ -62,15 +64,17 @@ export class EmpVisitorsListComponent  implements OnInit {
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
         if (res.Status === 'Success') {
-          this.reg_data = res.Data;
-          this.reg_filter_data = res.Data;
+          if (res && res.Data) {
+            this.reg_data = res.Data.filter((visistor: any) => visistor.actionBy === this.admin_id);
+            this.reg_filter_data = this.reg_data;
+          }
         }
       }
     )
   }
 
-  onDetails(data:any) {
-    this._shared.shared_details.next(data)    
+  onDetails(data: any) {
+    this._shared.shared_details.next(data)
     this._router.navigate(['/employee/empvisistorsdetails']);
   }
   onSearch(filter: any) {

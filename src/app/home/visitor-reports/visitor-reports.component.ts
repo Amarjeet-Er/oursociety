@@ -139,7 +139,7 @@ export class VisitorReportsComponent implements OnInit {
       rowData['Name'] = reg.visitorName;
       rowData['Mobile'] = reg.visitorMobileNum;
       rowData['Total Visitors'] = reg.totalVisitors;
-      rowData['Gate Incharge'] = reg.actionBy;
+      rowData['Gate Incharge'] = reg.GaurdName;
       rowData['Registration Date'] = reg.visitingDate;
       rowData['Status'] = reg.approvalStatus === 0 ? 'Rejected' : 'Approved';
       rowData['Vehicle'] = reg.havingVehicle;
@@ -241,7 +241,7 @@ export class VisitorReportsComponent implements OnInit {
       rowData.push({ text: reg.visitorName, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.visitorVehicleModel, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.totalVisitors, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.actionBy, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.GaurdName, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.visitingDate, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({
         text: reg.approvalStatus === 0 ? 'Rejected' : reg.approvalStatus === 1 ? 'Approved' : 'unknown',

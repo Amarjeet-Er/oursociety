@@ -32,13 +32,18 @@ export class TotalVisitorReportsComponent implements OnInit {
   reg_filter_data: any;
   formDate: string | null = null;
   toDate: string | null = null;
+  empId: any;
+  emp_id: any;
+  empEmail: any;
   // Constructor
   constructor(
     private _crud: CurdService,
     private _shared: SharedService,
-    private _router: Router,
     private _Platform: Platform,
   ) {
+    this.empId = localStorage.getItem('empId');
+    this.emp_id = JSON.parse(this.empId);
+    this.empEmail = this.emp_id.Username
 
     this._shared.img_base_url.subscribe((res: any) => {
       this.base_url = res;
@@ -46,8 +51,16 @@ export class TotalVisitorReportsComponent implements OnInit {
 
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
-        this.reg_data = res.Data;
-        this.reg_filter_data = res.Data;
+        this._crud.get_visistors_list().subscribe(
+          (res: any) => {
+            if (res.Status === 'Success') {
+              if (res && res.Data) {
+                this.reg_data = res.Data.filter((visistor: any) => visistor.actionBy === this.empEmail);
+                this.reg_filter_data = res.Data;
+              }
+            }
+          }
+        )
       }
     )
   }
@@ -85,17 +98,21 @@ export class TotalVisitorReportsComponent implements OnInit {
 
     const formDate = new Date(this.formDate);
     const toDate = new Date(this.toDate);
-
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
-        const filteredData = res.Data.filter((item: { visitingDate: string; }) => {
-          const visitingDate = new Date(item.visitingDate);
-          return visitingDate >= formDate && visitingDate <= toDate;
-        });
-        this.reg_data = filteredData;
+        if (res.Status === 'Success') {
+          if (res && res.Data) {
+            this.reg_data = res.Data.filter((visitor: any) => visitor.actionBy === this.empEmail);
+            const filteredData = this.reg_data.filter((item: { visitingDate: string; }) => {
+              const visitingDate = new Date(item.visitingDate);
+              return visitingDate >= formDate && visitingDate <= toDate;
+            });
+            this.reg_data = filteredData;
+          }
+        }
       },
       (error: any) => {
-        console.error("Error fetching registration date:", error);
+        console.error("Error fetching registration data:", error);
       }
     );
   }
@@ -105,17 +122,26 @@ export class TotalVisitorReportsComponent implements OnInit {
     this.onViewFilterList = true;
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
-        this.reg_data = res.Data;
-        this.reg_filter_data = res.Data;
+        if (res.Status === 'Success') {
+          if (res && res.Data) {
+            this.reg_data = res.Data.filter((visistor: any) => visistor.actionBy === this.empEmail);
+          }
+        }
       }
     )
   }
 
   onFilterClose() {
     this.siteSearch = !this.siteSearch;
-    this._crud.get_visistors_list().subscribe((res: any) => {
-      this.reg_data = res;
-    });
+    this._crud.get_visistors_list().subscribe(
+      (res: any) => {
+        if (res.Status === 'Success') {
+          if (res && res.Data) {
+            this.reg_data = res.Data.filter((visistor: any) => visistor.actionBy === this.empEmail);
+          }
+        }
+      }
+    )
   }
 
   onFilterList() {

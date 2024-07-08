@@ -6,11 +6,11 @@
     </div>
     <div class="manageContainer">
       <div class="manage">
-        <div class="card cardColor1" routerLink="#">
+        <div class="card cardColor1" routerLink="/employee/empvisitorlist">
           <div>
             <h3>Visitors</h3>
-            <p>{{ list_dashboard && list_dashboard.length > 0 ? list_dashboard[0] : '0' }}
-              <span>Today</span>
+            <p>{{ list_dashboard? list_dashboard.length : '0' }}
+              <span>Total</span>
             </p>
           </div>
           <div>
@@ -42,9 +42,4 @@
       </div>
     </div>
   </div>
-
-  <ion-card class="manageContainer">
-    <h1>Visitor</h1>
-    <canvas #visitorColumnChart width="400" height="400"></canvas>
-  </ion-card>
 </div>
