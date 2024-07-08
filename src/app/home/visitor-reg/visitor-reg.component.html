@@ -109,7 +109,7 @@
             </p>
             <p>
               <img src="../../../assets/icons/phone.png" alt="">
-              <span> {{data.primaryNumber}} </span>
+              <span> <a [href]="'tel:' + data.primaryNumber">{{data.primaryNumber}}</a></span>
               <ion-fab-button slot="end" (click)="onFindDetails(data)">View More</ion-fab-button>
             </p>
           </ion-card>
