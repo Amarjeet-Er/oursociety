@@ -48,7 +48,7 @@ export class FlatChangePasswordComponent  implements OnInit {
             this._router.navigate(['/flatowner'])
             this.changePassword.reset();
           }
-          if (res.Status === "error") {
+          if (res.Status === "Error") {
             this._shared.tostErrorTop('Incorrect Old Password')
           }
         },

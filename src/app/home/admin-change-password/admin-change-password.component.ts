@@ -46,7 +46,7 @@ export class AdminChangePasswordComponent implements OnInit {
             this._shared.tostSuccessTop('Change Password Successfully...')
             this._router.navigate(['/home'])
           }
-          if (res.Status === "error") {
+          if (res.Status === "Error") {
             this._shared.tostErrorTop('Incorrect Old Password')
           }
         },
