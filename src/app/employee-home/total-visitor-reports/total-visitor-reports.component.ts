@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { SharedService } from 'src/app/service/shared.service';
 import { Platform } from '@ionic/angular';
 import * as XLSX from 'xlsx';
@@ -9,9 +8,11 @@ import { LocalNotifications } from '@capacitor/local-notifications';
 import { FileOpener } from '@awesome-cordova-plugins/file-opener';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import { CurdService } from 'src/app/service/curd.service';
+import { NavigationEnd, Router } from '@angular/router';
 const pdfMakeX = require('pdfmake/build/pdfmake');
 const pdfFontsX = require('pdfmake/build/vfs_fonts');
 pdfMakeX.vfs = pdfFontsX.pdfMake.vfs;
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-total-visitor-reports',
@@ -40,6 +41,7 @@ export class TotalVisitorReportsComponent implements OnInit {
     private _crud: CurdService,
     private _shared: SharedService,
     private _Platform: Platform,
+    private _router: Router
   ) {
     this.empId = localStorage.getItem('empId');
     this.emp_id = JSON.parse(this.empId);
@@ -49,18 +51,22 @@ export class TotalVisitorReportsComponent implements OnInit {
       this.base_url = res;
     });
 
+    this._router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      this.loadData();
+    });
+
+    this.loadData();
+  }
+
+  loadData() {
     this._crud.get_visistors_list().subscribe(
       (res: any) => {
-        this._crud.get_visistors_list().subscribe(
-          (res: any) => {
-            if (res.Status === 'Success') {
-              if (res && res.Data) {
-                this.reg_data = res.Data.filter((visistor: any) => visistor.actionBy === this.empEmail);
-                this.reg_filter_data = res.Data;
-              }
-            }
+        if (res.Status === 'Success') {
+          if (res && res.Data) {
+            this.reg_data = res.Data.filter((visistor: any) => visistor.actionBy === this.empEmail);
+            this.reg_filter_data = this.reg_data;
           }
-        )
+        }
       }
     )
   }

@@ -36,7 +36,7 @@ export class BackBtnService {
           console.log('App will be closed');
           this.showExitConfirmation();
           return;
-        } else if (pathname === '/home/dashboard' || pathname === '/flatowner/dashboard' || pathname === '/employee/dashboard') {
+        } else if (pathname === '/home/dashboard' || pathname === '/flatowner' || pathname === '/employee') {
           console.log('Dashboard route detected, app will be closed');
           this.showExitConfirmation();
           return;
