@@ -27,13 +27,11 @@
             <div class="searchInput">
                 <input type="text" matInput placeholder="Search..." #search (keyup)="onSearch(search.value)" />
             </div>
-            <div class="searchInput">
-                <mat-label>Select Employee Type</mat-label>
-                <mat-select (valueChange)="get_emp_type_name($event)">
-                    <mat-option *ngFor="let empName of emp_type_list"
-                        [value]="empName?.empType">{{empName?.empType}}</mat-option>
-                </mat-select>
-            </div>
+            <ion-select class="searchInput" label="Employee Type" fill="fill" label-placement="floating"
+                interface="action-sheet" placeholder="Select Employee Type" (ionChange)="get_emp_type_name($event)">
+                <ion-select-option *ngFor="let empName of emp_type_list" [value]="empName?.empType">{{ empName?.empType
+                    }}</ion-select-option>
+            </ion-select>
         </div>
 
         <mat-accordion class="container" *ngIf="onViewFilterList">

@@ -54,7 +54,8 @@ export class EmployeeReportsComponent implements OnInit {
       }
     )
   }
-  get_emp_type_name(data: any) {
+  get_emp_type_name(empName: any) {
+    const data = empName.target.value;    
     if (!data) {
       this.reg_data = [];
       return;

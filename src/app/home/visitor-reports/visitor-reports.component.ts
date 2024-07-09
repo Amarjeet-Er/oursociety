@@ -239,7 +239,7 @@ export class VisitorReportsComponent implements OnInit {
     const tableBody: any[][] = this.reg_data.map((reg: any, index: number) => {
       const rowData: any[] = [{ text: (index + 1).toString(), style: 'tableBody', margin: [0, 5, 0, 5] }];
       rowData.push({ text: reg.visitorName, style: 'tableBody', margin: [0, 5, 0, 5] });
-      rowData.push({ text: reg.visitorVehicleModel, style: 'tableBody', margin: [0, 5, 0, 5] });
+      rowData.push({ text: reg.visitorMobileNum, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.totalVisitors, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.GaurdName, style: 'tableBody', margin: [0, 5, 0, 5] });
       rowData.push({ text: reg.visitingDate, style: 'tableBody', margin: [0, 5, 0, 5] });

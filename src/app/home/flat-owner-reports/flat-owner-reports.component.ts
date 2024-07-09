@@ -54,13 +54,14 @@ export class FlatOwnerReportsComponent implements OnInit {
       }
     )
   }
-  get_block_name(data:any){
+  get_block_name(block_name: any) {
+    const data = block_name.target.value;
     if (!data) {
       this.reg_data = [];
       return;
     }
     this._crud.get_flat_owner_list().subscribe(
-      (res: any) => {        
+      (res: any) => {
         const filteredData = res.Data.filter((item: { buildName: string; }) => item.buildName === data);
         this.reg_data = filteredData;
       },
