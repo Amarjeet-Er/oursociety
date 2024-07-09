@@ -115,7 +115,7 @@ export class DashboardComponent implements OnInit {
                 '#173e43',
                 '#e62739',
                 '#5c328d',
-                '#a31221',
+                '#123456',
                 'rgba(153, 102, 255, 0.3)',
               ],
             }]
