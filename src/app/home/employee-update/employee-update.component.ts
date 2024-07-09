@@ -63,7 +63,7 @@ export class EmployeeUpdateComponent implements OnInit {
       emp_WorkArea: [''],
       empName: ['', Validators.required],
       empMobNo: ['', Validators.required],
-      empEmail: ['', Validators.required],
+      empEmail: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
       alternateMob1: [''],
       relWithAlternateNum1: [''],
       OtherRelationWithNum1: [''],

@@ -66,7 +66,7 @@ export class FlatOwnerUpdateComponent implements OnInit {
       ownerDesignation: [''],
       primaryNumber: ['', Validators.required],
       alternatePhoneNum: [''],
-      ownerEmail: ['', Validators.required],
+      ownerEmail: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
       aadharNumber: [''],
       CountFamilyMember: [''],
       totalFamilyMember: [''],
