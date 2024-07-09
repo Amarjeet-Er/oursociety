@@ -199,6 +199,10 @@ export class EmployeeUpdateComponent implements OnInit {
   }
 
   onUpdate(): void {
+    const defaultContent = '';
+    const defaultBlob = new Blob([defaultContent], { type: '' });
+    const fileToUpload = new File([defaultBlob], '', { type: '' });
+
     const updateData = new FormData()
     updateData.append('Id', this.employeeReg.get('Id')?.value);
     updateData.append('emp_type', this.employeeReg.get('emp_type')?.value);
@@ -220,13 +224,21 @@ export class EmployeeUpdateComponent implements OnInit {
       updateData.append('empProfileImagePath', this.gallery_select);
     }
     else if (this.edit_reg.empProfileImagePath) {
+      updateData.append('empProfileImagePath', fileToUpload);
       updateData.append('empProfileImagePath', this.edit_reg.empProfileImagePath);
+    }
+    else {
+      updateData.append('empProfileImagePath', fileToUpload);
     }
     if (this.Aadhar_select) {
       updateData.append('empAadharImagePath', this.Aadhar_select);
     }
     else if (this.edit_reg.empAadharImagePath) {
+      updateData.append('empAadharImagePath', fileToUpload);
       updateData.append('empAadharImagePath', this.edit_reg.empAadharImagePath);
+    }
+    else {
+      updateData.append('empAadharImagePath', fileToUpload);
     }
 
     if (this.employeeReg.get('emp_password')?.value === this.employeeReg.get('empConfirmPass')?.value) {
