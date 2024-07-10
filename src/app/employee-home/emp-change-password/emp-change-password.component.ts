@@ -46,7 +46,7 @@ export class EmpChangePasswordComponent  implements OnInit {
             this._shared.tostSuccessTop('Change Password Successfully...')
             this._router.navigate(['/employee'])
           }
-          if (res.Status === "Error") {
+          if (res.Status === "error") {
             this._shared.tostErrorTop('Incorrect Old Password')
           }
         },

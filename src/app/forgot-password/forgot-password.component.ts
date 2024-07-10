@@ -87,7 +87,7 @@ export class ForgotPasswordComponent implements OnInit {
     console.log('Entered OTP:', otpData);
     console.log('Entered Email:', email);
     if (otpData == passwordIdOTP && email == passwordIdEmail) {
-      this._shared.tostSuccessTop('Password Changed Successfully');
+      this._shared.tostSuccessTop('OTP Match Successfully');
       this.onverificationCondition = false;
       this.onchangePassCondition = true;
     } else {
